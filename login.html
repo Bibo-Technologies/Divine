@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" >
+	<html lang="en" >
+		<head>
+		  <meta charset="UTF-8">
+		  <title>Devine Phone Service Center</title>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-FfzfrtACB/ir5P2+RU6mD5pfE2UZlSf2QdL6O59B6EGGoOcSD9byQ/lJ6UIZIepG" crossorigin="anonymous">
+		  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/font-awesome.min.css">
+		  <script src="https://apis.google.com/js/platform.js" async defer></script>
+		  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-t/KB5OWVRvLr+WigWn9nRryFgHmPwvKjtrD8/+E2f1qZq3BtUnkt8tYPpqd5xBpBtZ5qbA7teX9GJfZR/R+2Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.8.2/css/all.css'><link rel="stylesheet" href="./login.css">
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<link href="img/Devine Phones.png" rel="icon">
+            <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+            <!-- Include the Google Sign-In API script -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <link href="img/Devine Phones.png" rel="icon">
+
+		</head>
+<body>
+
+<head>
+
+<body>
+    <header class="showcase">
+        <div class="video-container">
+            <img autoplay loop muted>
+              <source src="TV (online-video-cutter.com).mp4">
+              Your browser does not support the video tag.
+        </img>
+          </div>
+
+            <div class="logo">
+                <img src="img/Devine Phones.png">
+            </div>
+
+            <div class="showcase-content">
+                <div class="form-container" id="formContainer">
+                    <div class="formm">
+                        <form id="signInForm">
+                            <h1 style="color: red;">Sign In</h1>
+                            <div class="info">
+                                <input id="emailInput" class="email" type="email" placeholder="Email or phone number" required><br>
+                                <input id="passwordInput" class="email" type="password" placeholder="Password" required>
+                            </div>
+                            <div class="btn">
+                                <button class="btn-primary"  type="submit" id="signInBtn">Sign In</button>
+                                <div class="spinner">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                </div>
+                            </div>
+                    
+                            <div class="help">
+                                <div>
+                                    <input value="true" type="checkbox"><label class="forgotPasswordLink">Remember me</label>
+                                </div>
+                                <a href="#" id="forgotPasswordLink"> Forgotten your Password?</a>
+                            </div>
+                            <div class="g-recaptcha" data-sitekey="6LcLoSIpAAAAAG8spWGOjCq9DRZutDSMTvT8r36D"></div>
+
+                        </form>
+                    
+                        <!-- Password Reset Form -->
+                        <form id="passwordResetForm" style="display: none;">
+                            <h1 style="color: red;">Forgot Password</h1>
+                            <div class="info">
+                                <p>Enter your email address to receive a password reset email.</p>
+                                <input id="resetEmailInput" class="email" type="email" placeholder="Email" required><br>
+                            </div>
+                            <div class="btn">
+                                <button class="btn-primary" type="button" id="sendResetEmailBtn">
+                                    <span id="btnText">Send Reset Email</span>
+                                    <span class="spinner" style="display: none;">
+                                        <i class="fas fa-spinner fa-spin"></i>
+                                    </span>
+                                </button>
+                                <p id="resendCountdown" style="display: none;">Didn't receive the email? Resend in <span id="countdown">2:00</span></p>
+                            </div>
+                    
+                            <div class="help">
+                                <button class="back-btn" id="backToSignInLink">
+                                    <i class="fas fa-arrow-left"></i> Back to Sign In
+                                </button>
+                            </div>
+                        </form>
+                    
+                        <p style="text-decoration: underline;">Don't have an account? </p>
+                        <button class="toggle-btn" id="toggleForm">Sign Up</button>
+                        <div id="error-message" style="color: red;"></div>
+                    </div>
+            
+                    <div class="signup">
+                        <form id="signUpForm">
+                            <h1 style="color: green; margin-bottom: 15px;">Sign Up</h1>
+                            <div class="info"><label>First Name</label>   <input id="signUpFirstNameInput" class="email" type="text" placeholder="First Name" required><br>
+                                <label>Last Name</label>  <input id="signUpLastNameInput" class="email" type="text" placeholder="Last Name" required><br>
+                                <label>Telephone Contact</label>  <input id="signUpTelephoneInput" class="email" type="tel" placeholder="Telephone Contact" required>
+                                <label>Email</label>   <input id="signUpEmailInput" class="email" type="text" placeholder="Email or Phone Number" required><br>
+                                <label>Password</label>   <input id="signUpPasswordInput" class="email" type="password" placeholder="Password" required><br>
+                                <label>Confirm Password</label>  <input id="confirmPasswordInput" class="email" type="password" placeholder="Confirm Password" required>
+                                <label>Date of Birth</label> <input id="signUpDOBInput" class="email" type="date" placeholder="Date of Birth" required>
+
+
+                            </div>
+                            <div class="btn">
+                                <button class="btn-primary" type="submit" id="signUpBtn">Sign Up</button>
+                                <div class="spinner2">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                </div>
+                            </div>
+                            <button class="back-btn" id="backToSignIn">
+                                <i class="fas fa-arrow-left"></i> Back to Sign In
+                            </button>
+                                                <div id="error-message2" style="color: red;"></div> 
+
+                        </form>
+                    </div>
+                    
+            
+                </div>
+            
+                <hr>
+                <p> OR </p>
+                <hr>
+            
+                <a href="#" id="signInWithGoogle" class="google-signup-btn">
+                    <span class="google-icon"><i class="fab fa-google"></i></span>
+                    Sign in with Google
+                </a>
+            
+                <div class="more">
+                    <p>
+                        This page is protected by Google reCAPTCHA to ensure you're not a bot. <a href="#">Learn more.</a>
+                    </p>
+                </div>
+            </div>
+            
+            
+
+            
+            <style>
+
+                hr {
+            border: none;
+            height: 1px;
+            background-color: #ccc; /* Set your desired color */
+        }
+
+  </style>
+       
+
+       
+    </header>
+
+
+   
+</body>
+</html>
+
+
+<!-- Firebase libraries -->
+<script type="module" src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js"></script>
+<script type="module" src="https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js"></script>
+<script type="module" src="https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js"></script>
+<script type="module" src="https://www.gstatic.com/firebasejs/9.0.2/firebase-storage.js"></script>
+
+
+<script type="module" src="login.js">
+  
+    </script>
+    

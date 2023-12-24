@@ -1,0 +1,4654 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Divine Cell Phone Services</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"><link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-c3wMPtLoYkMhLJsyR5R9EjqoGy0e70+iOSNUmPyE6x/TGm0ZU6C/Hca6M9o6rNRCC6dngyFg2DVo5AZHnt1aJw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-**********" crossorigin="anonymous" />
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" referrerpolicy="no-referrer" />
+  <link href="img/Devine Phones.png" rel="icon">
+
+</head>
+
+<!-- partial:index.partial.html -->
+<header class="head-area">
+  <div class="header-container">
+    <div class="logo">
+      <img class="ll" href="shop.html" src="img/Devine Phones.png" alt="">
+    </div>
+    <div class="mobile-nav">
+      <i class="fas fa-bars"></i>
+    </div>
+    <div class="menu">
+      <ul class="menu1">
+        <li ><a href="./shop.html"><i style="margin-right: 5px;" class="fa fa-download"></i>Price List</a></li>
+        <li ><a href="tel:+256759740405">Contact Us</a></li>
+        <li ><a href="#" id="accountLink"> <i style="margin-right: 5px;" class="fa fa-user"></i>Account</a></li>
+
+      </ul>
+       </div>
+  </div>
+   
+</header>
+
+<script>
+  $(document).ready(function(){
+    $(".mobile-nav i").click(function(){
+        $(".menu").toggleClass('mobile-menu');
+    });
+  })
+</script>
+
+
+   <body>
+
+    <div class="banner">
+      <div class="banner-text">     
+
+        <h2>Want to order now?</h2>
+        <p>Call us at <a href="tel:+256759740405">+(256) 759-740-405</a></p>
+      </div>
+      <div class="banner-icon">
+        <i class="fa fa-phone"></i>
+      </div>
+    </div>
+ <script>
+      window.onscroll = function() {myFunction()};
+      
+      var banner = document.querySelector('.banner');
+      var sticky = banner.offsetTop;
+      
+      function myFunction() {
+        if (window.pageYOffset >= sticky) {
+          banner.classList.add("sticky")
+        } else {
+          banner.classList.remove("sticky");
+        }
+      }
+      </script>
+   
+   <section class="topbody">
+      <div class="news-heading">     
+        <h2 style="color: darkred;" id="phone">DIVINE PHONE SERVICE CENTER</h2>    
+       <p >PHONE SOFTWARE AND HARDWARE SERVICES</p>
+      <h2 id="phone">GENUINE PHONE SPARE PARTS AND ACCESSORIES</h2>       
+       </div>
+    
+    </div>
+
+    <div class="saticifaction">
+        <div class="all">
+          <div>
+            <img href="shop.html" src="img/electronics.jpg" alt="">
+            <a href="#!" id="phones-link">ELECTRONICS</a>
+          </div>
+          <div>
+            <img src="img/port.webp" alt="">
+            <a href="#!" id="tablets-link">PORTS AND FLEX</a>
+          </div>
+          <div>
+            <img src="img/screen.webp" alt="">
+            <a href="#!" id="accessories-link">SCREENS & LCDS</a>
+          </div>
+          <div>
+            <img src="img/touch.webp" alt="">
+            <a href="#!" id="televisions-link">TOUCHES</a>
+          </div>
+          <div >
+            <img src="img/accessories.png" alt="">
+            <a href="#!" id="sound-link">ACCESSORIES</a>
+          </div>
+        </div>
+     </div>
+    
+       <div class="search-bar">
+        <form>
+          <input id="search-bar" type="text" placeholder="Search Product...">
+          <button id="search-btn" type="submit">Search</button>
+        </form>
+      </div>
+ 
+<!-- Popup Container -->
+<div id="popup" class="popup">
+  <!-- Popup content -->
+  <div id="userDetailsContainer">
+      <!-- Profile Picture -->
+      <img id="profilePicture" alt="Profile Picture" style="width: 100px; height: 100px; border-radius: 50%;" />
+      
+      <p id="userDetails"></p>
+      
+      <!-- View Purchase History button -->
+      <button id="viewPurchaseHistoryBtn">View Purchase History</button>
+  </div>
+  <!-- Close button with id -->
+  <button id="closePopupBtn">Close</button>
+</div>
+
+
+     <div class="news-heading">
+     
+      <h2>PHONE SCREEN CATEGORIES</h2>
+    
+</div>
+     <section class="phone-section">
+      <div class="phone-card"> 
+        <a href="#!" id="brand-new-link">GRADE A</a>
+      </div>
+
+      <div class="phone-card">
+        <a href="#!" id="uk-used-link">GRADE B</a>
+      </div>
+    </section>
+  
+  </section>
+  <div id="cart" class="cart">
+    <span id="cart-count"></span>
+    <div id="cart-buttons">
+      <button id="open-cart-btn"><i class="fa fa-shopping-cart"></i></button>
+      <button id="close-cart-btn"><i class="fa fa-times"></i></button>
+    </div>
+    <div id="cart-content">
+      <div id="cart-items"></div>
+      <p id="total-price"></p>
+      <button id="checkout-btn"><i class="fa fa-arrow-right"></i> Checkout</button>
+    </div>
+  </div>
+  
+ 
+  <script>
+ // Show/hide the cart based on scroll position
+window.addEventListener("scroll", () => {
+  const cart = document.getElementById("cart");
+  const distanceFromTop = window.pageYOffset || document.documentElement.scrollTop;
+  const scrollThreshold = 300; // Set the scroll height to trigger the cart display
+
+  if (distanceFromTop > scrollThreshold) {
+    cart.style.display = "block";
+  } else {
+    cart.style.display = "none";
+  }
+});
+
+
+
+  </script>
+
+
+ 
+  <div id="loader">
+            
+            </div>
+  
+
+   <!-- Rest of your HTML content -->
+
+  
+   <!--  <div class="loader-container">
+        <div class="loader"></div>
+      </div>
+-->
+            <div class="products">
+      <div id="products-list"></div>
+      </div>
+          <div class="modal">
+              <span class="close">&times;</span>
+              <img class="modal-content" id="modalImg">
+            </div>
+          
+            
+      </div>
+  </form>
+</div>
+<div id="message-container"></div>
+ <div class="image-slider">
+      <img src="img/divine 1.jpg" alt="Image 1">
+      <img src="img/divine 2.jpg" alt="Image 2">
+      <img src="img/divine 3.jpg" alt="Image 3">
+      <img src="img/divine 4.jpg" alt="Image 4">
+      <img src="img/divine 5.jpg" alt="Image 5">
+      <img src="img/divine 6.jpg" alt="Image 6">
+    </div>
+
+    
+<!-- Include this element in your HTML for displaying the message -->
+<div id="messageContainer" class="message-container">
+  <div id="messageContent" class="message-content">
+    
+    <img src="img/Devine Phones.png" alt="Company Logo 1">
+
+      <p id="message"></p>  
+  </div>
+  <div id="overlay" class="overlay"></div>
+  <div id="companyImages" class="company-images">
+      <!-- Add your company images here -->
+      <img src="img/Devine_Phones-removebg-preview.png" alt="Company Logo 2">
+  </div>
+</div>
+
+</section>
+   
+
+<footer>
+  <div class="footer-container container">
+      <div class="content_1">
+          <img src="img/Devine Phones.png" alt="logo">
+          <p>The customer is at the heart of our<br>unique business model, which includes<br>design.</p>
+          <hr>
+          <div class="content1">
+         
+      </div>
+      
+          </div>
+      <div class="content_2">
+          <h4>PHONES</h4>
+          <a>Iphones</a>
+          <a>Samsung</a>
+          <a>Tecnos</a>
+          <a>Oppos</a>
+          <hr>
+      </div>
+      <div class="content_3">
+          <h4>MODES OF SERVICE </h4>
+          <a >We Deliver</a>
+          <a >Swapping Allowed</a>
+          <a >Top Ups Allowed</a>
+          <a >12 Months Guarantee</a>
+          <hr>
+      </div>
+      <div style="display: flex; " class="home_social_icons">
+       
+      </div>
+  </div>
+  </div>
+</footer>             
+     
+ 
+      <!-- Firebase libraries -->
+<script type="module" src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js"></script>
+<script type="module" src="https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js"></script>
+<script type="module" src="https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js"></script>
+<script type="module" src="https://www.gstatic.com/firebasejs/9.0.2/firebase-storage.js"></script>
+      <script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js";
+import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-storage.js";
+import { getDatabase, ref, remove, push, get, update, onValue, child, set } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-database.js";
+import { getAuth, onAuthStateChanged,sendPasswordResetEmail,sendEmailVerification ,createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js";
+        const firebaseConfig = {
+              apiKey: "AIzaSyAisBpwnYt14S4NiLbcOiAhdINsqwSYJiI",
+  authDomain: "aleveltv-75194.firebaseapp.com",
+  databaseURL: "https://aleveltv-75194-default-rtdb.firebaseio.com",
+  projectId: "aleveltv-75194",
+  storageBucket: "aleveltv-75194.appspot.com",
+  messagingSenderId: "440342498130",
+  appId: "1:440342498130:web:20e2eb670b1cb2c39cc88b",
+  measurementId: "G-VTR1KGT4CW"
+            };
+
+          
+  // ... Your existing Firebase imports ...
+  const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const auth = getAuth(app);
+
+    // Declare userData variable in a higher scope
+    let userData = {};
+
+  // Function to show the popup with user details
+async function showPopupWithUserDetails() {
+    // Check if the user is authenticated
+    const user = auth.currentUser;
+    if (!user) {
+        console.log('User not authenticated');
+
+        // Display a message and fade it in with an overlay
+        const messageContainer = document.getElementById('messageContainer');
+        const messageContent = document.getElementById('messageContent');
+
+        // Set the message content HTML, including the company logo and login button
+        messageContent.innerHTML = `
+            <div id="companyLogo" class="company-logo">
+                <img src="img/Devine Phones.png" alt="Company Logo">
+            </div>
+            <p>You are not signed in. Please sign in to access your account.</p>
+            <button id="loginButton" class="login-button">
+                <i class="fa fa-sign-in"></i> Login
+            </button>
+        `;
+
+        // Add the "fade-in" class to apply the fade-in animation
+        messageContainer.classList.add('fade-in');
+        messageContainer.style.display = 'flex'; // Make the message container visible
+
+        // Add a click event listener to the login button
+        const loginButton = document.getElementById('loginButton');
+        loginButton.addEventListener('click', function() {
+            window.location.href = 'login.html'; // Adjust the login page URL
+        });
+
+        return;
+    }
+
+
+
+        // Retrieve user details from local storage
+        const userDetails = JSON.parse(localStorage.getItem('userDetails'));
+
+        // Display user details in the popup
+        const userDetailsElement = document.getElementById('userDetails');
+        const overlay = document.getElementById('overlay')
+        userDetailsElement.innerHTML = `
+            <div class="user-info">
+                <p>Email: ${userDetails.email}</p>
+            </div>
+
+        `;
+
+// Fetch additional details from Firebase using the user's UID
+const userId = userDetails.uid;
+const userRef = ref(database, 'users/' + userId);
+
+try {
+    const snapshot = await get(userRef);
+    if (snapshot.exists()) {
+        const userData = snapshot.val();
+        userDetailsElement.innerHTML += `
+            <div class="additional-info">
+                <p>First Name: ${userData.firstName || 'N/A'}</p>
+                <p>Last Name: ${userData.lastName || 'N/A'}</p>
+                <p>Telephone: ${userData.telephone || 'N/A'}</p>
+                <p>DOB: ${userData.dob || 'N/A'}</p>
+            </div>
+        `;
+
+        // Display profile picture if available or show a default profile icon
+        const profilePictureElement = document.getElementById('profilePicture');
+        if (user.photoURL) {
+            profilePictureElement.src = user.photoURL;
+            profilePictureElement.style.display = 'block';
+        } else {
+            // Show a default profile icon
+            profilePictureElement.src = 'img/profile.png'; // Replace with your default icon path
+            profilePictureElement.style.display = 'block';
+        }
+
+    } else {
+        userDetailsElement.innerHTML += `<p>No additional details found.</p>`;
+    }
+} catch (error) {
+    console.error('Error fetching user details from Firebase:', error.message);
+}
+
+// Show the popup
+document.getElementById("popup").style.display = "block";
+
+    }
+
+    // Use onAuthStateChanged to check when the authentication state changes
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            // User is signed in
+            // You can now call showPopupWithUserDetails here or wherever appropriate
+        } else {
+            // User is signed out
+            console.log('User signed out');
+        }
+    });
+
+    // Function to close the popup
+    function closePopup() {
+        document.getElementById("popup").style.display = "none";
+    }
+
+    // Event listener for the "Account" link
+    document.getElementById("accountLink").addEventListener("click", async function(event) {
+        event.preventDefault();
+        await showPopupWithUserDetails();
+        overlay.style.display = 'block'
+    });
+
+    // Event listener for the close button using id
+    document.getElementById("closePopupBtn").addEventListener("click", function() {
+        closePopup();
+    });
+
+
+// Get the checkout button element
+const checkoutBtn = document.getElementById("checkout-btn");
+
+// Add event listener to the checkout button
+checkoutBtn.addEventListener("click", () => {
+  // Collect cart items and their details
+  const cartItems = document.getElementsByClassName("cart-item");
+  const orderSummary = [];
+
+  for (let i = 0; i < cartItems.length; i++) {
+    const cartItem = cartItems[i];
+    const productName = cartItem.querySelector(".product-details h5").innerText;
+    const price = parseFloat(cartItem.querySelector(".product-details p").dataset.price);
+    const quantity = parseInt(cartItem.querySelector(".product-details input").value);
+    const total = parseFloat(cartItem.querySelector(".product-details p").dataset.total);
+    orderSummary.push({ productName, price, quantity, total });
+  }
+
+  // Get the cart total
+  const cartTotal = parseFloat(document.getElementById("total-price").innerText.replace("TOTAL: UGX ", ""));
+
+// Create the popup with the order summary and customer details
+const popupContent = document.createElement("div");
+popupContent.classList.add("popup-content");
+
+
+// Add the title to the popup
+const title = document.createElement("h3");
+title.innerText = "Order Summary";
+popupContent.appendChild(title);
+// ...
+
+// Add the order summary to the popup
+const orderTable = document.createElement("table");
+orderTable.classList.add("order-table");
+
+// Create table header
+const tableHeader = document.createElement("tr");
+tableHeader.innerHTML = `
+  <th>Product</th>
+  <th>Price</th>
+  <th>Qty</th>
+  <th>Total</th>
+`;
+orderTable.appendChild(tableHeader);
+
+// Iterate over the order summary and create table rows
+for (let i = 0; i < orderSummary.length; i++) {
+  const { productName, price, quantity, total } = orderSummary[i];
+  const tableRow = document.createElement("tr");
+  tableRow.innerHTML = `
+    <td>${productName}</td>
+    <td>UGX ${price}</td>
+    <td>${quantity}</td>
+    <td>UGX ${total.toFixed(2)}</td>
+  `;
+  orderTable.appendChild(tableRow);
+}
+
+// Append the table to the popup content
+popupContent.appendChild(orderTable);
+
+// ...
+
+
+// Add the cart total to the popup
+const totalElement = document.createElement("h4");
+totalElement.innerText = `Total: UGX ${cartTotal.toFixed(2)}`;
+totalElement.style.fontSize = "18px";
+totalElement.style.marginTop = "10px";
+totalElement.style.color = "#333";
+popupContent.appendChild(totalElement);
+
+
+// Create the popup container
+const popupContainer = document.createElement("div");
+popupContainer.classList.add("popup-container");
+
+
+// Add the popup content to the container
+popupContainer.appendChild(popupContent);
+
+
+  // Add the popup container to the document body
+  document.body.appendChild(popupContainer);
+// Create the close button
+const closeButton = document.createElement("button");
+closeButton.classList.add("close-button");
+closeButton.innerHTML = "&times;";
+
+// Add event listener to close the popup when the close button is clicked
+closeButton.addEventListener("click", () => {
+  popupContainer.style.display = "none";
+});
+
+// Append the close button to the popup container
+popupContainer.appendChild(closeButton);
+
+// Create the customer details section
+const customerDetails = document.createElement("div");
+customerDetails.classList.add("customer-details");
+// Create the payment options section
+const paymentOptionsSection = document.createElement("div");
+paymentOptionsSection.classList.add("payment-options");
+
+// Create the title for the payment options
+const paymentOptionsTitle = document.createElement("h3");
+paymentOptionsTitle.innerText = "Payment Options";
+paymentOptionsSection.appendChild(paymentOptionsTitle);
+
+// Create the payment options
+const paymentOptions = ["Airtel Money", "Mobile Money", "Bank Transfer"];
+
+paymentOptions.forEach((option) => {
+  const paymentOption = document.createElement("div");
+  paymentOption.classList.add("payment-option");
+  paymentOption.innerHTML = `
+    <input type="radio" name="payment-option" id="${option.toLowerCase()}" value="${option.toLowerCase()}">
+    <label for="${option.toLowerCase()}">${option}</label>
+  `;
+  paymentOptionsSection.appendChild(paymentOption);
+});
+
+// Append the payment options section to the popup content
+popupContent.appendChild(paymentOptionsSection);
+
+// Get the receiver/account details section
+const receiverDetailsSection = document.createElement("div");
+receiverDetailsSection.classList.add("receiver-details");
+
+// Define the receiver/account details for each payment option
+const receiverDetails = {
+  "airtel money": "Receiver: John Doe\nAccount Number: XXXX-XXXX-XXXX-1234",
+   "mobile money": "Receiver: PayPal\nAccount Email: example@example.com",
+  "bank transfer": "Receiver: Bank Name\nAccount Number: XXXX-XXXX-XXXX-5678",
+};
+
+// Function to update the receiver/account details based on the selected payment option
+function updateReceiverDetails() {
+  // Clear the previous receiver/account details
+  receiverDetailsSection.innerHTML = "";
+
+  // Get the selected payment option
+  const selectedOption = document.querySelector('input[name="payment-option"]:checked').value;
+
+  // Create the details element
+  const details = document.createElement("p");
+  details.innerText = receiverDetails[selectedOption];
+
+  // Append the details element to the receiver/account details section
+  receiverDetailsSection.appendChild(details);
+}
+
+// Add event listener to each payment option radio button
+const paymentOptionRadios = document.querySelectorAll('input[name="payment-option"]');
+paymentOptionRadios.forEach((radio) => {
+  radio.addEventListener("change", updateReceiverDetails);
+});
+
+// Append the receiver/account details section to the payment options section
+paymentOptionsSection.appendChild(receiverDetailsSection);
+
+// Add the title to the popup
+const head = document.createElement("h3");
+head.innerText = "Delivery details.";
+popupContent.appendChild(head);
+// Create a select element for means of transport
+const transportSelect = document.createElement("select");
+transportSelect.classList.add("input-field");
+
+// Create options for the select element
+const option1 = document.createElement("option");
+option1.value = "taxi";
+option1.text = "Taxi";
+transportSelect.appendChild(option1);
+
+const option2 = document.createElement("option");
+option2.value = "boda_boda";
+option2.text = "Boda boda";
+transportSelect.appendChild(option2);
+
+const option3 = document.createElement("option");
+option3.value = "bus";
+option3.text = "Bus";
+transportSelect.appendChild(option3);
+
+const option4 = document.createElement("option");
+option4.value = "foot";
+option4.text = "Foot";
+transportSelect.appendChild(option4);
+
+
+// Set the placeholder for the select element
+const defaultOption = document.createElement("option");
+defaultOption.value = "";
+defaultOption.text = "Select Means of Transport";
+defaultOption.disabled = true;
+defaultOption.selected = true;
+transportSelect.appendChild(defaultOption);
+
+// Set the required attribute for the select element
+transportSelect.required = true;
+
+// Append the select element to customerDetails
+customerDetails.appendChild(transportSelect);
+
+// Append customerDetails to popupContent
+popupContent.appendChild(customerDetails);
+
+// Create input for delivery place
+const deliveryPlaceInput = document.createElement("input");
+deliveryPlaceInput.type = "text";
+deliveryPlaceInput.placeholder = "Delivery Place";
+deliveryPlaceInput.classList.add("input-field");
+deliveryPlaceInput.required = true; // Set the required attribute
+customerDetails.appendChild(deliveryPlaceInput);
+
+// Append the customer details to the popup content
+popupContent.appendChild(customerDetails);
+
+// Create input for telephone contact
+const telephoneInput = document.createElement("input");
+telephoneInput.type = "tel";
+telephoneInput.placeholder = "Telephone Contact";
+telephoneInput.classList.add("input-field");
+telephoneInput.required = true; // Set the required attribute
+customerDetails.appendChild(telephoneInput);
+
+// Append the telephone input to the customer details
+customerDetails.appendChild(telephoneInput);
+
+// Create the order button
+const orderButton = document.createElement("button");
+orderButton.innerText = "Place Order";
+orderButton.classList.add("order-button");
+orderButton.style.backgroundColor = "#3f51b5";
+orderButton.style.width = "fit-content";
+orderButton.style.color = "#fff";
+orderButton.style.padding = "10px 20px";
+orderButton.style.border = "none";
+orderButton.style.borderRadius = "4px";
+orderButton.style.fontSize = "16px";
+orderButton.style.marginTop = "20px";
+popupContent.appendChild(orderButton);
+
+
+function showNotLoggedInMessage() {
+    const messageContainer = document.getElementById('messageContainer');
+    const messageContent = document.getElementById('messageContent');
+
+    // Set the message content HTML, including the company logo and login button
+    messageContent.innerHTML = `
+        <div id="companyLogo" class="company-logo">
+            <img src="img/Devine Phones.png" alt="Company Logo">
+        </div>
+        <p>You are not signed in. Please sign in to access your account.</p>
+        <button id="loginButton" class="login-button">
+            <i class="fa fa-sign-in"></i> Login
+        </button>
+    `;
+
+    // Add the "fade-in" class to apply the fade-in animation
+    messageContainer.classList.add('fade-in');
+    messageContainer.style.display = 'flex'; // Make the message container visible
+
+    // Add a click event listener to the login button
+    const loginButton = document.getElementById('loginButton');
+    loginButton.addEventListener('click', function() {
+        window.location.href = 'login.html'; // Adjust the login page URL
+    });
+}
+
+
+
+// Function to remove the loader container
+function removeLoaderContainer() {
+    const loaderContainer = document.querySelector(".loader-container");
+    if (loaderContainer) {
+        document.body.removeChild(loaderContainer);
+    }
+}
+
+// Function to show the success popup
+function showSuccessPopup() {
+    // Remove the loader container
+    removeLoaderContainer();
+
+    // Create the success popup
+    const successPopup = document.createElement("div");
+    successPopup.classList.add("success-popup");
+
+    // Create the success message
+    const successMessage = document.createElement("h3");
+    const successText = document.createElement("p");
+    successText.innerText = "Thank you for shopping with us... You can always find tour receipts in your account. Thank you.";
+    successMessage.innerText = "Order Successful";
+
+    // Create the okay button
+    const okayButton = document.createElement("button");
+    okayButton.classList.add("okay-button");
+    okayButton.innerText = "Okay";
+
+    // Add event listener to the okay button
+    okayButton.addEventListener("click", () => {
+        location.reload(); // Refresh the page
+    });
+
+    // Append the okay button to the success popup
+    successPopup.appendChild(okayButton);
+
+    // Add event listener to close the success popup when the okay button is clicked
+    okayButton.addEventListener("click", () => {
+        document.body.removeChild(successPopup);
+        popupContainer.style.display = "none";
+    });
+
+    // Append the success message and okay button to the success popup
+    successPopup.appendChild(successMessage);
+    successPopup.appendChild(successText);
+    successPopup.appendChild(okayButton);
+
+    // Add the success popup to the document body
+    document.body.appendChild(successPopup);
+}
+
+// Function to show the error popup
+function showErrorPopup() {
+    // Remove the loader container
+    removeLoaderContainer();
+
+    // Create the error popup
+    const errorPopup = document.createElement("div");
+    errorPopup.classList.add("error-popup");
+
+    // Create the error message
+    const errorMessage = document.createElement("h3");
+    errorMessage.innerText = "Order Failed!";
+
+    // Create the okay button
+    const okayButton = document.createElement("button");
+    okayButton.classList.add("okay-button");
+    okayButton.innerText = "Okay";
+
+    // Add event listener to the okay button
+    okayButton.addEventListener("click", () => {
+        location.reload(); // Refresh the page
+    });
+
+    // Append the okay button to the error popup
+    errorPopup.appendChild(okayButton);
+
+    // Append the error message and okay button to the error popup
+    errorPopup.appendChild(errorMessage);
+    errorPopup.appendChild(okayButton);
+
+    // Add the error popup to the document body
+    document.body.appendChild(errorPopup);
+}
+// Function to update the cart count
+function updateCartCount(count) {
+  const cartCountElement = document.getElementById("cart-count");
+  cartCountElement.innerText = count;
+}
+
+// Define the clearCart function
+function clearCart() {
+  // Remove all items from the cart
+  const cartItems = document.getElementsByClassName("cart-item");
+
+  while (cartItems.length > 0) {
+    cartItems[0].remove();
+    
+  }
+updateCartCount(0);
+  // Update the total price
+  const totalPriceElement = document.getElementById("total-price");
+  totalPriceElement.innerText = "TOTAL: UGX 0.00";
+
+  // Update any other necessary cart-related logic
+}
+
+// Rest of your code...
+
+// Add event listener to the order button
+orderButton.addEventListener("click", async () => {
+    // Display loader while processing the order
+    const loader = document.createElement("div");
+    loader.classList.add("loader");
+    popupContainer.appendChild(loader);
+
+    // Check if the user is authenticated
+    const user = auth.currentUser;
+    if (!user) {
+        // User is not authenticated, show the not logged in message
+        showNotLoggedInMessage();
+        return; // Stop further execution
+    }
+
+    // Get the UID of the logged-in user
+    const userId = user.uid;
+    const userEmail = user.email;
+// Get the delivery place from the input field
+const deliveryPlace = deliveryPlaceInput.value;
+
+// Get the selected means of transport
+const meansOfTransport = transportSelect.value;
+
+// Get the selected payment option
+const selectedPaymentOption = document.querySelector('input[name="payment-option"]:checked').value;
+
+// Initialize orderSummary as an array
+const orderSummary = [];
+
+// Iterate over the table rows and create table cells
+const rows = orderTable.querySelectorAll("tr");
+rows.forEach((row, index) => {
+  if (index > 0) { // Skip the header row
+    const columns = row.querySelectorAll("td");
+
+    // Assuming the order of columns is Product, Price, Qty, Total
+    const productName = columns[0].innerText;
+    const price = parseFloat(columns[1].innerText.replace("UGX ", ""));
+    const quantity = parseInt(columns[2].innerText, 10);
+    const total = parseFloat(columns[3].innerText.replace("UGX ", ""));
+
+    // Push product details to orderSummary array
+    orderSummary.push({
+      productName,
+      price,
+      quantity,
+      total,
+    });
+  }
+});
+
+
+// Get the cart total from the displayed element (assuming it's already calculated and displayed)
+const cartTotalElement = document.getElementById("total-price");
+const cartTotal = parseFloat(cartTotalElement.innerText.replace("TOTAL: UGX ", ""));
+
+// Rest of your code...
+      
+      // Create the loader container
+const loaderContainer = document.createElement("div");
+loaderContainer.classList.add("loader-container");
+
+// Append the loader to the loader container
+loaderContainer.appendChild(loader);
+
+// Add the loader container to the document body
+document.body.appendChild(loaderContainer);
+
+// Push the order details to Firebase database
+const orderRef = ref(database, "orders");
+const newOrderRef = push(orderRef);
+
+// Get the telephone number from the input field
+const telephoneNumber = telephoneInput.value;
+
+const orderData = {
+    orderId: newOrderRef.key,
+    orderDate: new Date().toLocaleDateString(),
+    orderTime: new Date().toLocaleTimeString(),
+    deliveryPlace,
+    meansOfTransport,
+    selectedPaymentOption,
+    orderSummary,
+    cartTotal,
+    userId, // Add the UID of the user
+    userEmail, // Add the email of the user (if needed)
+    telephoneNumber, // Add the telephone number
+};
+
+// Rest of your code...
+
+
+    set(newOrderRef, orderData)
+        .then(() => {
+            // Order placed successfully
+            // Save the receipt in the customer's account
+
+            // Create a new reference to the customer's receipt in the "receipts" node
+            const userReceiptRef = ref(database, `users/${userId}/receipts`);
+            const newUserReceiptRef = push(userReceiptRef);
+
+           // Save the receipt data under the user's account
+const receiptData = {
+    orderId: newOrderRef.key,
+    orderDate: orderData.orderDate,
+    orderTime: orderData.orderTime,
+    deliveryPlace: orderData.deliveryPlace,
+    meansOfTransport: orderData.meansOfTransport,
+    selectedPaymentOption: orderData.selectedPaymentOption,
+    orderSummary: orderData.orderSummary,
+    cartTotal: orderData.cartTotal,
+    userId: userId, // Add the UID of the user
+    userEmail: user.email, // Add the email of the user (if needed)
+    // Add other user-related details as needed
+};
+
+set(newUserReceiptRef, receiptData)
+    .then(() => {
+        // Receipt saved successfully
+        showSuccessPopup();
+        clearCart();
+    })
+    .catch((error) => {
+        console.error("Error saving receipt:", error.message);
+        showErrorPopup();
+    });
+
+        })
+        .catch((error) => {
+            console.error("Error placing order:", error.message);
+            showErrorPopup();
+        })
+        .finally(() => {
+            // Remove the loader container
+            document.body.removeChild(loaderContainer);
+        
+
+
+
+// Simulating the booking process
+setTimeout(() => {
+  // Simulate successful booking
+  showSuccessPopup();
+
+  // Simulate failed booking
+  // showErrorPopup();
+}, 2000);
+
+
+
+});
+
+// Close the cart content
+const cartContent = document.getElementById("cart-content");
+cartContent.style.display = "none";
+
+});
+
+});
+
+
+
+// Event listener for the "View Purchase History" button
+document.getElementById("viewPurchaseHistoryBtn").addEventListener("click", async function(event) {
+  event.preventDefault();
+
+  // Check if the user is authenticated
+  const user = auth.currentUser;
+  if (!user) {
+    console.log('User not authenticated');
+    // You may want to redirect the user to the login page or handle the lack of authentication
+    return;
+  }
+
+  // Fetch the user's UID
+  const userId = user.uid;
+
+  // Fetch the user's receipts from Firebase
+  const userReceiptsRef = ref(database, `users/${userId}/receipts`);
+  
+  try {
+    const userReceiptsSnapshot = await get(userReceiptsRef);
+
+    if (userReceiptsSnapshot.exists()) {
+      // User has receipts
+      const userReceipts = userReceiptsSnapshot.val();
+
+      // Display receipts in a popup
+      displayReceiptsPopup(userReceipts);
+    } else {
+      // No receipts found
+      console.log("No purchase history found.");
+      // You can display a message to the user indicating no purchase history.
+    }
+  } catch (error) {
+    console.error('Error fetching user receipts from Firebase:', error.message);
+  }
+});
+
+// Function to display receipts in a popup
+function displayReceiptsPopup(userReceipts) {
+  // Create the popup container
+  const popupContainer = document.createElement("div");
+  popupContainer.classList.add("popup-container");
+
+  // Create the close button for the popup
+  const closeButton = document.createElement("button");
+  closeButton.innerText = "Close";
+  closeButton.classList.add("close-button");
+
+  // Add event listener to close the popup when the close button is clicked
+  closeButton.addEventListener("click", () => {
+    document.body.removeChild(popupContainer);
+  });
+
+  // Create the receipt details container
+  const receiptDetailsContainer = document.createElement("div");
+  receiptDetailsContainer.classList.add("receipt-details-container");
+
+  // Iterate through user receipts and create elements for each receipt
+  for (const receiptId in userReceipts) {
+    const receipt = userReceipts[receiptId];
+
+    // Create a container for each receipt
+    const receiptContainer = document.createElement("div");
+    receiptContainer.classList.add("receipt-container");
+
+    // Create elements for receipt details using template literals
+    const receiptDetails = `
+      <p class="receipt-info">Order ID: ${receipt.orderId}</p>
+      <p class="receipt-info">Order Date: ${receipt.orderDate}</p>
+      <p class="receipt-info">Delivery Place: ${receipt.deliveryPlace}</p>
+      <p class="receipt-info">Means of Transport: ${receipt.meansOfTransport}</p>
+      <p class="receipt-info">Payment Option: ${receipt.selectedPaymentOption}</p>
+      <!-- Replace the existing order summary element with this table -->
+<table class="order-summary-table">
+  <caption>Order Summary</caption>
+  <thead>
+    <tr>
+      <th>Pdt</th>
+      <th>Qty</th>
+      <th>Price</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Iterate through each item in the order summary -->
+    ${receipt.orderSummary.map(item => `
+      <tr>
+        <td>${item.productName}</td>
+        <td>${item.quantity}</td>
+        <td>UGX ${item.price.toFixed(2)}</td>
+        <td>UGX ${item.total.toFixed(2)}</td>
+      </tr>
+    `).join('')}
+  </tbody>
+</table>
+
+      <p class="receipt-info">Cart Total: UGX ${receipt.cartTotal.toFixed(2)}</p>
+    `;
+
+    // Set innerHTML of the receipt container
+    receiptContainer.innerHTML = receiptDetails;
+
+    // Append the receipt container to the receipt details container
+    receiptDetailsContainer.appendChild(receiptContainer);
+  }
+
+  // Append the close button and receipt details container to the popup container
+  popupContainer.appendChild(closeButton);
+  popupContainer.appendChild(receiptDetailsContainer);
+
+  // Add the popup container to the document body
+  document.body.appendChild(popupContainer);
+}
+
+
+
+
+
+  const newPhonesRef = ref(database, "divine/new");
+const ukUsedRef = ref(database, "divine/grade");
+const tvsRef = ref(database, "divine/electronics");
+const tabletsRef = ref(database, "divine/touches");
+const accessoriesRef = ref(database, "divine/accessories");
+const soundRef = ref(database, "divine/screens");
+
+
+const searchBtn = document.getElementById("search-btn");
+
+searchBtn.addEventListener("click", function(event) {
+  event.preventDefault();
+  searchProducts();
+
+
+
+
+  function searchProducts() {
+  const query = document.getElementById("search-bar").value.toLowerCase();
+  
+  // Display the loader
+  const loader = document.getElementById("loader");
+  loader.style.display = "block";
+
+  // Clear the products list
+  document.getElementById("products-list").innerHTML = "";
+
+  // Define an array of Firebase node references to search through
+  const firebaseNodes = [newPhonesRef, ukUsedRef, accessoriesRef];
+
+  // Create an array to store the promises returned by the Firebase queries
+  const promises = [];
+
+  // Search for query in each relevant Firebase node
+  firebaseNodes.forEach((nodeRef) => {
+    const promise = get(nodeRef).then((snapshot) => {
+      const data = snapshot.val();
+
+      // Process the data and display matching products
+      const productsList = document.getElementById("products-list");
+      for (let i in data) {
+        const product = data[i];
+        const name = product.name.toLowerCase();
+        if (name.includes(query)) {
+          // Create a card for the matching product
+          const card = document.createElement("div");
+          card.classList.add("card1");
+      
+      // Add "Brand New" badge
+      const badge = document.createElement("div");
+      badge.classList.add("used-badge2");
+      badge.innerText = "Brand New";
+      card.appendChild(badge);
+      
+      // Add guarantee text
+      const guaranteeText = document.createElement("div");
+      guaranteeText.innerHTML = "<i class='fa fa-shield'></i>12 month Guarantee for Brand New Phones";
+      guaranteeText.classList.add("guarantee-text");
+      card.appendChild(guaranteeText);
+
+      // Add product image
+      const img = document.createElement("img");
+      img.src = product.image;
+      img.alt = product.name;
+      img.classList.add("product-img");
+      img.addEventListener("click", () => {
+        const modal = document.querySelector(".modal");
+        const modalImg = document.querySelector("#modalImg");
+        modal.style.display = "block";
+        modalImg.src = img.src;
+      });
+      card.appendChild(img);
+
+      // Add product name
+      const title = document.createElement("h2");
+      title.innerText = product.name;
+      card.appendChild(title);
+      
+      // Add product price
+      const price = document.createElement("p");
+      price.innerText = `Price: UGX ${product.price}`;
+      card.appendChild(price);
+
+  // Add star rating
+      const stars = document.createElement("div");
+      stars.classList.add("stars");
+      for (let j = 0; j < 5; j++) {
+        const star = document.createElement("span");
+        star.classList.add("star");
+        star.innerHTML = "&#9733;"; // Unicode character for a star
+        stars.appendChild(star);
+      }
+      card.appendChild(stars);
+      // Add product description
+      const desc = document.createElement("p");
+      desc.innerText = product.description;
+      card.appendChild(desc);
+
+
+
+// Create the "Add to Cart" button
+const addToCartBtn = document.createElement("button");
+addToCartBtn.innerText = "Add to Cart";
+
+function addToCart(product) {
+  // Get the cart items container
+  const cartItemsContainer = document.getElementById("cart-items");
+
+  // Create a new cart item element
+  const cartItem = document.createElement("div");
+  cartItem.classList.add("cart-item");
+
+  // Create a container for the product details (name, price, quantity, and delete button)
+  const productDetails = document.createElement("div");
+  productDetails.classList.add("product-details");
+
+  // Add product name
+  const productName = document.createElement("h5");
+  productName.innerText = product.name;
+  productDetails.appendChild(productName);
+
+  // Add product price
+  const productPrice = document.createElement("p");
+  productPrice.innerText = `Price: UGX ${product.price}`;
+  productPrice.dataset.price = product.price; // Store the price as a data attribute
+  productDetails.appendChild(productPrice);
+
+// Create a quantity input field
+const quantityInput = document.createElement("input");
+quantityInput.type = "number";
+quantityInput.value = 1;
+quantityInput.min = 1;
+quantityInput.classList.add("quantity-input"); // Add the quantity-input class
+quantityInput.addEventListener("input", () => {
+  updateCartItemTotal(cartItem);
+  updateCartTotal();
+});
+productDetails.appendChild(quantityInput);
+
+
+// Define the updateCartItemTotal function
+function updateCartItemTotal(cartItem) {
+  const priceElement = cartItem.querySelector(".product-details p");
+  const quantityInput = cartItem.querySelector(".product-details input");
+  const quantity = parseInt(quantityInput.value);
+  const price = parseFloat(priceElement.innerText.replace("Price: UGX ", ""));
+  const total = quantity * price;
+  priceElement.dataset.total = total.toFixed(2);
+}
+
+// Define the updateCartTotal function
+function updateCartTotal() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  const totalPriceElement = document.getElementById("total-price");
+  let total = 0;
+
+  for (let i = 0; i < cartItems.length; i++) {
+    const cartItem = cartItems[i];
+    const priceElement = cartItem.querySelector(".product-details p");
+    const totalForItem = parseFloat(priceElement.dataset.total);
+    total += totalForItem;
+  }
+
+  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
+}
+
+  // Create a delete button for the cart item
+  const deleteButton = document.createElement("button");
+  deleteButton.innerText = "Delete";
+  deleteButton.classList.add("delete-button");
+  deleteButton.addEventListener("click", () => {
+    cartItemsContainer.removeChild(cartItem);
+    updateCartTotal();
+    updateCartCount(-1);
+  });
+  productDetails.appendChild(deleteButton);
+
+  cartItem.appendChild(productDetails);
+
+  // Append the cart item to the cart items container
+  cartItemsContainer.appendChild(cartItem);
+
+  // Update the cart count
+  updateCartCount(1);
+
+  // Calculate and update the total price
+  updateCartItemTotal(cartItem);
+  updateCartTotal();
+
+  // Show the "Added to Cart" message
+  showAddToCartMessage(product.name);
+}
+
+
+
+
+// Function to update the cart count
+function updateCartCount(count) {
+  const cartCountElement = document.getElementById("cart-count");
+  const currentCount = parseInt(cartCountElement.innerText) || 0;
+  cartCountElement.innerText = currentCount + count;
+}
+
+// Add the event listener to the "Add to Cart" button
+addToCartBtn.addEventListener("click", () => {
+  addToCart(product);
+});
+
+// Assuming `card` is the element representing the product card
+card.appendChild(addToCartBtn);
+
+// Function to show the "Added to Cart" message
+function showAddToCartMessage(productName) {
+  const messageContainer = document.getElementById("message-container");
+  messageContainer.innerText = `${productName} added to cart`;
+  messageContainer.style.display = "block";
+
+  setTimeout(() => {
+    messageContainer.style.display = "none";
+  }, 3000);
+}
+
+
+const openCartBtn = document.getElementById("open-cart-btn");
+const closeCartBtn = document.getElementById("close-cart-btn");
+const cartContent = document.getElementById("cart-content");
+
+cartContent.style.display = "none"; // Hide the cart content on load
+
+openCartBtn.addEventListener("click", () => {
+  if (cartIsEmpty()) {
+    cartContent.style.display = "none"; // Hide the cart content on load
+    // Show a message or perform any desired action when cart is empty
+    return;
+  }
+  
+  cartContent.style.display = "block";
+  openCartBtn.style.display = "none";
+  closeCartBtn.style.display = "inline-block";
+});
+
+closeCartBtn.style.display = "none"; // Hide the close button initially
+
+closeCartBtn.addEventListener("click", () => {
+  cartContent.style.display = "none";
+  closeCartBtn.style.display = "none";
+  openCartBtn.style.display = "inline-block";
+});
+
+function cartIsEmpty() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  return cartItems.length === 0;
+}
+
+      // Add card to list
+      productsList.appendChild(card);
+    }
+      }
+    });
+
+    promises.push(promise);
+  });
+
+  // Wait for all Firebase queries to complete
+  Promise.all(promises).then(() => {
+    // Hide the loader
+    loader.style.display = "none";
+  });
+}
+ 
+}
+
+);
+
+
+
+
+
+//button for brand new//
+
+
+
+document.querySelector("#brand-new-link").addEventListener("click", () => {
+  // Clear the products list
+  document.getElementById("products-list").innerHTML = "";
+    // Display the loader
+    const loader = document.getElementById("loader");
+  loader.style.display = "block";
+
+
+  // Get products from newPhonesRef
+  get(newPhonesRef).then((snapshot) => {
+    const data = snapshot.val();
+    const productsList = document.getElementById("products-list");
+    for (let i in data) {
+      const product = data[i];
+      // Create a card for the product
+      const card = document.createElement("div");
+      card.classList.add("card1");
+      // Add "Brand New" badge
+      const badge = document.createElement("div");
+      badge.classList.add("used-badge2");
+      badge.innerText = "Brand New";
+      card.appendChild(badge);
+       // Add guarantee text
+const guaranteeText = document.createElement("div");
+guaranteeText.innerHTML = "<i class='fa fa-shield'></i>12 month Guarantee for Brand New Phones";
+guaranteeText.classList.add("guarantee-text");
+card.appendChild(guaranteeText);
+      // Add product image
+      const img = document.createElement("img");
+      img.src = product.image;
+      img.alt = product.name;
+      img.classList.add("product-img");
+      img.addEventListener("click", () => {
+        const modal = document.querySelector(".modal");
+        const modalImg = document.querySelector("#modalImg");
+        modal.style.display = "block";
+        modalImg.src = img.src;
+      });
+      card.appendChild(img);
+      // Add product name
+      const title = document.createElement("h2");
+      title.innerText = product.name;
+      card.appendChild(title);
+      // Add product description
+      const desc = document.createElement("p");
+      desc.innerText = product.description;
+      card.appendChild(desc);
+      // Add product price
+      const price = document.createElement("p");
+      price.innerText = `Price: UGX ${product.price}`;
+      card.appendChild(price);
+      // Add star rating
+      const stars = document.createElement("div");
+      stars.classList.add("stars");
+      for (let j = 0; j < 5; j++) {
+        const star = document.createElement("span");
+        star.classList.add("star");
+        star.innerHTML = "&#9733;"; // Unicode character for a star
+        stars.appendChild(star);
+      }
+      card.appendChild(stars);
+    
+   
+// Create the "Add to Cart" button
+const addToCartBtn = document.createElement("button");
+addToCartBtn.innerText = "Add to Cart";
+
+function addToCart(product) {
+  // Get the cart items container
+  const cartItemsContainer = document.getElementById("cart-items");
+
+  // Create a new cart item element
+  const cartItem = document.createElement("div");
+  cartItem.classList.add("cart-item");
+
+  // Create a container for the product details (name, price, quantity, and delete button)
+  const productDetails = document.createElement("div");
+  productDetails.classList.add("product-details");
+
+  // Add product name
+  const productName = document.createElement("h5");
+  productName.innerText = product.name;
+  productDetails.appendChild(productName);
+
+  // Add product price
+  const productPrice = document.createElement("p");
+  productPrice.innerText = `Price: UGX ${product.price}`;
+  productPrice.dataset.price = product.price; // Store the price as a data attribute
+  productDetails.appendChild(productPrice);
+
+// Create a quantity input field
+const quantityInput = document.createElement("input");
+quantityInput.type = "number";
+quantityInput.value = 1;
+quantityInput.min = 1;
+quantityInput.classList.add("quantity-input"); // Add the quantity-input class
+quantityInput.addEventListener("input", () => {
+  updateCartItemTotal(cartItem);
+  updateCartTotal();
+});
+productDetails.appendChild(quantityInput);
+
+
+// Define the updateCartItemTotal function
+function updateCartItemTotal(cartItem) {
+  const priceElement = cartItem.querySelector(".product-details p");
+  const quantityInput = cartItem.querySelector(".product-details input");
+  const quantity = parseInt(quantityInput.value);
+  const price = parseFloat(priceElement.innerText.replace("Price: UGX ", ""));
+  const total = quantity * price;
+  priceElement.dataset.total = total.toFixed(2);
+}
+
+// Define the updateCartTotal function
+function updateCartTotal() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  const totalPriceElement = document.getElementById("total-price");
+  let total = 0;
+
+  for (let i = 0; i < cartItems.length; i++) {
+    const cartItem = cartItems[i];
+    const priceElement = cartItem.querySelector(".product-details p");
+    const totalForItem = parseFloat(priceElement.dataset.total);
+    total += totalForItem;
+  }
+
+  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
+}
+
+  // Create a delete button for the cart item
+  const deleteButton = document.createElement("button");
+  deleteButton.innerText = "Delete";
+  deleteButton.classList.add("delete-button");
+  deleteButton.addEventListener("click", () => {
+    cartItemsContainer.removeChild(cartItem);
+    updateCartTotal();
+    updateCartCount(-1);
+  });
+  productDetails.appendChild(deleteButton);
+
+  cartItem.appendChild(productDetails);
+
+  // Append the cart item to the cart items container
+  cartItemsContainer.appendChild(cartItem);
+
+  // Update the cart count
+  updateCartCount(1);
+
+  // Calculate and update the total price
+  updateCartItemTotal(cartItem);
+  updateCartTotal();
+
+  // Show the "Added to Cart" message
+  showAddToCartMessage(product.name);
+}
+
+
+
+
+// Function to update the cart count
+function updateCartCount(count) {
+  const cartCountElement = document.getElementById("cart-count");
+  const currentCount = parseInt(cartCountElement.innerText) || 0;
+  cartCountElement.innerText = currentCount + count;
+}
+
+// Add the event listener to the "Add to Cart" button
+addToCartBtn.addEventListener("click", () => {
+  addToCart(product);
+});
+
+// Assuming `card` is the element representing the product card
+card.appendChild(addToCartBtn);
+
+// Function to show the "Added to Cart" message
+function showAddToCartMessage(productName) {
+  const messageContainer = document.getElementById("message-container");
+  messageContainer.innerText = `${productName} added to cart`;
+  messageContainer.style.display = "block";
+
+  setTimeout(() => {
+    messageContainer.style.display = "none";
+  }, 3000);
+}
+
+
+const openCartBtn = document.getElementById("open-cart-btn");
+const closeCartBtn = document.getElementById("close-cart-btn");
+const cartContent = document.getElementById("cart-content");
+
+cartContent.style.display = "none"; // Hide the cart content on load
+
+openCartBtn.addEventListener("click", () => {
+  if (cartIsEmpty()) {
+    cartContent.style.display = "none"; // Hide the cart content on load
+    // Show a message or perform any desired action when cart is empty
+    return;
+  }
+  
+  cartContent.style.display = "block";
+  openCartBtn.style.display = "none";
+  closeCartBtn.style.display = "inline-block";
+});
+
+closeCartBtn.style.display = "none"; // Hide the close button initially
+
+closeCartBtn.addEventListener("click", () => {
+  cartContent.style.display = "none";
+  closeCartBtn.style.display = "none";
+  openCartBtn.style.display = "inline-block";
+});
+
+function cartIsEmpty() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  return cartItems.length === 0;
+}
+
+
+      // Add card to list
+      productsList.appendChild(card);
+      loader.style.display = "none";
+    }
+  });
+});
+
+
+//button for used //
+
+
+
+document.querySelector("#uk-used-link").addEventListener("click", () => {
+  // Clear the products list
+  document.getElementById("products-list").innerHTML = "";
+   // Display the loader
+   const loader = document.getElementById("loader");
+  loader.style.display = "block";
+
+  // Get products from newPhonesRef
+  get(ukUsedRef).then((snapshot) => {
+    const data = snapshot.val();
+    const productsList = document.getElementById("products-list");
+    for (let i in data) {
+      const product = data[i];
+      // Create a card for the product
+      const card = document.createElement("div");
+      card.classList.add("card1");
+      // Add "Brand New" badge
+      const badge = document.createElement("div");
+      badge.classList.add("used-badge");
+      badge.innerText = "UK Used";
+      card.appendChild(badge);
+       // Add guarantee text
+const guaranteeText = document.createElement("div");
+guaranteeText.innerHTML = "<i class='fa fa-shield'></i>3 month Guarantee for UK Used Phones";
+guaranteeText.classList.add("guarantee-text");
+card.appendChild(guaranteeText);
+      // Add product image
+      const img = document.createElement("img");
+      img.src = product.image;
+      img.alt = product.name;
+      img.classList.add("product-img");
+      img.addEventListener("click", () => {
+        const modal = document.querySelector(".modal");
+        const modalImg = document.querySelector("#modalImg");
+        modal.style.display = "block";
+        modalImg.src = img.src;
+      });
+      card.appendChild(img);
+      // Add product name
+      const title = document.createElement("h2");
+      title.innerText = product.name;
+      card.appendChild(title);
+      // Add product description
+      const desc = document.createElement("p");
+      desc.innerText = product.description;
+      card.appendChild(desc);
+      // Add product price
+      const price = document.createElement("p");
+      price.innerText = `Price: UGX ${product.price}`;
+      card.appendChild(price);
+      // Add star rating
+      const stars = document.createElement("div");
+      stars.classList.add("stars");
+      for (let j = 0; j < 5; j++) {
+        const star = document.createElement("span");
+        star.classList.add("star");
+        star.innerHTML = "&#9733;"; // Unicode character for a star
+        stars.appendChild(star);
+      }
+      card.appendChild(stars);
+    
+     // Create the "Add to Cart" button
+const addToCartBtn = document.createElement("button");
+addToCartBtn.innerText = "Add to Cart";
+
+function addToCart(product) {
+  // Get the cart items container
+  const cartItemsContainer = document.getElementById("cart-items");
+
+  // Create a new cart item element
+  const cartItem = document.createElement("div");
+  cartItem.classList.add("cart-item");
+
+  // Create a container for the product details (name, price, quantity, and delete button)
+  const productDetails = document.createElement("div");
+  productDetails.classList.add("product-details");
+
+  // Add product name
+  const productName = document.createElement("h5");
+  productName.innerText = product.name;
+  productDetails.appendChild(productName);
+
+  // Add product price
+  const productPrice = document.createElement("p");
+  productPrice.innerText = `Price: UGX ${product.price}`;
+  productPrice.dataset.price = product.price; // Store the price as a data attribute
+  productDetails.appendChild(productPrice);
+
+// Create a quantity input field
+const quantityInput = document.createElement("input");
+quantityInput.type = "number";
+quantityInput.value = 1;
+quantityInput.min = 1;
+quantityInput.classList.add("quantity-input"); // Add the quantity-input class
+quantityInput.addEventListener("input", () => {
+  updateCartItemTotal(cartItem);
+  updateCartTotal();
+});
+productDetails.appendChild(quantityInput);
+
+
+// Define the updateCartItemTotal function
+function updateCartItemTotal(cartItem) {
+  const priceElement = cartItem.querySelector(".product-details p");
+  const quantityInput = cartItem.querySelector(".product-details input");
+  const quantity = parseInt(quantityInput.value);
+  const price = parseFloat(priceElement.innerText.replace("Price: UGX ", ""));
+  const total = quantity * price;
+  priceElement.dataset.total = total.toFixed(2);
+}
+
+// Define the updateCartTotal function
+function updateCartTotal() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  const totalPriceElement = document.getElementById("total-price");
+  let total = 0;
+
+  for (let i = 0; i < cartItems.length; i++) {
+    const cartItem = cartItems[i];
+    const priceElement = cartItem.querySelector(".product-details p");
+    const totalForItem = parseFloat(priceElement.dataset.total);
+    total += totalForItem;
+  }
+
+  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
+}
+
+  // Create a delete button for the cart item
+  const deleteButton = document.createElement("button");
+  deleteButton.innerText = "Delete";
+  deleteButton.classList.add("delete-button");
+  deleteButton.addEventListener("click", () => {
+    cartItemsContainer.removeChild(cartItem);
+    updateCartTotal();
+    updateCartCount(-1);
+  });
+  productDetails.appendChild(deleteButton);
+
+  cartItem.appendChild(productDetails);
+
+  // Append the cart item to the cart items container
+  cartItemsContainer.appendChild(cartItem);
+
+  // Update the cart count
+  updateCartCount(1);
+
+  // Calculate and update the total price
+  updateCartItemTotal(cartItem);
+  updateCartTotal();
+
+  // Show the "Added to Cart" message
+  showAddToCartMessage(product.name);
+}
+
+
+
+
+// Function to update the cart count
+function updateCartCount(count) {
+  const cartCountElement = document.getElementById("cart-count");
+  const currentCount = parseInt(cartCountElement.innerText) || 0;
+  cartCountElement.innerText = currentCount + count;
+}
+
+// Add the event listener to the "Add to Cart" button
+addToCartBtn.addEventListener("click", () => {
+  addToCart(product);
+});
+
+// Assuming `card` is the element representing the product card
+card.appendChild(addToCartBtn);
+
+// Function to show the "Added to Cart" message
+function showAddToCartMessage(productName) {
+  const messageContainer = document.getElementById("message-container");
+  messageContainer.innerText = `${productName} added to cart`;
+  messageContainer.style.display = "block";
+
+  setTimeout(() => {
+    messageContainer.style.display = "none";
+  }, 3000);
+}
+
+
+const openCartBtn = document.getElementById("open-cart-btn");
+const closeCartBtn = document.getElementById("close-cart-btn");
+const cartContent = document.getElementById("cart-content");
+
+cartContent.style.display = "none"; // Hide the cart content on load
+
+openCartBtn.addEventListener("click", () => {
+  if (cartIsEmpty()) {
+    cartContent.style.display = "none"; // Hide the cart content on load
+    // Show a message or perform any desired action when cart is empty
+    return;
+  }
+  
+  cartContent.style.display = "block";
+  openCartBtn.style.display = "none";
+  closeCartBtn.style.display = "inline-block";
+});
+
+closeCartBtn.style.display = "none"; // Hide the close button initially
+
+closeCartBtn.addEventListener("click", () => {
+  cartContent.style.display = "none";
+  closeCartBtn.style.display = "none";
+  openCartBtn.style.display = "inline-block";
+});
+
+function cartIsEmpty() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  return cartItems.length === 0;
+}
+
+
+      // Add card to list
+      productsList.appendChild(card);
+      loader.style.display = "none";
+    }
+  });
+});
+
+//Phones//
+
+
+
+
+document.querySelector("#phones-link").addEventListener("click", () => {
+  // Clear the products list
+  document.getElementById("products-list").innerHTML = "";
+   // Display the loader
+   const loader = document.getElementById("loader");
+  loader.style.display = "block";
+  // Get products from newPhonesRef
+  get(newPhonesRef).then((snapshot) => {
+    const data = snapshot.val();
+    const productsList = document.getElementById("products-list");
+    for (let i in data) {
+      const product = data[i];
+      // Create a card for the product
+      const card = document.createElement("div");
+      card.classList.add("card1");
+      // Add "Brand New" badge
+      const badge = document.createElement("div");
+      badge.classList.add("used-badge2");
+      badge.innerText = "Brand New";
+      card.appendChild(badge);
+       // Add guarantee text
+const guaranteeText = document.createElement("div");
+guaranteeText.innerHTML = "<i class='fa fa-shield'></i>12 month Guarantee for Brand New Phones";
+guaranteeText.classList.add("guarantee-text");
+card.appendChild(guaranteeText);
+      // Add product image
+      const img = document.createElement("img");
+      img.src = product.image;
+      img.alt = product.name;
+      img.classList.add("product-img");
+      img.addEventListener("click", () => {
+        const modal = document.querySelector(".modal");
+        const modalImg = document.querySelector("#modalImg");
+        modal.style.display = "block";
+        modalImg.src = img.src;
+      });
+      card.appendChild(img);
+      // Add product name
+      const title = document.createElement("h2");
+      title.innerText = product.name;
+      card.appendChild(title);
+      // Add product description
+      const desc = document.createElement("p");
+      desc.innerText = product.description;
+      card.appendChild(desc);
+      // Add product price
+      const price = document.createElement("p");
+      price.innerText = `Price: UGX ${product.price}`;
+      card.appendChild(price);
+      // Add star rating
+      const stars = document.createElement("div");
+      stars.classList.add("stars");
+      for (let j = 0; j < 5; j++) {
+        const star = document.createElement("span");
+        star.classList.add("star");
+        star.innerHTML = "&#9733;"; // Unicode character for a star
+        stars.appendChild(star);
+      }
+      card.appendChild(stars);
+     
+     // Create the "Add to Cart" button
+const addToCartBtn = document.createElement("button");
+addToCartBtn.innerText = "Add to Cart";
+
+function addToCart(product) {
+  // Get the cart items container
+  const cartItemsContainer = document.getElementById("cart-items");
+
+  // Create a new cart item element
+  const cartItem = document.createElement("div");
+  cartItem.classList.add("cart-item");
+
+  // Create a container for the product details (name, price, quantity, and delete button)
+  const productDetails = document.createElement("div");
+  productDetails.classList.add("product-details");
+
+  // Add product name
+  const productName = document.createElement("h5");
+  productName.innerText = product.name;
+  productDetails.appendChild(productName);
+
+  // Add product price
+  const productPrice = document.createElement("p");
+  productPrice.innerText = `Price: UGX ${product.price}`;
+  productPrice.dataset.price = product.price; // Store the price as a data attribute
+  productDetails.appendChild(productPrice);
+
+// Create a quantity input field
+const quantityInput = document.createElement("input");
+quantityInput.type = "number";
+quantityInput.value = 1;
+quantityInput.min = 1;
+quantityInput.classList.add("quantity-input"); // Add the quantity-input class
+quantityInput.addEventListener("input", () => {
+  updateCartItemTotal(cartItem);
+  updateCartTotal();
+});
+productDetails.appendChild(quantityInput);
+
+
+// Define the updateCartItemTotal function
+function updateCartItemTotal(cartItem) {
+  const priceElement = cartItem.querySelector(".product-details p");
+  const quantityInput = cartItem.querySelector(".product-details input");
+  const quantity = parseInt(quantityInput.value);
+  const price = parseFloat(priceElement.innerText.replace("Price: UGX ", ""));
+  const total = quantity * price;
+  priceElement.dataset.total = total.toFixed(2);
+}
+
+// Define the updateCartTotal function
+function updateCartTotal() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  const totalPriceElement = document.getElementById("total-price");
+  let total = 0;
+
+  for (let i = 0; i < cartItems.length; i++) {
+    const cartItem = cartItems[i];
+    const priceElement = cartItem.querySelector(".product-details p");
+    const totalForItem = parseFloat(priceElement.dataset.total);
+    total += totalForItem;
+  }
+
+  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
+}
+
+  // Create a delete button for the cart item
+  const deleteButton = document.createElement("button");
+  deleteButton.innerText = "Delete";
+  deleteButton.classList.add("delete-button");
+  deleteButton.addEventListener("click", () => {
+    cartItemsContainer.removeChild(cartItem);
+    updateCartTotal();
+    updateCartCount(-1);
+  });
+  productDetails.appendChild(deleteButton);
+
+  cartItem.appendChild(productDetails);
+
+  // Append the cart item to the cart items container
+  cartItemsContainer.appendChild(cartItem);
+
+  // Update the cart count
+  updateCartCount(1);
+
+  // Calculate and update the total price
+  updateCartItemTotal(cartItem);
+  updateCartTotal();
+
+  // Show the "Added to Cart" message
+  showAddToCartMessage(product.name);
+}
+
+
+
+
+// Function to update the cart count
+function updateCartCount(count) {
+  const cartCountElement = document.getElementById("cart-count");
+  const currentCount = parseInt(cartCountElement.innerText) || 0;
+  cartCountElement.innerText = currentCount + count;
+}
+
+// Add the event listener to the "Add to Cart" button
+addToCartBtn.addEventListener("click", () => {
+  addToCart(product);
+});
+
+// Assuming `card` is the element representing the product card
+card.appendChild(addToCartBtn);
+
+// Function to show the "Added to Cart" message
+function showAddToCartMessage(productName) {
+  const messageContainer = document.getElementById("message-container");
+  messageContainer.innerText = `${productName} added to cart`;
+  messageContainer.style.display = "block";
+
+  setTimeout(() => {
+    messageContainer.style.display = "none";
+  }, 3000);
+}
+
+
+const openCartBtn = document.getElementById("open-cart-btn");
+const closeCartBtn = document.getElementById("close-cart-btn");
+const cartContent = document.getElementById("cart-content");
+
+cartContent.style.display = "none"; // Hide the cart content on load
+
+openCartBtn.addEventListener("click", () => {
+  if (cartIsEmpty()) {
+    cartContent.style.display = "none"; // Hide the cart content on load
+    // Show a message or perform any desired action when cart is empty
+    return;
+  }
+  
+  cartContent.style.display = "block";
+  openCartBtn.style.display = "none";
+  closeCartBtn.style.display = "inline-block";
+});
+
+closeCartBtn.style.display = "none"; // Hide the close button initially
+
+closeCartBtn.addEventListener("click", () => {
+  cartContent.style.display = "none";
+  closeCartBtn.style.display = "none";
+  openCartBtn.style.display = "inline-block";
+});
+
+function cartIsEmpty() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  return cartItems.length === 0;
+}
+
+
+      // Add card to list
+      productsList.appendChild(card);
+      loader.style.display = "none";
+    }
+  });
+});
+
+
+
+
+   // Get products from newPhonesRef
+   get(ukUsedRef).then((snapshot) => {
+    const data = snapshot.val();
+     // Display the loader
+  const loader = document.getElementById("loader");
+  loader.style.display = "block";
+    const productsList = document.getElementById("products-list");
+    for (let i in data) {
+      const product = data[i];
+      // Create a card for the product
+      const card = document.createElement("div");
+      card.classList.add("card1");
+      // Add "Brand New" badge
+      const badge = document.createElement("div");
+      badge.classList.add("used-badge");
+      badge.innerText = "UK Used";
+      card.appendChild(badge);
+       // Add guarantee text
+const guaranteeText = document.createElement("div");
+guaranteeText.innerHTML = "<i class='fa fa-shield'></i>3 month Guarantee for UK Used Phones";
+guaranteeText.classList.add("guarantee-text");
+card.appendChild(guaranteeText);
+      // Add product image
+      const img = document.createElement("img");
+      img.src = product.image;
+      img.alt = product.name;
+      img.classList.add("product-img");
+      img.addEventListener("click", () => {
+        const modal = document.querySelector(".modal");
+        const modalImg = document.querySelector("#modalImg");
+        modal.style.display = "block";
+        modalImg.src = img.src;
+      });
+      card.appendChild(img);
+      // Add product name
+      const title = document.createElement("h2");
+      title.innerText = product.name;
+      card.appendChild(title);
+      // Add product description
+      const desc = document.createElement("p");
+      desc.innerText = product.description;
+      card.appendChild(desc);
+      // Add product price
+      const price = document.createElement("p");
+      price.innerText = `Price: UGX ${product.price}`;
+      card.appendChild(price);
+      // Add star rating
+      const stars = document.createElement("div");
+      stars.classList.add("stars");
+      for (let j = 0; j < 5; j++) {
+        const star = document.createElement("span");
+        star.classList.add("star");
+        star.innerHTML = "&#9733;"; // Unicode character for a star
+        stars.appendChild(star);
+      }
+      card.appendChild(stars);
+    
+   // Create the "Add to Cart" button
+const addToCartBtn = document.createElement("button");
+addToCartBtn.innerText = "Add to Cart";
+
+function addToCart(product) {
+  // Get the cart items container
+  const cartItemsContainer = document.getElementById("cart-items");
+
+  // Create a new cart item element
+  const cartItem = document.createElement("div");
+  cartItem.classList.add("cart-item");
+
+  // Create a container for the product details (name, price, quantity, and delete button)
+  const productDetails = document.createElement("div");
+  productDetails.classList.add("product-details");
+
+  // Add product name
+  const productName = document.createElement("h5");
+  productName.innerText = product.name;
+  productDetails.appendChild(productName);
+
+  // Add product price
+  const productPrice = document.createElement("p");
+  productPrice.innerText = `Price: UGX ${product.price}`;
+  productPrice.dataset.price = product.price; // Store the price as a data attribute
+  productDetails.appendChild(productPrice);
+
+// Create a quantity input field
+const quantityInput = document.createElement("input");
+quantityInput.type = "number";
+quantityInput.value = 1;
+quantityInput.min = 1;
+quantityInput.classList.add("quantity-input"); // Add the quantity-input class
+quantityInput.addEventListener("input", () => {
+  updateCartItemTotal(cartItem);
+  updateCartTotal();
+});
+productDetails.appendChild(quantityInput);
+
+
+// Define the updateCartItemTotal function
+function updateCartItemTotal(cartItem) {
+  const priceElement = cartItem.querySelector(".product-details p");
+  const quantityInput = cartItem.querySelector(".product-details input");
+  const quantity = parseInt(quantityInput.value);
+  const price = parseFloat(priceElement.innerText.replace("Price: UGX ", ""));
+  const total = quantity * price;
+  priceElement.dataset.total = total.toFixed(2);
+}
+
+// Define the updateCartTotal function
+function updateCartTotal() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  const totalPriceElement = document.getElementById("total-price");
+  let total = 0;
+
+  for (let i = 0; i < cartItems.length; i++) {
+    const cartItem = cartItems[i];
+    const priceElement = cartItem.querySelector(".product-details p");
+    const totalForItem = parseFloat(priceElement.dataset.total);
+    total += totalForItem;
+  }
+
+  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
+}
+
+  // Create a delete button for the cart item
+  const deleteButton = document.createElement("button");
+  deleteButton.innerText = "Delete";
+  deleteButton.classList.add("delete-button");
+  deleteButton.addEventListener("click", () => {
+    cartItemsContainer.removeChild(cartItem);
+    updateCartTotal();
+    updateCartCount(-1);
+  });
+  productDetails.appendChild(deleteButton);
+
+  cartItem.appendChild(productDetails);
+
+  // Append the cart item to the cart items container
+  cartItemsContainer.appendChild(cartItem);
+
+  // Update the cart count
+  updateCartCount(1);
+
+  // Calculate and update the total price
+  updateCartItemTotal(cartItem);
+  updateCartTotal();
+
+  // Show the "Added to Cart" message
+  showAddToCartMessage(product.name);
+}
+
+
+
+
+// Function to update the cart count
+function updateCartCount(count) {
+  const cartCountElement = document.getElementById("cart-count");
+  const currentCount = parseInt(cartCountElement.innerText) || 0;
+  cartCountElement.innerText = currentCount + count;
+}
+
+// Add the event listener to the "Add to Cart" button
+addToCartBtn.addEventListener("click", () => {
+  addToCart(product);
+});
+
+// Assuming `card` is the element representing the product card
+card.appendChild(addToCartBtn);
+
+// Function to show the "Added to Cart" message
+function showAddToCartMessage(productName) {
+  const messageContainer = document.getElementById("message-container");
+  messageContainer.innerText = `${productName} added to cart`;
+  messageContainer.style.display = "block";
+
+  setTimeout(() => {
+    messageContainer.style.display = "none";
+  }, 3000);
+}
+
+
+const openCartBtn = document.getElementById("open-cart-btn");
+const closeCartBtn = document.getElementById("close-cart-btn");
+const cartContent = document.getElementById("cart-content");
+
+cartContent.style.display = "none"; // Hide the cart content on load
+
+openCartBtn.addEventListener("click", () => {
+  if (cartIsEmpty()) {
+    cartContent.style.display = "none"; // Hide the cart content on load
+    // Show a message or perform any desired action when cart is empty
+    return;
+  }
+  
+  cartContent.style.display = "block";
+  openCartBtn.style.display = "none";
+  closeCartBtn.style.display = "inline-block";
+});
+
+closeCartBtn.style.display = "none"; // Hide the close button initially
+
+closeCartBtn.addEventListener("click", () => {
+  cartContent.style.display = "none";
+  closeCartBtn.style.display = "none";
+  openCartBtn.style.display = "inline-block";
+});
+
+function cartIsEmpty() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  return cartItems.length === 0;
+}
+
+
+      // Add card to list
+      productsList.appendChild(card);
+      loader.style.display = "none";
+    }
+  });
+
+
+
+
+
+//tevevisions navigation//
+
+
+
+
+document.querySelector("#televisions-link").addEventListener("click", () => {
+  // Clear the products list
+  document.getElementById("products-list").innerHTML = "";
+  
+   // Display the loader
+   const loader = document.getElementById("loader");
+  loader.style.display = "block";
+  // Get products from newPhonesRef
+  get(tvsRef).then((snapshot) => {
+    const data = snapshot.val();
+    const productsList = document.getElementById("products-list");
+    for (let i in data) {
+      const product = data[i];
+      // Create a card for the product
+      const card = document.createElement("div");
+      card.classList.add("card1");
+      // Add "Brand New" badge
+      const badge = document.createElement("div");
+      badge.classList.add("used-badge2");
+      badge.innerText = "Brand New";
+      card.appendChild(badge);
+      // Add product image
+      const img = document.createElement("img");
+      img.src = product.image;
+      img.alt = product.name;
+      img.classList.add("product-img");
+      img.addEventListener("click", () => {
+        const modal = document.querySelector(".modal");
+        const modalImg = document.querySelector("#modalImg");
+        modal.style.display = "block";
+        modalImg.src = img.src;
+      });
+      card.appendChild(img);
+      // Add product name
+      const title = document.createElement("h2");
+      title.innerText = product.name;
+      card.appendChild(title);
+      // Add product description
+      const desc = document.createElement("p");
+      desc.innerText = product.description;
+      card.appendChild(desc);
+      // Add product price
+      const price = document.createElement("p");
+      price.innerText = `Price: UGX ${product.price}`;
+      card.appendChild(price);
+      // Add star rating
+      const stars = document.createElement("div");
+      stars.classList.add("stars");
+      for (let j = 0; j < 5; j++) {
+        const star = document.createElement("span");
+        star.classList.add("star");
+        star.innerHTML = "&#9733;"; // Unicode character for a star
+        stars.appendChild(star);
+      }
+      card.appendChild(stars);
+     
+     // Create the "Add to Cart" button
+const addToCartBtn = document.createElement("button");
+addToCartBtn.innerText = "Add to Cart";
+
+function addToCart(product) {
+  // Get the cart items container
+  const cartItemsContainer = document.getElementById("cart-items");
+
+  // Create a new cart item element
+  const cartItem = document.createElement("div");
+  cartItem.classList.add("cart-item");
+
+  // Create a container for the product details (name, price, quantity, and delete button)
+  const productDetails = document.createElement("div");
+  productDetails.classList.add("product-details");
+
+  // Add product name
+  const productName = document.createElement("h5");
+  productName.innerText = product.name;
+  productDetails.appendChild(productName);
+
+  // Add product price
+  const productPrice = document.createElement("p");
+  productPrice.innerText = `Price: UGX ${product.price}`;
+  productPrice.dataset.price = product.price; // Store the price as a data attribute
+  productDetails.appendChild(productPrice);
+
+// Create a quantity input field
+const quantityInput = document.createElement("input");
+quantityInput.type = "number";
+quantityInput.value = 1;
+quantityInput.min = 1;
+quantityInput.classList.add("quantity-input"); // Add the quantity-input class
+quantityInput.addEventListener("input", () => {
+  updateCartItemTotal(cartItem);
+  updateCartTotal();
+});
+productDetails.appendChild(quantityInput);
+
+
+// Define the updateCartItemTotal function
+function updateCartItemTotal(cartItem) {
+  const priceElement = cartItem.querySelector(".product-details p");
+  const quantityInput = cartItem.querySelector(".product-details input");
+  const quantity = parseInt(quantityInput.value);
+  const price = parseFloat(priceElement.innerText.replace("Price: UGX ", ""));
+  const total = quantity * price;
+  priceElement.dataset.total = total.toFixed(2);
+}
+
+// Define the updateCartTotal function
+function updateCartTotal() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  const totalPriceElement = document.getElementById("total-price");
+  let total = 0;
+
+  for (let i = 0; i < cartItems.length; i++) {
+    const cartItem = cartItems[i];
+    const priceElement = cartItem.querySelector(".product-details p");
+    const totalForItem = parseFloat(priceElement.dataset.total);
+    total += totalForItem;
+  }
+
+  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
+}
+
+  // Create a delete button for the cart item
+  const deleteButton = document.createElement("button");
+  deleteButton.innerText = "Delete";
+  deleteButton.classList.add("delete-button");
+  deleteButton.addEventListener("click", () => {
+    cartItemsContainer.removeChild(cartItem);
+    updateCartTotal();
+    updateCartCount(-1);
+  });
+  productDetails.appendChild(deleteButton);
+
+  cartItem.appendChild(productDetails);
+
+  // Append the cart item to the cart items container
+  cartItemsContainer.appendChild(cartItem);
+
+  // Update the cart count
+  updateCartCount(1);
+
+  // Calculate and update the total price
+  updateCartItemTotal(cartItem);
+  updateCartTotal();
+
+  // Show the "Added to Cart" message
+  showAddToCartMessage(product.name);
+}
+
+
+
+
+// Function to update the cart count
+function updateCartCount(count) {
+  const cartCountElement = document.getElementById("cart-count");
+  const currentCount = parseInt(cartCountElement.innerText) || 0;
+  cartCountElement.innerText = currentCount + count;
+}
+
+// Add the event listener to the "Add to Cart" button
+addToCartBtn.addEventListener("click", () => {
+  addToCart(product);
+});
+
+// Assuming `card` is the element representing the product card
+card.appendChild(addToCartBtn);
+
+// Function to show the "Added to Cart" message
+function showAddToCartMessage(productName) {
+  const messageContainer = document.getElementById("message-container");
+  messageContainer.innerText = `${productName} added to cart`;
+  messageContainer.style.display = "block";
+
+  setTimeout(() => {
+    messageContainer.style.display = "none";
+  }, 3000);
+}
+
+
+const openCartBtn = document.getElementById("open-cart-btn");
+const closeCartBtn = document.getElementById("close-cart-btn");
+const cartContent = document.getElementById("cart-content");
+
+cartContent.style.display = "none"; // Hide the cart content on load
+
+openCartBtn.addEventListener("click", () => {
+  if (cartIsEmpty()) {
+    cartContent.style.display = "none"; // Hide the cart content on load
+    // Show a message or perform any desired action when cart is empty
+    return;
+  }
+  
+  cartContent.style.display = "block";
+  openCartBtn.style.display = "none";
+  closeCartBtn.style.display = "inline-block";
+});
+
+closeCartBtn.style.display = "none"; // Hide the close button initially
+
+closeCartBtn.addEventListener("click", () => {
+  cartContent.style.display = "none";
+  closeCartBtn.style.display = "none";
+  openCartBtn.style.display = "inline-block";
+});
+
+function cartIsEmpty() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  return cartItems.length === 0;
+}
+
+
+      // Add card to list
+      productsList.appendChild(card);
+      loader.style.display = "none";
+    }
+  });
+});
+
+
+
+//sound navigation//
+
+
+
+document.querySelector("#sound-link").addEventListener("click", () => {
+  // Clear the products list
+  document.getElementById("products-list").innerHTML = "";
+   // Display the loader
+   const loader = document.getElementById("loader");
+  loader.style.display = "block";
+
+  // Get products from newPhonesRef
+  get(soundRef).then((snapshot) => {
+    const data = snapshot.val();
+    const productsList = document.getElementById("products-list");
+    for (let i in data) {
+      const product = data[i];
+      // Create a card for the product
+      const card = document.createElement("div");
+      card.classList.add("card1");
+      // Add "Brand New" badge
+      const badge = document.createElement("div");
+      badge.classList.add("used-badge2");
+      badge.innerText = "Brand New";
+      card.appendChild(badge);
+      // Add product image
+      const img = document.createElement("img");
+      img.src = product.image;
+      img.alt = product.name;
+      img.classList.add("product-img");
+      img.addEventListener("click", () => {
+        const modal = document.querySelector(".modal");
+        const modalImg = document.querySelector("#modalImg");
+        modal.style.display = "block";
+        modalImg.src = img.src;
+      });
+      card.appendChild(img);
+      // Add product name
+      const title = document.createElement("h2");
+      title.innerText = product.name;
+      card.appendChild(title);
+      // Add product description
+      const desc = document.createElement("p");
+      desc.innerText = product.description;
+      card.appendChild(desc);
+      // Add product price
+      const price = document.createElement("p");
+      price.innerText = `Price: UGX ${product.price}`;
+      card.appendChild(price);
+      // Add star rating
+      const stars = document.createElement("div");
+      stars.classList.add("stars");
+      for (let j = 0; j < 5; j++) {
+        const star = document.createElement("span");
+        star.classList.add("star");
+        star.innerHTML = "&#9733;"; // Unicode character for a star
+        stars.appendChild(star);
+      }
+      card.appendChild(stars);
+    
+     // Create the "Add to Cart" button
+const addToCartBtn = document.createElement("button");
+addToCartBtn.innerText = "Add to Cart";
+
+function addToCart(product) {
+  // Get the cart items container
+  const cartItemsContainer = document.getElementById("cart-items");
+
+  // Create a new cart item element
+  const cartItem = document.createElement("div");
+  cartItem.classList.add("cart-item");
+
+  // Create a container for the product details (name, price, quantity, and delete button)
+  const productDetails = document.createElement("div");
+  productDetails.classList.add("product-details");
+
+  // Add product name
+  const productName = document.createElement("h5");
+  productName.innerText = product.name;
+  productDetails.appendChild(productName);
+
+  // Add product price
+  const productPrice = document.createElement("p");
+  productPrice.innerText = `Price: UGX ${product.price}`;
+  productPrice.dataset.price = product.price; // Store the price as a data attribute
+  productDetails.appendChild(productPrice);
+
+// Create a quantity input field
+const quantityInput = document.createElement("input");
+quantityInput.type = "number";
+quantityInput.value = 1;
+quantityInput.min = 1;
+quantityInput.classList.add("quantity-input"); // Add the quantity-input class
+quantityInput.addEventListener("input", () => {
+  updateCartItemTotal(cartItem);
+  updateCartTotal();
+});
+productDetails.appendChild(quantityInput);
+
+
+// Define the updateCartItemTotal function
+function updateCartItemTotal(cartItem) {
+  const priceElement = cartItem.querySelector(".product-details p");
+  const quantityInput = cartItem.querySelector(".product-details input");
+  const quantity = parseInt(quantityInput.value);
+  const price = parseFloat(priceElement.innerText.replace("Price: UGX ", ""));
+  const total = quantity * price;
+  priceElement.dataset.total = total.toFixed(2);
+}
+
+// Define the updateCartTotal function
+function updateCartTotal() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  const totalPriceElement = document.getElementById("total-price");
+  let total = 0;
+
+  for (let i = 0; i < cartItems.length; i++) {
+    const cartItem = cartItems[i];
+    const priceElement = cartItem.querySelector(".product-details p");
+    const totalForItem = parseFloat(priceElement.dataset.total);
+    total += totalForItem;
+  }
+
+  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
+}
+
+  // Create a delete button for the cart item
+  const deleteButton = document.createElement("button");
+  deleteButton.innerText = "Delete";
+  deleteButton.classList.add("delete-button");
+  deleteButton.addEventListener("click", () => {
+    cartItemsContainer.removeChild(cartItem);
+    updateCartTotal();
+    updateCartCount(-1);
+  });
+  productDetails.appendChild(deleteButton);
+
+  cartItem.appendChild(productDetails);
+
+  // Append the cart item to the cart items container
+  cartItemsContainer.appendChild(cartItem);
+
+  // Update the cart count
+  updateCartCount(1);
+
+  // Calculate and update the total price
+  updateCartItemTotal(cartItem);
+  updateCartTotal();
+
+  // Show the "Added to Cart" message
+  showAddToCartMessage(product.name);
+}
+
+
+
+
+// Function to update the cart count
+function updateCartCount(count) {
+  const cartCountElement = document.getElementById("cart-count");
+  const currentCount = parseInt(cartCountElement.innerText) || 0;
+  cartCountElement.innerText = currentCount + count;
+}
+
+// Add the event listener to the "Add to Cart" button
+addToCartBtn.addEventListener("click", () => {
+  addToCart(product);
+});
+
+// Assuming `card` is the element representing the product card
+card.appendChild(addToCartBtn);
+
+// Function to show the "Added to Cart" message
+function showAddToCartMessage(productName) {
+  const messageContainer = document.getElementById("message-container");
+  messageContainer.innerText = `${productName} added to cart`;
+  messageContainer.style.display = "block";
+
+  setTimeout(() => {
+    messageContainer.style.display = "none";
+  }, 3000);
+}
+
+
+const openCartBtn = document.getElementById("open-cart-btn");
+const closeCartBtn = document.getElementById("close-cart-btn");
+const cartContent = document.getElementById("cart-content");
+
+cartContent.style.display = "none"; // Hide the cart content on load
+
+openCartBtn.addEventListener("click", () => {
+  if (cartIsEmpty()) {
+    cartContent.style.display = "none"; // Hide the cart content on load
+    // Show a message or perform any desired action when cart is empty
+    return;
+  }
+  
+  cartContent.style.display = "block";
+  openCartBtn.style.display = "none";
+  closeCartBtn.style.display = "inline-block";
+});
+
+closeCartBtn.style.display = "none"; // Hide the close button initially
+
+closeCartBtn.addEventListener("click", () => {
+  cartContent.style.display = "none";
+  closeCartBtn.style.display = "none";
+  openCartBtn.style.display = "inline-block";
+});
+
+function cartIsEmpty() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  return cartItems.length === 0;
+}
+
+
+      // Add card to list
+      productsList.appendChild(card);
+      loader.style.display = "none";
+    }
+  });
+});
+
+
+//accessories Navigation//
+
+
+
+
+document.querySelector("#accessories-link").addEventListener("click", () => {
+  // Clear the products list
+  document.getElementById("products-list").innerHTML = "";
+   // Display the loader
+   const loader = document.getElementById("loader");
+  loader.style.display = "block";
+  // Get products from newPhonesRef
+  get(accessoriesRef).then((snapshot) => {
+    const data = snapshot.val();
+    const productsList = document.getElementById("products-list");
+    for (let i in data) {
+      const product = data[i];
+      // Create a card for the product
+      const card = document.createElement("div");
+      card.classList.add("card1");
+      // Add "Brand New" badge
+      const badge = document.createElement("div");
+      badge.classList.add("used-badge2");
+      badge.innerText = "Brand New";
+      card.appendChild(badge);
+      // Add product image
+      const img = document.createElement("img");
+      img.src = product.image;
+      img.alt = product.name;
+      img.classList.add("product-img");
+      img.addEventListener("click", () => {
+        const modal = document.querySelector(".modal");
+        const modalImg = document.querySelector("#modalImg");
+        modal.style.display = "block";
+        modalImg.src = img.src;
+      });
+      card.appendChild(img);
+      // Add product name
+      const title = document.createElement("h2");
+      title.innerText = product.name;
+      card.appendChild(title);
+      // Add product description
+      const desc = document.createElement("p");
+      desc.innerText = product.description;
+      card.appendChild(desc);
+      // Add product price
+      const price = document.createElement("p");
+      price.innerText = `Price: UGX ${product.price}`;
+      card.appendChild(price);
+      // Add star rating
+      const stars = document.createElement("div");
+      stars.classList.add("stars");
+      for (let j = 0; j < 5; j++) {
+        const star = document.createElement("span");
+        star.classList.add("star");
+        star.innerHTML = "&#9733;"; // Unicode character for a star
+        stars.appendChild(star);
+      }
+      card.appendChild(stars);
+    
+     // Create the "Add to Cart" button
+const addToCartBtn = document.createElement("button");
+addToCartBtn.innerText = "Add to Cart";
+
+function addToCart(product) {
+  // Get the cart items container
+  const cartItemsContainer = document.getElementById("cart-items");
+
+  // Create a new cart item element
+  const cartItem = document.createElement("div");
+  cartItem.classList.add("cart-item");
+
+  // Create a container for the product details (name, price, quantity, and delete button)
+  const productDetails = document.createElement("div");
+  productDetails.classList.add("product-details");
+
+  // Add product name
+  const productName = document.createElement("h5");
+  productName.innerText = product.name;
+  productDetails.appendChild(productName);
+
+  // Add product price
+  const productPrice = document.createElement("p");
+  productPrice.innerText = `Price: UGX ${product.price}`;
+  productPrice.dataset.price = product.price; // Store the price as a data attribute
+  productDetails.appendChild(productPrice);
+
+// Create a quantity input field
+const quantityInput = document.createElement("input");
+quantityInput.type = "number";
+quantityInput.value = 1;
+quantityInput.min = 1;
+quantityInput.classList.add("quantity-input"); // Add the quantity-input class
+quantityInput.addEventListener("input", () => {
+  updateCartItemTotal(cartItem);
+  updateCartTotal();
+});
+productDetails.appendChild(quantityInput);
+
+
+// Define the updateCartItemTotal function
+function updateCartItemTotal(cartItem) {
+  const priceElement = cartItem.querySelector(".product-details p");
+  const quantityInput = cartItem.querySelector(".product-details input");
+  const quantity = parseInt(quantityInput.value);
+  const price = parseFloat(priceElement.innerText.replace("Price: UGX ", ""));
+  const total = quantity * price;
+  priceElement.dataset.total = total.toFixed(2);
+}
+
+// Define the updateCartTotal function
+function updateCartTotal() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  const totalPriceElement = document.getElementById("total-price");
+  let total = 0;
+
+  for (let i = 0; i < cartItems.length; i++) {
+    const cartItem = cartItems[i];
+    const priceElement = cartItem.querySelector(".product-details p");
+    const totalForItem = parseFloat(priceElement.dataset.total);
+    total += totalForItem;
+  }
+
+  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
+}
+
+  // Create a delete button for the cart item
+  const deleteButton = document.createElement("button");
+  deleteButton.innerText = "Delete";
+  deleteButton.classList.add("delete-button");
+  deleteButton.addEventListener("click", () => {
+    cartItemsContainer.removeChild(cartItem);
+    updateCartTotal();
+    updateCartCount(-1);
+  });
+  productDetails.appendChild(deleteButton);
+
+  cartItem.appendChild(productDetails);
+
+  // Append the cart item to the cart items container
+  cartItemsContainer.appendChild(cartItem);
+
+  // Update the cart count
+  updateCartCount(1);
+
+  // Calculate and update the total price
+  updateCartItemTotal(cartItem);
+  updateCartTotal();
+
+  // Show the "Added to Cart" message
+  showAddToCartMessage(product.name);
+}
+
+
+
+
+// Function to update the cart count
+function updateCartCount(count) {
+  const cartCountElement = document.getElementById("cart-count");
+  const currentCount = parseInt(cartCountElement.innerText) || 0;
+  cartCountElement.innerText = currentCount + count;
+}
+
+// Add the event listener to the "Add to Cart" button
+addToCartBtn.addEventListener("click", () => {
+  addToCart(product);
+});
+
+// Assuming `card` is the element representing the product card
+card.appendChild(addToCartBtn);
+
+// Function to show the "Added to Cart" message
+function showAddToCartMessage(productName) {
+  const messageContainer = document.getElementById("message-container");
+  messageContainer.innerText = `${productName} added to cart`;
+  messageContainer.style.display = "block";
+
+  setTimeout(() => {
+    messageContainer.style.display = "none";
+  }, 3000);
+}
+
+
+const openCartBtn = document.getElementById("open-cart-btn");
+const closeCartBtn = document.getElementById("close-cart-btn");
+const cartContent = document.getElementById("cart-content");
+
+cartContent.style.display = "none"; // Hide the cart content on load
+
+openCartBtn.addEventListener("click", () => {
+  if (cartIsEmpty()) {
+    cartContent.style.display = "none"; // Hide the cart content on load
+    // Show a message or perform any desired action when cart is empty
+    return;
+  }
+  
+  cartContent.style.display = "block";
+  openCartBtn.style.display = "none";
+  closeCartBtn.style.display = "inline-block";
+});
+
+closeCartBtn.style.display = "none"; // Hide the close button initially
+
+closeCartBtn.addEventListener("click", () => {
+  cartContent.style.display = "none";
+  closeCartBtn.style.display = "none";
+  openCartBtn.style.display = "inline-block";
+});
+
+function cartIsEmpty() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  return cartItems.length === 0;
+}
+
+
+      // Add card to list
+      productsList.appendChild(card);
+      loader.style.display = "none";
+    }
+  });
+});
+
+
+
+//tablets Navigation//
+
+
+
+document.querySelector("#tablets-link").addEventListener("click", () => {
+  // Clear the products list
+  document.getElementById("products-list").innerHTML = "";
+  
+   // Display the loader
+   const loader = document.getElementById("loader");
+  loader.style.display = "block";
+  // Get products from newPhonesRef
+  get(tabletsRef).then((snapshot) => {
+    const data = snapshot.val();
+    const productsList = document.getElementById("products-list");
+    for (let i in data) {
+      const product = data[i];
+      // Create a card for the product
+      const card = document.createElement("div");
+      card.classList.add("card1");
+      // Add "Brand New" badge
+      const badge = document.createElement("div");
+      badge.classList.add("used-badge2");
+      badge.innerText = "Brand New";
+      card.appendChild(badge);
+      // Add product image
+      const img = document.createElement("img");
+      img.src = product.image;
+      img.alt = product.name;
+      img.classList.add("product-img");
+      img.addEventListener("click", () => {
+        const modal = document.querySelector(".modal");
+        const modalImg = document.querySelector("#modalImg");
+        modal.style.display = "block";
+        modalImg.src = img.src;
+      });
+      card.appendChild(img);
+      // Add product name
+      const title = document.createElement("h2");
+      title.innerText = product.name;
+      card.appendChild(title);
+      // Add product description
+      const desc = document.createElement("p");
+      desc.innerText = product.description;
+      card.appendChild(desc);
+      // Add product price
+      const price = document.createElement("p");
+      price.innerText = `Price: UGX ${product.price}`;
+      card.appendChild(price);
+      // Add star rating
+      const stars = document.createElement("div");
+      stars.classList.add("stars");
+      for (let j = 0; j < 5; j++) {
+        const star = document.createElement("span");
+        star.classList.add("star");
+        star.innerHTML = "&#9733;"; // Unicode character for a star
+        stars.appendChild(star);
+      }
+      card.appendChild(stars);
+     
+     // Create the "Add to Cart" button
+const addToCartBtn = document.createElement("button");
+addToCartBtn.innerText = "Add to Cart";
+
+function addToCart(product) {
+  // Get the cart items container
+  const cartItemsContainer = document.getElementById("cart-items");
+
+  // Create a new cart item element
+  const cartItem = document.createElement("div");
+  cartItem.classList.add("cart-item");
+
+  // Create a container for the product details (name, price, quantity, and delete button)
+  const productDetails = document.createElement("div");
+  productDetails.classList.add("product-details");
+
+  // Add product name
+  const productName = document.createElement("h5");
+  productName.innerText = product.name;
+  productDetails.appendChild(productName);
+
+  // Add product price
+  const productPrice = document.createElement("p");
+  productPrice.innerText = `Price: UGX ${product.price}`;
+  productPrice.dataset.price = product.price; // Store the price as a data attribute
+  productDetails.appendChild(productPrice);
+
+// Create a quantity input field
+const quantityInput = document.createElement("input");
+quantityInput.type = "number";
+quantityInput.value = 1;
+quantityInput.min = 1;
+quantityInput.classList.add("quantity-input"); // Add the quantity-input class
+quantityInput.addEventListener("input", () => {
+  updateCartItemTotal(cartItem);
+  updateCartTotal();
+});
+productDetails.appendChild(quantityInput);
+
+
+// Define the updateCartItemTotal function
+function updateCartItemTotal(cartItem) {
+  const priceElement = cartItem.querySelector(".product-details p");
+  const quantityInput = cartItem.querySelector(".product-details input");
+  const quantity = parseInt(quantityInput.value);
+  const price = parseFloat(priceElement.innerText.replace("Price: UGX ", ""));
+  const total = quantity * price;
+  priceElement.dataset.total = total.toFixed(2);
+}
+
+// Define the updateCartTotal function
+function updateCartTotal() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  const totalPriceElement = document.getElementById("total-price");
+  let total = 0;
+
+  for (let i = 0; i < cartItems.length; i++) {
+    const cartItem = cartItems[i];
+    const priceElement = cartItem.querySelector(".product-details p");
+    const totalForItem = parseFloat(priceElement.dataset.total);
+    total += totalForItem;
+  }
+
+  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
+}
+
+  // Create a delete button for the cart item
+  const deleteButton = document.createElement("button");
+  deleteButton.innerText = "Delete";
+  deleteButton.classList.add("delete-button");
+  deleteButton.addEventListener("click", () => {
+    cartItemsContainer.removeChild(cartItem);
+    updateCartTotal();
+    updateCartCount(-1);
+  });
+  productDetails.appendChild(deleteButton);
+
+  cartItem.appendChild(productDetails);
+
+  // Append the cart item to the cart items container
+  cartItemsContainer.appendChild(cartItem);
+
+  // Update the cart count
+  updateCartCount(1);
+
+  // Calculate and update the total price
+  updateCartItemTotal(cartItem);
+  updateCartTotal();
+
+  // Show the "Added to Cart" message
+  showAddToCartMessage(product.name);
+}
+
+
+
+
+// Function to update the cart count
+function updateCartCount(count) {
+  const cartCountElement = document.getElementById("cart-count");
+  const currentCount = parseInt(cartCountElement.innerText) || 0;
+  cartCountElement.innerText = currentCount + count;
+}
+
+// Add the event listener to the "Add to Cart" button
+addToCartBtn.addEventListener("click", () => {
+  addToCart(product);
+});
+
+// Assuming `card` is the element representing the product card
+card.appendChild(addToCartBtn);
+
+// Function to show the "Added to Cart" message
+function showAddToCartMessage(productName) {
+  const messageContainer = document.getElementById("message-container");
+  messageContainer.innerText = `${productName} added to cart`;
+  messageContainer.style.display = "block";
+
+  setTimeout(() => {
+    messageContainer.style.display = "none";
+  }, 3000);
+}
+
+
+const openCartBtn = document.getElementById("open-cart-btn");
+const closeCartBtn = document.getElementById("close-cart-btn");
+const cartContent = document.getElementById("cart-content");
+
+cartContent.style.display = "none"; // Hide the cart content on load
+
+openCartBtn.addEventListener("click", () => {
+  if (cartIsEmpty()) {
+    cartContent.style.display = "none"; // Hide the cart content on load
+    // Show a message or perform any desired action when cart is empty
+    return;
+  }
+  
+  cartContent.style.display = "block";
+  openCartBtn.style.display = "none";
+  closeCartBtn.style.display = "inline-block";
+});
+
+closeCartBtn.style.display = "none"; // Hide the close button initially
+
+closeCartBtn.addEventListener("click", () => {
+  cartContent.style.display = "none";
+  closeCartBtn.style.display = "none";
+  openCartBtn.style.display = "inline-block";
+});
+
+function cartIsEmpty() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  return cartItems.length === 0;
+}
+
+
+      // Add card to list
+      productsList.appendChild(card);
+      loader.style.display = "none";
+    }
+  });
+});
+
+
+
+           const loaderContainer = document.querySelector('.loader-container');
+         //   const loader = document.querySelector('.loader');
+            const productsList = document.getElementById("products-list");
+            const modal = document.querySelector('.modal');
+            const modalImg = document.getElementById("modalImg");
+            const closeBtn = document.querySelector('.close');
+      
+      
+          //  loaderContainer.style.display = "flex"; // show the loader
+
+
+            get(newPhonesRef).then((snapshot) => {
+              const data = snapshot.val();
+              const productsList = document.getElementById("products-list");
+              for (let i in data) {
+                const product = data[i];
+                const card = document.createElement("div");
+                card.classList.add("card1");
+                       // Add "used" badge
+  const usedBadge = document.createElement("div");
+  usedBadge.classList.add("used-badge2");
+  usedBadge.innerText = "Brand New";
+  card.appendChild(usedBadge);
+   // Add guarantee text
+const guaranteeText = document.createElement("div");
+guaranteeText.innerHTML = "<i class='fa fa-shield'></i>24 month Guarantee for Brand New Phones";
+guaranteeText.classList.add("guarantee-text");
+card.appendChild(guaranteeText);
+                   const img = document.createElement("img");
+      img.src = product.image;
+      img.alt = product.name;
+      img.classList.add("product-img");
+      img.addEventListener("click", () => {
+        const modal = document.querySelector(".modal");
+        const modalImg = document.querySelector("#modalImg");
+        modal.style.display = "block";
+        modalImg.src = img.src;
+      });
+      card.appendChild(img);
+      
+      const modal = document.querySelector(".modal");
+      const closeBtn = document.querySelector(".close");
+      closeBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+      });
+          
+ 
+
+                const title = document.createElement("h2");
+                title.innerText = product.name;
+                card.appendChild(title);
+      
+                const desc = document.createElement("p");
+                desc.innerText = product.description;
+                card.appendChild(desc);
+      
+
+      
+                const price = document.createElement("p");
+                price.innerText = `Price: UGX${product.price}`;
+                card.appendChild(price);
+      
+
+                const stars = document.createElement("div");            
+stars.classList.add("stars");
+for (let j = 0; j < 5; j++) {
+  const star = document.createElement("span");
+  star.classList.add("star");
+  star.innerHTML = "&#9733;"; // Unicode character for a star
+  stars.appendChild(star);
+}
+card.appendChild(stars);
+
+
+      
+      
+      // Open the Modal
+      function openModal(img) {
+        document.getElementById("modalImg").src = img.src;
+        document.querySelector(".modal").style.display = "block";
+      }
+      
+      // Close the Modal
+      document.querySelector(".close").addEventListener("click", function() {
+        document.querySelector(".modal").style.display = "none";
+      });
+      
+      
+      
+              
+      // Create the "Add to Cart" button
+const addToCartBtn = document.createElement("button");
+addToCartBtn.innerText = "Add to Cart";
+
+function addToCart(product) {
+  // Get the cart items container
+  const cartItemsContainer = document.getElementById("cart-items");
+
+  // Create a new cart item element
+  const cartItem = document.createElement("div");
+  cartItem.classList.add("cart-item");
+
+  // Create a container for the product details (name, price, quantity, and delete button)
+  const productDetails = document.createElement("div");
+  productDetails.classList.add("product-details");
+
+  // Add product name
+  const productName = document.createElement("h5");
+  productName.innerText = product.name;
+  productDetails.appendChild(productName);
+
+  // Add product price
+  const productPrice = document.createElement("p");
+  productPrice.innerText = `Price: UGX ${product.price}`;
+  productPrice.dataset.price = product.price; // Store the price as a data attribute
+  productDetails.appendChild(productPrice);
+
+// Create a quantity input field
+const quantityInput = document.createElement("input");
+quantityInput.type = "number";
+quantityInput.value = 1;
+quantityInput.min = 1;
+quantityInput.classList.add("quantity-input"); // Add the quantity-input class
+quantityInput.addEventListener("input", () => {
+  updateCartItemTotal(cartItem);
+  updateCartTotal();
+});
+productDetails.appendChild(quantityInput);
+
+
+// Define the updateCartItemTotal function
+function updateCartItemTotal(cartItem) {
+  const priceElement = cartItem.querySelector(".product-details p");
+  const quantityInput = cartItem.querySelector(".product-details input");
+  const quantity = parseInt(quantityInput.value);
+  const price = parseFloat(priceElement.innerText.replace("Price: UGX ", ""));
+  const total = quantity * price;
+  priceElement.dataset.total = total.toFixed(2);
+}
+
+// Define the updateCartTotal function
+function updateCartTotal() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  const totalPriceElement = document.getElementById("total-price");
+  let total = 0;
+
+  for (let i = 0; i < cartItems.length; i++) {
+    const cartItem = cartItems[i];
+    const priceElement = cartItem.querySelector(".product-details p");
+    const totalForItem = parseFloat(priceElement.dataset.total);
+    total += totalForItem;
+  }
+
+  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
+}
+
+  // Create a delete button for the cart item
+  const deleteButton = document.createElement("button");
+  deleteButton.innerText = "Delete";
+  deleteButton.classList.add("delete-button");
+  deleteButton.addEventListener("click", () => {
+    cartItemsContainer.removeChild(cartItem);
+    updateCartTotal();
+    updateCartCount(-1);
+  });
+  productDetails.appendChild(deleteButton);
+
+  cartItem.appendChild(productDetails);
+
+  // Append the cart item to the cart items container
+  cartItemsContainer.appendChild(cartItem);
+
+  // Update the cart count
+  updateCartCount(1);
+
+  // Calculate and update the total price
+  updateCartItemTotal(cartItem);
+  updateCartTotal();
+
+  // Show the "Added to Cart" message
+  showAddToCartMessage(product.name);
+}
+
+
+
+
+// Function to update the cart count
+function updateCartCount(count) {
+  const cartCountElement = document.getElementById("cart-count");
+  const currentCount = parseInt(cartCountElement.innerText) || 0;
+  cartCountElement.innerText = currentCount + count;
+}
+
+// Add the event listener to the "Add to Cart" button
+addToCartBtn.addEventListener("click", () => {
+  addToCart(product);
+});
+
+// Assuming `card` is the element representing the product card
+card.appendChild(addToCartBtn);
+
+// Function to show the "Added to Cart" message
+function showAddToCartMessage(productName) {
+  const messageContainer = document.getElementById("message-container");
+  messageContainer.innerText = `${productName} added to cart`;
+  messageContainer.style.display = "block";
+
+  setTimeout(() => {
+    messageContainer.style.display = "none";
+  }, 3000);
+}
+
+
+const openCartBtn = document.getElementById("open-cart-btn");
+const closeCartBtn = document.getElementById("close-cart-btn");
+const cartContent = document.getElementById("cart-content");
+
+cartContent.style.display = "none"; // Hide the cart content on load
+
+openCartBtn.addEventListener("click", () => {
+  if (cartIsEmpty()) {
+    cartContent.style.display = "none"; // Hide the cart content on load
+    // Show a message or perform any desired action when cart is empty
+    return;
+  }
+  
+  cartContent.style.display = "block";
+  openCartBtn.style.display = "none";
+  closeCartBtn.style.display = "inline-block";
+});
+
+closeCartBtn.style.display = "none"; // Hide the close button initially
+
+closeCartBtn.addEventListener("click", () => {
+  cartContent.style.display = "none";
+  closeCartBtn.style.display = "none";
+  openCartBtn.style.display = "inline-block";
+});
+
+function cartIsEmpty() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  return cartItems.length === 0;
+}
+
+
+      // Add card to list
+      productsList.appendChild(card);
+      loader.style.display = "none";
+    }
+  });
+
+
+
+
+
+//UK USed  //
+
+    get(ukUsedRef).then((snapshot) => {
+              const data = snapshot.val();
+              const productsList = document.getElementById("products-list");
+              for (let i in data) {
+                const product = data[i];
+                const card = document.createElement("div");
+                card.classList.add("card1");
+
+
+                  // Add "used" badge
+  const usedBadge = document.createElement("div");
+  usedBadge.classList.add("used-badge");
+  usedBadge.innerText = "UK Used";
+  card.appendChild(usedBadge);
+   // Add guarantee text
+const guaranteeText = document.createElement("div");
+guaranteeText.innerHTML = "<i class='fa fa-shield'></i>12 month Guarantee for UK Used Phones";
+guaranteeText.classList.add("guarantee-text");
+card.appendChild(guaranteeText);
+      
+                   const img = document.createElement("img");
+      img.src = product.image;
+      img.alt = product.name;
+      img.classList.add("product-img");
+      img.addEventListener("click", () => {
+        const modal = document.querySelector(".modal");
+        const modalImg = document.querySelector("#modalImg");
+        modal.style.display = "block";
+        modalImg.src = img.src;
+      });
+      card.appendChild(img);
+      
+      const modal = document.querySelector(".modal");
+      const closeBtn = document.querySelector(".close");
+      closeBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+      });
+          
+ 
+
+                const title = document.createElement("h2");
+                title.innerText = product.name;
+                card.appendChild(title);
+      
+
+
+
+                const desc = document.createElement("p");
+                desc.innerText = product.description;
+                card.appendChild(desc);
+      
+     
+      
+      
+                const price = document.createElement("p");
+                price.innerText = `Price: UGX${product.price}`;
+                card.appendChild(price);
+      
+
+                const stars = document.createElement("div");            
+stars.classList.add("stars");
+for (let j = 0; j < 5; j++) {
+  const star = document.createElement("span");
+  star.classList.add("star");
+  star.innerHTML = "&#9733;"; // Unicode character for a star
+  stars.appendChild(star);
+}
+card.appendChild(stars);
+
+
+
+
+      
+      
+      // Open the Modal
+      function openModal(img) {
+        document.getElementById("modalImg").src = img.src;
+        document.querySelector(".modal").style.display = "block";
+      }
+      
+      // Close the Modal
+      document.querySelector(".close").addEventListener("click", function() {
+        document.querySelector(".modal").style.display = "none";
+      });
+      
+      
+      
+      
+     // Create the "Add to Cart" button
+const addToCartBtn = document.createElement("button");
+addToCartBtn.innerText = "Add to Cart";
+
+function addToCart(product) {
+  // Get the cart items container
+  const cartItemsContainer = document.getElementById("cart-items");
+
+  // Create a new cart item element
+  const cartItem = document.createElement("div");
+  cartItem.classList.add("cart-item");
+
+  // Create a container for the product details (name, price, quantity, and delete button)
+  const productDetails = document.createElement("div");
+  productDetails.classList.add("product-details");
+
+  // Add product name
+  const productName = document.createElement("h5");
+  productName.innerText = product.name;
+  productDetails.appendChild(productName);
+
+  // Add product price
+  const productPrice = document.createElement("p");
+  productPrice.innerText = `Price: UGX ${product.price}`;
+  productPrice.dataset.price = product.price; // Store the price as a data attribute
+  productDetails.appendChild(productPrice);
+
+// Create a quantity input field
+const quantityInput = document.createElement("input");
+quantityInput.type = "number";
+quantityInput.value = 1;
+quantityInput.min = 1;
+quantityInput.classList.add("quantity-input"); // Add the quantity-input class
+quantityInput.addEventListener("input", () => {
+  updateCartItemTotal(cartItem);
+  updateCartTotal();
+});
+productDetails.appendChild(quantityInput);
+
+
+// Define the updateCartItemTotal function
+function updateCartItemTotal(cartItem) {
+  const priceElement = cartItem.querySelector(".product-details p");
+  const quantityInput = cartItem.querySelector(".product-details input");
+  const quantity = parseInt(quantityInput.value);
+  const price = parseFloat(priceElement.innerText.replace("Price: UGX ", ""));
+  const total = quantity * price;
+  priceElement.dataset.total = total.toFixed(2);
+}
+
+// Define the updateCartTotal function
+function updateCartTotal() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  const totalPriceElement = document.getElementById("total-price");
+  let total = 0;
+
+  for (let i = 0; i < cartItems.length; i++) {
+    const cartItem = cartItems[i];
+    const priceElement = cartItem.querySelector(".product-details p");
+    const totalForItem = parseFloat(priceElement.dataset.total);
+    total += totalForItem;
+  }
+
+  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
+}
+
+  // Create a delete button for the cart item
+  const deleteButton = document.createElement("button");
+  deleteButton.innerText = "Delete";
+  deleteButton.classList.add("delete-button");
+  deleteButton.addEventListener("click", () => {
+    cartItemsContainer.removeChild(cartItem);
+    updateCartTotal();
+    updateCartCount(-1);
+  });
+  productDetails.appendChild(deleteButton);
+
+  cartItem.appendChild(productDetails);
+
+  // Append the cart item to the cart items container
+  cartItemsContainer.appendChild(cartItem);
+
+  // Update the cart count
+  updateCartCount(1);
+
+  // Calculate and update the total price
+  updateCartItemTotal(cartItem);
+  updateCartTotal();
+
+  // Show the "Added to Cart" message
+  showAddToCartMessage(product.name);
+}
+
+
+
+
+// Function to update the cart count
+function updateCartCount(count) {
+  const cartCountElement = document.getElementById("cart-count");
+  const currentCount = parseInt(cartCountElement.innerText) || 0;
+  cartCountElement.innerText = currentCount + count;
+}
+
+// Add the event listener to the "Add to Cart" button
+addToCartBtn.addEventListener("click", () => {
+  addToCart(product);
+});
+
+// Assuming `card` is the element representing the product card
+card.appendChild(addToCartBtn);
+
+// Function to show the "Added to Cart" message
+function showAddToCartMessage(productName) {
+  const messageContainer = document.getElementById("message-container");
+  messageContainer.innerText = `${productName} added to cart`;
+  messageContainer.style.display = "block";
+
+  setTimeout(() => {
+    messageContainer.style.display = "none";
+  }, 3000);
+}
+
+
+const openCartBtn = document.getElementById("open-cart-btn");
+const closeCartBtn = document.getElementById("close-cart-btn");
+const cartContent = document.getElementById("cart-content");
+
+cartContent.style.display = "none"; // Hide the cart content on load
+
+openCartBtn.addEventListener("click", () => {
+  if (cartIsEmpty()) {
+    cartContent.style.display = "none"; // Hide the cart content on load
+    // Show a message or perform any desired action when cart is empty
+    return;
+  }
+  
+  cartContent.style.display = "block";
+  openCartBtn.style.display = "none";
+  closeCartBtn.style.display = "inline-block";
+});
+
+closeCartBtn.style.display = "none"; // Hide the close button initially
+
+closeCartBtn.addEventListener("click", () => {
+  cartContent.style.display = "none";
+  closeCartBtn.style.display = "none";
+  openCartBtn.style.display = "inline-block";
+});
+
+function cartIsEmpty() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  return cartItems.length === 0;
+}
+
+
+      // Add card to list
+      productsList.appendChild(card);
+      loader.style.display = "none";
+    }
+  });
+   
+
+
+
+
+    //Sound//
+
+
+    get(soundRef).then((snapshot) => {
+              const data = snapshot.val();
+              const productsList = document.getElementById("products-list");
+              for (let i in data) {
+                const product = data[i];
+                const card = document.createElement("div");
+                card.classList.add("card1");
+      
+                   const img = document.createElement("img");
+      img.src = product.image;
+      img.alt = product.name;
+      img.classList.add("product-img");
+      img.addEventListener("click", () => {
+        const modal = document.querySelector(".modal");
+        const modalImg = document.querySelector("#modalImg");
+        modal.style.display = "block";
+        modalImg.src = img.src;
+      });
+      card.appendChild(img);
+      
+      const modal = document.querySelector(".modal");
+      const closeBtn = document.querySelector(".close");
+      closeBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+      });
+          
+ 
+
+                const title = document.createElement("h2");
+                title.innerText = product.name;
+                card.appendChild(title);
+      
+                const desc = document.createElement("p");
+                desc.innerText = product.description;
+                card.appendChild(desc);
+      
+      
+      
+                const price = document.createElement("p");
+                price.innerText = `Price: UGX${product.price}`;
+                card.appendChild(price);
+      
+
+                const stars = document.createElement("div");            
+stars.classList.add("stars");
+for (let j = 0; j < 5; j++) {
+  const star = document.createElement("span");
+  star.classList.add("star");
+  star.innerHTML = "&#9733;"; // Unicode character for a star
+  stars.appendChild(star);
+}
+card.appendChild(stars);
+
+
+
+
+      
+      
+      // Open the Modal
+      function openModal(img) {
+        document.getElementById("modalImg").src = img.src;
+        document.querySelector(".modal").style.display = "block";
+      }
+      
+      // Close the Modal
+      document.querySelector(".close").addEventListener("click", function() {
+        document.querySelector(".modal").style.display = "none";
+      });
+      
+      
+      
+              
+     // Create the "Add to Cart" button
+const addToCartBtn = document.createElement("button");
+addToCartBtn.innerText = "Add to Cart";
+
+function addToCart(product) {
+  // Get the cart items container
+  const cartItemsContainer = document.getElementById("cart-items");
+
+  // Create a new cart item element
+  const cartItem = document.createElement("div");
+  cartItem.classList.add("cart-item");
+
+  // Create a container for the product details (name, price, quantity, and delete button)
+  const productDetails = document.createElement("div");
+  productDetails.classList.add("product-details");
+
+  // Add product name
+  const productName = document.createElement("h5");
+  productName.innerText = product.name;
+  productDetails.appendChild(productName);
+
+  // Add product price
+  const productPrice = document.createElement("p");
+  productPrice.innerText = `Price: UGX ${product.price}`;
+  productPrice.dataset.price = product.price; // Store the price as a data attribute
+  productDetails.appendChild(productPrice);
+
+// Create a quantity input field
+const quantityInput = document.createElement("input");
+quantityInput.type = "number";
+quantityInput.value = 1;
+quantityInput.min = 1;
+quantityInput.classList.add("quantity-input"); // Add the quantity-input class
+quantityInput.addEventListener("input", () => {
+  updateCartItemTotal(cartItem);
+  updateCartTotal();
+});
+productDetails.appendChild(quantityInput);
+
+
+// Define the updateCartItemTotal function
+function updateCartItemTotal(cartItem) {
+  const priceElement = cartItem.querySelector(".product-details p");
+  const quantityInput = cartItem.querySelector(".product-details input");
+  const quantity = parseInt(quantityInput.value);
+  const price = parseFloat(priceElement.innerText.replace("Price: UGX ", ""));
+  const total = quantity * price;
+  priceElement.dataset.total = total.toFixed(2);
+}
+
+// Define the updateCartTotal function
+function updateCartTotal() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  const totalPriceElement = document.getElementById("total-price");
+  let total = 0;
+
+  for (let i = 0; i < cartItems.length; i++) {
+    const cartItem = cartItems[i];
+    const priceElement = cartItem.querySelector(".product-details p");
+    const totalForItem = parseFloat(priceElement.dataset.total);
+    total += totalForItem;
+  }
+
+  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
+}
+
+  // Create a delete button for the cart item
+  const deleteButton = document.createElement("button");
+  deleteButton.innerText = "Delete";
+  deleteButton.classList.add("delete-button");
+  deleteButton.addEventListener("click", () => {
+    cartItemsContainer.removeChild(cartItem);
+    updateCartTotal();
+    updateCartCount(-1);
+  });
+  productDetails.appendChild(deleteButton);
+
+  cartItem.appendChild(productDetails);
+
+  // Append the cart item to the cart items container
+  cartItemsContainer.appendChild(cartItem);
+
+  // Update the cart count
+  updateCartCount(1);
+
+  // Calculate and update the total price
+  updateCartItemTotal(cartItem);
+  updateCartTotal();
+
+  // Show the "Added to Cart" message
+  showAddToCartMessage(product.name);
+}
+
+
+
+
+// Function to update the cart count
+function updateCartCount(count) {
+  const cartCountElement = document.getElementById("cart-count");
+  const currentCount = parseInt(cartCountElement.innerText) || 0;
+  cartCountElement.innerText = currentCount + count;
+}
+
+// Add the event listener to the "Add to Cart" button
+addToCartBtn.addEventListener("click", () => {
+  addToCart(product);
+});
+
+// Assuming `card` is the element representing the product card
+card.appendChild(addToCartBtn);
+
+// Function to show the "Added to Cart" message
+function showAddToCartMessage(productName) {
+  const messageContainer = document.getElementById("message-container");
+  messageContainer.innerText = `${productName} added to cart`;
+  messageContainer.style.display = "block";
+
+  setTimeout(() => {
+    messageContainer.style.display = "none";
+  }, 3000);
+}
+
+
+const openCartBtn = document.getElementById("open-cart-btn");
+const closeCartBtn = document.getElementById("close-cart-btn");
+const cartContent = document.getElementById("cart-content");
+
+cartContent.style.display = "none"; // Hide the cart content on load
+
+openCartBtn.addEventListener("click", () => {
+  if (cartIsEmpty()) {
+    cartContent.style.display = "none"; // Hide the cart content on load
+    // Show a message or perform any desired action when cart is empty
+    return;
+  }
+  
+  cartContent.style.display = "block";
+  openCartBtn.style.display = "none";
+  closeCartBtn.style.display = "inline-block";
+});
+
+closeCartBtn.style.display = "none"; // Hide the close button initially
+
+closeCartBtn.addEventListener("click", () => {
+  cartContent.style.display = "none";
+  closeCartBtn.style.display = "none";
+  openCartBtn.style.display = "inline-block";
+});
+
+function cartIsEmpty() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  return cartItems.length === 0;
+}
+
+
+      // Add card to list
+      productsList.appendChild(card);
+      loader.style.display = "none";
+    }
+  });
+
+   
+
+
+    //tablets//
+
+
+    get(tabletsRef).then((snapshot) => {
+              const data = snapshot.val();
+              const productsList = document.getElementById("products-list");
+              for (let i in data) {
+                const product = data[i];
+                const card = document.createElement("div");
+                card.classList.add("card1");
+      
+                   const img = document.createElement("img");
+      img.src = product.image;
+      img.alt = product.name;
+      img.classList.add("product-img");
+      img.addEventListener("click", () => {
+        const modal = document.querySelector(".modal");
+        const modalImg = document.querySelector("#modalImg");
+        modal.style.display = "block";
+        modalImg.src = img.src;
+      });
+      card.appendChild(img);
+      
+      const modal = document.querySelector(".modal");
+      const closeBtn = document.querySelector(".close");
+      closeBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+      });
+          
+ 
+
+                const title = document.createElement("h2");
+                title.innerText = product.name;
+                card.appendChild(title);
+      
+                const desc = document.createElement("p");
+                desc.innerText = product.description;
+                card.appendChild(desc);
+      
+      
+      
+      
+                const price = document.createElement("p");
+                price.innerText = `Price: UGX${product.price}`;
+                card.appendChild(price);
+      
+
+                const stars = document.createElement("div");            
+stars.classList.add("stars");
+for (let j = 0; j < 5; j++) {
+  const star = document.createElement("span");
+  star.classList.add("star");
+  star.innerHTML = "&#9733;"; // Unicode character for a star
+  stars.appendChild(star);
+}
+card.appendChild(stars);
+
+
+
+
+
+      
+      
+      // Open the Modal
+      function openModal(img) {
+        document.getElementById("modalImg").src = img.src;
+        document.querySelector(".modal").style.display = "block";
+      }
+      
+      // Close the Modal
+      document.querySelector(".close").addEventListener("click", function() {
+        document.querySelector(".modal").style.display = "none";
+      });
+      
+      
+      
+   
+      
+     // Create the "Add to Cart" button
+const addToCartBtn = document.createElement("button");
+addToCartBtn.innerText = "Add to Cart";
+
+function addToCart(product) {
+  // Get the cart items container
+  const cartItemsContainer = document.getElementById("cart-items");
+
+  // Create a new cart item element
+  const cartItem = document.createElement("div");
+  cartItem.classList.add("cart-item");
+
+  // Create a container for the product details (name, price, quantity, and delete button)
+  const productDetails = document.createElement("div");
+  productDetails.classList.add("product-details");
+
+  // Add product name
+  const productName = document.createElement("h5");
+  productName.innerText = product.name;
+  productDetails.appendChild(productName);
+
+  // Add product price
+  const productPrice = document.createElement("p");
+  productPrice.innerText = `Price: UGX ${product.price}`;
+  productPrice.dataset.price = product.price; // Store the price as a data attribute
+  productDetails.appendChild(productPrice);
+
+// Create a quantity input field
+const quantityInput = document.createElement("input");
+quantityInput.type = "number";
+quantityInput.value = 1;
+quantityInput.min = 1;
+quantityInput.classList.add("quantity-input"); // Add the quantity-input class
+quantityInput.addEventListener("input", () => {
+  updateCartItemTotal(cartItem);
+  updateCartTotal();
+});
+productDetails.appendChild(quantityInput);
+
+
+// Define the updateCartItemTotal function
+function updateCartItemTotal(cartItem) {
+  const priceElement = cartItem.querySelector(".product-details p");
+  const quantityInput = cartItem.querySelector(".product-details input");
+  const quantity = parseInt(quantityInput.value);
+  const price = parseFloat(priceElement.innerText.replace("Price: UGX ", ""));
+  const total = quantity * price;
+  priceElement.dataset.total = total.toFixed(2);
+}
+
+// Define the updateCartTotal function
+function updateCartTotal() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  const totalPriceElement = document.getElementById("total-price");
+  let total = 0;
+
+  for (let i = 0; i < cartItems.length; i++) {
+    const cartItem = cartItems[i];
+    const priceElement = cartItem.querySelector(".product-details p");
+    const totalForItem = parseFloat(priceElement.dataset.total);
+    total += totalForItem;
+  }
+
+  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
+}
+
+  // Create a delete button for the cart item
+  const deleteButton = document.createElement("button");
+  deleteButton.innerText = "Delete";
+  deleteButton.classList.add("delete-button");
+  deleteButton.addEventListener("click", () => {
+    cartItemsContainer.removeChild(cartItem);
+    updateCartTotal();
+    updateCartCount(-1);
+  });
+  productDetails.appendChild(deleteButton);
+
+  cartItem.appendChild(productDetails);
+
+  // Append the cart item to the cart items container
+  cartItemsContainer.appendChild(cartItem);
+
+  // Update the cart count
+  updateCartCount(1);
+
+  // Calculate and update the total price
+  updateCartItemTotal(cartItem);
+  updateCartTotal();
+
+  // Show the "Added to Cart" message
+  showAddToCartMessage(product.name);
+}
+
+
+
+
+// Function to update the cart count
+function updateCartCount(count) {
+  const cartCountElement = document.getElementById("cart-count");
+  const currentCount = parseInt(cartCountElement.innerText) || 0;
+  cartCountElement.innerText = currentCount + count;
+}
+
+// Add the event listener to the "Add to Cart" button
+addToCartBtn.addEventListener("click", () => {
+  addToCart(product);
+});
+
+// Assuming `card` is the element representing the product card
+card.appendChild(addToCartBtn);
+
+// Function to show the "Added to Cart" message
+function showAddToCartMessage(productName) {
+  const messageContainer = document.getElementById("message-container");
+  messageContainer.innerText = `${productName} added to cart`;
+  messageContainer.style.display = "block";
+
+  setTimeout(() => {
+    messageContainer.style.display = "none";
+  }, 3000);
+}
+
+
+const openCartBtn = document.getElementById("open-cart-btn");
+const closeCartBtn = document.getElementById("close-cart-btn");
+const cartContent = document.getElementById("cart-content");
+
+cartContent.style.display = "none"; // Hide the cart content on load
+
+openCartBtn.addEventListener("click", () => {
+  if (cartIsEmpty()) {
+    cartContent.style.display = "none"; // Hide the cart content on load
+    // Show a message or perform any desired action when cart is empty
+    return;
+  }
+  
+  cartContent.style.display = "block";
+  openCartBtn.style.display = "none";
+  closeCartBtn.style.display = "inline-block";
+});
+
+closeCartBtn.style.display = "none"; // Hide the close button initially
+
+closeCartBtn.addEventListener("click", () => {
+  cartContent.style.display = "none";
+  closeCartBtn.style.display = "none";
+  openCartBtn.style.display = "inline-block";
+});
+
+function cartIsEmpty() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  return cartItems.length === 0;
+}
+
+
+      // Add card to list
+      productsList.appendChild(card);
+      loader.style.display = "none";
+    }
+  });
+
+   
+
+
+
+    //accessories//
+
+
+    get(accessoriesRef).then((snapshot) => {
+              const data = snapshot.val();
+              const productsList = document.getElementById("products-list");
+              for (let i in data) {
+                const product = data[i];
+                const card = document.createElement("div");
+                card.classList.add("card1");
+      
+                   const img = document.createElement("img");
+      img.src = product.image;
+      img.alt = product.name;
+      img.classList.add("product-img");
+      img.addEventListener("click", () => {
+        const modal = document.querySelector(".modal");
+        const modalImg = document.querySelector("#modalImg");
+        modal.style.display = "block";
+        modalImg.src = img.src;
+      });
+      card.appendChild(img);
+      
+      const modal = document.querySelector(".modal");
+      const closeBtn = document.querySelector(".close");
+      closeBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+      });
+          
+ 
+
+                const title = document.createElement("h2");
+                title.innerText = product.name;
+                card.appendChild(title);
+      
+                const desc = document.createElement("p");
+                desc.innerText = product.description;
+                card.appendChild(desc);
+      
+     
+      
+      
+                const price = document.createElement("p");
+                price.innerText = `Price: UGX${product.price}`;
+                card.appendChild(price);
+      
+
+                const stars = document.createElement("div");            
+stars.classList.add("stars");
+for (let j = 0; j < 5; j++) {
+  const star = document.createElement("span");
+  star.classList.add("star");
+  star.innerHTML = "&#9733;"; // Unicode character for a star
+  stars.appendChild(star);
+}
+card.appendChild(stars);
+
+
+
+
+      
+      
+      // Open the Modal
+      function openModal(img) {
+        document.getElementById("modalImg").src = img.src;
+        document.querySelector(".modal").style.display = "block";
+      }
+      
+      // Close the Modal
+      document.querySelector(".close").addEventListener("click", function() {
+        document.querySelector(".modal").style.display = "none";
+      });
+      
+      
+      
+    // Create the "Add to Cart" button
+const addToCartBtn = document.createElement("button");
+addToCartBtn.innerText = "Add to Cart";
+
+function addToCart(product) {
+  // Get the cart items container
+  const cartItemsContainer = document.getElementById("cart-items");
+
+  // Create a new cart item element
+  const cartItem = document.createElement("div");
+  cartItem.classList.add("cart-item");
+
+  // Create a container for the product details (name, price, quantity, and delete button)
+  const productDetails = document.createElement("div");
+  productDetails.classList.add("product-details");
+
+  // Add product name
+  const productName = document.createElement("h5");
+  productName.innerText = product.name;
+  productDetails.appendChild(productName);
+
+  // Add product price
+  const productPrice = document.createElement("p");
+  productPrice.innerText = `Price: UGX ${product.price}`;
+  productPrice.dataset.price = product.price; // Store the price as a data attribute
+  productDetails.appendChild(productPrice);
+
+// Create a quantity input field
+const quantityInput = document.createElement("input");
+quantityInput.type = "number";
+quantityInput.value = 1;
+quantityInput.min = 1;
+quantityInput.classList.add("quantity-input"); // Add the quantity-input class
+quantityInput.addEventListener("input", () => {
+  updateCartItemTotal(cartItem);
+  updateCartTotal();
+});
+productDetails.appendChild(quantityInput);
+
+
+// Define the updateCartItemTotal function
+function updateCartItemTotal(cartItem) {
+  const priceElement = cartItem.querySelector(".product-details p");
+  const quantityInput = cartItem.querySelector(".product-details input");
+  const quantity = parseInt(quantityInput.value);
+  const price = parseFloat(priceElement.innerText.replace("Price: UGX ", ""));
+  const total = quantity * price;
+  priceElement.dataset.total = total.toFixed(2);
+}
+
+// Define the updateCartTotal function
+function updateCartTotal() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  const totalPriceElement = document.getElementById("total-price");
+  let total = 0;
+
+  for (let i = 0; i < cartItems.length; i++) {
+    const cartItem = cartItems[i];
+    const priceElement = cartItem.querySelector(".product-details p");
+    const totalForItem = parseFloat(priceElement.dataset.total);
+    total += totalForItem;
+  }
+
+  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
+}
+
+  // Create a delete button for the cart item
+  const deleteButton = document.createElement("button");
+  deleteButton.innerText = "Delete";
+  deleteButton.classList.add("delete-button");
+  deleteButton.addEventListener("click", () => {
+    cartItemsContainer.removeChild(cartItem);
+    updateCartTotal();
+    updateCartCount(-1);
+  });
+  productDetails.appendChild(deleteButton);
+
+  cartItem.appendChild(productDetails);
+
+  // Append the cart item to the cart items container
+  cartItemsContainer.appendChild(cartItem);
+
+  // Update the cart count
+  updateCartCount(1);
+
+  // Calculate and update the total price
+  updateCartItemTotal(cartItem);
+  updateCartTotal();
+
+  // Show the "Added to Cart" message
+  showAddToCartMessage(product.name);
+}
+
+
+
+
+// Function to update the cart count
+function updateCartCount(count) {
+  const cartCountElement = document.getElementById("cart-count");
+  const currentCount = parseInt(cartCountElement.innerText) || 0;
+  cartCountElement.innerText = currentCount + count;
+}
+
+// Add the event listener to the "Add to Cart" button
+addToCartBtn.addEventListener("click", () => {
+  addToCart(product);
+});
+
+// Assuming `card` is the element representing the product card
+card.appendChild(addToCartBtn);
+
+// Function to show the "Added to Cart" message
+function showAddToCartMessage(productName) {
+  const messageContainer = document.getElementById("message-container");
+  messageContainer.innerText = `${productName} added to cart`;
+  messageContainer.style.display = "block";
+
+  setTimeout(() => {
+    messageContainer.style.display = "none";
+  }, 3000);
+}
+
+
+const openCartBtn = document.getElementById("open-cart-btn");
+const closeCartBtn = document.getElementById("close-cart-btn");
+const cartContent = document.getElementById("cart-content");
+
+cartContent.style.display = "none"; // Hide the cart content on load
+
+openCartBtn.addEventListener("click", () => {
+  if (cartIsEmpty()) {
+    cartContent.style.display = "none"; // Hide the cart content on load
+    // Show a message or perform any desired action when cart is empty
+    return;
+  }
+  
+  cartContent.style.display = "block";
+  openCartBtn.style.display = "none";
+  closeCartBtn.style.display = "inline-block";
+});
+
+closeCartBtn.style.display = "none"; // Hide the close button initially
+
+closeCartBtn.addEventListener("click", () => {
+  cartContent.style.display = "none";
+  closeCartBtn.style.display = "none";
+  openCartBtn.style.display = "inline-block";
+});
+
+function cartIsEmpty() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  return cartItems.length === 0;
+}
+
+
+      // Add card to list
+      productsList.appendChild(card);
+      loader.style.display = "none";
+    }
+  });
+
+
+//tvs//
+
+
+get(tvsRef).then((snapshot) => {
+              const data = snapshot.val();
+              const productsList = document.getElementById("products-list");
+              for (let i in data) {
+                const product = data[i];
+                const card = document.createElement("div");
+                card.classList.add("card1");
+      
+                   const img = document.createElement("img");
+      img.src = product.image;
+      img.alt = product.name;
+      img.classList.add("product-img");
+      img.addEventListener("click", () => {
+        const modal = document.querySelector(".modal");
+        const modalImg = document.querySelector("#modalImg");
+        modal.style.display = "block";
+        modalImg.src = img.src;
+      });
+      card.appendChild(img);
+      
+      const modal = document.querySelector(".modal");
+      const closeBtn = document.querySelector(".close");
+      closeBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+      });
+          
+ 
+
+                const title = document.createElement("h2");
+                title.innerText = product.name;
+                card.appendChild(title);
+      
+                const desc = document.createElement("p");
+                desc.innerText = product.description;
+                card.appendChild(desc);
+      
+      
+      
+                const price = document.createElement("p");
+                price.innerText = `Price: UGX${product.price}`;
+                card.appendChild(price);
+      
+
+                const stars = document.createElement("div");            
+stars.classList.add("stars");
+for (let j = 0; j < 5; j++) {
+  const star = document.createElement("span");
+  star.classList.add("star");
+  star.innerHTML = "&#9733;"; // Unicode character for a star
+  stars.appendChild(star);
+}
+card.appendChild(stars);
+
+
+
+      
+      
+      // Open the Modal
+      function openModal(img) {
+        document.getElementById("modalImg").src = img.src;
+        document.querySelector(".modal").style.display = "block";
+      }
+      
+      // Close the Modal
+      document.querySelector(".close").addEventListener("click", function() {
+        document.querySelector(".modal").style.display = "none";
+      });
+      
+      
+      
+     // Create the "Add to Cart" button
+const addToCartBtn = document.createElement("button");
+addToCartBtn.innerText = "Add to Cart";
+
+function addToCart(product) {
+  // Get the cart items container
+  const cartItemsContainer = document.getElementById("cart-items");
+
+  // Create a new cart item element
+  const cartItem = document.createElement("div");
+  cartItem.classList.add("cart-item");
+
+  // Create a container for the product details (name, price, quantity, and delete button)
+  const productDetails = document.createElement("div");
+  productDetails.classList.add("product-details");
+
+  // Add product name
+  const productName = document.createElement("h5");
+  productName.innerText = product.name;
+  productDetails.appendChild(productName);
+
+  // Add product price
+  const productPrice = document.createElement("p");
+  productPrice.innerText = `Price: UGX ${product.price}`;
+  productPrice.dataset.price = product.price; // Store the price as a data attribute
+  productDetails.appendChild(productPrice);
+
+// Create a quantity input field
+const quantityInput = document.createElement("input");
+quantityInput.type = "number";
+quantityInput.value = 1;
+quantityInput.min = 1;
+quantityInput.classList.add("quantity-input"); // Add the quantity-input class
+quantityInput.addEventListener("input", () => {
+  updateCartItemTotal(cartItem);
+  updateCartTotal();
+});
+productDetails.appendChild(quantityInput);
+
+
+// Define the updateCartItemTotal function
+function updateCartItemTotal(cartItem) {
+  const priceElement = cartItem.querySelector(".product-details p");
+  const quantityInput = cartItem.querySelector(".product-details input");
+  const quantity = parseInt(quantityInput.value);
+  const price = parseFloat(priceElement.innerText.replace("Price: UGX ", ""));
+  const total = quantity * price;
+  priceElement.dataset.total = total.toFixed(2);
+}
+
+// Define the updateCartTotal function
+function updateCartTotal() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  const totalPriceElement = document.getElementById("total-price");
+  let total = 0;
+
+  for (let i = 0; i < cartItems.length; i++) {
+    const cartItem = cartItems[i];
+    const priceElement = cartItem.querySelector(".product-details p");
+    const totalForItem = parseFloat(priceElement.dataset.total);
+    total += totalForItem;
+  }
+
+  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
+}
+
+  // Create a delete button for the cart item
+  const deleteButton = document.createElement("button");
+  deleteButton.innerText = "Delete";
+  deleteButton.classList.add("delete-button");
+  deleteButton.addEventListener("click", () => {
+    cartItemsContainer.removeChild(cartItem);
+    updateCartTotal();
+    updateCartCount(-1);
+  });
+  productDetails.appendChild(deleteButton);
+
+  cartItem.appendChild(productDetails);
+
+  // Append the cart item to the cart items container
+  cartItemsContainer.appendChild(cartItem);
+
+  // Update the cart count
+  updateCartCount(1);
+
+  // Calculate and update the total price
+  updateCartItemTotal(cartItem);
+  updateCartTotal();
+
+  // Show the "Added to Cart" message
+  showAddToCartMessage(product.name);
+}
+
+
+
+
+// Function to update the cart count
+function updateCartCount(count) {
+  const cartCountElement = document.getElementById("cart-count");
+  const currentCount = parseInt(cartCountElement.innerText) || 0;
+  cartCountElement.innerText = currentCount + count;
+}
+
+// Add the event listener to the "Add to Cart" button
+addToCartBtn.addEventListener("click", () => {
+  addToCart(product);
+});
+
+// Assuming `card` is the element representing the product card
+card.appendChild(addToCartBtn);
+
+// Function to show the "Added to Cart" message
+function showAddToCartMessage(productName) {
+  const messageContainer = document.getElementById("message-container");
+  messageContainer.innerText = `${productName} added to cart`;
+  messageContainer.style.display = "block";
+
+  setTimeout(() => {
+    messageContainer.style.display = "none";
+  }, 3000);
+}
+
+
+const openCartBtn = document.getElementById("open-cart-btn");
+const closeCartBtn = document.getElementById("close-cart-btn");
+const cartContent = document.getElementById("cart-content");
+
+cartContent.style.display = "none"; // Hide the cart content on load
+
+openCartBtn.addEventListener("click", () => {
+  if (cartIsEmpty()) {
+    cartContent.style.display = "none"; // Hide the cart content on load
+    // Show a message or perform any desired action when cart is empty
+    return;
+  }
+  
+  cartContent.style.display = "block";
+  openCartBtn.style.display = "none";
+  closeCartBtn.style.display = "inline-block";
+});
+
+closeCartBtn.style.display = "none"; // Hide the close button initially
+
+closeCartBtn.addEventListener("click", () => {
+  cartContent.style.display = "none";
+  closeCartBtn.style.display = "none";
+  openCartBtn.style.display = "inline-block";
+});
+
+function cartIsEmpty() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  return cartItems.length === 0;
+}
+
+
+      // Add card to list
+      productsList.appendChild(card);
+      loader.style.display = "none";
+    }
+  });
+
+   
+
+
+
+     </script>
+
+<script>
+  const slider = document.querySelector('.image-slider');
+const images = slider.querySelectorAll('img');
+const interval = 3000; // Change image every 3 seconds
+
+let index = 0;
+setInterval(() => {
+  images[index].classList.remove('active');
+  index = (index + 1) % images.length;
+  images[index].classList.add('active');
+}, interval);
+
+
+
+</script>
+
+</body>
+</html> 
