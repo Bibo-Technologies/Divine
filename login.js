@@ -19,7 +19,7 @@ const database = getDatabase(app);
 const auth = getAuth(app);
 const storage = getStorage(app);
 
-/*
+/**/
    // Google Sign-In function
    function signInWithGoogle() {
         const provider = new GoogleAuthProvider();
@@ -72,7 +72,7 @@ const storage = getStorage(app);
     button.addEventListener("click", () => {
         signInWithGoogle();
     });
- */
+ 
     const toggle = document.getElementById('toggleForm');
     const formContainer = document.getElementById('formContainer');
     const backToSignInBtn = document.getElementById('backToSignIn');
