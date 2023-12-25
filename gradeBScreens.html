@@ -26,7 +26,7 @@
         <div id="page-content">
     
     <div class="card">
-        <h1 class="card-title">Add New Accessory</h1>
+        <h1 class="card-title">Add Grade B </h1>
         <form id="form" class="card-body">
           <div class="form-group">
             <label for="name">Name:</label>
@@ -110,6 +110,7 @@ const passwordPopup = document.getElementById('password-popup');
    window.addEventListener('load', showPasswordPopup);
 */
 
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
 import { getDatabase, ref, push, set, child, get, remove } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
 import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-storage.js";
@@ -129,9 +130,9 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
-const productsRef = ref(db, 'products/accessories');
+const productsRef = ref(db, 'products/gradeBScreens');
 const storage = getStorage(app);
-const imagesRef = storageRef(storage, 'products/accessories');
+const imagesRef = storageRef(storage, 'products/gradeBScreens');
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('form');
   const loader = document.getElementById('loader');

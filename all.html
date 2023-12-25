@@ -61,8 +61,8 @@ if (Notification.permission !== "granted") {
 <main>
 <center>
     <div class="profile-card">
-      <img class="profile-img" src="img/Devine Phones.png" alt="ABBAH GADGETS Admin">
-      <h2 class="profile-name">DIVINE CELLPHONE SERVICES</h2>
+      <img class="profile-img" src="img/Devine Phones.png" alt="DIVINE PHONE SERVICE CENTER">
+      <h2 class="profile-name">DIVINE PHONE SERVICE CENTER</h2>
       <p class="profile-title">CEO</p>
       <ul class="profile-details">
         <li><i class="fa fa-phone"></i> +(256) 759-740-405</li>
@@ -73,44 +73,34 @@ if (Notification.permission !== "granted") {
     </div>
     </center>
      <div class="news-heading">
-    <p >WELCOME DIVINE CELLPHONE SERVICES</p>
+    <p >WELCOME DIVINE PHONE SERVICE CENTER</p>
    <h2 id="phone">MANAGE YOUR SITE HERE...</h2>       
     </div>
 
     <div class="card3-container">
       <div class="card3">
-        <a href="brandnew.html">
+        <a href="brandNewScreens.html">
           <div class="card3-content">
          
-           <h2>Brand New Phones</h2>
+           <h2>Brand New Screens</h2>
           </div>
         </a>
       </div>
     
       <div class="card3">
-        <a href="ukused.html">
+        <a href="gradeBScreens.html">
           <div class="card3-content">
             
            
-          <h2>UK Used Phones</h2>
+          <h2>Grade B</h2>
           </div>
         </a>
       </div>
     
       <div class="card3">
-        <a href="tvs.html">
+        <a href="touches.html">
           <div class="card3-content">
-                  <h2>TVs</h2>
-          </div>
-        </a>
-      </div>
-    
-      <div class="card3">
-        <a href="sound.html">
-          <div class="card3-content">
-          
-  
-              <h2>Sound Gadgets</h2>
+                  <h2>Touches</h2>
           </div>
         </a>
       </div>
@@ -118,8 +108,18 @@ if (Notification.permission !== "granted") {
       <div class="card3">
         <a href="accessories.html">
           <div class="card3-content">
+          
+  
+              <h2>Accessories</h2>
+          </div>
+        </a>
+      </div>
+    
+      <div class="card3">
+        <a href="electronics.html">
+          <div class="card3-content">
 
-            <h2>Accessories</h2>
+            <h2>Electronics</h2>
           </div>
         </a>
       </div>
@@ -127,10 +127,10 @@ if (Notification.permission !== "granted") {
      
     
     
-      <div class="card3">
-        <a href="tablet.html">
+    <div class="card3">
+        <a href="Ports.html">
           <div class="card3-content">
-               <h2>Tablets</h2>
+               <h2>Ports and Flexes</h2>
           </div>
         </a>
       </div>
@@ -199,6 +199,16 @@ onValue(ordersRef, (snapshot) => {
     const orderContainer = document.createElement("div");
     orderContainer.classList.add("order-container");
 
+    // Check if payment is received and set background color accordingly
+    const paymentStatusRef = ref(database, `orders/${orderId}/paymentStatus`);
+    get(paymentStatusRef).then((paymentStatusSnapshot) => {
+        const paymentStatus = paymentStatusSnapshot.val();
+
+        if (paymentStatus === "Payment Received") {
+            orderContainer.style.backgroundColor = "lightgreen";
+        }
+    });
+
     const orderTitle = document.createElement("h3");
     orderTitle.classList.add("order-title");
     orderTitle.textContent = `Order ID: ${orderId}`;
@@ -263,7 +273,24 @@ onValue(ordersRef, (snapshot) => {
       }
     }
 
+    const paymentButton = document.createElement("button");
+    paymentButton.classList.add("payment-button");
+    paymentButton.textContent = "Receive Payment";
+    paymentButton.addEventListener("click", () => {
+        // Add logic to update the payment status to "Payment Received"
+        const paymentStatusRef = ref(database, `orders/${orderId}/paymentStatus`);
+        set(paymentStatusRef, "Payment Received").then(() => {
+            // Update background color immediately after payment is received
+            orderContainer.style.backgroundColor = "lightgreen";
+
+            // Optionally, you can update the UI or perform other actions after updating the payment status
+            console.log(`Payment received for Order ID: ${orderId}`);
+        }).catch((error) => {
+            console.error("Error updating payment status:", error.message);
+        });
+    });
     orderContainer.appendChild(orderTitle);
+    orderContainer.appendChild(paymentButton);
     orderContainer.appendChild(shareButton);
     orderContainer.appendChild(orderDetails);
 

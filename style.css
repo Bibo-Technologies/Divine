@@ -1212,7 +1212,7 @@ iframe {
     position: fixed;
     top: 40%;
     left: 43%;
-    z-index: 9999;
+    z-index: 99999;
     background-color: #fff;
     border-radius: 50%;
     width: 15vw; /* Use viewport units for responsive sizing */
@@ -1249,26 +1249,22 @@ iframe {
   .products {
     min-height: 500px; /* set a minimum height */
   }
-
   #products-list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1px;
-    margin-bottom:20px;
-    background:#e9e9e9;
-    margin-top:20px;
- 
-
+    margin-bottom: 20px;
+    background: #e9e9e9;
+    margin-top: 20px;
+    align-items: stretch; /* Ensure equal height for all items */
   }
   
   @media screen and (min-width: 768px) {
     #products-list {
       grid-template-columns: repeat(4, 1fr);
-      margin-top:30px;
+      margin-top: 30px;
     }
   }
-  
-  
   
   .card1 {
     position: relative;
@@ -1276,8 +1272,7 @@ iframe {
     flex-direction: column;
     margin: 10px auto;
     width: 98%;
-    height: fit-content;
-    min-height: fit-content;
+    min-height: 100%; /* Ensure the card takes up the full height of the grid item */
     padding: 5px;
     border: transparent;
     border-radius: 5px;
@@ -1290,9 +1285,6 @@ iframe {
       width: 98%;
       padding: 5px;
     }
-
-   
-  
   }
   
   .card1 h2 {
@@ -1303,16 +1295,14 @@ iframe {
   }
   
   .card1 p {
-
-    margin-bottom: 5px;
+    margin: 2px;
     color: #000000;
-    
     overflow: hidden;
-    font-size:bold ;
-    font-weight:500;
+    font-size: bold;
+    font-weight: 500;
   }
+  
   @media (max-width: 768px) {
-
     .card1 h2 {
       margin-bottom: 5px;
       color: #000000;
@@ -1320,22 +1310,21 @@ iframe {
     }
   
     .card1 p {
-    font-size: small;
+      font-size: small;
     }
   }
-    @media (max-width: 480px) {
-      .card1 h2 {
-        font-size: 13px;
-        }
-       
-    
+  
+  @media (max-width: 480px) {
+    .card1 h2 {
+      font-size: 13px;
     }
+  }
   
   .button {
     background-color: transparent;
     border: none;
     cursor: pointer;
-    color: #008ABF;
+    color: #008abf;
     text-decoration: underline;
   }
   
@@ -1345,40 +1334,44 @@ iframe {
   
   .card1 img {
     width: 100%;
-    height: 35%;
-    border-radius:0px;
-    margin-top:5px;
+    height: 200px; /* Set a fixed height for the image */
+    object-fit: cover; /* Ensure the image covers the entire space */
+    border-radius: 0px;
+    margin-top: 5px;
   }
+  
+  .card1 button {
+    margin-top: auto; /* Push the button to the bottom */
+    width: 100%;
+    background-color: orange;
+    border: none;
+    cursor: pointer;
+    color: #ffffff;
 
+  }
+  
   .stars {
     display: flex;
+    margin: 0;
   }
   
   .star {
     font-size: 18px;
     color: #ffd700;
- 
   }
   
-   
-@media (max-width: 768px) {
-
-  .card1 img {
-    width: 100%;
-    height:150px;
-    border-radius:5px;
-  } 
-    
-  }
-  @media (max-width: 480px) {
-
+  @media (max-width: 768px) {
     .card1 img {
-      width: 100%;
-      height:150px;
-      border-radius:5px;
-    } 
-      
+      height: 150px; /* Adjust the height for smaller screens */
     }
+  }
+  
+  @media (max-width: 480px) {
+    .card1 img {
+      height: 150px; /* Adjust the height for even smaller screens */
+    }
+  }
+  
 /* Modal */
 .modal {
   display: none; /* Hidden by default */
@@ -1460,7 +1453,7 @@ input[type=text] {
 button {
   background-color: orange;
   color: white;
-  padding: 12px 20px;
+  padding: 10px;
   border-color:transparent;
   width:100%;
   margin-bottom:10px;
@@ -1471,9 +1464,9 @@ button {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 button:hover{
-  background-color:transparent;
+  background-color:lightgoldenrodyellow;
   color: orange;
-  padding: 12px 20px;
+  padding: 10px;
   border-color: orange;
 }
 .loader-container {
@@ -1891,13 +1884,13 @@ transition: all 0.3s ease-in-out;
         display: none;
         top: 90px;
         max-height: 80%;
-        max-width: 90%;
+        max-width: 80%;
         right: 5px;
         padding: 10px;
         background-color:#002E63;
         border: transparent;
-        border-radius: 4px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        border-radius: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
         z-index: 9999;
         overflow-y: auto; /* Enable vertical scrolling */
       }
@@ -1925,7 +1918,7 @@ transition: all 0.3s ease-in-out;
       
       #cart-buttons button {
         font-size: 16px;
-        padding: 5px;
+        padding: 10px;
  
         cursor: pointer;
         background-color: green;
@@ -2034,11 +2027,12 @@ transition: all 0.3s ease-in-out;
         border-radius: 10px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         padding: 20px;
-        z-index: 9999;
+        z-index: 999999;
         overflow: auto;
       }
             
 /* Overlay styles */
+
 .overlay {
   position: fixed;
   top: 0;
@@ -2048,7 +2042,115 @@ transition: all 0.3s ease-in-out;
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 9998;
 }
-      .popup-container h3 {
+#overlay {
+  position: fixed;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 9998;
+}
+
+#overlay2 {
+  position: fixed;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 99999;
+}
+#overlay3 {
+  position: fixed;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 999999;
+}
+
+
+.popup2 {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 100000;
+}
+
+/* Confirmation popup specific styles */
+#confirmationPopup {
+  text-align: center;
+  z-index: 1000000;
+  padding: 7px;
+}
+
+#confirmationPopup p {
+  margin-bottom: 20px;
+}
+
+#confirmationPopup button {
+  padding: 5px;
+  margin: 10px;
+  cursor: pointer;
+  width: fit-content;
+}
+
+/* Add these styles to your existing styles or create a new CSS file */
+
+/* Confirmation popup specific styles */
+#confirmationPopup {
+  text-align: center;
+}
+
+#confirmationPopup p {
+  margin-bottom: 20px;
+}
+
+#confirmationPopup button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+/* Float buttons */
+#confirmYesBtn {
+  float: right;
+}
+
+#confirmNoBtn {
+  float: left;
+  background-color: red;
+}
+
+
+/* Additional styling for animation (optional) */
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+
+.popup-container h3 {
         font-size: 24px;
         margin-bottom: 10px;
       }
@@ -2064,7 +2166,7 @@ transition: all 0.3s ease-in-out;
         background-color: transparent;
         border: none;
         width: fit-content;
-        font-size: 20px;
+        font-size: 10px;
         color: #fff;
         cursor: pointer;
         background: red;
@@ -2208,7 +2310,7 @@ transition: all 0.3s ease-in-out;
   align-items: center;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 9999;
+  z-index: 999999;
 }
 
 .success-popup {
@@ -2219,8 +2321,9 @@ transition: all 0.3s ease-in-out;
   background-color: rgb(7, 192, 7);
   padding: 20px;
   text-align: center;
-  z-index: 9999;
+  z-index: 1000000;
   border-radius: 7px;
+  width: 50%;
   color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
@@ -2232,8 +2335,9 @@ transition: all 0.3s ease-in-out;
   background-color: red;
   padding: 20px;
   text-align: center;
-  z-index: 9999;
+  z-index: 1000000;
   border-radius: 7px;
+  width: 50%;
   color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
@@ -2261,6 +2365,9 @@ transition: all 0.3s ease-in-out;
 
 
 
+.order-container.payment-received {
+  background-color: lightgreen;
+}
 
 
 /* Style for the orders container */
@@ -2278,6 +2385,7 @@ transition: all 0.3s ease-in-out;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
   width: 400px;
   margin: 10px auto;
+  font-size: small;
 }
 
 /* Style for the order details */
@@ -2394,8 +2502,9 @@ transition: all 0.3s ease-in-out;
     transform: translate(-50%, -50%);
     padding: 20px;
     background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     z-index: 100000;
+    max-width: 500px;
     border-radius: 20px;
 }
 
@@ -2461,7 +2570,7 @@ transition: all 0.3s ease-in-out;
 }
 
 .company-images img {
-    width: 50px; /* Adjust the width as needed */
+    width: 40px; /* Adjust the width as needed */
     margin-right: 10px;
     border-radius: 50%;
 }
@@ -2513,8 +2622,9 @@ transition: all 0.3s ease-in-out;
   padding:0px 20px;
 }
 .ll{
-  width: 80px;
-  border-radius: 50px;
+  width: 80px; 
+     border-radius: 30px;
+
 }
 .logo h1{
   color: #fff;
@@ -2613,7 +2723,7 @@ transition: all 0.3s ease-in-out;
   padding: 15px;
   border: 1px solid #ddd;
   font-size: small;
-  width: 80%; /* Adjust the width as needed */
+  width: 100%; /* Adjust the width as needed */
   margin: auto; /* Center the receipt container */
 }
 
@@ -2650,3 +2760,16 @@ transition: all 0.3s ease-in-out;
 .order-summary-table th {
   background-color: #f5f5f5;
 }
+.fa-shopping-cart{
+  margin-right: 2px;
+}
+
+#messageContainer{
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+z-index: 100000;
+}
+
+#userDetailsContainer{
+  width: 100%;
+}
+

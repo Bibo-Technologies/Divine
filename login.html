@@ -25,9 +25,8 @@
 <body>
     <header class="showcase">
         <div class="video-container">
-            <img autoplay loop muted>
-              <source src="TV (online-video-cutter.com).mp4">
-              Your browser does not support the video tag.
+            <img src="img/divine 3.jpg" >
+              
         </img>
           </div>
 
@@ -90,32 +89,100 @@
                         <div id="error-message" style="color: red;"></div>
                     </div>
             
-                    <div class="signup">
-                        <form id="signUpForm">
-                            <h1 style="color: green; margin-bottom: 15px;">Sign Up</h1>
-                            <div class="info"><label>First Name</label>   <input id="signUpFirstNameInput" class="email" type="text" placeholder="First Name" required><br>
-                                <label>Last Name</label>  <input id="signUpLastNameInput" class="email" type="text" placeholder="Last Name" required><br>
-                                <label>Telephone Contact</label>  <input id="signUpTelephoneInput" class="email" type="tel" placeholder="Telephone Contact" required>
-                                <label>Email</label>   <input id="signUpEmailInput" class="email" type="text" placeholder="Email or Phone Number" required><br>
-                                <label>Password</label>   <input id="signUpPasswordInput" class="email" type="password" placeholder="Password" required><br>
-                                <label>Confirm Password</label>  <input id="confirmPasswordInput" class="email" type="password" placeholder="Confirm Password" required>
-                                <label>Date of Birth</label> <input id="signUpDOBInput" class="email" type="date" placeholder="Date of Birth" required>
+                   
+<div class="signup">
+    <!-- Personal Information Form -->
+    <div id="personalInfoDiv" class="slide-in">
+        <form id="personalInfoForm">
+            <h2 style="color: green; margin-bottom: 15px;">Sign Up - Personal Information</h2>
+            <div class="info">
+                <label>First Name</label>
+                <input id="signUpFirstNameInput" class="email" type="text" placeholder="First Name" required><br>
+                <label>Last Name</label>
+                <input id="signUpLastNameInput" class="email" type="text" placeholder="Last Name" required><br>
+                <label>Telephone Contact</label>
+                <input id="signUpTelephoneInput" class="email" type="tel" placeholder="Telephone Contact" required>
+                <label>Date of Birth</label>
+                <input id="signUpDOBInput" class="email" type="date" placeholder="Date of Birth" required>
+            </div>
+            <div class="btn">
+                <button class="btn-primary" type="button" id="nextToAccountInfo">Next</button>
+                <button class="back-btn" id="backToSignIn">
+                    <i class="fas fa-arrow-left"></i> Back to Sign In
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Account Information Form -->
+    <div id="accountInfoDiv" style="display: none;" class="slide-out">
+        <form id="accountInfoForm">
+            <h2 style="color: green; margin-bottom: 15px;">Sign Up - Account Information</h2>
+            <div class="info">
+                <label>Email</label>
+                <input id="signUpEmailInput" class="email" type="text" placeholder="Email" required><br>
+                <label>Password</label>
+                <input id="signUpPasswordInput" class="email" type="password" placeholder="Password" required><br>
+                <label>Confirm Password</label>
+                <input id="confirmPasswordInput" class="email" type="password" placeholder="Confirm Password" required>
+            </div>
+            <div class="btn">
+                <button class="btn-primary" type="submit" id="signUpBtn">Sign Up</button>
+                <div class="spinner2">
+                    <i class="fas fa-spinner fa-spin"></i>
+                </div>
+            </div>
+            <button class="back-btn" id="backToPersonalInfo">
+                <i class="fas fa-arrow-left"></i> Back to Personal Information
+            </button>
+            <div id="error-message2" style="color: red;"></div>
+        </form>
+    </div>
+</div>
 
 
-                            </div>
-                            <div class="btn">
-                                <button class="btn-primary" type="submit" id="signUpBtn">Sign Up</button>
-                                <div class="spinner2">
-                                    <i class="fas fa-spinner fa-spin"></i>
-                                </div>
-                            </div>
-                            <button class="back-btn" id="backToSignIn">
-                                <i class="fas fa-arrow-left"></i> Back to Sign In
-                            </button>
-                                                <div id="error-message2" style="color: red;"></div> 
+<style>
+    /* Add a style for the disabled button */
+    .btn-primary:disabled {
+        background-color: #d3d3d3; /* Dull background color for disabled state */
+        cursor: not-allowed; /* Disabled cursor */
+    }
+</style>
 
-                        </form>
-                    </div>
+<script>
+
+
+
+</script>
+
+<script>
+    document.getElementById("nextToAccountInfo").addEventListener("click", function () {
+        document.getElementById("personalInfoDiv").classList.remove("slide-in");
+        document.getElementById("personalInfoDiv").classList.add("slide-out");
+
+        setTimeout(function () {
+            document.getElementById("personalInfoDiv").style.display = "none";
+            document.getElementById("accountInfoDiv").style.display = "block";
+            document.getElementById("accountInfoDiv").classList.remove("slide-out");
+            document.getElementById("accountInfoDiv").classList.add("slide-in");
+        }, 500);
+    });
+
+    document.getElementById("backToPersonalInfo").addEventListener("click", function (event) {
+        event.preventDefault();
+
+        document.getElementById("accountInfoDiv").classList.remove("slide-in");
+        document.getElementById("accountInfoDiv").classList.add("slide-out");
+
+        setTimeout(function () {
+            document.getElementById("accountInfoDiv").style.display = "none";
+            document.getElementById("personalInfoDiv").style.display = "block";
+            document.getElementById("personalInfoDiv").classList.remove("slide-out");
+            document.getElementById("personalInfoDiv").classList.add("slide-in");
+        }, 500);
+    });
+</script>
+                    
                     
             
                 </div>

@@ -26,7 +26,7 @@
         <div id="page-content">
     
     <div class="card">
-        <h1 class="card-title">Add New Accessory</h1>
+        <h1 class="card-title">Add Port or Flex</h1>
         <form id="form" class="card-body">
           <div class="form-group">
             <label for="name">Name:</label>
@@ -129,9 +129,9 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
-const productsRef = ref(db, 'products/accessories');
+const productsRef = ref(db, 'products/Ports');
 const storage = getStorage(app);
-const imagesRef = storageRef(storage, 'products/accessories');
+const imagesRef = storageRef(storage, 'products/Ports');
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('form');
   const loader = document.getElementById('loader');
@@ -216,6 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return new File([u8arr], fileName, { type: mime });
   }
 });
+
 
 // ...
 
