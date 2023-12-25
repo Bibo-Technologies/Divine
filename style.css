@@ -2325,7 +2325,7 @@ transition: all 0.3s ease-in-out;
   text-align: center;
   z-index: 1000000;
   border-radius: 7px;
-  width: 50%;
+  width: 60%;
   color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
