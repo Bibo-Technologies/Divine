@@ -50,15 +50,27 @@
    <body>
 
     <div class="banner">
-      <div class="banner-text">     
-
-        <h2>Inquiry ?</h2>
-        <p>Call:  <a href="tel:+256759740405">+(256) 759-740-405</a></p>
+      <div class="search-bar">
+        <form>
+          <input id="search-bar" type="text" placeholder="Search Product..." style="font-family: 'Font Awesome 5 Free';">
+          <button id="search-btn" type="submit"><i class="fas fa-search"></i></button>
+        </form>
       </div>
-      <div class="banner-icon">
-        <i class="fa fa-phone"></i>
-      </div>
+     
     </div>
+    
+    <div id="cart" class="cart">
+        <span id="cart-count"></span>
+        <div id="cart-buttons">
+          <button id="open-cart-btn"><i class="fa fa-shopping-cart"></i></button>
+          <button id="close-cart-btn"><i class="fa fa-times"></i></button>
+        </div>
+        <div id="cart-content">
+          <div id="cart-items"></div>
+          <p id="total-price"></p>
+          <button id="checkout-btn"><i class="fa fa-arrow-right"></i> Checkout</button>
+        </div>
+      </div>
  <script>
       window.onscroll = function() {myFunction()};
       
@@ -84,21 +96,10 @@
    <section class="topbody">
       <div class="news-heading">     
         <h2 style="color: rgb(220, 3, 3);" id="phone">DIVINE PHONE SERVICE CENTER</h2>    
-       <p >PHONE SOFTWARE AND HARDWARE SERVICES</p>
+      
       <h2 id="phone">GENUINE PHONE SPARE PARTS AND ACCESSORIES</h2>       
        </div>
-    <div id="cart" class="cart">
-    <span id="cart-count"></span>
-    <div id="cart-buttons">
-      <button id="open-cart-btn"><i class="fa fa-shopping-cart"></i></button>
-      <button id="close-cart-btn"><i class="fa fa-times"></i></button>
-    </div>
-    <div id="cart-content">
-      <div id="cart-items"></div>
-      <p id="total-price"></p>
-      <button id="checkout-btn"><i class="fa fa-arrow-right"></i> Checkout</button>
-    </div>
-  </div>
+   
     </div>
 
     <div class="saticifaction">
@@ -126,12 +127,6 @@
         </div>
      </div>
     
-     <div class="search-bar">
-      <form>
-        <input id="search-bar" type="text" placeholder="Search Product..." style="font-family: 'Font Awesome 5 Free';">
-        <button id="search-btn" type="submit"><i class="fas fa-search"></i></button>
-      </form>
-    </div>
     
  
 <!-- Popup Container -->
@@ -214,8 +209,8 @@ window.addEventListener("scroll", () => {
 
    <!-- Rest of your HTML content -->
 
-  
-   <!--  <div class="loader-container">
+  <!--
+ <div class="loader-container">
         <div class="loader"></div>
       </div>
 -->
@@ -801,8 +796,10 @@ function showSuccessPopup() {
 
     // Add event listener to close the success popup when the okay button is clicked
     okayButton.addEventListener("click", () => {
+       location.reload()
         document.body.removeChild(successPopup);
         popupContainer.style.display = "none";
+       
     });
 
     // Append the success message and okay button to the success popup
@@ -1194,6 +1191,57 @@ const electronicsRef = ref(database, "products/electronics");
 const touchesRef = ref(database, "products/touches");
 const accessoriesRef = ref(database, "products/accessories");
 const portsRef = ref(database, "products/Ports");
+
+
+// Define your product references
+const productRefs = [
+  ref(database, "products/newScreens"),
+  ref(database, "products/gradeBScreens"),
+  ref(database, "products/electronics"),
+  ref(database, "products/touches"),
+  ref(database, "products/accessories"),
+  ref(database, "products/Ports"),
+];
+
+// Options for the Intersection Observer
+const observerOptions = {
+  root: null, // Use the viewport as the root
+  rootMargin: "0px", // No margin
+  threshold: 0.5, // Trigger when 50% of the target is visible
+};
+
+// Create a callback function for the Intersection Observer
+const intersectionCallback = (entries, observer) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      // If the target is intersecting, load or retrieve the products
+      const productRef = entry.target.dataset.productRef;
+      // Call a function to retrieve products from the specified reference
+      retrieveProducts(productRef);
+
+      // Unobserve the target to avoid unnecessary calls
+      observer.unobserve(entry.target);
+    }
+  });
+};
+
+// Create an Intersection Observer instance
+const productObserver = new IntersectionObserver(intersectionCallback, observerOptions);
+
+// Function to create a product element and observe it
+function observeProduct(productRef) {
+  const productContainer = document.createElement("div");
+  // Set the dataset for the product reference
+  productContainer.dataset.productRef = productRef;
+
+  // Append the product element to the DOM
+  document.getElementById("products-list").appendChild(productContainer);
+
+  // Observe the product element
+  productObserver.observe(productContainer);
+}
+
+
 
 const searchBtn = document.getElementById("search-btn");
 let isSearching = false;
