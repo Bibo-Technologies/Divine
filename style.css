@@ -1111,7 +1111,7 @@ transition: all 0.3s ease-in-out;
   .banner {
     position: relative;
     height: 70px;
-    background-color: #b7b7b7;
+    background-color: #404040;
     display: flex;
     align-items: center;
     justify-content: space-between;
