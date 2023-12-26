@@ -7,8 +7,8 @@
 body {
 	font-family: 'Arial', sans-serif;
 	-webkit-font-smoothing: antialiased;
-	background: #000;
-	color: #999;
+	background: #ffffff;
+	color: #606060;
 }
 
 ul {
@@ -19,11 +19,11 @@ h1,
 h2,
 h3,
 h4 {
-	color: #fff;
+	color: #606060;
 }
 
 a {
-	color: #fff;
+	color:#606060;
 	text-decoration: none;
 }
 
@@ -92,7 +92,7 @@ img {
 	z-index: 2;
 	width: 500px;
   height: auto;
-	background: rgba(31, 31, 31, 0.6);
+	background: rgba(25, 25, 25, 0.9);
 	margin: 0 auto;
 	display: flex;
     border-radius: 10px;
@@ -181,7 +181,7 @@ img {
 }
 
 .help a {
-	color: #999;
+	color: #606060;
 }
 
 .help a:hover {
@@ -191,7 +191,7 @@ img {
 /* ------ input ------- */
 
 input[type=checkbox] {
-	background: #737373;
+	background: #424242;
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
 	border-radius: 2px;
@@ -203,13 +203,15 @@ input[type=checkbox] {
 }
 
 input[type=email] {
-	background: lightgoldenrodyellow;
+	background: rgb(255, 255, 205);
 }
 
 input[type=password] {
-	background: lightgoldenrodyellow;
+	background: rgb(255, 255, 205);
 }
-
+input {
+	background: rgb(255, 255, 205);
+}
 /* ------ input end ------- */
 
 
@@ -228,7 +230,7 @@ input[type=password] {
 .more {
 	font-size: 0.8em;
 	line-height: 1.1em;
-    
+    color: #000000;
 }
 
 .more a {
@@ -260,7 +262,7 @@ input[type=password] {
     width: 100%;
     box-sizing: border-box;
     padding: 20px;
-    background-color: #000000;
+    background-color: #ffffff;
     border-radius: 10px;
     transition: transform 0.5s ease-in-out;
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.9);
@@ -332,7 +334,7 @@ height: fit-content;
   width: 100%;
   box-sizing: border-box;
   padding: 20px;
-  background-color: #000000;
+  background-color: #f6f6f6;
   border-radius: 10px;
   transition: transform 0.5s ease-in-out;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.9);

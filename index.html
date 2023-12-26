@@ -16,6 +16,7 @@
 
 </head>
 
+
 <!-- partial:index.partial.html -->
 <header class="head-area">
   <div class="header-container">
@@ -51,8 +52,8 @@
     <div class="banner">
       <div class="banner-text">     
 
-        <h2>Want to order now?</h2>
-        <p>Call us at <a href="tel:+256759740405">+(256) 759-740-405</a></p>
+        <h2>Inquiry ?</h2>
+        <p>Call:  <a href="tel:+256759740405">+(256) 759-740-405</a></p>
       </div>
       <div class="banner-icon">
         <i class="fa fa-phone"></i>
@@ -72,14 +73,32 @@
         }
       }
       </script>
-   
+ <!--  <div class="image-slider">
+  <img src="img/divine 1.jpg" alt="Image 1">
+  <img src="img/divine 2.jpg" alt="Image 2">
+  <img src="img/divine 3.jpg" alt="Image 3">
+  <img src="img/divine 4.jpg" alt="Image 4">
+  <img src="img/divine 5.jpg" alt="Image 5">
+  <img src="img/divine 6.jpg" alt="Image 6">
+</div>-->
    <section class="topbody">
       <div class="news-heading">     
-        <h2 style="color: darkred;" id="phone">DIVINE PHONE SERVICE CENTER</h2>    
+        <h2 style="color: rgb(220, 3, 3);" id="phone">DIVINE PHONE SERVICE CENTER</h2>    
        <p >PHONE SOFTWARE AND HARDWARE SERVICES</p>
       <h2 id="phone">GENUINE PHONE SPARE PARTS AND ACCESSORIES</h2>       
        </div>
-    
+    <div id="cart" class="cart">
+    <span id="cart-count"></span>
+    <div id="cart-buttons">
+      <button id="open-cart-btn"><i class="fa fa-shopping-cart"></i></button>
+      <button id="close-cart-btn"><i class="fa fa-times"></i></button>
+    </div>
+    <div id="cart-content">
+      <div id="cart-items"></div>
+      <p id="total-price"></p>
+      <button id="checkout-btn"><i class="fa fa-arrow-right"></i> Checkout</button>
+    </div>
+  </div>
     </div>
 
     <div class="saticifaction">
@@ -107,12 +126,13 @@
         </div>
      </div>
     
-       <div class="search-bar">
-        <form>
-          <input id="search-bar" type="text" placeholder="Search Product...">
-          <button id="search-btn" type="submit">Search</button>
-        </form>
-      </div>
+     <div class="search-bar">
+      <form>
+        <input id="search-bar" type="text" placeholder="Search Product..." style="font-family: 'Font Awesome 5 Free';">
+        <button id="search-btn" type="submit"><i class="fas fa-search"></i></button>
+      </form>
+    </div>
+    
  
 <!-- Popup Container -->
 <div id="popup" class="popup">
@@ -123,8 +143,13 @@
 
       <p id="userDetails"></p>
 
-      <!-- View Purchase History button -->
-      <button id="viewPurchaseHistoryBtn">View Purchase History</button>
+    <!-- Your button element with a spinner container -->
+<button id="viewPurchaseHistoryBtn" class="button-with-spinner">
+  View Purchase History
+  <div id="spinner" class="spinner">
+    <i class="fas fa-spinner fa-spin"></i>
+  </div>
+</button>
 
       <!-- Logout button with icon -->
       <button id="logoutBtn">
@@ -132,9 +157,8 @@
       </button>
   </div>
   <!-- Close button with id -->
-  <button id="closePopupBtn">Close</button>
+  <button class="close-button" id="closePopupBtn">Close</button>
 </div>
-
 
 
      <div class="news-heading">
@@ -153,18 +177,7 @@
     </section>
   
   </section>
-  <div id="cart" class="cart">
-    <span id="cart-count"></span>
-    <div id="cart-buttons">
-      <button id="open-cart-btn"><i class="fa fa-shopping-cart"></i></button>
-      <button id="close-cart-btn"><i class="fa fa-times"></i></button>
-    </div>
-    <div id="cart-content">
-      <div id="cart-items"></div>
-      <p id="total-price"></p>
-      <button id="checkout-btn"><i class="fa fa-arrow-right"></i> Checkout</button>
-    </div>
-  </div>
+  
   
  
   <script>
@@ -219,15 +232,7 @@ window.addEventListener("scroll", () => {
   </form>
 </div>
 <div id="message-container"></div>
- <div class="image-slider">
-      <img src="img/divine 1.jpg" alt="Image 1">
-      <img src="img/divine 2.jpg" alt="Image 2">
-      <img src="img/divine 3.jpg" alt="Image 3">
-      <img src="img/divine 4.jpg" alt="Image 4">
-      <img src="img/divine 5.jpg" alt="Image 5">
-      <img src="img/divine 6.jpg" alt="Image 6">
-    </div>
-
+ 
     
 <!-- Include this element in your HTML for displaying the message -->
 <div id="messageContainer" class="message-container">
@@ -247,39 +252,7 @@ window.addEventListener("scroll", () => {
 </section>
    
 
-<footer>
-  <div class="footer-container container">
-      <div class="content_1">
-          <img src="img/Devine Phones.png" alt="logo">
-          <p>The customer is at the heart of our<br>unique business model, which includes<br>design.</p>
-          <hr>
-          <div class="content1">
-         
-      </div>
-      
-          </div>
-      <div class="content_2">
-          <h4>PHONES</h4>
-          <a>Iphones</a>
-          <a>Samsung</a>
-          <a>Tecnos</a>
-          <a>Oppos</a>
-          <hr>
-      </div>
-      <div class="content_3">
-          <h4>MODES OF SERVICE </h4>
-          <a >We Deliver</a>
-          <a >Swapping Allowed</a>
-          <a >Top Ups Allowed</a>
-          <a >12 Months Guarantee</a>
-          <hr>
-      </div>
-      <div style="display: flex; " class="home_social_icons">
-       
-      </div>
-  </div>
-  </div>
-</footer>             
+     
      
  
       <!-- Firebase libraries -->
@@ -406,7 +379,7 @@ overlay2.style.display = 'block'
 
 // Show the popup
 document.getElementById("popup").style.display = "block";
-
+document.body.classList.add("no-scroll"); // Disable scrolling
     }
 
     // Use onAuthStateChanged to check when the authentication state changes
@@ -423,6 +396,7 @@ document.getElementById("popup").style.display = "block";
     // Function to close the popup
     function closePopup() {
         document.getElementById("popup").style.display = "none";
+        
     }
 
 
@@ -506,10 +480,11 @@ document.getElementById("accountLink").addEventListener("click", async function(
 document.getElementById("closePopupBtn").addEventListener("click", function() {
     const overlay = document.getElementById('overlay');
     overlay.style.display = 'none';
-
+    
     const popup = document.getElementById('popup');
     popup.style.display = 'none';
     popup.classList.remove('fade-in');
+    document.body.classList.remove("no-scroll"); // Enable scrolling
 });
 
 // Get the checkout button element
@@ -524,9 +499,9 @@ checkoutBtn.addEventListener("click", () => {
   for (let i = 0; i < cartItems.length; i++) {
     const cartItem = cartItems[i];
     const productName = cartItem.querySelector(".product-details h5").innerText;
-    const price = parseFloat(cartItem.querySelector(".product-details p").dataset.price);
+       const price = parseFloat(cartItem.querySelector(".product-details h4").dataset.price);
     const quantity = parseInt(cartItem.querySelector(".product-details input").value);
-    const total = parseFloat(cartItem.querySelector(".product-details p").dataset.total);
+    const total = parseFloat(cartItem.querySelector(".product-details h4").dataset.total);
     orderSummary.push({ productName, price, quantity, total });
   }
 
@@ -539,7 +514,7 @@ popupContent.classList.add("popup-content");
 
 
 // Add the title to the popup
-const title = document.createElement("h3");
+const title = document.createElement("h4");
 title.innerText = "Order Summary";
 popupContent.appendChild(title);
 // ...
@@ -599,8 +574,8 @@ popupContainer.appendChild(popupContent);
   document.body.appendChild(popupContainer);
 // Create the close button
 const closeButton = document.createElement("button");
-closeButton.classList.add("close-button2");
-closeButton.innerHTML = "&times;";
+closeButton.classList.add("close-button");
+closeButton.innerHTML = "&times; Close";
 
 // Add event listener to close the popup when the close button is clicked
 closeButton.addEventListener("click", () => {
@@ -618,7 +593,7 @@ const paymentOptionsSection = document.createElement("div");
 paymentOptionsSection.classList.add("payment-options");
 
 // Create the title for the payment options
-const paymentOptionsTitle = document.createElement("h3");
+const paymentOptionsTitle = document.createElement("h4");
 paymentOptionsTitle.innerText = "Payment Options";
 paymentOptionsSection.appendChild(paymentOptionsTitle);
 
@@ -645,7 +620,7 @@ receiverDetailsSection.classList.add("receiver-details");
 // Define the receiver/account details for each payment option
 const receiverDetails = {
   "airtel money": "Receiver: John Doe\nAccount Number: XXXX-XXXX-XXXX-1234",
-   "mobile money": "Receiver: PayPal\nAccount Email: example@example.com",
+   "mobile money": "Receiver: PayPal\nAccount Number: XXXX-XXXX-XXXX-1234",
   "bank transfer": "Receiver: Bank Name\nAccount Number: XXXX-XXXX-XXXX-5678",
 };
 
@@ -675,7 +650,7 @@ paymentOptionRadios.forEach((radio) => {
 paymentOptionsSection.appendChild(receiverDetailsSection);
 
 // Add the title to the popup
-const head = document.createElement("h3");
+const head = document.createElement("h4");
 head.innerText = "Delivery details.";
 popupContent.appendChild(head);
 // Create a select element for means of transport
@@ -1064,6 +1039,16 @@ cartContent.style.display = "none";
 document.getElementById("viewPurchaseHistoryBtn").addEventListener("click", async function(event) {
   event.preventDefault();
 
+  
+  // Get the button and spinner elements
+  const viewHistoryBtn = document.getElementById("viewPurchaseHistoryBtn");
+  const spinner = document.getElementById("spinner"); // Add an ID to your spinner element
+
+  // Disable the button and show the spinner
+  viewHistoryBtn.disabled = true;
+  spinner.style.display = "block";
+
+
   // Check if the user is authenticated
   const user = auth.currentUser;
   if (!user) {
@@ -1095,6 +1080,11 @@ document.getElementById("viewPurchaseHistoryBtn").addEventListener("click", asyn
   } catch (error) {
     console.error('Error fetching user receipts from Firebase:', error.message);
   }
+  finally {
+    // Enable the button and hide the spinner after loading
+    viewHistoryBtn.disabled = false;
+    spinner.style.display = "none";
+  }
 });
 // Function to show the "Added to Cart" message
 function showNoPurchaseMessage() {
@@ -1118,10 +1108,16 @@ function displayReceiptsPopup(userReceipts) {
   closeButton.innerText = "Close";
   closeButton.classList.add("close-button");
 
-  // Add event listener to close the popup when the close button is clicked
-  closeButton.addEventListener("click", () => {
+// Add event listener to close the popup when the close button is clicked
+closeButton.addEventListener("click", () => {
+  // Apply a class for the fade-out animation
+  popupContainer.style.animation = "fadeOut 0.5s";
+  // Remove the popup container after the animation duration
+  setTimeout(() => {
     document.body.removeChild(popupContainer);
-  });
+  }, 500); // 500 milliseconds (0.5 seconds) should match your animation duration
+});
+
 
   // Create the receipt details container
   const receiptDetailsContainer = document.createElement("div");
@@ -1142,7 +1138,7 @@ function displayReceiptsPopup(userReceipts) {
       <p class="receipt-info">Delivery Place: ${receipt.deliveryPlace}</p>
       <p class="receipt-info">Means of Transport: ${receipt.meansOfTransport}</p>
       <p class="receipt-info">Payment Option: ${receipt.selectedPaymentOption}</p>
-      <p class="receipt-info">Payment Status: ${receipt.paymentStatus}</p>
+      
       <!-- Replace the existing order summary element with this table -->
 <table class="order-summary-table">
   <caption>Order Summary</caption>
@@ -1183,6 +1179,9 @@ function displayReceiptsPopup(userReceipts) {
 
   // Add the popup container to the document body
   document.body.appendChild(popupContainer);
+ // Add fade-in animation to the popup container
+ popupContainer.style.animation = "fadeIn 0.5s";
+
 }
 
 
@@ -1196,12 +1195,47 @@ const touchesRef = ref(database, "products/touches");
 const accessoriesRef = ref(database, "products/accessories");
 const portsRef = ref(database, "products/Ports");
 
-
 const searchBtn = document.getElementById("search-btn");
+let isSearching = false;
 
 searchBtn.addEventListener("click", function(event) {
   event.preventDefault();
+
+  if (isSearching) {
+    // If currently searching, clear search bar and revert button
+    clearSearchBar();
+    revertSearchButton();
+    isSearching = false;
+  } else {
+    // If not currently searching, change the icon to refresh and perform search
+    changeToRefreshIcon();
+    searchProducts();
+    isSearching = true;
+  }
+
+
+function changeToRefreshIcon() {
+  // Assuming you're using Font Awesome
+  const searchIcon = document.querySelector("#search-btn i");
+  searchIcon.classList.remove("fa-search");
+  searchIcon.classList.add("fa-refresh");
+  searchBtn.style.background = 'orange';
+}
+
+function revertSearchButton() {
+  // Assuming you're using Font Awesome
+  const searchIcon = document.querySelector("#search-btn i");
+  searchIcon.classList.remove("fa-refresh");
   searchProducts();
+  searchIcon.classList.add("fa-search");
+  searchBtn.style.background = '#008abf';
+
+}
+
+function clearSearchBar() {
+  const searchBar = document.getElementById("search-bar");
+  searchBar.value = "";
+}
 
 
 
@@ -1265,16 +1299,18 @@ searchBtn.addEventListener("click", function(event) {
         stars.appendChild(star);
       }
       card.appendChild(stars);
-      // Add product price
-      const price = document.createElement("p");
-      price.innerText = `Price: UGX ${product.price}`;
-      card.appendChild(price);
-
 
       // Add product description
       const desc = document.createElement("p");
       desc.innerText = product.description;
       card.appendChild(desc);
+
+
+      // Add product price
+      const price = document.createElement("h4");
+      price.innerText = `UGX ${product.price}`;
+      card.appendChild(price);
+
 
 
 // Create the "Add to Cart" button
@@ -1306,8 +1342,8 @@ function addToCart(product) {
   productDetails.appendChild(productName);
 
   // Add product price
-  const productPrice = document.createElement("p");
-  productPrice.innerText = `Price: UGX ${product.price}`;
+  const productPrice = document.createElement("h4");
+  productPrice.innerText = `UGX ${product.price}`;
   productPrice.dataset.price = product.price; // Store the price as a data attribute
   productDetails.appendChild(productPrice);
 
@@ -1324,14 +1360,17 @@ quantityInput.addEventListener("input", () => {
 productDetails.appendChild(quantityInput);
 
 
-// Define the updateCartItemTotal function
 function updateCartItemTotal(cartItem) {
-  const priceElement = cartItem.querySelector(".product-details p");
-  const quantityInput = cartItem.querySelector(".product-details input");
-  const quantity = parseInt(quantityInput.value);
-  const price = parseFloat(priceElement.innerText.replace("Price: UGX ", ""));
-  const total = quantity * price;
-  priceElement.dataset.total = total.toFixed(2);
+  const priceElement = cartItem.querySelector(".product-details h4");
+
+  // Check if the element is found before accessing properties
+  if (priceElement) {
+    const quantityInput = cartItem.querySelector(".product-details input");
+    const quantity = parseInt(quantityInput.value);
+    const price = parseFloat(priceElement.innerText.replace("UGX ", ""));
+    const total = quantity * price;
+    priceElement.dataset.total = total.toFixed(2);
+  }
 }
 
 // Define the updateCartTotal function
@@ -1342,7 +1381,7 @@ function updateCartTotal() {
 
   for (let i = 0; i < cartItems.length; i++) {
     const cartItem = cartItems[i];
-    const priceElement = cartItem.querySelector(".product-details p");
+    const priceElement = cartItem.querySelector(".product-details h4");
     const totalForItem = parseFloat(priceElement.dataset.total);
     total += totalForItem;
   }
@@ -1410,16 +1449,17 @@ function showAddToCartMessage(productName) {
 const openCartBtn = document.getElementById("open-cart-btn");
 const closeCartBtn = document.getElementById("close-cart-btn");
 const cartContent = document.getElementById("cart-content");
-
+const overlay = document.getElementById('overlay')
 cartContent.style.display = "none"; // Hide the cart content on load
 
 openCartBtn.addEventListener("click", () => {
   if (cartIsEmpty()) {
     cartContent.style.display = "none"; // Hide the cart content on load
+ 
     // Show a message or perform any desired action when cart is empty
     return;
   }
-  
+     overlay.style.display = 'block'
   cartContent.style.display = "block";
   openCartBtn.style.display = "none";
   closeCartBtn.style.display = "inline-block";
@@ -1431,6 +1471,8 @@ closeCartBtn.addEventListener("click", () => {
   cartContent.style.display = "none";
   closeCartBtn.style.display = "none";
   openCartBtn.style.display = "inline-block";
+  overlay.style.display = 'none'
+
 });
 
 function cartIsEmpty() {
@@ -1525,8 +1567,8 @@ card.appendChild(guaranteeText);
       desc.innerText = product.description;
       card.appendChild(desc);
       // Add product price
-      const price = document.createElement("p");
-      price.innerText = `Price: UGX ${product.price}`;
+      const price = document.createElement("h4");
+      price.innerText = `UGX ${product.price}`;
       card.appendChild(price);
 
     
@@ -1560,8 +1602,8 @@ function addToCart(product) {
   productDetails.appendChild(productName);
 
   // Add product price
-  const productPrice = document.createElement("p");
-  productPrice.innerText = `Price: UGX ${product.price}`;
+  const productPrice = document.createElement("h4");
+  productPrice.innerText = `UGX ${product.price}`;
   productPrice.dataset.price = product.price; // Store the price as a data attribute
   productDetails.appendChild(productPrice);
 
@@ -1578,15 +1620,19 @@ quantityInput.addEventListener("input", () => {
 productDetails.appendChild(quantityInput);
 
 
-// Define the updateCartItemTotal function
 function updateCartItemTotal(cartItem) {
-  const priceElement = cartItem.querySelector(".product-details p");
-  const quantityInput = cartItem.querySelector(".product-details input");
-  const quantity = parseInt(quantityInput.value);
-  const price = parseFloat(priceElement.innerText.replace("Price: UGX ", ""));
-  const total = quantity * price;
-  priceElement.dataset.total = total.toFixed(2);
+  const priceElement = cartItem.querySelector(".product-details h4");
+
+  // Check if the element is found before accessing properties
+  if (priceElement) {
+    const quantityInput = cartItem.querySelector(".product-details input");
+    const quantity = parseInt(quantityInput.value);
+    const price = parseFloat(priceElement.innerText.replace("UGX ", ""));
+    const total = quantity * price;
+    priceElement.dataset.total = total.toFixed(2);
+  }
 }
+
 
 // Define the updateCartTotal function
 function updateCartTotal() {
@@ -1596,7 +1642,7 @@ function updateCartTotal() {
 
   for (let i = 0; i < cartItems.length; i++) {
     const cartItem = cartItems[i];
-    const priceElement = cartItem.querySelector(".product-details p");
+    const priceElement = cartItem.querySelector(".product-details h4");
     const totalForItem = parseFloat(priceElement.dataset.total);
     total += totalForItem;
   }
@@ -1664,16 +1710,17 @@ function showAddToCartMessage(productName) {
 const openCartBtn = document.getElementById("open-cart-btn");
 const closeCartBtn = document.getElementById("close-cart-btn");
 const cartContent = document.getElementById("cart-content");
-
+const overlay = document.getElementById('overlay')
 cartContent.style.display = "none"; // Hide the cart content on load
 
 openCartBtn.addEventListener("click", () => {
   if (cartIsEmpty()) {
     cartContent.style.display = "none"; // Hide the cart content on load
+ 
     // Show a message or perform any desired action when cart is empty
     return;
   }
-  
+     overlay.style.display = 'block'
   cartContent.style.display = "block";
   openCartBtn.style.display = "none";
   closeCartBtn.style.display = "inline-block";
@@ -1685,6 +1732,8 @@ closeCartBtn.addEventListener("click", () => {
   cartContent.style.display = "none";
   closeCartBtn.style.display = "none";
   openCartBtn.style.display = "inline-block";
+  overlay.style.display = 'none'
+
 });
 
 function cartIsEmpty() {
@@ -1764,8 +1813,8 @@ card.appendChild(guaranteeText);
       desc.innerText = product.description;
       card.appendChild(desc);
       // Add product price
-      const price = document.createElement("p");
-      price.innerText = `Price: UGX ${product.price}`;
+      const price = document.createElement("h4");
+      price.innerText = `UGX ${product.price}`;
       card.appendChild(price);
 
     
@@ -1798,8 +1847,8 @@ function addToCart(product) {
   productDetails.appendChild(productName);
 
   // Add product price
-  const productPrice = document.createElement("p");
-  productPrice.innerText = `Price: UGX ${product.price}`;
+  const productPrice = document.createElement("h4");
+  productPrice.innerText = `UGX ${product.price}`;
   productPrice.dataset.price = product.price; // Store the price as a data attribute
   productDetails.appendChild(productPrice);
 
@@ -1816,15 +1865,19 @@ quantityInput.addEventListener("input", () => {
 productDetails.appendChild(quantityInput);
 
 
-// Define the updateCartItemTotal function
 function updateCartItemTotal(cartItem) {
-  const priceElement = cartItem.querySelector(".product-details p");
-  const quantityInput = cartItem.querySelector(".product-details input");
-  const quantity = parseInt(quantityInput.value);
-  const price = parseFloat(priceElement.innerText.replace("Price: UGX ", ""));
-  const total = quantity * price;
-  priceElement.dataset.total = total.toFixed(2);
+  const priceElement = cartItem.querySelector(".product-details h4");
+
+  // Check if the element is found before accessing properties
+  if (priceElement) {
+    const quantityInput = cartItem.querySelector(".product-details input");
+    const quantity = parseInt(quantityInput.value);
+    const price = parseFloat(priceElement.innerText.replace("UGX ", ""));
+    const total = quantity * price;
+    priceElement.dataset.total = total.toFixed(2);
+  }
 }
+
 
 // Define the updateCartTotal function
 function updateCartTotal() {
@@ -1834,7 +1887,7 @@ function updateCartTotal() {
 
   for (let i = 0; i < cartItems.length; i++) {
     const cartItem = cartItems[i];
-    const priceElement = cartItem.querySelector(".product-details p");
+    const priceElement = cartItem.querySelector(".product-details h4");
     const totalForItem = parseFloat(priceElement.dataset.total);
     total += totalForItem;
   }
@@ -1899,19 +1952,21 @@ function showAddToCartMessage(productName) {
 }
 
 
+
 const openCartBtn = document.getElementById("open-cart-btn");
 const closeCartBtn = document.getElementById("close-cart-btn");
 const cartContent = document.getElementById("cart-content");
-
+const overlay = document.getElementById('overlay')
 cartContent.style.display = "none"; // Hide the cart content on load
 
 openCartBtn.addEventListener("click", () => {
   if (cartIsEmpty()) {
     cartContent.style.display = "none"; // Hide the cart content on load
+ 
     // Show a message or perform any desired action when cart is empty
     return;
   }
-  
+     overlay.style.display = 'block'
   cartContent.style.display = "block";
   openCartBtn.style.display = "none";
   closeCartBtn.style.display = "inline-block";
@@ -1923,6 +1978,8 @@ closeCartBtn.addEventListener("click", () => {
   cartContent.style.display = "none";
   closeCartBtn.style.display = "none";
   openCartBtn.style.display = "inline-block";
+  overlay.style.display = 'none'
+
 });
 
 function cartIsEmpty() {
@@ -2001,8 +2058,8 @@ document.querySelector("#newScreens-link").addEventListener("click", () => {
       desc.innerText = product.description;
       card.appendChild(desc);
       // Add product price
-      const price = document.createElement("p");
-      price.innerText = `Price: UGX ${product.price}`;
+      const price = document.createElement("h4");
+      price.innerText = `UGX ${product.price}`;
       card.appendChild(price);
 
      
@@ -2035,8 +2092,8 @@ function addToCart(product) {
   productDetails.appendChild(productName);
 
   // Add product price
-  const productPrice = document.createElement("p");
-  productPrice.innerText = `Price: UGX ${product.price}`;
+  const productPrice = document.createElement("h4");
+  productPrice.innerText = `UGX ${product.price}`;
   productPrice.dataset.price = product.price; // Store the price as a data attribute
   productDetails.appendChild(productPrice);
 
@@ -2053,14 +2110,17 @@ quantityInput.addEventListener("input", () => {
 productDetails.appendChild(quantityInput);
 
 
-// Define the updateCartItemTotal function
 function updateCartItemTotal(cartItem) {
-  const priceElement = cartItem.querySelector(".product-details p");
-  const quantityInput = cartItem.querySelector(".product-details input");
-  const quantity = parseInt(quantityInput.value);
-  const price = parseFloat(priceElement.innerText.replace("Price: UGX ", ""));
-  const total = quantity * price;
-  priceElement.dataset.total = total.toFixed(2);
+  const priceElement = cartItem.querySelector(".product-details h4");
+
+  // Check if the element is found before accessing properties
+  if (priceElement) {
+    const quantityInput = cartItem.querySelector(".product-details input");
+    const quantity = parseInt(quantityInput.value);
+    const price = parseFloat(priceElement.innerText.replace("UGX ", ""));
+    const total = quantity * price;
+    priceElement.dataset.total = total.toFixed(2);
+  }
 }
 
 // Define the updateCartTotal function
@@ -2071,7 +2131,7 @@ function updateCartTotal() {
 
   for (let i = 0; i < cartItems.length; i++) {
     const cartItem = cartItems[i];
-    const priceElement = cartItem.querySelector(".product-details p");
+    const priceElement = cartItem.querySelector(".product-details h4");
     const totalForItem = parseFloat(priceElement.dataset.total);
     total += totalForItem;
   }
@@ -2136,19 +2196,21 @@ function showAddToCartMessage(productName) {
 }
 
 
+
 const openCartBtn = document.getElementById("open-cart-btn");
 const closeCartBtn = document.getElementById("close-cart-btn");
 const cartContent = document.getElementById("cart-content");
-
+const overlay = document.getElementById('overlay')
 cartContent.style.display = "none"; // Hide the cart content on load
 
 openCartBtn.addEventListener("click", () => {
   if (cartIsEmpty()) {
     cartContent.style.display = "none"; // Hide the cart content on load
+ 
     // Show a message or perform any desired action when cart is empty
     return;
   }
-  
+     overlay.style.display = 'block'
   cartContent.style.display = "block";
   openCartBtn.style.display = "none";
   closeCartBtn.style.display = "inline-block";
@@ -2160,7 +2222,10 @@ closeCartBtn.addEventListener("click", () => {
   cartContent.style.display = "none";
   closeCartBtn.style.display = "none";
   openCartBtn.style.display = "inline-block";
+  overlay.style.display = 'none'
+
 });
+
 
 function cartIsEmpty() {
   const cartItems = document.getElementsByClassName("cart-item");
@@ -2233,8 +2298,8 @@ card.appendChild(guaranteeText);
       desc.innerText = product.description;
       card.appendChild(desc);
       // Add product price
-      const price = document.createElement("p");
-      price.innerText = `Price: UGX ${product.price}`;
+      const price = document.createElement("h4");
+      price.innerText = `UGX ${product.price}`;
       card.appendChild(price);
 
     
@@ -2267,8 +2332,8 @@ function addToCart(product) {
   productDetails.appendChild(productName);
 
   // Add product price
-  const productPrice = document.createElement("p");
-  productPrice.innerText = `Price: UGX ${product.price}`;
+  const productPrice = document.createElement("h4");
+  productPrice.innerText = `UGX ${product.price}`;
   productPrice.dataset.price = product.price; // Store the price as a data attribute
   productDetails.appendChild(productPrice);
 
@@ -2285,15 +2350,19 @@ quantityInput.addEventListener("input", () => {
 productDetails.appendChild(quantityInput);
 
 
-// Define the updateCartItemTotal function
 function updateCartItemTotal(cartItem) {
-  const priceElement = cartItem.querySelector(".product-details p");
-  const quantityInput = cartItem.querySelector(".product-details input");
-  const quantity = parseInt(quantityInput.value);
-  const price = parseFloat(priceElement.innerText.replace("Price: UGX ", ""));
-  const total = quantity * price;
-  priceElement.dataset.total = total.toFixed(2);
+  const priceElement = cartItem.querySelector(".product-details h4");
+
+  // Check if the element is found before accessing properties
+  if (priceElement) {
+    const quantityInput = cartItem.querySelector(".product-details input");
+    const quantity = parseInt(quantityInput.value);
+    const price = parseFloat(priceElement.innerText.replace("UGX ", ""));
+    const total = quantity * price;
+    priceElement.dataset.total = total.toFixed(2);
+  }
 }
+
 
 // Define the updateCartTotal function
 function updateCartTotal() {
@@ -2303,7 +2372,7 @@ function updateCartTotal() {
 
   for (let i = 0; i < cartItems.length; i++) {
     const cartItem = cartItems[i];
-    const priceElement = cartItem.querySelector(".product-details p");
+    const priceElement = cartItem.querySelector(".product-details h4");
     const totalForItem = parseFloat(priceElement.dataset.total);
     total += totalForItem;
   }
@@ -2368,19 +2437,21 @@ function showAddToCartMessage(productName) {
 }
 
 
+
 const openCartBtn = document.getElementById("open-cart-btn");
 const closeCartBtn = document.getElementById("close-cart-btn");
 const cartContent = document.getElementById("cart-content");
-
+const overlay = document.getElementById('overlay')
 cartContent.style.display = "none"; // Hide the cart content on load
 
 openCartBtn.addEventListener("click", () => {
   if (cartIsEmpty()) {
     cartContent.style.display = "none"; // Hide the cart content on load
+ 
     // Show a message or perform any desired action when cart is empty
     return;
   }
-  
+     overlay.style.display = 'block'
   cartContent.style.display = "block";
   openCartBtn.style.display = "none";
   closeCartBtn.style.display = "inline-block";
@@ -2392,7 +2463,10 @@ closeCartBtn.addEventListener("click", () => {
   cartContent.style.display = "none";
   closeCartBtn.style.display = "none";
   openCartBtn.style.display = "inline-block";
+  overlay.style.display = 'none'
+
 });
+
 
 function cartIsEmpty() {
   const cartItems = document.getElementsByClassName("cart-item");
@@ -2469,8 +2543,8 @@ document.querySelector("#touches-link").addEventListener("click", () => {
       desc.innerText = product.description;
       card.appendChild(desc);
       // Add product price
-      const price = document.createElement("p");
-      price.innerText = `Price: UGX ${product.price}`;
+      const price = document.createElement("h4");
+      price.innerText = ` UGX ${product.price}`;
       card.appendChild(price);
 
      
@@ -2503,8 +2577,8 @@ function addToCart(product) {
   productDetails.appendChild(productName);
 
   // Add product price
-  const productPrice = document.createElement("p");
-  productPrice.innerText = `Price: UGX ${product.price}`;
+  const productPrice = document.createElement("h4");
+  productPrice.innerText = `UGX ${product.price}`;
   productPrice.dataset.price = product.price; // Store the price as a data attribute
   productDetails.appendChild(productPrice);
 
@@ -2521,14 +2595,17 @@ quantityInput.addEventListener("input", () => {
 productDetails.appendChild(quantityInput);
 
 
-// Define the updateCartItemTotal function
 function updateCartItemTotal(cartItem) {
-  const priceElement = cartItem.querySelector(".product-details p");
-  const quantityInput = cartItem.querySelector(".product-details input");
-  const quantity = parseInt(quantityInput.value);
-  const price = parseFloat(priceElement.innerText.replace("Price: UGX ", ""));
-  const total = quantity * price;
-  priceElement.dataset.total = total.toFixed(2);
+  const priceElement = cartItem.querySelector(".product-details h4");
+
+  // Check if the element is found before accessing properties
+  if (priceElement) {
+    const quantityInput = cartItem.querySelector(".product-details input");
+    const quantity = parseInt(quantityInput.value);
+    const price = parseFloat(priceElement.innerText.replace("UGX ", ""));
+    const total = quantity * price;
+    priceElement.dataset.total = total.toFixed(2);
+  }
 }
 
 // Define the updateCartTotal function
@@ -2539,7 +2616,7 @@ function updateCartTotal() {
 
   for (let i = 0; i < cartItems.length; i++) {
     const cartItem = cartItems[i];
-    const priceElement = cartItem.querySelector(".product-details p");
+    const priceElement = cartItem.querySelector(".product-details h4");
     const totalForItem = parseFloat(priceElement.dataset.total);
     total += totalForItem;
   }
@@ -2604,19 +2681,21 @@ function showAddToCartMessage(productName) {
 }
 
 
+
 const openCartBtn = document.getElementById("open-cart-btn");
 const closeCartBtn = document.getElementById("close-cart-btn");
 const cartContent = document.getElementById("cart-content");
-
+const overlay = document.getElementById('overlay')
 cartContent.style.display = "none"; // Hide the cart content on load
 
 openCartBtn.addEventListener("click", () => {
   if (cartIsEmpty()) {
     cartContent.style.display = "none"; // Hide the cart content on load
+ 
     // Show a message or perform any desired action when cart is empty
     return;
   }
-  
+     overlay.style.display = 'block'
   cartContent.style.display = "block";
   openCartBtn.style.display = "none";
   closeCartBtn.style.display = "inline-block";
@@ -2628,6 +2707,8 @@ closeCartBtn.addEventListener("click", () => {
   cartContent.style.display = "none";
   closeCartBtn.style.display = "none";
   openCartBtn.style.display = "inline-block";
+  overlay.style.display = 'none'
+
 });
 
 function cartIsEmpty() {
@@ -2703,8 +2784,8 @@ document.querySelector("#electronics-link").addEventListener("click", () => {
       desc.innerText = product.description;
       card.appendChild(desc);
       // Add product price
-      const price = document.createElement("p");
-      price.innerText = `Price: UGX ${product.price}`;
+      const price = document.createElement("h4");
+      price.innerText = `UGX ${product.price}`;
       card.appendChild(price);
 
     
@@ -2737,8 +2818,8 @@ function addToCart(product) {
   productDetails.appendChild(productName);
 
   // Add product price
-  const productPrice = document.createElement("p");
-  productPrice.innerText = `Price: UGX ${product.price}`;
+  const productPrice = document.createElement("h4");
+  productPrice.innerText = `UGX ${product.price}`;
   productPrice.dataset.price = product.price; // Store the price as a data attribute
   productDetails.appendChild(productPrice);
 
@@ -2755,14 +2836,17 @@ quantityInput.addEventListener("input", () => {
 productDetails.appendChild(quantityInput);
 
 
-// Define the updateCartItemTotal function
 function updateCartItemTotal(cartItem) {
-  const priceElement = cartItem.querySelector(".product-details p");
-  const quantityInput = cartItem.querySelector(".product-details input");
-  const quantity = parseInt(quantityInput.value);
-  const price = parseFloat(priceElement.innerText.replace("Price: UGX ", ""));
-  const total = quantity * price;
-  priceElement.dataset.total = total.toFixed(2);
+  const priceElement = cartItem.querySelector(".product-details h4");
+
+  // Check if the element is found before accessing properties
+  if (priceElement) {
+    const quantityInput = cartItem.querySelector(".product-details input");
+    const quantity = parseInt(quantityInput.value);
+    const price = parseFloat(priceElement.innerText.replace("UGX ", ""));
+    const total = quantity * price;
+    priceElement.dataset.total = total.toFixed(2);
+  }
 }
 
 // Define the updateCartTotal function
@@ -2773,7 +2857,7 @@ function updateCartTotal() {
 
   for (let i = 0; i < cartItems.length; i++) {
     const cartItem = cartItems[i];
-    const priceElement = cartItem.querySelector(".product-details p");
+    const priceElement = cartItem.querySelector(".product-details h4");
     const totalForItem = parseFloat(priceElement.dataset.total);
     total += totalForItem;
   }
@@ -2838,19 +2922,21 @@ function showAddToCartMessage(productName) {
 }
 
 
+
 const openCartBtn = document.getElementById("open-cart-btn");
 const closeCartBtn = document.getElementById("close-cart-btn");
 const cartContent = document.getElementById("cart-content");
-
+const overlay = document.getElementById('overlay')
 cartContent.style.display = "none"; // Hide the cart content on load
 
 openCartBtn.addEventListener("click", () => {
   if (cartIsEmpty()) {
     cartContent.style.display = "none"; // Hide the cart content on load
+ 
     // Show a message or perform any desired action when cart is empty
     return;
   }
-  
+     overlay.style.display = 'block'
   cartContent.style.display = "block";
   openCartBtn.style.display = "none";
   closeCartBtn.style.display = "inline-block";
@@ -2862,7 +2948,10 @@ closeCartBtn.addEventListener("click", () => {
   cartContent.style.display = "none";
   closeCartBtn.style.display = "none";
   openCartBtn.style.display = "inline-block";
+  overlay.style.display = 'none'
+
 });
+
 
 function cartIsEmpty() {
   const cartItems = document.getElementsByClassName("cart-item");
@@ -2935,8 +3024,8 @@ document.querySelector("#accessories-link").addEventListener("click", () => {
       desc.innerText = product.description;
       card.appendChild(desc);
       // Add product price
-      const price = document.createElement("p");
-      price.innerText = `Price: UGX ${product.price}`;
+      const price = document.createElement("h4");
+      price.innerText = `UGX ${product.price}`;
       card.appendChild(price);
 
     
@@ -2969,8 +3058,8 @@ function addToCart(product) {
   productDetails.appendChild(productName);
 
   // Add product price
-  const productPrice = document.createElement("p");
-  productPrice.innerText = `Price: UGX ${product.price}`;
+  const productPrice = document.createElement("h4");
+  productPrice.innerText = `UGX ${product.price}`;
   productPrice.dataset.price = product.price; // Store the price as a data attribute
   productDetails.appendChild(productPrice);
 
@@ -2987,14 +3076,17 @@ quantityInput.addEventListener("input", () => {
 productDetails.appendChild(quantityInput);
 
 
-// Define the updateCartItemTotal function
 function updateCartItemTotal(cartItem) {
-  const priceElement = cartItem.querySelector(".product-details p");
-  const quantityInput = cartItem.querySelector(".product-details input");
-  const quantity = parseInt(quantityInput.value);
-  const price = parseFloat(priceElement.innerText.replace("Price: UGX ", ""));
-  const total = quantity * price;
-  priceElement.dataset.total = total.toFixed(2);
+  const priceElement = cartItem.querySelector(".product-details h4");
+
+  // Check if the element is found before accessing properties
+  if (priceElement) {
+    const quantityInput = cartItem.querySelector(".product-details input");
+    const quantity = parseInt(quantityInput.value);
+    const price = parseFloat(priceElement.innerText.replace("UGX ", ""));
+    const total = quantity * price;
+    priceElement.dataset.total = total.toFixed(2);
+  }
 }
 
 // Define the updateCartTotal function
@@ -3005,7 +3097,7 @@ function updateCartTotal() {
 
   for (let i = 0; i < cartItems.length; i++) {
     const cartItem = cartItems[i];
-    const priceElement = cartItem.querySelector(".product-details p");
+    const priceElement = cartItem.querySelector(".product-details h4");
     const totalForItem = parseFloat(priceElement.dataset.total);
     total += totalForItem;
   }
@@ -3070,19 +3162,21 @@ function showAddToCartMessage(productName) {
 }
 
 
+
 const openCartBtn = document.getElementById("open-cart-btn");
 const closeCartBtn = document.getElementById("close-cart-btn");
 const cartContent = document.getElementById("cart-content");
-
+const overlay = document.getElementById('overlay')
 cartContent.style.display = "none"; // Hide the cart content on load
 
 openCartBtn.addEventListener("click", () => {
   if (cartIsEmpty()) {
     cartContent.style.display = "none"; // Hide the cart content on load
+ 
     // Show a message or perform any desired action when cart is empty
     return;
   }
-  
+     overlay.style.display = 'block'
   cartContent.style.display = "block";
   openCartBtn.style.display = "none";
   closeCartBtn.style.display = "inline-block";
@@ -3094,7 +3188,10 @@ closeCartBtn.addEventListener("click", () => {
   cartContent.style.display = "none";
   closeCartBtn.style.display = "none";
   openCartBtn.style.display = "inline-block";
+  overlay.style.display = 'none'
+
 });
+
 
 function cartIsEmpty() {
   const cartItems = document.getElementsByClassName("cart-item");
@@ -3169,8 +3266,8 @@ document.querySelector("#ports-link").addEventListener("click", () => {
       desc.innerText = product.description;
       card.appendChild(desc);
       // Add product price
-      const price = document.createElement("p");
-      price.innerText = `Price: UGX ${product.price}`;
+      const price = document.createElement("h4");
+      price.innerText = `UGX ${product.price}`;
       card.appendChild(price);
 
      
@@ -3203,8 +3300,8 @@ function addToCart(product) {
   productDetails.appendChild(productName);
 
   // Add product price
-  const productPrice = document.createElement("p");
-  productPrice.innerText = `Price: UGX ${product.price}`;
+  const productPrice = document.createElement("h4");
+  productPrice.innerText = `UGX ${product.price}`;
   productPrice.dataset.price = product.price; // Store the price as a data attribute
   productDetails.appendChild(productPrice);
 
@@ -3221,14 +3318,17 @@ quantityInput.addEventListener("input", () => {
 productDetails.appendChild(quantityInput);
 
 
-// Define the updateCartItemTotal function
 function updateCartItemTotal(cartItem) {
-  const priceElement = cartItem.querySelector(".product-details p");
-  const quantityInput = cartItem.querySelector(".product-details input");
-  const quantity = parseInt(quantityInput.value);
-  const price = parseFloat(priceElement.innerText.replace("Price: UGX ", ""));
-  const total = quantity * price;
-  priceElement.dataset.total = total.toFixed(2);
+  const priceElement = cartItem.querySelector(".product-details h4");
+
+  // Check if the element is found before accessing properties
+  if (priceElement) {
+    const quantityInput = cartItem.querySelector(".product-details input");
+    const quantity = parseInt(quantityInput.value);
+    const price = parseFloat(priceElement.innerText.replace("UGX ", ""));
+    const total = quantity * price;
+    priceElement.dataset.total = total.toFixed(2);
+  }
 }
 
 // Define the updateCartTotal function
@@ -3239,7 +3339,7 @@ function updateCartTotal() {
 
   for (let i = 0; i < cartItems.length; i++) {
     const cartItem = cartItems[i];
-    const priceElement = cartItem.querySelector(".product-details p");
+    const priceElement = cartItem.querySelector(".product-details h4");
     const totalForItem = parseFloat(priceElement.dataset.total);
     total += totalForItem;
   }
@@ -3304,19 +3404,21 @@ function showAddToCartMessage(productName) {
 }
 
 
+
 const openCartBtn = document.getElementById("open-cart-btn");
 const closeCartBtn = document.getElementById("close-cart-btn");
 const cartContent = document.getElementById("cart-content");
-
+const overlay = document.getElementById('overlay')
 cartContent.style.display = "none"; // Hide the cart content on load
 
 openCartBtn.addEventListener("click", () => {
   if (cartIsEmpty()) {
     cartContent.style.display = "none"; // Hide the cart content on load
+ 
     // Show a message or perform any desired action when cart is empty
     return;
   }
-  
+     overlay.style.display = 'block'
   cartContent.style.display = "block";
   openCartBtn.style.display = "none";
   closeCartBtn.style.display = "inline-block";
@@ -3328,6 +3430,8 @@ closeCartBtn.addEventListener("click", () => {
   cartContent.style.display = "none";
   closeCartBtn.style.display = "none";
   openCartBtn.style.display = "inline-block";
+  overlay.style.display = 'none'
+
 });
 
 function cartIsEmpty() {
@@ -3414,8 +3518,8 @@ card.appendChild(stars);
       
 
       
-                const price = document.createElement("p");
-                price.innerText = `Price: UGX${product.price}`;
+                const price = document.createElement("h4");
+                price.innerText = `UGX ${product.price}`;
                 card.appendChild(price);
       
 
@@ -3466,8 +3570,8 @@ function addToCart(product) {
   productDetails.appendChild(productName);
 
   // Add product price
-  const productPrice = document.createElement("p");
-  productPrice.innerText = `Price: UGX ${product.price}`;
+  const productPrice = document.createElement("h4");
+  productPrice.innerText = `UGX ${product.price}`;
   productPrice.dataset.price = product.price; // Store the price as a data attribute
   productDetails.appendChild(productPrice);
 
@@ -3484,17 +3588,19 @@ quantityInput.addEventListener("input", () => {
 productDetails.appendChild(quantityInput);
 
 
-// Define the updateCartItemTotal function
 function updateCartItemTotal(cartItem) {
-  const priceElement = cartItem.querySelector(".product-details p");
-  const quantityInput = cartItem.querySelector(".product-details input");
-  const quantity = parseInt(quantityInput.value);
-  const price = parseFloat(priceElement.innerText.replace("Price: UGX ", ""));
-  const total = quantity * price;
-  priceElement.dataset.total = total.toFixed(2);
+  const priceElement = cartItem.querySelector(".product-details h4");
+
+  // Check if the element is found before accessing properties
+  if (priceElement) {
+    const quantityInput = cartItem.querySelector(".product-details input");
+    const quantity = parseInt(quantityInput.value);
+    const price = parseFloat(priceElement.innerText.replace("UGX ", ""));
+    const total = quantity * price;
+    priceElement.dataset.total = total.toFixed(2);
+  }
 }
 
-// Define the updateCartTotal function
 function updateCartTotal() {
   const cartItems = document.getElementsByClassName("cart-item");
   const totalPriceElement = document.getElementById("total-price");
@@ -3502,13 +3608,18 @@ function updateCartTotal() {
 
   for (let i = 0; i < cartItems.length; i++) {
     const cartItem = cartItems[i];
-    const priceElement = cartItem.querySelector(".product-details p");
-    const totalForItem = parseFloat(priceElement.dataset.total);
-    total += totalForItem;
+    const priceElement = cartItem.querySelector(".product-details h4");
+
+    // Check if the element is found before accessing properties
+    if (priceElement) {
+      const totalForItem = parseFloat(priceElement.dataset.total);
+      total += totalForItem;
+    }
   }
 
   totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
 }
+
 
   // Create a delete button for the cart item
   const deleteButton = document.createElement("button");
@@ -3567,19 +3678,21 @@ function showAddToCartMessage(productName) {
 }
 
 
+
 const openCartBtn = document.getElementById("open-cart-btn");
 const closeCartBtn = document.getElementById("close-cart-btn");
 const cartContent = document.getElementById("cart-content");
-
+const overlay = document.getElementById('overlay')
 cartContent.style.display = "none"; // Hide the cart content on load
 
 openCartBtn.addEventListener("click", () => {
   if (cartIsEmpty()) {
     cartContent.style.display = "none"; // Hide the cart content on load
+ 
     // Show a message or perform any desired action when cart is empty
     return;
   }
-  
+     overlay.style.display = 'block'
   cartContent.style.display = "block";
   openCartBtn.style.display = "none";
   closeCartBtn.style.display = "inline-block";
@@ -3591,7 +3704,10 @@ closeCartBtn.addEventListener("click", () => {
   cartContent.style.display = "none";
   closeCartBtn.style.display = "none";
   openCartBtn.style.display = "inline-block";
+  overlay.style.display = 'none'
+
 });
+
 
 function cartIsEmpty() {
   const cartItems = document.getElementsByClassName("cart-item");
@@ -3674,8 +3790,8 @@ card.appendChild(stars);
      
       
       
-                const price = document.createElement("p");
-                price.innerText = `Price: UGX${product.price}`;
+                const price = document.createElement("h4");
+                price.innerText = `UGX ${product.price}`;
                 card.appendChild(price);
       
 
@@ -3727,8 +3843,8 @@ function addToCart(product) {
   productDetails.appendChild(productName);
 
   // Add product price
-  const productPrice = document.createElement("p");
-  productPrice.innerText = `Price: UGX ${product.price}`;
+  const productPrice = document.createElement("h4");
+  productPrice.innerText = `UGX ${product.price}`;
   productPrice.dataset.price = product.price; // Store the price as a data attribute
   productDetails.appendChild(productPrice);
 
@@ -3745,14 +3861,17 @@ quantityInput.addEventListener("input", () => {
 productDetails.appendChild(quantityInput);
 
 
-// Define the updateCartItemTotal function
 function updateCartItemTotal(cartItem) {
-  const priceElement = cartItem.querySelector(".product-details p");
-  const quantityInput = cartItem.querySelector(".product-details input");
-  const quantity = parseInt(quantityInput.value);
-  const price = parseFloat(priceElement.innerText.replace("Price: UGX ", ""));
-  const total = quantity * price;
-  priceElement.dataset.total = total.toFixed(2);
+  const priceElement = cartItem.querySelector(".product-details h4");
+
+  // Check if the element is found before accessing properties
+  if (priceElement) {
+    const quantityInput = cartItem.querySelector(".product-details input");
+    const quantity = parseInt(quantityInput.value);
+    const price = parseFloat(priceElement.innerText.replace("UGX ", ""));
+    const total = quantity * price;
+    priceElement.dataset.total = total.toFixed(2);
+  }
 }
 
 // Define the updateCartTotal function
@@ -3763,7 +3882,7 @@ function updateCartTotal() {
 
   for (let i = 0; i < cartItems.length; i++) {
     const cartItem = cartItems[i];
-    const priceElement = cartItem.querySelector(".product-details p");
+    const priceElement = cartItem.querySelector(".product-details h4");
     const totalForItem = parseFloat(priceElement.dataset.total);
     total += totalForItem;
   }
@@ -3828,19 +3947,21 @@ function showAddToCartMessage(productName) {
 }
 
 
+
 const openCartBtn = document.getElementById("open-cart-btn");
 const closeCartBtn = document.getElementById("close-cart-btn");
 const cartContent = document.getElementById("cart-content");
-
+const overlay = document.getElementById('overlay')
 cartContent.style.display = "none"; // Hide the cart content on load
 
 openCartBtn.addEventListener("click", () => {
   if (cartIsEmpty()) {
     cartContent.style.display = "none"; // Hide the cart content on load
+ 
     // Show a message or perform any desired action when cart is empty
     return;
   }
-  
+     overlay.style.display = 'block'
   cartContent.style.display = "block";
   openCartBtn.style.display = "none";
   closeCartBtn.style.display = "inline-block";
@@ -3852,6 +3973,8 @@ closeCartBtn.addEventListener("click", () => {
   cartContent.style.display = "none";
   closeCartBtn.style.display = "none";
   openCartBtn.style.display = "inline-block";
+  overlay.style.display = 'none'
+
 });
 
 function cartIsEmpty() {
@@ -3922,8 +4045,8 @@ card.appendChild(stars);
       
       
       
-                const price = document.createElement("p");
-                price.innerText = `Price: UGX${product.price}`;
+                const price = document.createElement("h4");
+                price.innerText = `UGX ${product.price}`;
                 card.appendChild(price);
       
 
@@ -3974,8 +4097,8 @@ function addToCart(product) {
   productDetails.appendChild(productName);
 
   // Add product price
-  const productPrice = document.createElement("p");
-  productPrice.innerText = `Price: UGX ${product.price}`;
+  const productPrice = document.createElement("h4");
+  productPrice.innerText = `UGX ${product.price}`;
   productPrice.dataset.price = product.price; // Store the price as a data attribute
   productDetails.appendChild(productPrice);
 
@@ -3992,14 +4115,17 @@ quantityInput.addEventListener("input", () => {
 productDetails.appendChild(quantityInput);
 
 
-// Define the updateCartItemTotal function
 function updateCartItemTotal(cartItem) {
-  const priceElement = cartItem.querySelector(".product-details p");
-  const quantityInput = cartItem.querySelector(".product-details input");
-  const quantity = parseInt(quantityInput.value);
-  const price = parseFloat(priceElement.innerText.replace("Price: UGX ", ""));
-  const total = quantity * price;
-  priceElement.dataset.total = total.toFixed(2);
+  const priceElement = cartItem.querySelector(".product-details h4");
+
+  // Check if the element is found before accessing properties
+  if (priceElement) {
+    const quantityInput = cartItem.querySelector(".product-details input");
+    const quantity = parseInt(quantityInput.value);
+    const price = parseFloat(priceElement.innerText.replace("UGX ", ""));
+    const total = quantity * price;
+    priceElement.dataset.total = total.toFixed(2);
+  }
 }
 
 // Define the updateCartTotal function
@@ -4010,7 +4136,7 @@ function updateCartTotal() {
 
   for (let i = 0; i < cartItems.length; i++) {
     const cartItem = cartItems[i];
-    const priceElement = cartItem.querySelector(".product-details p");
+    const priceElement = cartItem.querySelector(".product-details h4");
     const totalForItem = parseFloat(priceElement.dataset.total);
     total += totalForItem;
   }
@@ -4075,19 +4201,21 @@ function showAddToCartMessage(productName) {
 }
 
 
+
 const openCartBtn = document.getElementById("open-cart-btn");
 const closeCartBtn = document.getElementById("close-cart-btn");
 const cartContent = document.getElementById("cart-content");
-
+const overlay = document.getElementById('overlay')
 cartContent.style.display = "none"; // Hide the cart content on load
 
 openCartBtn.addEventListener("click", () => {
   if (cartIsEmpty()) {
     cartContent.style.display = "none"; // Hide the cart content on load
+ 
     // Show a message or perform any desired action when cart is empty
     return;
   }
-  
+     overlay.style.display = 'block'
   cartContent.style.display = "block";
   openCartBtn.style.display = "none";
   closeCartBtn.style.display = "inline-block";
@@ -4099,6 +4227,8 @@ closeCartBtn.addEventListener("click", () => {
   cartContent.style.display = "none";
   closeCartBtn.style.display = "none";
   openCartBtn.style.display = "inline-block";
+  overlay.style.display = 'none'
+
 });
 
 function cartIsEmpty() {
@@ -4170,8 +4300,8 @@ card.appendChild(stars);
       
       
       
-                const price = document.createElement("p");
-                price.innerText = `Price: UGX${product.price}`;
+                const price = document.createElement("h4");
+                price.innerText = `UGX ${product.price}`;
                 card.appendChild(price);
       
 
@@ -4224,8 +4354,8 @@ function addToCart(product) {
   productDetails.appendChild(productName);
 
   // Add product price
-  const productPrice = document.createElement("p");
-  productPrice.innerText = `Price: UGX ${product.price}`;
+  const productPrice = document.createElement("h4");
+  productPrice.innerText = `UGX ${product.price}`;
   productPrice.dataset.price = product.price; // Store the price as a data attribute
   productDetails.appendChild(productPrice);
 
@@ -4242,14 +4372,17 @@ quantityInput.addEventListener("input", () => {
 productDetails.appendChild(quantityInput);
 
 
-// Define the updateCartItemTotal function
 function updateCartItemTotal(cartItem) {
-  const priceElement = cartItem.querySelector(".product-details p");
-  const quantityInput = cartItem.querySelector(".product-details input");
-  const quantity = parseInt(quantityInput.value);
-  const price = parseFloat(priceElement.innerText.replace("Price: UGX ", ""));
-  const total = quantity * price;
-  priceElement.dataset.total = total.toFixed(2);
+  const priceElement = cartItem.querySelector(".product-details h4");
+
+  // Check if the element is found before accessing properties
+  if (priceElement) {
+    const quantityInput = cartItem.querySelector(".product-details input");
+    const quantity = parseInt(quantityInput.value);
+    const price = parseFloat(priceElement.innerText.replace("UGX ", ""));
+    const total = quantity * price;
+    priceElement.dataset.total = total.toFixed(2);
+  }
 }
 
 // Define the updateCartTotal function
@@ -4260,7 +4393,7 @@ function updateCartTotal() {
 
   for (let i = 0; i < cartItems.length; i++) {
     const cartItem = cartItems[i];
-    const priceElement = cartItem.querySelector(".product-details p");
+    const priceElement = cartItem.querySelector(".product-details h4");
     const totalForItem = parseFloat(priceElement.dataset.total);
     total += totalForItem;
   }
@@ -4325,19 +4458,21 @@ function showAddToCartMessage(productName) {
 }
 
 
+
 const openCartBtn = document.getElementById("open-cart-btn");
 const closeCartBtn = document.getElementById("close-cart-btn");
 const cartContent = document.getElementById("cart-content");
-
+const overlay = document.getElementById('overlay')
 cartContent.style.display = "none"; // Hide the cart content on load
 
 openCartBtn.addEventListener("click", () => {
   if (cartIsEmpty()) {
     cartContent.style.display = "none"; // Hide the cart content on load
+ 
     // Show a message or perform any desired action when cart is empty
     return;
   }
-  
+     overlay.style.display = 'block'
   cartContent.style.display = "block";
   openCartBtn.style.display = "none";
   closeCartBtn.style.display = "inline-block";
@@ -4349,7 +4484,10 @@ closeCartBtn.addEventListener("click", () => {
   cartContent.style.display = "none";
   closeCartBtn.style.display = "none";
   openCartBtn.style.display = "inline-block";
+  overlay.style.display = 'none'
+
 });
+
 
 function cartIsEmpty() {
   const cartItems = document.getElementsByClassName("cart-item");
@@ -4419,8 +4557,8 @@ card.appendChild(stars);
      
       
       
-                const price = document.createElement("p");
-                price.innerText = `Price: UGX${product.price}`;
+                const price = document.createElement("h4");
+                price.innerText = `UGX ${product.price}`;
                 card.appendChild(price);
       
 
@@ -4472,8 +4610,8 @@ function addToCart(product) {
   productDetails.appendChild(productName);
 
   // Add product price
-  const productPrice = document.createElement("p");
-  productPrice.innerText = `Price: UGX ${product.price}`;
+  const productPrice = document.createElement("h4");
+  productPrice.innerText = `UGX ${product.price}`;
   productPrice.dataset.price = product.price; // Store the price as a data attribute
   productDetails.appendChild(productPrice);
 
@@ -4490,14 +4628,17 @@ quantityInput.addEventListener("input", () => {
 productDetails.appendChild(quantityInput);
 
 
-// Define the updateCartItemTotal function
 function updateCartItemTotal(cartItem) {
-  const priceElement = cartItem.querySelector(".product-details p");
-  const quantityInput = cartItem.querySelector(".product-details input");
-  const quantity = parseInt(quantityInput.value);
-  const price = parseFloat(priceElement.innerText.replace("Price: UGX ", ""));
-  const total = quantity * price;
-  priceElement.dataset.total = total.toFixed(2);
+  const priceElement = cartItem.querySelector(".product-details h4");
+
+  // Check if the element is found before accessing properties
+  if (priceElement) {
+    const quantityInput = cartItem.querySelector(".product-details input");
+    const quantity = parseInt(quantityInput.value);
+    const price = parseFloat(priceElement.innerText.replace("UGX ", ""));
+    const total = quantity * price;
+    priceElement.dataset.total = total.toFixed(2);
+  }
 }
 
 // Define the updateCartTotal function
@@ -4508,7 +4649,7 @@ function updateCartTotal() {
 
   for (let i = 0; i < cartItems.length; i++) {
     const cartItem = cartItems[i];
-    const priceElement = cartItem.querySelector(".product-details p");
+    const priceElement = cartItem.querySelector(".product-details h4");
     const totalForItem = parseFloat(priceElement.dataset.total);
     total += totalForItem;
   }
@@ -4573,19 +4714,21 @@ function showAddToCartMessage(productName) {
 }
 
 
+
 const openCartBtn = document.getElementById("open-cart-btn");
 const closeCartBtn = document.getElementById("close-cart-btn");
 const cartContent = document.getElementById("cart-content");
-
+const overlay = document.getElementById('overlay')
 cartContent.style.display = "none"; // Hide the cart content on load
 
 openCartBtn.addEventListener("click", () => {
   if (cartIsEmpty()) {
     cartContent.style.display = "none"; // Hide the cart content on load
+ 
     // Show a message or perform any desired action when cart is empty
     return;
   }
-  
+     overlay.style.display = 'block'
   cartContent.style.display = "block";
   openCartBtn.style.display = "none";
   closeCartBtn.style.display = "inline-block";
@@ -4597,6 +4740,8 @@ closeCartBtn.addEventListener("click", () => {
   cartContent.style.display = "none";
   closeCartBtn.style.display = "none";
   openCartBtn.style.display = "inline-block";
+  overlay.style.display = 'none'
+
 });
 
 function cartIsEmpty() {
@@ -4664,8 +4809,8 @@ card.appendChild(stars);
       
       
       
-                const price = document.createElement("p");
-                price.innerText = `Price: UGX${product.price}`;
+                const price = document.createElement("h4");
+                price.innerText = `UGX ${product.price}`;
                 card.appendChild(price);
       
 
@@ -4717,8 +4862,8 @@ function addToCart(product) {
   productDetails.appendChild(productName);
 
   // Add product price
-  const productPrice = document.createElement("p");
-  productPrice.innerText = `Price: UGX ${product.price}`;
+  const productPrice = document.createElement("h4");
+  productPrice.innerText = `UGX ${product.price}`;
   productPrice.dataset.price = product.price; // Store the price as a data attribute
   productDetails.appendChild(productPrice);
 
@@ -4735,14 +4880,17 @@ quantityInput.addEventListener("input", () => {
 productDetails.appendChild(quantityInput);
 
 
-// Define the updateCartItemTotal function
 function updateCartItemTotal(cartItem) {
-  const priceElement = cartItem.querySelector(".product-details p");
-  const quantityInput = cartItem.querySelector(".product-details input");
-  const quantity = parseInt(quantityInput.value);
-  const price = parseFloat(priceElement.innerText.replace("Price: UGX ", ""));
-  const total = quantity * price;
-  priceElement.dataset.total = total.toFixed(2);
+  const priceElement = cartItem.querySelector(".product-details h4");
+
+  // Check if the element is found before accessing properties
+  if (priceElement) {
+    const quantityInput = cartItem.querySelector(".product-details input");
+    const quantity = parseInt(quantityInput.value);
+    const price = parseFloat(priceElement.innerText.replace("UGX ", ""));
+    const total = quantity * price;
+    priceElement.dataset.total = total.toFixed(2);
+  }
 }
 
 // Define the updateCartTotal function
@@ -4753,7 +4901,7 @@ function updateCartTotal() {
 
   for (let i = 0; i < cartItems.length; i++) {
     const cartItem = cartItems[i];
-    const priceElement = cartItem.querySelector(".product-details p");
+    const priceElement = cartItem.querySelector(".product-details h4");
     const totalForItem = parseFloat(priceElement.dataset.total);
     total += totalForItem;
   }
@@ -4818,19 +4966,21 @@ function showAddToCartMessage(productName) {
 }
 
 
+
 const openCartBtn = document.getElementById("open-cart-btn");
 const closeCartBtn = document.getElementById("close-cart-btn");
 const cartContent = document.getElementById("cart-content");
-
+const overlay = document.getElementById('overlay')
 cartContent.style.display = "none"; // Hide the cart content on load
 
 openCartBtn.addEventListener("click", () => {
   if (cartIsEmpty()) {
     cartContent.style.display = "none"; // Hide the cart content on load
+ 
     // Show a message or perform any desired action when cart is empty
     return;
   }
-  
+     overlay.style.display = 'block'
   cartContent.style.display = "block";
   openCartBtn.style.display = "none";
   closeCartBtn.style.display = "inline-block";
@@ -4842,7 +4992,10 @@ closeCartBtn.addEventListener("click", () => {
   cartContent.style.display = "none";
   closeCartBtn.style.display = "none";
   openCartBtn.style.display = "inline-block";
+  overlay.style.display = 'none'
+
 });
+
 
 function cartIsEmpty() {
   const cartItems = document.getElementsByClassName("cart-item");
@@ -4861,7 +5014,7 @@ function cartIsEmpty() {
 
 
      </script>
-
+<!--
 <script>
   const slider = document.querySelector('.image-slider');
 const images = slider.querySelectorAll('img');
@@ -4874,7 +5027,7 @@ setInterval(() => {
   images[index].classList.add('active');
 }, interval);
 
-
+-->
 
 </script>
 
