@@ -11,7 +11,7 @@ body {
         align-items: center;
         margin: 0;
         padding: 0;
-        background:rgb(245, 245, 245);
+        background:rgb(251, 251, 251);
         width: 100%;
         height: 100vh;
       }
@@ -64,7 +64,7 @@ body {
 }
 
 .logo {
-	height: 80px;
+	height: fit-content;
   margin-top: 10px;
   margin-bottom: 10px; 
 }
@@ -672,45 +672,50 @@ body {
   #success-message.show {
     display: block;
   }
-  
-  
   #loader {
     position: fixed;
-    top: 40%;
-    left: 43%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 99999;
-    background-color: #fff;
     border-radius: 50%;
-    width: 15vw; /* Use viewport units for responsive sizing */
-    height: 15vw; /* Use same value as width for a circular shape */
-    max-width: 120px; /* Set a maximum width */
-    max-height: 120px; /* Set a maximum height */
-    border: 10px solid #f3f3f3;
-    border-top: 10px solid #3498db;
-    animation: spin 2s linear infinite;
-    box-shadow: 0 0 0 9999px rgba(0,0,0,0.5);
-    backdrop-filter: blur(5px);
+    width: 15vw;
+    height: 15vw;
+    background-color: transparent;
+    border-color: transparent;
+    max-width: 90px;
+    max-height: 90px;
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(0px);
+    text-align: center;
   }
   
+  .logo2 {
+    width: 80px; /* Adjust the width of the logo as needed */
+    height: auto;
+    display: block;
+    margin: 0 auto 20px; /* Adjust margin as needed */
+    border-radius: 50px;
+    animation: rotate 2s linear infinite; /* Rotation animation */
+  }
   
-  @keyframes spin {
+  .spinner2 {
+    font-size: 24px; /* Adjust the font size of the spinner as needed */
+    color: #ffffff; /* Adjust the color of the spinner as needed */
+    text-align: center;
+    margin-top: 10px; /* Adjust the margin as needed */
+  }
+  
+  .spinner2 i {
+    margin-right: 5px; /* Adjust the spacing between the icon and text as needed */
+  }
+  
+  @keyframes rotate {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
   
-  #loader p {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    font-size: 1.7vw; /* Use viewport units for responsive font size */
-    max-width: 80%; /* Set a maximum width for the text */
-  }
-  #loader .giphy-embed {
-    height: 100px;
-    width: 100px;
-  }
+
 
   .products {
     min-height: 500px; /* set a minimum height */
@@ -737,15 +742,51 @@ body {
     display: flex;
     flex-direction: column;
     margin: 10px auto;
+    cursor: pointer;
     width: 98%;
-    min-height: fit-content; /* Ensure the card takes up the full height of the grid item */
+    min-height: fit-content;
     padding: 5px;
     border: transparent;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.0.5);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, );
     background: #ffffff;
+    transition: transform 0.3s ease-in-out; /* Add a transition to the transform property */
   }
   
+  .card1:hover {
+    transform: scale(1.02); /* Scale the card by 5% on hover */
+    border-color: orange;
+    background-color: rgb(255, 251, 248);
+    box-shadow: 0 2px 5px rgba(0, 0, 0,0.3);
+
+  }
+  
+  /* Add these styles to your existing CSS */
+.sticker-container {
+  display: flex;
+  float: left;
+  margin-top: 1px;
+}
+
+.sticker {
+  display: flex;
+  align-items: center;
+  padding: 3px 5px;
+  background-color: #4CAF50; /* Green color for the sticker background, you can change it */
+  color: #ffffff; /* White color for the text and icon, you can change it */
+  border-radius: 50px;
+  font-size: 7px;
+}
+
+.fast-delivery {
+  /* Add specific styles for the fast delivery sticker */
+}
+
+/* Adjust these styles to position the icon as needed */
+.sticker i {
+  margin-right: 5px;
+}
+
   @media (max-width: 768px) {
     .card1 {
       width: 98%;
@@ -802,8 +843,7 @@ body {
   
   .card1 img {
     width: 100%;
-    height: 200px; /* Set a fixed height for the image */
-    object-fit: cover; /* Ensure the image covers the entire space */
+    height: 210px; /* Set a fixed height for the image */
     border-radius: 0px;
     margin-top: 5px;
   }
@@ -836,7 +876,7 @@ body {
   
   @media (max-width: 480px) {
     .card1 img {
-      height: 150px; /* Adjust the height for even smaller screens */
+      height: 140px; /* Adjust the height for even smaller screens */
     }
   }
   
@@ -844,13 +884,12 @@ body {
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 9999; /* Sit on top */
+  z-index: 99999; /* Sit on top */
   padding-top: 100px; /* Location of the box */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
   height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
   background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
 }
 
@@ -858,8 +897,8 @@ body {
 .modal-content {
   margin: auto;
   display: block;
-  width: 80%;
-  max-width: 1000px;
+  width: fit-content;
+  max-height: 80vh; /* Set a maximum height as a percentage of the viewport height */
 }
 
 /* Add Animation */
@@ -932,8 +971,8 @@ button {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
 }
 button:hover{
-  background-color:lightgoldenrodyellow;
-  color: orange;
+  background-color:rgb(202, 134, 7);
+  color: rgb(255, 255, 255);
   padding: 10px;
   border-color: orange;
 }
@@ -1067,7 +1106,7 @@ transition: all 0.3s ease-in-out;
 
 .image-slider {
   width: 100%;
-  height: 500px;
+  height: 300px;
   overflow: hidden;
   position: relative;
   display: flex;
@@ -1088,12 +1127,12 @@ transition: all 0.3s ease-in-out;
 }
 @media screen and (max-width: 768px){
     .image-slider{
-      height: 100px;
+      height: 200px;
     }
   }
   @media screen and (max-width: 480px){
     .image-slider{
-      height: 100px;
+      height: 180px;
     }
   }
 
@@ -1111,7 +1150,7 @@ transition: all 0.3s ease-in-out;
   .banner {
     position: relative;
     height: 70px;
-    background-color: #404040;
+    background:#515151;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1347,8 +1386,9 @@ transition: all 0.3s ease-in-out;
         background-color: #2c3e99;
         border-radius: 20px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
-        z-index: 9999;
-        overflow-y: auto; /* Enable vertical scrolling */
+        z-index: 99999;
+        overflow-y: auto;
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
       }
          /* Responsive Styles */
          @media (max-width: 768px) {
@@ -1400,7 +1440,9 @@ transition: all 0.3s ease-in-out;
       .cart-item p {
         margin: 0;
       }
-      
+      .cart-item p {
+        margin: 0;
+      }
       .quantity-input {
         width: 0px; /* Adjust the width as desired */
         padding: 4px;
@@ -1428,13 +1470,14 @@ transition: all 0.3s ease-in-out;
         position: fixed;
         bottom: 5px;
         right: 20px;
-        padding: 10px;
+        padding: 8px;
         color:white;
         background-color: #00e70c;
         border: transparent;
         border-radius: 4px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         z-index: 9999;
+        font-size: small;
         display: none;
         animation: slideInRight 0.5s ease-in-out;
       }
@@ -1516,7 +1559,26 @@ transition: all 0.3s ease-in-out;
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 9998;
 }
-
+#overlay4 {
+  position: fixed;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 9999;
+}
+#overlay5 {
+  position: fixed;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 99999;
+}
 #overlay2 {
   position: fixed;
   display: none;
@@ -1972,7 +2034,8 @@ body.no-scroll {
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     z-index: 100000;
-    width: 85%;
+    width: 400px;
+    max-width: 330px;
     max-height: 500px;
     overflow: auto;
     border-radius: 20px;
@@ -1998,6 +2061,7 @@ body.no-scroll {
     width: 100%;
     height: 100%;
     align-items: center;
+    font-size: small;
     justify-content: center;
     z-index: 10000;
 }
@@ -2080,7 +2144,7 @@ body.no-scroll {
   float: left;
 }
 .ll{
-  width: 80px; 
+  width: 50px; 
      border-radius: 10px;
 
 }
@@ -2158,7 +2222,7 @@ body.no-scroll {
     z-index: 10000;
   }
   .ll{
-    width: 60px;
+    width: 50px;
   }
   .menu1 li{
     display: block;
@@ -2268,6 +2332,19 @@ z-index: 10000000;
 .spinner i {
   margin: auto;
 }
+.spinner2 {
+  display: none; /* Hide the spinner by default */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffff; /* Change the color to match your design */
+}
+
+/* Add this CSS to center the spinner within the container */
+.spinner2 i {
+  margin: auto;
+}
 
 .fadeOut {
   animation: fadeOut 0.5s;
@@ -2291,3 +2368,73 @@ z-index: 10000000;
   border-radius: 5px;
 }
 
+.welcomePopup {
+  position: fixed;
+  top: 50%;
+  min-width: 350px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 9999999;
+  font-size: 12px;
+}
+.welcomePopup button[type="button"]{
+  background-color: #002E63; 
+   margin: 10px auto;
+}
+.welcomePopup button:hover[type="button"]{
+  background-color: whitesmoke;
+  color: #002E63;
+
+}
+.welcomePopup-logo {
+  width: 100px;
+  height: auto;
+  margin-bottom: 10px;
+}
+.bold{
+  color: rgb(28, 28, 28);
+  font-weight: 700;
+}
+.welcomePopup-content {
+  text-align: center;
+}
+
+input[type="email"] {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  background-color: lightgoldenrodyellow;
+  font-size: 16px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+ /* Add styles for fade-in and fade-out animations */
+ .fade-in {
+  animation: fadeIn 1s ease-in-out;
+}
+
+.fade-out {
+  animation: fadeOut 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

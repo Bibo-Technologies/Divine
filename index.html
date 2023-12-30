@@ -65,13 +65,14 @@
   <div class="header-container">
     <div class="logo">
       <img class="ll" href="shop.html" src="img/Devine Phones.png" alt="">
+
     </div>
     <div class="mobile-nav">
       <i class="fas fa-bars"></i>
     </div>
     <div class="menu">
       <ul class="menu1">
-        <li ><a href="./shop.html"><i style="margin-right: 5px;" class="fa fa-download"></i>Price List</a></li>
+        <li ><a href="#"><i style="margin-right: 5px;" class="fa fa-download"></i>Price List</a></li>
         <li ><a href="tel:+256759740405">Contact Us</a></li>
         <li ><a href="#" id="accountLink"> <i style="margin-right: 5px;" class="fa fa-user"></i>Account</a></li>
 
@@ -92,28 +93,60 @@
 
    <body>
 
+
+
+<!-- Your HTML code -->
+<div class="welcomePopup" id="welcomePopup">
+  <div class="welcomePopup-content" id="popupContent">
+    <img src="img/Devine Phones.png" alt="Company Logo" class="welcomePopup-logo">
+    <p class="bold">Welcome to Divine Phone Service Center!</p>
+
+    <!-- Content to be replaced -->
+    <div id="subscriptionContent">
+      <p>Your one-stop for expert mobile support, including troubleshooting, setup, and quality repairs. Choose us for our tech-savvy team, convenient service options, and genuine parts commitment.</p>
+      <p class="bold">Why Choose Divine Phone Service Center?</p>
+      <ul>
+        <li>✨ <strong>Expertise:</strong> Tech-passionate professionals.</li>
+        <li>🌐 <strong>Convenience:</strong> Online and in-person support.</li>
+        <li>🛠️ <strong>Quality Repairs:</strong> Genuine parts and top-notch practices.</li>
+      </ul>
+      <p class="bold">Subscribe for Updates!</p>
+      <form id="subscribeForm">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <button type="button" id="subscribeButton">Subscribe</button>
+        <div id="spinner" style="display: none;"> <!-- Spinner element initially hidden -->
+          <i class="fa fa-spinner fa-spin"></i> Subscribing...
+        </div>
+      </form>
+      <button class="close-button" id="closeButton">Close</button>
+    </div>
+
+    <!-- Success message initially hidden -->
+    <div id="thankYouMessage" style="display: none;">
+      Thank you for subscribing!
+    </div>
+  </div>
+</div>
+    
+
+
+
     <div class="banner">
       <div class="search-bar">
         <form>
-          <input id="search-bar" type="text" placeholder="Search Product..." style="font-family: 'Font Awesome 5 Free';">
+          <input id="search-bar" type="text" placeholder="Search Products...">
           <button id="search-btn" type="submit"><i class="fas fa-search"></i></button>
         </form>
       </div>
      
     </div>
     
-    <div id="cart" class="cart">
-        <span id="cart-count"></span>
-        <div id="cart-buttons">
-          <button id="open-cart-btn"><i class="fa fa-shopping-cart"></i></button>
-          <button id="close-cart-btn"><i class="fa fa-times"></i></button>
-        </div>
-        <div id="cart-content">
-          <div id="cart-items"></div>
-          <p id="total-price"></p>
-          <button id="checkout-btn"><i class="fa fa-arrow-right"></i> Checkout</button>
-        </div>
-      </div>
+    <!-- Assuming you have a container element with id "cart-container" where you want to append the cart -->
+<div id="cart-container"></div>
+
+
+
  <script>
       window.onscroll = function() {myFunction()};
       
@@ -127,15 +160,21 @@
           banner.classList.remove("sticky");
         }
       }
+
+
+      
       </script>
- <!--  <div class="image-slider">
+  <div class="image-slider">
   <img src="img/divine 1.jpg" alt="Image 1">
   <img src="img/divine 2.jpg" alt="Image 2">
   <img src="img/divine 3.jpg" alt="Image 3">
   <img src="img/divine 4.jpg" alt="Image 4">
   <img src="img/divine 5.jpg" alt="Image 5">
   <img src="img/divine 6.jpg" alt="Image 6">
-</div>-->
+</div>
+
+
+
    <section class="topbody">
       <div class="news-heading">     
         <h2 style="color: rgb(220, 3, 3);" id="phone">DIVINE PHONE SERVICE CENTER</h2>    
@@ -218,30 +257,22 @@
   
   
  
-  <script>
- // Show/hide the cart based on scroll position
-window.addEventListener("scroll", () => {
-  const cart = document.getElementById("cart");
-  const distanceFromTop = window.pageYOffset || document.documentElement.scrollTop;
-  const scrollThreshold = 300; // Set the scroll height to trigger the cart display
 
-  if (distanceFromTop > scrollThreshold) {
-    cart.style.display = "block";
-  } else {
-    cart.style.display = "none";
-  }
-});
-
-
-
-  </script>
 
 <div id="overlay"></div>
 <div id="overlay2"></div>
 <div id="overlay3"></div>
-  <div id="loader">
-            
-            </div>
+<div id="overlay4"></div>
+<div id="overlay5"></div>
+
+<div id="loader">
+  <img src="img/Devine Phones.png" alt="Devine Logo" class="logo2">
+  <div class="spinner2">
+    <i class="fas fa-spinner fa-spin"></i>
+  </div>
+</div>
+
+
   <!-- Logout Confirmation Popup -->
 <div id="confirmationPopup" class="popup2">
   <p>Are you sure you want to log out?</p>
@@ -252,8 +283,7 @@ window.addEventListener("scroll", () => {
 
    <!-- Rest of your HTML content -->
 
-  <!--
- <div class="loader-container">
+<!-- <div class="loader-container">
         <div class="loader"></div>
       </div>
 -->
@@ -319,6 +349,174 @@ import { getAuth, onAuthStateChanged,sendPasswordResetEmail,sendEmailVerificatio
   const app = initializeApp(firebaseConfig);
     const database = getDatabase(app);
     const auth = getAuth(app);
+
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+  // Check if the welcome popup has been shown
+  const hasShownPopup = localStorage.getItem('hasShownPopup');
+
+  if (!hasShownPopup) {
+    // Show the welcome popup
+    const overlay = document.getElementById('overlay');
+    const welcomePopup = document.getElementById('welcomePopup');
+    overlay.style.display = 'block';
+    welcomePopup.style.display = 'block';
+
+    // Fade in the welcome popup
+    setTimeout(() => {
+      welcomePopup.classList.remove('fade-in');
+    }, 1000); // Wait for 1 second (adjust as needed)
+
+    // Set the flag to indicate that the popup has been shown
+    localStorage.setItem('hasShownPopup', true);
+  }
+});
+
+function closeWelcomePopup() {
+  const overlay = document.getElementById('overlay');
+  const welcomePopup = document.getElementById('welcomePopup');
+
+  // Hide the overlay and the welcome popup after a delay
+  setTimeout(() => {
+    overlay.style.display = 'none';
+    welcomePopup.style.display = 'none';
+  }, 1000); // Wait for 1 second (adjust as needed)
+}
+
+document.getElementById('subscribeButton').addEventListener('click', subscribeToFirebase);
+document.getElementById('closeButton').addEventListener('click', closeWelcomePopup);
+
+function subscribeToFirebase() {
+  var email = document.getElementById('email').value;
+
+  // Show spinner and update button text
+  document.getElementById('subscribeButton').style.display = 'none';
+  document.getElementById('spinner').style.display = 'inline-block';
+
+  // Push the email to Firebase Realtime Database
+  const emailsRef = ref(database, 'subscribedEmails');
+  push(emailsRef, email)
+    .then(() => {
+      // Hide spinner and show thank you message
+      document.getElementById('spinner').style.display = 'none';
+      document.getElementById('thankYouMessage').style.display = 'block';
+
+      // Replace the existing content with the success message
+      replaceContentWithSuccessMessage();
+
+      // Close the welcome popup after 1 second
+      setTimeout(() => {
+        closeWelcomePopup();
+      }, 1000);
+    })
+    .catch(error => {
+      console.error('Error submitting email to Firebase:', error);
+
+      // Hide spinner and show an error message (if needed)
+      document.getElementById('spinner').style.display = 'none';
+      alert('There was an error subscribing. Please try again.');
+    });
+}
+
+function replaceContentWithSuccessMessage() {
+  // Replace the content inside the subscriptionContent div with the success message
+  document.getElementById('subscriptionContent').innerHTML = '';
+}
+
+
+
+
+// Function to create the cart dynamically
+function createCart() {
+    // Create the main cart div
+    const cartDiv = document.createElement("div");
+    cartDiv.id = "cart";
+    cartDiv.classList.add("cart");
+
+    // Create the cart count span
+    const cartCountSpan = document.createElement("span");
+    cartCountSpan.id = "cart-count";
+
+    // Create the cart buttons div
+    const cartButtonsDiv = document.createElement("div");
+    cartButtonsDiv.id = "cart-buttons";
+
+    // Create the open cart button
+    const openCartBtn = document.createElement("button");
+    openCartBtn.id = "open-cart-btn";
+    openCartBtn.innerHTML = '<i class="fa fa-shopping-cart"></i>';
+
+    // Create the close cart button
+    const closeCartBtn = document.createElement("button");
+    closeCartBtn.id = "close-cart-btn";
+    closeCartBtn.innerHTML = '<i class="fa fa-times"></i>';
+
+    // Append buttons to the cart buttons div
+    cartButtonsDiv.appendChild(openCartBtn);
+    cartButtonsDiv.appendChild(closeCartBtn);
+
+    // Create the cart content div
+    const cartContentDiv = document.createElement("div");
+    cartContentDiv.id = "cart-content";
+
+    // Create the cart items div
+    const cartItemsDiv = document.createElement("div");
+    cartItemsDiv.id = "cart-items";
+
+    // Create the total price paragraph
+    const totalPriceParagraph = document.createElement("p");
+    totalPriceParagraph.id = "total-price";
+
+    // Create the checkout button
+    const checkoutBtn = document.createElement("button");
+    checkoutBtn.id = "checkout-btn";
+    checkoutBtn.innerHTML = '<i class="fa fa-arrow-right"></i> Checkout';
+
+    // Append items to the cart content div
+    cartContentDiv.appendChild(cartItemsDiv);
+    cartContentDiv.appendChild(totalPriceParagraph);
+    cartContentDiv.appendChild(checkoutBtn);
+
+    // Append elements to the main cart div
+    cartDiv.appendChild(cartCountSpan);
+    cartDiv.appendChild(cartButtonsDiv);
+    cartDiv.appendChild(cartContentDiv);
+
+    // Append the cart to the cart container
+    const cartContainer = document.getElementById("cart-container");
+    cartContainer.appendChild(cartDiv);
+  }
+
+  // Call the function to create the cart
+  createCart();
+
+ // Show/hide the cart based on scroll position
+ window.addEventListener("scroll", () => {
+  const cart = document.getElementById("cart");
+  const distanceFromTop = window.pageYOffset || document.documentElement.scrollTop;
+  const scrollThreshold = 300; // Set the scroll height to trigger the cart display
+
+  if (distanceFromTop > scrollThreshold) {
+    cart.style.display = "block";
+  } else {
+    cart.style.display = "none";
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // Declare userData variable in a higher scope
     let userData = {};
@@ -1391,10 +1589,23 @@ function clearSearchBar() {
       }
       card.appendChild(stars);
 
+        // Add fast delivery sticker with icon
+  const stickerContainer = document.createElement("div");
+  stickerContainer.classList.add("sticker-container");
+
+  const fastDeliverySticker = document.createElement("div");
+  fastDeliverySticker.classList.add("sticker", "fast-delivery");
+  fastDeliverySticker.innerHTML = '... <i class="fas fa-truck"></i> Fast Delivery';
+
+  stickerContainer.appendChild(fastDeliverySticker);
+  card.appendChild(stickerContainer);
+
+
       // Add product description
       const desc = document.createElement("p");
       desc.innerText = product.description;
       card.appendChild(desc);
+
 
 
       // Add product price
@@ -1540,7 +1751,7 @@ function showAddToCartMessage(productName) {
 const openCartBtn = document.getElementById("open-cart-btn");
 const closeCartBtn = document.getElementById("close-cart-btn");
 const cartContent = document.getElementById("cart-content");
-const overlay = document.getElementById('overlay')
+const overlay = document.getElementById('overlay4')
 cartContent.style.display = "none"; // Hide the cart content on load
 
 openCartBtn.addEventListener("click", () => {
@@ -1653,6 +1864,20 @@ card.appendChild(guaranteeText);
         stars.appendChild(star);
       }
       card.appendChild(stars);
+
+              // Add fast delivery sticker with icon
+  const stickerContainer = document.createElement("div");
+  stickerContainer.classList.add("sticker-container");
+
+  const fastDeliverySticker = document.createElement("div");
+  fastDeliverySticker.classList.add("sticker", "fast-delivery");
+  fastDeliverySticker.innerHTML = '... <i class="fas fa-truck"></i> Fast Delivery';
+
+  stickerContainer.appendChild(fastDeliverySticker);
+  card.appendChild(stickerContainer);
+
+
+
       // Add product description
       const desc = document.createElement("p");
       desc.innerText = product.description;
@@ -1801,7 +2026,7 @@ function showAddToCartMessage(productName) {
 const openCartBtn = document.getElementById("open-cart-btn");
 const closeCartBtn = document.getElementById("close-cart-btn");
 const cartContent = document.getElementById("cart-content");
-const overlay = document.getElementById('overlay')
+const overlay = document.getElementById('overlay4')
 cartContent.style.display = "none"; // Hide the cart content on load
 
 openCartBtn.addEventListener("click", () => {
@@ -1899,6 +2124,18 @@ card.appendChild(guaranteeText);
         stars.appendChild(star);
       }
       card.appendChild(stars);
+
+              // Add fast delivery sticker with icon
+  const stickerContainer = document.createElement("div");
+  stickerContainer.classList.add("sticker-container");
+
+  const fastDeliverySticker = document.createElement("div");
+  fastDeliverySticker.classList.add("sticker", "fast-delivery");
+  fastDeliverySticker.innerHTML = '... <i class="fas fa-truck"></i> Fast Delivery';
+
+  stickerContainer.appendChild(fastDeliverySticker);
+  card.appendChild(stickerContainer);
+
       // Add product description
       const desc = document.createElement("p");
       desc.innerText = product.description;
@@ -2047,7 +2284,7 @@ function showAddToCartMessage(productName) {
 const openCartBtn = document.getElementById("open-cart-btn");
 const closeCartBtn = document.getElementById("close-cart-btn");
 const cartContent = document.getElementById("cart-content");
-const overlay = document.getElementById('overlay')
+const overlay = document.getElementById('overlay4')
 cartContent.style.display = "none"; // Hide the cart content on load
 
 openCartBtn.addEventListener("click", () => {
@@ -2144,6 +2381,21 @@ document.querySelector("#newScreens-link").addEventListener("click", () => {
         stars.appendChild(star);
       }
       card.appendChild(stars);
+
+
+              // Add fast delivery sticker with icon
+  const stickerContainer = document.createElement("div");
+  stickerContainer.classList.add("sticker-container");
+
+  const fastDeliverySticker = document.createElement("div");
+  fastDeliverySticker.classList.add("sticker", "fast-delivery");
+  fastDeliverySticker.innerHTML = '... <i class="fas fa-truck"></i> Fast Delivery';
+
+  stickerContainer.appendChild(fastDeliverySticker);
+  card.appendChild(stickerContainer);
+
+
+
       // Add product description
       const desc = document.createElement("p");
       desc.innerText = product.description;
@@ -2291,7 +2543,7 @@ function showAddToCartMessage(productName) {
 const openCartBtn = document.getElementById("open-cart-btn");
 const closeCartBtn = document.getElementById("close-cart-btn");
 const cartContent = document.getElementById("cart-content");
-const overlay = document.getElementById('overlay')
+const overlay = document.getElementById('overlay4')
 cartContent.style.display = "none"; // Hide the cart content on load
 
 openCartBtn.addEventListener("click", () => {
@@ -2384,6 +2636,20 @@ card.appendChild(guaranteeText);
         stars.appendChild(star);
       }
       card.appendChild(stars);
+
+              // Add fast delivery sticker with icon
+  const stickerContainer = document.createElement("div");
+  stickerContainer.classList.add("sticker-container");
+
+  const fastDeliverySticker = document.createElement("div");
+  fastDeliverySticker.classList.add("sticker", "fast-delivery");
+  fastDeliverySticker.innerHTML = '... <i class="fas fa-truck"></i> Fast Delivery';
+
+  stickerContainer.appendChild(fastDeliverySticker);
+  card.appendChild(stickerContainer);
+
+
+
       // Add product description
       const desc = document.createElement("p");
       desc.innerText = product.description;
@@ -2532,7 +2798,7 @@ function showAddToCartMessage(productName) {
 const openCartBtn = document.getElementById("open-cart-btn");
 const closeCartBtn = document.getElementById("close-cart-btn");
 const cartContent = document.getElementById("cart-content");
-const overlay = document.getElementById('overlay')
+const overlay = document.getElementById('overlay4')
 cartContent.style.display = "none"; // Hide the cart content on load
 
 openCartBtn.addEventListener("click", () => {
@@ -2629,6 +2895,21 @@ document.querySelector("#touches-link").addEventListener("click", () => {
         stars.appendChild(star);
       }
       card.appendChild(stars);
+
+              // Add fast delivery sticker with icon
+  const stickerContainer = document.createElement("div");
+  stickerContainer.classList.add("sticker-container");
+
+  const fastDeliverySticker = document.createElement("div");
+  fastDeliverySticker.classList.add("sticker", "fast-delivery");
+  fastDeliverySticker.innerHTML = '... <i class="fas fa-truck"></i> Fast Delivery';
+
+  stickerContainer.appendChild(fastDeliverySticker);
+  card.appendChild(stickerContainer);
+
+
+
+
       // Add product description
       const desc = document.createElement("p");
       desc.innerText = product.description;
@@ -2776,7 +3057,7 @@ function showAddToCartMessage(productName) {
 const openCartBtn = document.getElementById("open-cart-btn");
 const closeCartBtn = document.getElementById("close-cart-btn");
 const cartContent = document.getElementById("cart-content");
-const overlay = document.getElementById('overlay')
+const overlay = document.getElementById('overlay4')
 cartContent.style.display = "none"; // Hide the cart content on load
 
 openCartBtn.addEventListener("click", () => {
@@ -2870,6 +3151,21 @@ document.querySelector("#electronics-link").addEventListener("click", () => {
         stars.appendChild(star);
       }
       card.appendChild(stars);
+
+
+              // Add fast delivery sticker with icon
+  const stickerContainer = document.createElement("div");
+  stickerContainer.classList.add("sticker-container");
+
+  const fastDeliverySticker = document.createElement("div");
+  fastDeliverySticker.classList.add("sticker", "fast-delivery");
+  fastDeliverySticker.innerHTML = '... <i class="fas fa-truck"></i> Fast Delivery';
+
+  stickerContainer.appendChild(fastDeliverySticker);
+  card.appendChild(stickerContainer);
+
+
+
       // Add product description
       const desc = document.createElement("p");
       desc.innerText = product.description;
@@ -3017,7 +3313,7 @@ function showAddToCartMessage(productName) {
 const openCartBtn = document.getElementById("open-cart-btn");
 const closeCartBtn = document.getElementById("close-cart-btn");
 const cartContent = document.getElementById("cart-content");
-const overlay = document.getElementById('overlay')
+const overlay = document.getElementById('overlay4')
 cartContent.style.display = "none"; // Hide the cart content on load
 
 openCartBtn.addEventListener("click", () => {
@@ -3110,6 +3406,21 @@ document.querySelector("#accessories-link").addEventListener("click", () => {
         stars.appendChild(star);
       }
       card.appendChild(stars);
+
+
+              // Add fast delivery sticker with icon
+  const stickerContainer = document.createElement("div");
+  stickerContainer.classList.add("sticker-container");
+
+  const fastDeliverySticker = document.createElement("div");
+  fastDeliverySticker.classList.add("sticker", "fast-delivery");
+  fastDeliverySticker.innerHTML = '... <i class="fas fa-truck"></i> Fast Delivery';
+
+  stickerContainer.appendChild(fastDeliverySticker);
+  card.appendChild(stickerContainer);
+
+
+
       // Add product description
       const desc = document.createElement("p");
       desc.innerText = product.description;
@@ -3257,7 +3568,7 @@ function showAddToCartMessage(productName) {
 const openCartBtn = document.getElementById("open-cart-btn");
 const closeCartBtn = document.getElementById("close-cart-btn");
 const cartContent = document.getElementById("cart-content");
-const overlay = document.getElementById('overlay')
+const overlay = document.getElementById('overlay4')
 cartContent.style.display = "none"; // Hide the cart content on load
 
 openCartBtn.addEventListener("click", () => {
@@ -3352,6 +3663,20 @@ document.querySelector("#ports-link").addEventListener("click", () => {
         stars.appendChild(star);
       }
       card.appendChild(stars);
+
+              // Add fast delivery sticker with icon
+  const stickerContainer = document.createElement("div");
+  stickerContainer.classList.add("sticker-container");
+
+  const fastDeliverySticker = document.createElement("div");
+  fastDeliverySticker.classList.add("sticker", "fast-delivery");
+  fastDeliverySticker.innerHTML = '... <i class="fas fa-truck"></i> Fast Delivery';
+
+  stickerContainer.appendChild(fastDeliverySticker);
+  card.appendChild(stickerContainer);
+
+
+
       // Add product description
       const desc = document.createElement("p");
       desc.innerText = product.description;
@@ -3499,7 +3824,7 @@ function showAddToCartMessage(productName) {
 const openCartBtn = document.getElementById("open-cart-btn");
 const closeCartBtn = document.getElementById("close-cart-btn");
 const cartContent = document.getElementById("cart-content");
-const overlay = document.getElementById('overlay')
+const overlay = document.getElementById('overlay4')
 cartContent.style.display = "none"; // Hide the cart content on load
 
 openCartBtn.addEventListener("click", () => {
@@ -3602,6 +3927,20 @@ for (let j = 0; j < 5; j++) {
   stars.appendChild(star);
 }
 card.appendChild(stars);
+
+
+        // Add fast delivery sticker with icon
+        const stickerContainer = document.createElement("div");
+  stickerContainer.classList.add("sticker-container");
+
+  const fastDeliverySticker = document.createElement("div");
+  fastDeliverySticker.classList.add("sticker", "fast-delivery");
+  fastDeliverySticker.innerHTML = '... <i class="fas fa-truck"></i> Fast Delivery';
+
+  stickerContainer.appendChild(fastDeliverySticker);
+  card.appendChild(stickerContainer);
+
+
 
                 const desc = document.createElement("p");
                 desc.innerText = product.description;
@@ -3773,7 +4112,7 @@ function showAddToCartMessage(productName) {
 const openCartBtn = document.getElementById("open-cart-btn");
 const closeCartBtn = document.getElementById("close-cart-btn");
 const cartContent = document.getElementById("cart-content");
-const overlay = document.getElementById('overlay')
+const overlay = document.getElementById('overlay4')
 cartContent.style.display = "none"; // Hide the cart content on load
 
 openCartBtn.addEventListener("click", () => {
@@ -3872,6 +4211,16 @@ for (let j = 0; j < 5; j++) {
 }
 card.appendChild(stars);
 
+        // Add fast delivery sticker with icon
+  const stickerContainer = document.createElement("div");
+  stickerContainer.classList.add("sticker-container");
+
+  const fastDeliverySticker = document.createElement("div");
+  fastDeliverySticker.classList.add("sticker", "fast-delivery");
+  fastDeliverySticker.innerHTML = '... <i class="fas fa-truck"></i> Fast Delivery';
+
+  stickerContainer.appendChild(fastDeliverySticker);
+  card.appendChild(stickerContainer);
 
 
                 const desc = document.createElement("p");
@@ -4042,7 +4391,7 @@ function showAddToCartMessage(productName) {
 const openCartBtn = document.getElementById("open-cart-btn");
 const closeCartBtn = document.getElementById("close-cart-btn");
 const cartContent = document.getElementById("cart-content");
-const overlay = document.getElementById('overlay')
+const overlay = document.getElementById('overlay4')
 cartContent.style.display = "none"; // Hide the cart content on load
 
 openCartBtn.addEventListener("click", () => {
@@ -4128,6 +4477,20 @@ for (let j = 0; j < 5; j++) {
   stars.appendChild(star);
 }
 card.appendChild(stars);
+
+
+
+        // Add fast delivery sticker with icon
+        const stickerContainer = document.createElement("div");
+  stickerContainer.classList.add("sticker-container");
+
+  const fastDeliverySticker = document.createElement("div");
+  fastDeliverySticker.classList.add("sticker", "fast-delivery");
+  fastDeliverySticker.innerHTML = '... <i class="fas fa-truck"></i> Fast Delivery';
+
+  stickerContainer.appendChild(fastDeliverySticker);
+  card.appendChild(stickerContainer);
+
 
 
                 const desc = document.createElement("p");
@@ -4296,7 +4659,7 @@ function showAddToCartMessage(productName) {
 const openCartBtn = document.getElementById("open-cart-btn");
 const closeCartBtn = document.getElementById("close-cart-btn");
 const cartContent = document.getElementById("cart-content");
-const overlay = document.getElementById('overlay')
+const overlay = document.getElementById('overlay4')
 cartContent.style.display = "none"; // Hide the cart content on load
 
 openCartBtn.addEventListener("click", () => {
@@ -4382,6 +4745,16 @@ for (let j = 0; j < 5; j++) {
 }
 card.appendChild(stars);
 
+        // Add fast delivery sticker with icon
+  const stickerContainer = document.createElement("div");
+  stickerContainer.classList.add("sticker-container");
+
+  const fastDeliverySticker = document.createElement("div");
+  fastDeliverySticker.classList.add("sticker", "fast-delivery");
+  fastDeliverySticker.innerHTML = '... <i class="fas fa-truck"></i> Fast Delivery';
+
+  stickerContainer.appendChild(fastDeliverySticker);
+  card.appendChild(stickerContainer);
 
 
                 const desc = document.createElement("p");
@@ -4553,7 +4926,7 @@ function showAddToCartMessage(productName) {
 const openCartBtn = document.getElementById("open-cart-btn");
 const closeCartBtn = document.getElementById("close-cart-btn");
 const cartContent = document.getElementById("cart-content");
-const overlay = document.getElementById('overlay')
+const overlay = document.getElementById('overlay4')
 cartContent.style.display = "none"; // Hide the cart content on load
 
 openCartBtn.addEventListener("click", () => {
@@ -4640,6 +5013,18 @@ for (let j = 0; j < 5; j++) {
   stars.appendChild(star);
 }
 card.appendChild(stars);
+
+        // Add fast delivery sticker with icon
+        const stickerContainer = document.createElement("div");
+  stickerContainer.classList.add("sticker-container");
+
+  const fastDeliverySticker = document.createElement("div");
+  fastDeliverySticker.classList.add("sticker", "fast-delivery");
+  fastDeliverySticker.innerHTML = '... <i class="fas fa-truck"></i> Fast Delivery';
+
+  stickerContainer.appendChild(fastDeliverySticker);
+  card.appendChild(stickerContainer);
+
 
                 const desc = document.createElement("p");
                 desc.innerText = product.description;
@@ -4809,7 +5194,7 @@ function showAddToCartMessage(productName) {
 const openCartBtn = document.getElementById("open-cart-btn");
 const closeCartBtn = document.getElementById("close-cart-btn");
 const cartContent = document.getElementById("cart-content");
-const overlay = document.getElementById('overlay')
+const overlay = document.getElementById('overlay4')
 cartContent.style.display = "none"; // Hide the cart content on load
 
 openCartBtn.addEventListener("click", () => {
@@ -4893,6 +5278,20 @@ for (let j = 0; j < 5; j++) {
 }
 card.appendChild(stars);
 
+
+        // Add fast delivery sticker with icon
+        const stickerContainer = document.createElement("div");
+  stickerContainer.classList.add("sticker-container");
+
+  const fastDeliverySticker = document.createElement("div");
+  fastDeliverySticker.classList.add("sticker", "fast-delivery");
+  fastDeliverySticker.innerHTML = '... <i class="fas fa-truck"></i> Fast Delivery';
+
+  stickerContainer.appendChild(fastDeliverySticker);
+  card.appendChild(stickerContainer);
+
+
+  
 
                 const desc = document.createElement("p");
                 desc.innerText = product.description;
@@ -5061,7 +5460,7 @@ function showAddToCartMessage(productName) {
 const openCartBtn = document.getElementById("open-cart-btn");
 const closeCartBtn = document.getElementById("close-cart-btn");
 const cartContent = document.getElementById("cart-content");
-const overlay = document.getElementById('overlay')
+const overlay = document.getElementById('overlay4')
 cartContent.style.display = "none"; // Hide the cart content on load
 
 openCartBtn.addEventListener("click", () => {
@@ -5105,7 +5504,7 @@ function cartIsEmpty() {
 
 
      </script>
-<!--
+
 <script>
   const slider = document.querySelector('.image-slider');
 const images = slider.querySelectorAll('img');
@@ -5118,9 +5517,8 @@ setInterval(() => {
   images[index].classList.add('active');
 }, interval);
 
--->
+
 
 </script>
-
 </body>
 </html> 
