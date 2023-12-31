@@ -797,10 +797,10 @@ body {
   }
   
   .card1 h2 {
-    margin-top: 10px;
-    margin-bottom: 5px;
+    margin-top: 5px;
     color: #4d4d4d;
-    font-size: medium;
+    font-weight: 600;
+    font-size: 15px;
   }
   
   .card1 p {
@@ -813,7 +813,7 @@ body {
   
   @media (max-width: 768px) {
     .card1 h2 {
-      margin-bottom: 5px;
+      margin-bottom: 2px;
       color: #000000;
       font-size: small;
     }
@@ -1106,7 +1106,7 @@ transition: all 0.3s ease-in-out;
 
 .image-slider {
   width: 100%;
-  height: 300px;
+  height: 400px;
   overflow: hidden;
   position: relative;
   display: flex;
@@ -2042,16 +2042,28 @@ body.no-scroll {
 }
      /* Style for user details */
      .user-info {
-      font-weight: bold;
+      font-weight: 400;
   }
-
-  .additional-info {
-      margin-top: 10px;
-      background-color: rgb(215, 245, 255);
-      padding: 10px;
-      margin: 10px;
-      border-radius: 10px;
+.accountt{
+  font-weight: bold;
+}
+  .additional-info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px; /* Add some space between the table and other elements */
+    margin-bottom: 10px;
   }
+  
+  .additional-info-table th, .additional-info-table td {
+    border: 1px solid #ddd; /* Add borders to cells */
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .additional-info-table th {
+    background-color: #f2f2f2; /* Gray background for headers */
+  }
+  
 
   .message-container {
     display: none;
@@ -2256,7 +2268,7 @@ body.no-scroll {
   width: fit-content;
   padding: 5px;
   margin-bottom: 5px;
-  border-radius: 50px;
+  border-radius: 5px;
 }
 
 /* Styles for the order summary table */
@@ -2437,4 +2449,137 @@ input[type="email"] {
   to {
     opacity: 0;
   }
+}
+
+
+/* notice */
+.cookie-notice {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+  bottom: 0;
+  width: 100%;
+  background: #191919;
+  color: #F6F6F6;
+  font-size: 1.2rem;
+  z-index: 999;
+
+  a {
+    color: #F6F6F6;
+
+    &:hover {
+      text-decoration: none;
+    }
+
+    &:visited {
+      color: #F6F6F6;
+    }
+  }
+
+  .cookie {
+    font-size: 2.2rem;
+    margin-right: 0.3rem;
+    margin-left: 1rem;
+  }
+
+  .accept-cookies {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: #F6F6F6;
+    width: fit-content;
+    color: #191919;
+    font-weight: 700;
+    padding: 0.5rem 1.5rem;
+    margin-right: 1rem;
+    margin-left: 3rem;
+    transition: 0.35s ease;
+
+    &:hover {
+      box-shadow: 0.01rem 0.01rem 0.1rem #DDDDDD;
+    }
+  }
+}
+/* Add these styles to your existing styles */
+.filter-container {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  background-color: lightgoldenrodyellow;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+input[type="date"] {
+  padding: 8px;
+  margin-right: 10px;
+  font-size: 14px;
+  margin: 0 auto;
+}
+input[type="text"] {
+  padding: 8px;
+  margin-right: 10px;
+  font-size: 14px;
+  height: 45px;
+}
+
+/* Add these styles to highlight the filtered receipts */
+.receipt-container.filtered {
+  border: 2px solid #3498db;
+}
+/* Style for the "No Orders" message container */
+.no-orders-message-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Style for the "No Orders" message image */
+.no-orders-image {
+  width: 100px; /* Adjust the width as needed */
+  height: auto; /* Maintain aspect ratio */
+}
+
+/* Style for the "No Orders" message text */
+.no-orders-message {
+  color: #555; /* Adjust the color as needed */
+  font-size: 16px; /* Adjust the font size as needed */
+  margin-top: 10px; /* Adjust the margin as needed */
+}
+
+/* Style for the "Search Results" message container */
+.search-results-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Style for the "Search Results" message image */
+.search-results-container .no-orders-image {
+  width: 100px; /* Adjust the width as needed */
+  height: auto; /* Maintain aspect ratio */
+}
+
+/* Style for the "Search Results" message text */
+.search-results-container .no-orders-message {
+  color: #555; /* Adjust the color as needed */
+  font-size: 16px; /* Adjust the font size as needed */
+  margin-top: 10px; /* Adjust the margin as needed */
+}
+.clear-button {
+  background-color: #d10000; /* Light gray background */
+  border: none;
+  color: #ffffff; /* Dark gray text color */
+  padding:0px 10px;
+  font-size: 14px;
+  width: fit-content;
+  cursor: pointer;
+  margin: 5px; /* Add some space between the date input and the clear button */
+}
+
+.clear-button:hover {
+  background-color: #ff6363; /* Darker gray background on hover */
+  padding:0px 10px;
+
 }

@@ -146,6 +146,12 @@
 <div id="cart-container"></div>
 
 
+<div class="cookie-notice">
+  <span class="cookie">🍪</span>
+  <p>We use cookies to improve your browsing experience. By clicking "OK," you agree to our <a href="#">Cookie Policy</a>.</p>
+  <button type="button" class="accept-cookies">OK</button>
+</div>
+
 
  <script>
       window.onscroll = function() {myFunction()};
@@ -161,7 +167,18 @@
         }
       }
 
-
+if($('.cookie-notice').length) {
+  $('.accept-cookies').on('click', function () {
+    // Following code can be placed in AJAX .done   
+    width = $('.cookie-notice').width();
+    $('.cookie-notice').animate({
+      left: '-=' + width
+    }, 250, 'linear', function() {
+      // animation is complete, remove element from DOM
+      $(this).remove();
+    });   
+  });
+}
       
       </script>
   <div class="image-slider">
@@ -574,6 +591,7 @@ overlay2.style.display = 'block'
     const userDetailsElement = document.getElementById('userDetails');
     userDetailsElement.innerHTML = `
         <div class="user-info">
+          <p class="accountt"> Account Details </p>
             <p>Email: ${userDetails.email}</p>
         </div>
     `;
@@ -587,12 +605,25 @@ overlay2.style.display = 'block'
         if (snapshot.exists()) {
             const userData = snapshot.val();
             userDetailsElement.innerHTML += `
-                <div class="additional-info">
-                    <p>First Name: ${userData.firstName || 'N/A'}</p>
-                    <p>Last Name: ${userData.lastName || 'N/A'}</p>
-                    <p>Telephone: ${userData.telephone || 'N/A'}</p>
-                    <p>DOB: ${userData.dob || 'N/A'}</p>
-                </div>
+            <table class="additional-info-table">
+  <tr>
+    <th>First Name</th>
+    <td>${userData.firstName || 'N/A'}</td>
+  </tr>
+  <tr>
+    <th>Last Name</th>
+    <td>${userData.lastName || 'N/A'}</td>
+  </tr>
+  <tr>
+    <th>Telephone</th>
+    <td>${userData.telephone || 'N/A'}</td>
+  </tr>
+  <tr>
+    <th>Date of Birth</th>
+    <td>${userData.dob || 'N/A'}</td>
+  </tr>
+</table>
+
             `;
 
             // Display profile picture if available or show a default profile icon
@@ -1355,11 +1386,200 @@ closeButton.addEventListener("click", () => {
     document.body.removeChild(popupContainer);
   }, 500); // 500 milliseconds (0.5 seconds) should match your animation duration
 });
+// Create the receipt details container
+const receiptDetailsContainer = document.createElement("div");
+receiptDetailsContainer.classList.add("receipt-details-container");
+
+// Create filter by date input
+const dateFilterInput = document.createElement("input");
+dateFilterInput.type = "date";
+dateFilterInput.placeholder = "Filter by Date";
+dateFilterInput.addEventListener("input", handleDateFilter);
+
+// Create clear button for the date input
+const clearDateButton = document.createElement("button");
+clearDateButton.innerText = "Clear";
+clearDateButton.classList.add("clear-button");
+clearDateButton.addEventListener("click", clearDateFilter);
+
+// Create search by order ID input
+const orderIdSearchInput = document.createElement("input");
+orderIdSearchInput.type = "text";
+orderIdSearchInput.placeholder = "Search by Order ID";
+orderIdSearchInput.addEventListener("input", handleOrderIdSearch);
 
 
-  // Create the receipt details container
-  const receiptDetailsContainer = document.createElement("div");
-  receiptDetailsContainer.classList.add("receipt-details-container");
+// Append filter, search inputs, and clear button to a container
+const filterContainer = document.createElement("div");
+filterContainer.classList.add("filter-container");
+filterContainer.appendChild(dateFilterInput);
+filterContainer.appendChild(clearDateButton);
+filterContainer.appendChild(orderIdSearchInput);
+
+// Append the filter container to the document body
+document.body.appendChild(filterContainer);
+
+// Add fade-in animation to the popup container
+popupContainer.style.animation = "fadeIn 0.5s";
+// Add event listeners for the filter inputs
+dateFilterInput.addEventListener("input", handleDateFilter);
+orderIdSearchInput.addEventListener("input", handleOrderIdSearch);
+
+// Function to clear the date filter
+function clearDateFilter() {
+  dateFilterInput.value = "";
+  handleDateFilter({ target: { value: "" } }); // Trigger the filter function after clearing
+}
+
+// Filter by date handler function
+function handleDateFilter(event) {
+  const selectedDate = event.target.value;
+
+  // Clear previous orders
+  document.querySelectorAll('.receipt-container').forEach(receiptContainer => {
+    receiptContainer.style.display = 'none';
+  });
+
+  const receiptDetailsContainer = document.querySelector('.receipt-details-container');
+  let noOrdersMessageContainer = receiptDetailsContainer.querySelector('.no-orders-message-container');
+
+  // If the message container doesn't exist, create it
+  if (!noOrdersMessageContainer) {
+    noOrdersMessageContainer = document.createElement('div');
+    noOrdersMessageContainer.classList.add('no-orders-message-container');
+    receiptDetailsContainer.appendChild(noOrdersMessageContainer);
+
+    // Add an image on top of the message
+    const noOrdersImage = document.createElement('img');
+    noOrdersImage.src = 'img/nothing found.png'; // Provide the correct path to your image
+    noOrdersImage.alt = 'No Orders Image';
+    noOrdersImage.classList.add('no-orders-image');
+    noOrdersMessageContainer.appendChild(noOrdersImage);
+
+    // Create a paragraph element for the message
+    const noOrdersMessage = document.createElement('p');
+    noOrdersMessage.classList.add('no-orders-message');
+    noOrdersMessageContainer.appendChild(noOrdersMessage);
+  }
+
+  // Hide the message container initially
+  noOrdersMessageContainer.style.display = 'none';
+
+  // Clear existing content
+  noOrdersMessageContainer.querySelector('.no-orders-message').textContent = '';
+
+  // Track whether any orders are found for the selected date
+  let ordersFound = false;
+
+  // Iterate through receipt containers and filter based on date
+  document.querySelectorAll('.receipt-container').forEach(receiptContainer => {
+    const orderDateElement = receiptContainer.querySelector('.receipt-info:nth-child(2)');
+    const orderDate = orderDateElement.textContent.split(": ")[1]; // Extract the date part from the receipt
+
+    // Parse and format the orderDate to match the selectedDate format
+    const formattedOrderDate = new Date(orderDate);
+    const formattedSelectedDate = formattedOrderDate.toLocaleDateString('en-US', {
+      month: 'numeric',
+      day: 'numeric',
+      year: 'numeric'
+    });
+
+    if (selectedDate && formattedOrderDate.toISOString().split('T')[0] !== selectedDate) {
+      receiptContainer.style.display = 'none'; // hide orders not matching the selected date
+    } else {
+      receiptContainer.style.display = 'block'; // show orders matching the selected date
+      ordersFound = true; // Orders are found for the selected date
+    }
+  });
+
+  // Toggle the visibility of the message container based on orders found
+  noOrdersMessageContainer.style.display = ordersFound ? 'none' : 'block';
+
+  // Update the message if no orders are found for the selected date
+  if (!ordersFound) {
+    noOrdersMessageContainer.querySelector('.no-orders-message').textContent = 'No orders found on this date.';
+  }
+
+  // Reattach event listeners to handle further filtering
+  dateFilterInput.addEventListener("input", handleDateFilter);
+  orderIdSearchInput.addEventListener("input", handleOrderIdSearch);
+}
+
+
+
+
+
+
+
+
+// Search by order ID handler function
+function handleOrderIdSearch(event) {
+  const searchText = event.target.value.toLowerCase();
+
+  // Clear previous orders and messages
+  document.querySelectorAll('.receipt-container').forEach(receiptContainer => {
+    receiptContainer.style.display = 'none';
+  });
+
+  const receiptDetailsContainer = document.querySelector('.receipt-details-container');
+  let searchResultsContainer = receiptDetailsContainer.querySelector('.search-results-container');
+
+  // If the search results container doesn't exist, create it
+  if (!searchResultsContainer) {
+    searchResultsContainer = document.createElement('div');
+    searchResultsContainer.classList.add('search-results-container');
+    receiptDetailsContainer.appendChild(searchResultsContainer);
+
+    // Add an image on top of the message
+    const noOrdersImage = document.createElement('img');
+    noOrdersImage.src = 'img/nothing found.png'; // Provide the correct path to your image
+    noOrdersImage.alt = 'No Orders Image';
+    noOrdersImage.classList.add('no-orders-image');
+    searchResultsContainer.appendChild(noOrdersImage);
+
+    // Create a paragraph element for the message
+    const noOrdersMessage = document.createElement('p');
+    noOrdersMessage.classList.add('no-orders-message');
+    searchResultsContainer.appendChild(noOrdersMessage);
+  }
+
+  // Hide the search results container initially
+  searchResultsContainer.style.display = 'none';
+
+  // Check if the message element exists before updating its textContent
+  const noOrdersMessageElement = searchResultsContainer.querySelector('.no-orders-message');
+  if (noOrdersMessageElement) {
+    // Clear existing content
+    noOrdersMessageElement.textContent = '';
+
+    // Track whether any orders are found for the search text
+    let ordersFound = false;
+
+    // Iterate through receipt containers and filter based on order ID
+    document.querySelectorAll('.receipt-container').forEach(receiptContainer => {
+      const orderId = receiptContainer.querySelector('.receipt-info:first-child').textContent;
+      if (searchText && !orderId.toLowerCase().includes(`order id: ${searchText}`)) {
+        receiptContainer.style.display = 'none'; // hide orders not matching the search text
+      } else {
+        receiptContainer.style.display = 'block'; // show orders matching the search text
+        ordersFound = true; // Orders are found for the search text
+      }
+    });
+
+    // Toggle the visibility of the search results container based on orders found
+    searchResultsContainer.style.display = ordersFound ? 'none' : 'block';
+
+    // Update the message if no orders are found for the search text
+    if (!ordersFound) {
+      noOrdersMessageElement.textContent = 'No orders found for the specified order ID.';
+    }
+  }
+
+  // Reattach event listeners to handle further filtering
+  dateFilterInput.addEventListener("input", handleDateFilter);
+  orderIdSearchInput.addEventListener("input", handleOrderIdSearch);
+}
+
 
   // Iterate through user receipts and create elements for each receipt
   for (const receiptId in userReceipts) {
@@ -1413,6 +1633,7 @@ closeButton.addEventListener("click", () => {
 
   // Append the close button and receipt details container to the popup container
   popupContainer.appendChild(closeButton);
+  popupContainer.appendChild(filterContainer);
   popupContainer.appendChild(receiptDetailsContainer);
 
   // Add the popup container to the document body
@@ -5500,6 +5721,56 @@ function cartIsEmpty() {
   });
 
    
+  async function fetchAndRenderCards() {
+  try {
+    const snapshot = await get(newScreensRef);
+    const data = snapshot.val();
+    const productsList = document.getElementById("products-list");
+
+    // Intersection Observer options
+    const options = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.1,
+    };
+
+    // Intersection Observer callback
+    function handleIntersection(entries, observer) {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const product = entry.target.productData;
+          renderCard(product);
+          observer.unobserve(entry.target);
+        }
+      });
+    }
+
+    // Create Intersection Observer
+    const observer = new IntersectionObserver(handleIntersection, options);
+
+    for (let i in data) {
+      const product = data[i];
+      const card = document.createElement("div");
+      card.classList.add("card1");
+      card.productData = product; // Store product data on the card element
+
+      // Add the card to the Intersection Observer
+      observer.observe(card);
+    }
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+}
+
+function renderCard(product) {
+  // Your existing card rendering logic here...
+
+  // Add card to list
+  productsList.appendChild(card);
+}
+
+// Call the fetchAndRenderCards function to initiate the lazy loading
+fetchAndRenderCards();
 
 
 
