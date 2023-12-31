@@ -1384,7 +1384,7 @@ transition: all 0.3s ease-in-out;
         padding: 10px;
         border: transparent;
         background-color: #2c3e99;
-        border-radius: 20px;
+        border-radius: 2px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
         z-index: 99999;
         overflow-y: auto;
@@ -1427,6 +1427,7 @@ transition: all 0.3s ease-in-out;
         background-color: green;
         border: none;
         width: fit-content;
+        
       }
       
       .cart-item {
@@ -2373,11 +2374,14 @@ z-index: 10000000;
   background-color: lightgoldenrodyellow;
   padding: 10px;
   border-radius: 5px;
+  margin-bottom: 10px;
 }
 .payment-options{
   background-color: lightblue;
   padding: 10px;
   border-radius: 5px;
+  display: flex;
+  margin-bottom: 10px;
 }
 
 .welcomePopup {
@@ -2465,7 +2469,7 @@ input[type="email"] {
   color: #F6F6F6;
   font-size: 1.2rem;
   z-index: 999;
-
+font-size: small;
   a {
     color: #F6F6F6;
 
@@ -2505,12 +2509,11 @@ input[type="email"] {
 /* Add these styles to your existing styles */
 .filter-container {
   margin-bottom: 20px;
-  display: flex;
-  justify-content: space-between;
   margin-top: 30px;
   background-color: lightgoldenrodyellow;
   padding: 10px;
   border-radius: 5px;
+  width: 100%;
 }
 
 input[type="date"] {
@@ -2519,11 +2522,21 @@ input[type="date"] {
   font-size: 14px;
   margin: 0 auto;
 }
+
 input[type="text"] {
   padding: 8px;
   margin-right: 10px;
   font-size: 14px;
   height: 45px;
+}
+
+/* Media query for small screens */
+@media only screen and (min-width: 768px) {
+  .filter-container {
+    display: inline-block;
+    justify-content: space-between;
+
+  }
 }
 
 /* Add these styles to highlight the filtered receipts */
@@ -2571,7 +2584,7 @@ input[type="text"] {
   background-color: #d10000; /* Light gray background */
   border: none;
   color: #ffffff; /* Dark gray text color */
-  padding:0px 10px;
+  padding:10px 10px;
   font-size: 14px;
   width: fit-content;
   cursor: pointer;
@@ -2580,6 +2593,138 @@ input[type="text"] {
 
 .clear-button:hover {
   background-color: #ff6363; /* Darker gray background on hover */
-  padding:0px 10px;
+  padding:10px 10px;
 
+}
+/* Style for the order type section */
+.order-type {
+  margin-top: 20px;
+  background-color:  #002041;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+/* Style for the order type title */
+.order-type h4 {
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: white;
+}
+
+/* Style for each order option */
+.order-option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  background: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+  width: fit-content;
+  color: #000;
+}
+
+/* Style for radio input */
+.order-option input[type="radio"] {
+  margin-right: 8px;
+}
+
+/* Style for label */
+.order-option label {
+  font-size: 16px;
+}
+
+
+/* Style for radio input container */
+.order-option input[type="radio"] {
+  margin-right: 8px;
+  appearance: none; /* Remove default styles */
+  width: 20px; /* Adjust size as needed */
+  height: 20px; /* Adjust size as needed */
+  border: 2px solid #333; /* Border color */
+  border-radius: 50%; /* Make it circular */
+  outline: none;
+  cursor: pointer;
+}
+
+/* Style for radio input checked state */
+.order-option input[type="radio"]:checked {
+  background-color: rgb(0, 189, 0); /* Background color when checked */
+  border: 2px solid rgb(0, 189, 0); /* Border color */
+
+}
+
+/* Style for label */
+.order-option label {
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Optional: Apply some styling for better visibility when selected */
+.order-option input[type="radio"]:checked + label {
+  font-weight: bold;
+  color: #ffffff; /* Change color as needed */
+padding: 5px;
+background-color: rgb(0, 189, 0);
+border-radius: 10px;
+
+}
+/* Add these styles to your existing styles */
+.order-option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* Style for radio input container */
+.order-option input[type="radio"] {
+  margin-right: 8px;
+  appearance: none; /* Remove default styles */
+  width: 20px; /* Adjust size as needed */
+  height: 20px; /* Adjust size as needed */
+  border: 2px solid #333; /* Border color */
+  border-radius: 50%; /* Make it circular */
+  outline: none;
+  cursor: pointer;
+}
+
+/* Style for radio input checked state */
+.order-option input[type="radio"]:checked {
+  background-color: #333; /* Background color when checked */
+}
+
+/* Style for label */
+.order-option label {
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Style for order notes */
+.order-note {
+  display: none; /* Hide initially */
+  margin-top: 5px; /* Add space between the label and note */
+  font-size: 12px;
+  color: #555;
+  margin-left: 10px;
+}
+.payment-options-note{
+  font-size: 12px;
+  margin: 0 auto;
+}
+
+.copy-icon {
+  font-size: 20px;
+  margin-right: 5px;
+  color: #007bff; /* Change color as needed */
+  cursor: pointer;
+}
+
+.copy-word {
+  font-size: 14px;
+  color: #007bff; /* Change color as needed */
+  cursor: pointer;
+}
+
+.copied {
+  color: #28a745; /* Green color for copied feedback */
+  cursor: pointer;
 }

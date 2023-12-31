@@ -147,8 +147,8 @@
 
 
 <div class="cookie-notice">
-  <span class="cookie">🍪</span>
-  <p>We use cookies to improve your browsing experience. By clicking "OK," you agree to our <a href="#">Cookie Policy</a>.</p>
+  <span class="cookie">🕑</span>
+  <p>Orders made on Sunday's are processed on Monday due to closed days. We are open from 7am to 8pm Monday to Saturday. Thank you!<a href="#"></a></p>
   <button type="button" class="accept-cookies">OK</button>
 </div>
 
@@ -240,7 +240,7 @@ if($('.cookie-notice').length) {
     <!-- Your button element with a spinner container -->
 <button id="viewPurchaseHistoryBtn" class="button-with-spinner">
   View Purchase History
-  <div id="spinner" class="spinner">
+  <div id="spinner2" class="spinner">
     <i class="fas fa-spinner fa-spin"></i>
   </div>
 </button>
@@ -512,7 +512,7 @@ function createCart() {
  window.addEventListener("scroll", () => {
   const cart = document.getElementById("cart");
   const distanceFromTop = window.pageYOffset || document.documentElement.scrollTop;
-  const scrollThreshold = 300; // Set the scroll height to trigger the cart display
+  const scrollThreshold = 200; // Set the scroll height to trigger the cart display
 
   if (distanceFromTop > scrollThreshold) {
     cart.style.display = "block";
@@ -839,6 +839,9 @@ popupContainer.appendChild(popupContent);
 
   // Add the popup container to the document body
   document.body.appendChild(popupContainer);
+
+
+  
 // Create the close button
 const closeButton = document.createElement("button");
 closeButton.classList.add("close-button");
@@ -848,6 +851,8 @@ closeButton.innerHTML = "&times; Close";
 closeButton.addEventListener("click", () => {
   popupContainer.style.display = "none";
 });
+
+
 
 // Append the close button to the popup container
 popupContainer.appendChild(closeButton);
@@ -864,31 +869,89 @@ const paymentOptionsTitle = document.createElement("h4");
 paymentOptionsTitle.innerText = "Payment Options";
 paymentOptionsSection.appendChild(paymentOptionsTitle);
 
+// Create a small note under the payment options title
+const paymentOptionsNote = document.createElement("p");
+paymentOptionsNote.innerText = "Click your payment type to reveal and copy merchant code to pay for your goods.";
+paymentOptionsNote.classList.add("payment-options-note"); // Add the desired class
+paymentOptionsSection.appendChild(paymentOptionsNote);
+
 // Create the payment options
 const paymentOptions = ["Airtel Money", "Mobile Money", "Bank Transfer"];
 
 paymentOptions.forEach((option) => {
+  // Create a container for each payment option
+  const paymentOptionContainer = document.createElement("div");
+  paymentOptionContainer.classList.add("payment-option-container");
+
+  // Create the payment option div
   const paymentOption = document.createElement("div");
   paymentOption.classList.add("payment-option");
   paymentOption.innerHTML = `
     <input type="radio" name="payment-option" id="${option.toLowerCase()}" value="${option.toLowerCase()}">
     <label for="${option.toLowerCase()}">${option}</label>
   `;
-  paymentOptionsSection.appendChild(paymentOption);
+
+  // Create a div for details (copy icon and "Copy" word)
+  const detailsSection = document.createElement("div");
+  detailsSection.classList.add("details-section");
+
+  // Create a copy icon
+  const copyIcon = document.createElement("i");
+  copyIcon.classList.add("fas", "fa-copy", "copy-icon");
+  detailsSection.appendChild(copyIcon);
+
+  // Create a "Copy" word
+  const copyWord = document.createElement("span");
+  copyWord.innerText = "Copy";
+  detailsSection.appendChild(copyWord);
+
+  // Append details section to payment option
+  paymentOption.appendChild(detailsSection);
+
+  // Add event listener to copy the details to clipboard when the option is selected
+  paymentOption.addEventListener("click", () => {
+    // Assuming the merchant code is the second line in the details
+    const merchantCode = receiverDetails[option.toLowerCase()].split("\n")[1].split(": ")[1];
+
+    // Copy the merchant code to the clipboard
+    copyToClipboard(merchantCode);
+
+    // Optionally, provide feedback to the user (e.g., highlight the copied details)
+    detailsSection.classList.add("copied");
+
+    // Reset the copied status after a short delay (e.g., 2 seconds)
+    setTimeout(() => {
+      detailsSection.classList.remove("copied");
+    }, 2000);
+  });
+
+  // Append the payment option to the container
+  paymentOptionContainer.appendChild(paymentOption);
+
+  // Append the payment option container to the payment options section
+  paymentOptionsSection.appendChild(paymentOptionContainer);
 });
 
 // Append the payment options section to the popup content
 popupContent.appendChild(paymentOptionsSection);
-
+// Function to copy text to clipboard
+function copyToClipboard(text) {
+  const tempInput = document.createElement("textarea");
+  tempInput.value = text;
+  document.body.appendChild(tempInput);
+  tempInput.select();
+  document.execCommand("copy");
+  document.body.removeChild(tempInput);
+}
 // Get the receiver/account details section
 const receiverDetailsSection = document.createElement("div");
 receiverDetailsSection.classList.add("receiver-details");
 
 // Define the receiver/account details for each payment option
 const receiverDetails = {
-  "airtel money": "Receiver: John Doe\nAccount Number: XXXX-XXXX-XXXX-1234",
-   "mobile money": "Receiver: PayPal\nAccount Number: XXXX-XXXX-XXXX-1234",
-  "bank transfer": "Receiver: Bank Name\nAccount Number: XXXX-XXXX-XXXX-5678",
+  "airtel money": "Receiver: Nsereko Gerald\nAirtel Merchand ID: 78268392",
+   "mobile money": "Receiver: Nsereko Gerald\nMTN Merchant ID: 63913638",
+  "bank transfer": "Receiver: Centenary Bank\nAccount Number: 18207635678",
 };
 
 // Function to update the receiver/account details based on the selected payment option
@@ -916,6 +979,8 @@ paymentOptionRadios.forEach((radio) => {
 // Append the receiver/account details section to the payment options section
 paymentOptionsSection.appendChild(receiverDetailsSection);
 
+
+
 // Add the title to the popup
 const head = document.createElement("h4");
 head.innerText = "Delivery details.";
@@ -931,7 +996,7 @@ option1.text = "Taxi";
 transportSelect.appendChild(option1);
 
 const option2 = document.createElement("option");
-option2.value = "boda_boda";
+option2.value = "boda boda";
 option2.text = "Boda boda";
 transportSelect.appendChild(option2);
 
@@ -971,6 +1036,10 @@ deliveryPlaceInput.classList.add("input-field");
 deliveryPlaceInput.required = true; // Set the required attribute
 customerDetails.appendChild(deliveryPlaceInput);
 
+
+
+
+
 // Append the customer details to the popup content
 popupContent.appendChild(customerDetails);
 
@@ -997,6 +1066,76 @@ orderButton.style.border = "none";
 orderButton.style.borderRadius = "4px";
 orderButton.style.fontSize = "16px";
 orderButton.style.marginTop = "20px";
+// Create the order type section
+const orderTypeSection = document.createElement("div");
+orderTypeSection.classList.add("order-type");
+
+// Create the title for the order type
+const orderTypeTitle = document.createElement("h4");
+orderTypeTitle.innerText = "Order Type";
+orderTypeSection.appendChild(orderTypeTitle);
+
+// Declare selectedOrderType outside the function scope
+let selectedOrderType;
+
+// Function to create order option with note
+function createOrderOption(id, value, label, note) {
+  const orderOption = document.createElement("div");
+  orderOption.classList.add("order-option");
+
+  // Create radio input
+  const radioInput = document.createElement("input");
+  radioInput.type = "radio";
+  radioInput.name = "order-type";
+  radioInput.id = id;
+  radioInput.value = value;
+
+  // Create label for radio input
+  const labelElement = document.createElement("label");
+  labelElement.for = id;
+  labelElement.innerText = label;
+
+  // Create note element
+  const noteElement = document.createElement("p");
+  noteElement.classList.add("order-note");
+  noteElement.innerText = note;
+
+  // Append elements to order option
+  orderOption.appendChild(radioInput);
+  orderOption.appendChild(labelElement);
+  orderOption.appendChild(noteElement);
+
+  // Append order option to order type section
+  orderTypeSection.appendChild(orderOption);
+
+  // Add event listener to show/hide notes
+  radioInput.addEventListener("change", () => {
+    // Set the selected order type
+    selectedOrderType = radioInput.value;
+
+    // Hide all notes
+    document.querySelectorAll(".order-note").forEach((note) => {
+      note.style.display = "none";
+    });
+
+    // Show the selected note
+    noteElement.style.display = "block";
+  });
+}
+
+// Create retail order option with note
+createOrderOption("retail-order", "retail", "Retail Order", "Prices remain the same for all products.");
+
+// Create wholesale order option with note
+createOrderOption("wholesale-order", "wholesale", "Wholesale Order", "Wholesale orders have special discounts and require a minimum order quantity.");
+
+// Append the order type section to the document or another container
+popupContent.appendChild(orderTypeSection);
+
+// Now you can use selectedOrderType globally in your code
+
+
+
 popupContent.appendChild(orderButton);
 
 function showNotLoggedInMessage() {
@@ -1217,13 +1356,34 @@ const newOrderRef = push(orderRef);
 // Get the telephone number from the input field
 const telephoneNumber = telephoneInput.value;
 
+// Get the selected order type
+const selectedOrderType = document.querySelector('input[name="order-type"]:checked').value;
+
+// Function to generate a random alphanumeric string
+function generateRandomOrderId(length) {
+    const characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    let result = '';
+
+    for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        result += characters.charAt(randomIndex);
+    }
+
+    return result;
+}
+
+// Generate a random order ID
+const randomOrderId = generateRandomOrderId(10);
+
+// Create the order data object with the random order ID
 const orderData = {
-    orderId: newOrderRef.key,
+    orderId: randomOrderId,
     orderDate: new Date().toLocaleDateString(),
     orderTime: new Date().toLocaleTimeString(),
     deliveryPlace,
     meansOfTransport,
     selectedPaymentOption,
+    selectedOrderType, // Add the selected order type
     orderSummary,
     cartTotal,
     userId, // Add the UID of the user
@@ -1243,20 +1403,22 @@ const orderData = {
             const userReceiptRef = ref(database, `users/${userId}/receipts`);
             const newUserReceiptRef = push(userReceiptRef);
 
-           // Save the receipt data under the user's account
+// Save the receipt data under the user's account
 const receiptData = {
-    orderId: newOrderRef.key,
+  orderId: randomOrderId,
     orderDate: orderData.orderDate,
     orderTime: orderData.orderTime,
     deliveryPlace: orderData.deliveryPlace,
     meansOfTransport: orderData.meansOfTransport,
     selectedPaymentOption: orderData.selectedPaymentOption,
+    selectedOrderType: orderData.selectedOrderType, // Add the selected order type
     orderSummary: orderData.orderSummary,
     cartTotal: orderData.cartTotal,
     userId: userId, // Add the UID of the user
     userEmail: user.email, // Add the email of the user (if needed)
     // Add other user-related details as needed
 };
+
 
 set(newUserReceiptRef, receiptData)
     .then(() => {
@@ -1311,7 +1473,7 @@ document.getElementById("viewPurchaseHistoryBtn").addEventListener("click", asyn
   
   // Get the button and spinner elements
   const viewHistoryBtn = document.getElementById("viewPurchaseHistoryBtn");
-  const spinner = document.getElementById("spinner"); // Add an ID to your spinner element
+  const spinner = document.getElementById("spinner2"); // Add an ID to your spinner element
 
   // Disable the button and show the spinner
   viewHistoryBtn.disabled = true;
@@ -1391,6 +1553,8 @@ const receiptDetailsContainer = document.createElement("div");
 receiptDetailsContainer.classList.add("receipt-details-container");
 
 // Create filter by date input
+const dateFilterLabel = document.createElement("label");
+dateFilterLabel.innerText = "Filter by Date";
 const dateFilterInput = document.createElement("input");
 dateFilterInput.type = "date";
 dateFilterInput.placeholder = "Filter by Date";
@@ -1403,20 +1567,27 @@ clearDateButton.classList.add("clear-button");
 clearDateButton.addEventListener("click", clearDateFilter);
 
 // Create search by order ID input
+const orderIdSearchLabel = document.createElement("label");
+orderIdSearchLabel.innerText = "Search by Order ID";
 const orderIdSearchInput = document.createElement("input");
 orderIdSearchInput.type = "text";
 orderIdSearchInput.placeholder = "Search by Order ID";
 orderIdSearchInput.addEventListener("input", handleOrderIdSearch);
 
-
-// Append filter, search inputs, and clear button to a container
+// Append labels and inputs to the filter container
 const filterContainer = document.createElement("div");
 filterContainer.classList.add("filter-container");
+
+
+
+filterContainer.appendChild(orderIdSearchLabel);
+filterContainer.appendChild(orderIdSearchInput);
+filterContainer.appendChild(dateFilterLabel);
 filterContainer.appendChild(dateFilterInput);
 filterContainer.appendChild(clearDateButton);
-filterContainer.appendChild(orderIdSearchInput);
 
-// Append the filter container to the document body
+
+// Append the filter container to the document body or another container
 document.body.appendChild(filterContainer);
 
 // Add fade-in animation to the popup container
@@ -1596,7 +1767,9 @@ function handleOrderIdSearch(event) {
       <p class="receipt-info">Delivery Place: ${receipt.deliveryPlace}</p>
       <p class="receipt-info">Means of Transport: ${receipt.meansOfTransport}</p>
       <p class="receipt-info">Payment Option: ${receipt.selectedPaymentOption}</p>
-      
+      <p class="receipt-info">Order Type: ${receipt.selectedOrderType}</p>
+      <p class="receipt-info">Order Type: ${receipt.orderTime}</p>
+
       <!-- Replace the existing order summary element with this table -->
 <table class="order-summary-table">
   <caption>Order Summary</caption>
@@ -1703,12 +1876,10 @@ function observeProduct(productRef) {
   productObserver.observe(productContainer);
 }
 
-
-
 const searchBtn = document.getElementById("search-btn");
 let isSearching = false;
 
-searchBtn.addEventListener("click", function(event) {
+searchBtn.addEventListener("click", function (event) {
   event.preventDefault();
 
   if (isSearching) {
@@ -1717,36 +1888,60 @@ searchBtn.addEventListener("click", function(event) {
     revertSearchButton();
     isSearching = false;
   } else {
-    // If not currently searching, change the icon to refresh and perform search
-    changeToRefreshIcon();
+    // If not currently searching, append the "X" icon to the search bar and perform search
+    if (shouldShowClearIcon()) {
+      appendIconToSearchBar();
+      isSearching = true;
+    }
     searchProducts();
-    isSearching = true;
   }
 
 
-function changeToRefreshIcon() {
-  // Assuming you're using Font Awesome
-  const searchIcon = document.querySelector("#search-btn i");
-  searchIcon.classList.remove("fa-search");
-  searchIcon.classList.add("fa-refresh");
+function shouldShowClearIcon() {
+  const searchBar = document.getElementById("search-bar");
+  return searchBar.value.trim() !== "";
+}
+
+function appendIconToSearchBar() {
+  if (!shouldShowClearIcon()) {
+    return;
+  }
+
+  // Create a new element for the "X" icon
+  const clearIcon = document.createElement("i");
+  clearIcon.classList.add("fa", "fa-times", "clear-icon");
+
+  // Append the "X" icon to the right side of the search bar
+  const searchBar = document.getElementById("search-bar");
+  searchBar.parentNode.insertBefore(clearIcon, searchBar.nextSibling);
+
+  // Add an event listener to the "X" icon to clear the search bar
+  clearIcon.addEventListener("click", function () {
+    clearSearchBar();
+    revertSearchButton();
+    isSearching = false;
+  });
+
+  // Style the search button
   searchBtn.style.background = 'orange';
 }
 
 function revertSearchButton() {
-  // Assuming you're using Font Awesome
-  const searchIcon = document.querySelector("#search-btn i");
-  searchIcon.classList.remove("fa-refresh");
-  searchProducts();
-  searchIcon.classList.add("fa-search");
-  searchBtn.style.background = '#008abf';
+  // Remove the icon from the search bar
+  const searchBar = document.getElementById("search-bar");
+  const icon = searchBar.nextSibling;
+  if (icon && icon.classList.contains("clear-icon")) {
+    searchBar.parentNode.removeChild(icon);
+  }
 
+  // Style the search button
+  searchBtn.style.background = '#008abf';
 }
 
 function clearSearchBar() {
   const searchBar = document.getElementById("search-bar");
   searchBar.value = "";
 }
-
 
 
 
