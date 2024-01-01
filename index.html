@@ -443,70 +443,80 @@ function replaceContentWithSuccessMessage() {
 
 
 
-
 // Function to create the cart dynamically
 function createCart() {
-    // Create the main cart div
-    const cartDiv = document.createElement("div");
-    cartDiv.id = "cart";
-    cartDiv.classList.add("cart");
+  // Create the main cart div
+  const cartDiv = document.createElement("div");
+  cartDiv.id = "cart";
+  cartDiv.classList.add("cart");
 
-    // Create the cart count span
-    const cartCountSpan = document.createElement("span");
-    cartCountSpan.id = "cart-count";
+  // Create the cart count span
+  const cartCountSpan = document.createElement("span");
+  cartCountSpan.id = "cart-count";
 
-    // Create the cart buttons div
-    const cartButtonsDiv = document.createElement("div");
-    cartButtonsDiv.id = "cart-buttons";
+  // Create the cart buttons div
+  const cartButtonsDiv = document.createElement("div");
+  cartButtonsDiv.id = "cart-buttons";
 
-    // Create the open cart button
-    const openCartBtn = document.createElement("button");
-    openCartBtn.id = "open-cart-btn";
-    openCartBtn.innerHTML = '<i class="fa fa-shopping-cart"></i>';
+  // Create the open cart button
+  const openCartBtn = document.createElement("button");
+  openCartBtn.id = "open-cart-btn";
+  openCartBtn.innerHTML = '<i class="fa fa-shopping-cart"></i>';
 
-    // Create the close cart button
-    const closeCartBtn = document.createElement("button");
-    closeCartBtn.id = "close-cart-btn";
-    closeCartBtn.innerHTML = '<i class="fa fa-times"></i>';
+  // Create the close cart button
+  const closeCartBtn = document.createElement("button");
+  closeCartBtn.id = "close-cart-btn";
+  closeCartBtn.innerHTML = '<i class="fa fa-times"></i>';
 
-    // Append buttons to the cart buttons div
-    cartButtonsDiv.appendChild(openCartBtn);
-    cartButtonsDiv.appendChild(closeCartBtn);
+  // Append buttons to the cart buttons div
+  cartButtonsDiv.appendChild(openCartBtn);
+  cartButtonsDiv.appendChild(closeCartBtn);
 
-    // Create the cart content div
-    const cartContentDiv = document.createElement("div");
-    cartContentDiv.id = "cart-content";
+  // Create the cart content div
+  const cartContentDiv = document.createElement("div");
+  cartContentDiv.id = "cart-content";
 
-    // Create the cart items div
-    const cartItemsDiv = document.createElement("div");
-    cartItemsDiv.id = "cart-items";
+  // Create the cart items div
+  const cartItemsDiv = document.createElement("div");
+  cartItemsDiv.id = "cart-items";
 
-    // Create the total price paragraph
-    const totalPriceParagraph = document.createElement("p");
-    totalPriceParagraph.id = "total-price";
+  // Create the total price paragraph
+  const totalPriceParagraph = document.createElement("p");
+  totalPriceParagraph.id = "total-price";
 
-    // Create the checkout button
-    const checkoutBtn = document.createElement("button");
-    checkoutBtn.id = "checkout-btn";
-    checkoutBtn.innerHTML = '<i class="fa fa-arrow-right"></i> Checkout';
+  // Create the checkout button
+  const checkoutBtn = document.createElement("button");
+  checkoutBtn.id = "checkout-btn";
+  checkoutBtn.innerHTML = '<i class="fa fa-arrow-right"></i> Checkout';
 
-    // Append items to the cart content div
-    cartContentDiv.appendChild(cartItemsDiv);
-    cartContentDiv.appendChild(totalPriceParagraph);
-    cartContentDiv.appendChild(checkoutBtn);
+  // Append items to the cart content div
+  cartContentDiv.appendChild(cartItemsDiv);
+  cartContentDiv.appendChild(totalPriceParagraph);
+  cartContentDiv.appendChild(checkoutBtn);
 
-    // Append elements to the main cart div
-    cartDiv.appendChild(cartCountSpan);
-    cartDiv.appendChild(cartButtonsDiv);
-    cartDiv.appendChild(cartContentDiv);
+  // Append elements to the main cart div
+  cartDiv.appendChild(cartCountSpan);
+  cartDiv.appendChild(cartButtonsDiv);
+  cartDiv.appendChild(cartContentDiv);
 
-    // Append the cart to the cart container
-    const cartContainer = document.getElementById("cart-container");
-    cartContainer.appendChild(cartDiv);
+  // Append the cart to the cart container
+  const cartContainer = document.getElementById("cart-container");
+  cartContainer.appendChild(cartDiv);
+
+  // Check if cart is empty and hide it initially
+  if (isCartEmpty()) {
+    cartDiv.style.display = "none";
   }
+}
 
-  // Call the function to create the cart
-  createCart();
+// Function to check if the cart is empty
+function isCartEmpty() {
+  const cartItems = document.getElementById("cart-items");
+  return cartItems.children.length === 0;
+}
+
+// Call the function to create the cart
+createCart();
 
  // Show/hide the cart based on scroll position
  window.addEventListener("scroll", () => {
@@ -979,12 +989,17 @@ paymentOptionRadios.forEach((radio) => {
 // Append the receiver/account details section to the payment options section
 paymentOptionsSection.appendChild(receiverDetailsSection);
 
-
-
 // Add the title to the popup
 const head = document.createElement("h4");
 head.innerText = "Delivery details.";
 popupContent.appendChild(head);
+
+// Add note about transport and delivery costs
+const note = document.createElement("p");
+note.innerText = "Please note that transport and delivery costs are on the side of the customer.";
+note.classList.add("order-note2");
+popupContent.appendChild(note);
+
 // Create a select element for means of transport
 const transportSelect = document.createElement("select");
 transportSelect.classList.add("input-field");
@@ -4292,13 +4307,13 @@ function cartIsEmpty() {
           //  loaderContainer.style.display = "flex"; // show the loader
 
 
-            get(newScreensRef).then((snapshot) => {
-              const data = snapshot.val();
-              const productsList = document.getElementById("products-list");
-              for (let i in data) {
-                const product = data[i];
-                const card = document.createElement("div");
-                card.classList.add("card1");
+// Function to load new screens cards
+function loadNewScreenCards(data) {
+  const productsList = document.getElementById("products-list");
+  for (let i in data) {
+    const product = data[i];
+    const newScreenCard = document.createElement("div");
+    newScreenCard.classList.add("card1");
                        // Add "used" badge
   const usedBadge = document.createElement("div");
   usedBadge.classList.add("used-badge2");
@@ -4561,11 +4576,46 @@ function cartIsEmpty() {
 }
 
 
-      // Add card to list
-      productsList.appendChild(card);
-      loader.style.display = "none";
+    // Add card to list only if it's in the viewport
+    if (isNewScreenElementInViewport(newScreenCard)) {
+      productsList.appendChild(newScreenCard);
+    }
+  }
+  loader.style.display = "none";
+}
+
+
+// Function to check if an element is in the viewport
+function isNewScreenElementInViewport(element) {
+  const rect = element.getBoundingClientRect();
+  return (
+    rect.top >= 0 &&
+    rect.left >= 0 &&
+    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+  );
+}
+
+// Function to handle scroll events for new screens
+function handleNewScreenScroll() {
+  const productsList = document.getElementById("products-list");
+  const newScreenCards = document.querySelectorAll(".card1");
+
+  newScreenCards.forEach((newScreenCard) => {
+    if (isNewScreenElementInViewport(newScreenCard) && !productsList.contains(newScreenCard)) {
+      productsList.appendChild(newScreenCard);
     }
   });
+}
+
+// Attach scroll event listener for new screens
+window.addEventListener("scroll", handleNewScreenScroll);
+
+// Call the loadNewScreenCards function when retrieving new screens data
+get(newScreensRef).then((snapshot) => {
+  const data = snapshot.val();
+  loadNewScreenCards(data);
+});
 
 
 
@@ -4573,13 +4623,13 @@ function cartIsEmpty() {
 
 //gradeBScreens //
 
-    get(gradeBScreens).then((snapshot) => {
-              const data = snapshot.val();
-              const productsList = document.getElementById("products-list");
-              for (let i in data) {
-                const product = data[i];
-                const card = document.createElement("div");
-                card.classList.add("card1");
+// Function to load gradeB screen cards
+function loadGradeBScreenCards(data) {
+  const productsList = document.getElementById("products-list");
+  for (let i in data) {
+    const product = data[i];
+    const gradeBScreenCard = document.createElement("div");
+    gradeBScreenCard.classList.add("card1");
 
 
                   // Add "used" badge
@@ -4839,12 +4889,49 @@ function cartIsEmpty() {
 }
 
 
-      // Add card to list
-      productsList.appendChild(card);
-      loader.style.display = "none";
+    // Add card to list only if it's in the viewport
+    if (isGradeBScreenElementInViewport(gradeBScreenCard)) {
+      productsList.appendChild(gradeBScreenCard);
+    }
+  }
+  loader.style.display = "none";
+}
+
+// Function to check if an element is in the viewport
+function isGradeBScreenElementInViewport(element) {
+  const rect = element.getBoundingClientRect();
+  return (
+    rect.top >= 0 &&
+    rect.left >= 0 &&
+    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+  );
+}
+
+
+
+// Function to handle scroll events for gradeB screens
+function handleGradeBScreenScroll() {
+  const productsList = document.getElementById("products-list");
+  const gradeBScreenCards = document.querySelectorAll(".card1");
+
+  gradeBScreenCards.forEach((gradeBScreenCard) => {
+    if (isGradeBScreenElementInViewport(gradeBScreenCard) && !productsList.contains(gradeBScreenCard)) {
+      productsList.appendChild(gradeBScreenCard);
     }
   });
-   
+}
+
+// Attach scroll event listener for gradeB screens
+window.addEventListener("scroll", handleGradeBScreenScroll);
+
+// Call the loadGradeBScreenCards function when retrieving gradeB screens data
+get(gradeBScreens).then((snapshot) => {
+  const data = snapshot.val();
+  loadGradeBScreenCards(data);
+});
+
+
 
 
 
@@ -4852,13 +4939,14 @@ function cartIsEmpty() {
     //ports//
 
 
-    get(portsRef).then((snapshot) => {
-              const data = snapshot.val();
-              const productsList = document.getElementById("products-list");
-              for (let i in data) {
-                const product = data[i];
-                const card = document.createElement("div");
-                card.classList.add("card1");
+// Function to load port cards
+function loadPortCards(data) {
+  const productsList = document.getElementById("products-list");
+  for (let i in data) {
+    const product = data[i];
+    const portCard = document.createElement("div");
+    portCard.classList.add("card1");
+
       
                    const img = document.createElement("img");
       img.src = product.image;
@@ -5107,25 +5195,65 @@ function cartIsEmpty() {
 }
 
 
-      // Add card to list
-      productsList.appendChild(card);
-      loader.style.display = "none";
+    // Add port card to list only if it's in the viewport
+    if (isPortElementInViewport(portCard)) {
+      productsList.appendChild(portCard);
     }
-  });
+  }
+  loader.style.display = "none";
+}
 
    
+
+// Function to check if an element is in the viewport
+function isPortElementInViewport(element) {
+  const rect = element.getBoundingClientRect();
+  return (
+    rect.top >= 0 &&
+    rect.left >= 0 &&
+    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+  );
+}
+
+
+
+
+// Function to handle scroll events for ports
+function handlePortScroll() {
+  const productsList = document.getElementById("products-list");
+  const portCards = document.querySelectorAll(".card1");
+
+  portCards.forEach((portCard) => {
+    if (isPortElementInViewport(portCard) && !productsList.contains(portCard)) {
+      productsList.appendChild(portCard);
+    }
+  });
+}
+
+// Attach scroll event listener for ports
+window.addEventListener("scroll", handlePortScroll);
+
+// Call the loadPortCards function when retrieving ports data
+get(portsRef).then((snapshot) => {
+  const data = snapshot.val();
+  loadPortCards(data);
+});
+
+
 
 
     //touches//
 
 
-    get(touchesRef).then((snapshot) => {
-              const data = snapshot.val();
-              const productsList = document.getElementById("products-list");
-              for (let i in data) {
-                const product = data[i];
-                const card = document.createElement("div");
-                card.classList.add("card1");
+// Function to load touches cards
+function loadTouchesCards(data) {
+  const productsList = document.getElementById("products-list");
+  for (let i in data) {
+    const product = data[i];
+    const card = document.createElement("div");
+    card.classList.add("card1");
+
       
                    const img = document.createElement("img");
       img.src = product.image;
@@ -5375,26 +5503,74 @@ function cartIsEmpty() {
 }
 
 
-      // Add card to list
+    // Add touches card to list only if it's in the viewport
+    if (isInViewportTouches(card)) {
       productsList.appendChild(card);
-      loader.style.display = "none";
+    }
+  }
+  loader.style.display = "none";
+}
+   
+
+// Function to check if an element is in the viewport
+function isInViewportTouches(element) {
+  const rect = element.getBoundingClientRect();
+  return (
+    rect.top >= 0 &&
+    rect.left >= 0 &&
+    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+  );
+}
+
+
+
+
+// Function to handle scroll events for touches
+function handleScrollTouches() {
+  const productsList = document.getElementById("products-list");
+  const cards = document.querySelectorAll(".card1");
+
+  cards.forEach((card) => {
+    if (isInViewportTouches(card) && !productsList.contains(card)) {
+      productsList.appendChild(card);
     }
   });
+}
 
-   
+// Attach scroll event listener for touches
+window.addEventListener("scroll", handleScrollTouches);
+
+// Call the loadTouchesCards function when retrieving touches data
+get(touchesRef).then((snapshot) => {
+  const data = snapshot.val();
+  loadTouchesCards(data);
+});
+
 
 
 
     //accessories//
 
 
-    get(accessoriesRef).then((snapshot) => {
-              const data = snapshot.val();
-              const productsList = document.getElementById("products-list");
-              for (let i in data) {
-                const product = data[i];
-                const card = document.createElement("div");
-                card.classList.add("card1");
+function isInViewport(element) {
+  const rect = element.getBoundingClientRect();
+  return (
+    rect.top >= 0 &&
+    rect.left >= 0 &&
+    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+  );
+}
+
+// Function to load cards
+function loadCards(data) {
+  const productsList = document.getElementById("products-list");
+  for (let i in data) {
+    const product = data[i];
+    const card = document.createElement("div");
+    card.classList.add("card1");
+
       
                    const img = document.createElement("img");
       img.src = product.image;
@@ -5642,24 +5818,43 @@ function cartIsEmpty() {
 }
 
 
-      // Add card to list
+if (isInViewport(card)) {
       productsList.appendChild(card);
-      loader.style.display = "none";
+    }
+  }
+  loader.style.display = "none";
+}
+// Function to handle scroll events
+function handleScroll() {
+  const productsList = document.getElementById("products-list");
+  const cards = document.querySelectorAll(".card1");
+
+  cards.forEach((card) => {
+    if (isInViewport(card) && !productsList.contains(card)) {
+      productsList.appendChild(card);
     }
   });
+}
 
+// Attach scroll event listener
+window.addEventListener("scroll", handleScroll);
+
+// Call the loadCards function when retrieving data
+get(accessoriesRef).then((snapshot) => {
+  const data = snapshot.val();
+  loadCards(data);
+});
 
 //electronics//
 
+// Function to load cards
+function loadCardsNew(data) {
+  const productsList = document.getElementById("products-list");
+  for (let i in data) {
+    const product = data[i];
+    const card = document.createElement("div");
+    card.classList.add("card1");
 
-get(electronicsRef).then((snapshot) => {
-              const data = snapshot.val();
-              const productsList = document.getElementById("products-list");
-              for (let i in data) {
-                const product = data[i];
-                const card = document.createElement("div");
-                card.classList.add("card1");
-      
                    const img = document.createElement("img");
       img.src = product.image;
       img.alt = product.name;
@@ -5909,66 +6104,48 @@ function cartIsEmpty() {
 }
 
 
-      // Add card to list
+      // Add card to list only if it's in the viewport
+      if (isInViewportNew(card)) {
       productsList.appendChild(card);
-      loader.style.display = "none";
+    }
+  }
+  loader.style.display = "none";
+}
+
+  // Function to check if an element is in the viewport
+function isInViewportNew(element) {
+  const rect = element.getBoundingClientRect();
+  return (
+    rect.top >= 0 &&
+    rect.left >= 0 &&
+    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+  );
+}
+
+
+  
+
+// Function to handle scroll events
+function handleScrollNew() {
+  const productsList = document.getElementById("products-list");
+  const cards = document.querySelectorAll(".card1");
+
+  cards.forEach((card) => {
+    if (isInViewportNew(card) && !productsList.contains(card)) {
+      productsList.appendChild(card);
     }
   });
-
-   
-  async function fetchAndRenderCards() {
-  try {
-    const snapshot = await get(newScreensRef);
-    const data = snapshot.val();
-    const productsList = document.getElementById("products-list");
-
-    // Intersection Observer options
-    const options = {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.1,
-    };
-
-    // Intersection Observer callback
-    function handleIntersection(entries, observer) {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const product = entry.target.productData;
-          renderCard(product);
-          observer.unobserve(entry.target);
-        }
-      });
-    }
-
-    // Create Intersection Observer
-    const observer = new IntersectionObserver(handleIntersection, options);
-
-    for (let i in data) {
-      const product = data[i];
-      const card = document.createElement("div");
-      card.classList.add("card1");
-      card.productData = product; // Store product data on the card element
-
-      // Add the card to the Intersection Observer
-      observer.observe(card);
-    }
-  } catch (error) {
-    console.error("Error fetching data:", error);
-  }
 }
 
-function renderCard(product) {
-  // Your existing card rendering logic here...
+// Attach scroll event listener
+window.addEventListener("scroll", handleScrollNew);
 
-  // Add card to list
-  productsList.appendChild(card);
-}
-
-// Call the fetchAndRenderCards function to initiate the lazy loading
-fetchAndRenderCards();
-
-
-
+// Call the loadCards function when retrieving data
+get(electronicsRef).then((snapshot) => {
+  const data = snapshot.val();
+  loadCardsNew(data);
+});
      </script>
 
 <script>

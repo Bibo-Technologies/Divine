@@ -1472,26 +1472,27 @@ transition: all 0.3s ease-in-out;
         bottom: 5px;
         right: 20px;
         padding: 8px;
-        color:white;
+        color: white;
         background-color: #00e70c;
         border: transparent;
         border-radius: 4px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         z-index: 9999;
         font-size: small;
+        max-width: 300px;
         display: none;
-        animation: slideInRight 0.5s ease-in-out;
+        animation: slideInUp 0.5s ease-in-out;
       }
       
-      @keyframes slideInRight {
+      @keyframes slideInUp {
         0% {
-          transform: translateX(100%);
+          transform: translateY(100%);
         }
         100% {
-          transform: translateX(0);
+          transform: translateY(0);
         }
       }
-
+      
       #checkout-btn {
         background-color: #4caf50;
         color: white;
@@ -2701,6 +2702,13 @@ border-radius: 10px;
 /* Style for order notes */
 .order-note {
   display: none; /* Hide initially */
+  margin-top: 5px; /* Add space between the label and note */
+  font-size: 12px;
+  color: #555;
+  margin-left: 10px;
+}
+/* Style for order notes */
+.order-note2 {
   margin-top: 5px; /* Add space between the label and note */
   font-size: 12px;
   color: #555;
