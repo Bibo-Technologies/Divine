@@ -4611,11 +4611,38 @@ function handleNewScreenScroll() {
 // Attach scroll event listener for new screens
 window.addEventListener("scroll", handleNewScreenScroll);
 
-// Call the loadNewScreenCards function when retrieving new screens data
-get(newScreensRef).then((snapshot) => {
-  const data = snapshot.val();
-  loadNewScreenCards(data);
-});
+// Function to load new screen cards with retries
+function loadNewScreenCardsWithRetries(retries = 100) {
+  // Retry loading new screen cards
+  function retryLoad() {
+    retries--;
+    if (retries >= 0) {
+      // Make the asynchronous call to retrieve new screens data
+      get(newScreensRef).then((snapshot) => {
+        const data = snapshot.val();
+        // Check if data is retrieved successfully
+        if (data) {
+          loadNewScreenCards(data);
+        } else {
+          // Retry if data is not retrieved successfully
+          retryLoad();
+        }
+      }).catch(() => {
+        // Retry if there is an error in retrieving data
+        retryLoad();
+      });
+    } else {
+      // Log an error or handle the case when retries are exhausted
+      console.error("Failed to load new screen cards after multiple retries");
+    }
+  }
+
+  // Initial attempt to retrieve new screens data
+  retryLoad();
+}
+
+// Call the function to load new screen cards with retries
+loadNewScreenCardsWithRetries();
 
 
 
@@ -4925,11 +4952,39 @@ function handleGradeBScreenScroll() {
 // Attach scroll event listener for gradeB screens
 window.addEventListener("scroll", handleGradeBScreenScroll);
 
-// Call the loadGradeBScreenCards function when retrieving gradeB screens data
-get(gradeBScreens).then((snapshot) => {
-  const data = snapshot.val();
-  loadGradeBScreenCards(data);
-});
+// Function to load gradeB screen cards with retries
+function loadGradeBScreenCardsWithRetries(retries = 100) {
+  // Retry loading gradeB screen cards
+  function retryLoad() {
+    retries--;
+    if (retries >= 0) {
+      // Make the asynchronous call to retrieve gradeB screens data
+      get(gradeBScreens).then((snapshot) => {
+        const data = snapshot.val();
+        // Check if data is retrieved successfully
+        if (data) {
+          loadGradeBScreenCards(data);
+        } else {
+          // Retry if data is not retrieved successfully
+          retryLoad();
+        }
+      }).catch(() => {
+        // Retry if there is an error in retrieving data
+        retryLoad();
+      });
+    } else {
+      // Log an error or handle the case when retries are exhausted
+      console.error("Failed to load gradeB screen cards after multiple retries");
+    }
+  }
+
+  // Initial attempt to retrieve gradeB screens data
+  retryLoad();
+}
+
+// Call the function to load gradeB screen cards with retries
+loadGradeBScreenCardsWithRetries();
+
 
 
 
@@ -5234,11 +5289,38 @@ function handlePortScroll() {
 // Attach scroll event listener for ports
 window.addEventListener("scroll", handlePortScroll);
 
-// Call the loadPortCards function when retrieving ports data
-get(portsRef).then((snapshot) => {
-  const data = snapshot.val();
-  loadPortCards(data);
-});
+// Function to load port cards with retries
+function loadPortCardsWithRetries(retries = 100) {
+  // Retry loading port cards
+  function retryLoad() {
+    retries--;
+    if (retries >= 0) {
+      // Make the asynchronous call to retrieve ports data
+      get(portsRef).then((snapshot) => {
+        const data = snapshot.val();
+        // Check if data is retrieved successfully
+        if (data) {
+          loadPortCards(data);
+        } else {
+          // Retry if data is not retrieved successfully
+          retryLoad();
+        }
+      }).catch(() => {
+        // Retry if there is an error in retrieving data
+        retryLoad();
+      });
+    } else {
+      // Log an error or handle the case when retries are exhausted
+      console.error("Failed to load port cards after multiple retries");
+    }
+  }
+
+  // Initial attempt to retrieve ports data
+  retryLoad();
+}
+
+// Call the function to load port cards with retries
+loadPortCardsWithRetries();
 
 
 
@@ -5541,11 +5623,38 @@ function handleScrollTouches() {
 // Attach scroll event listener for touches
 window.addEventListener("scroll", handleScrollTouches);
 
-// Call the loadTouchesCards function when retrieving touches data
-get(touchesRef).then((snapshot) => {
-  const data = snapshot.val();
-  loadTouchesCards(data);
-});
+// Function to load touches cards with retries
+function loadTouchesCardsWithRetries(retries = 1000) {
+  // Retry loading touches cards
+  function retryLoad() {
+    retries--;
+    if (retries >= 0) {
+      // Make the asynchronous call to retrieve touches data
+      get(touchesRef).then((snapshot) => {
+        const data = snapshot.val();
+        // Check if data is retrieved successfully
+        if (data) {
+          loadTouchesCards(data);
+        } else {
+          // Retry if data is not retrieved successfully
+          retryLoad();
+        }
+      }).catch(() => {
+        // Retry if there is an error in retrieving data
+        retryLoad();
+      });
+    } else {
+      // Log an error or handle the case when retries are exhausted
+      console.error("Failed to load touches cards after multiple retries");
+    }
+  }
+
+  // Initial attempt to retrieve touches data
+  retryLoad();
+}
+
+// Call the function to load touches cards with retries
+loadTouchesCardsWithRetries();
 
 
 
@@ -5839,11 +5948,39 @@ function handleScroll() {
 // Attach scroll event listener
 window.addEventListener("scroll", handleScroll);
 
-// Call the loadCards function when retrieving data
-get(accessoriesRef).then((snapshot) => {
-  const data = snapshot.val();
-  loadCards(data);
-});
+// Function to load cards with retries
+function loadCardsWithRetries(dataRef, loadFunction, retries = 100) {
+  // Retry loading cards
+  function retryLoad() {
+    retries--;
+    if (retries >= 0) {
+      // Make the asynchronous call to retrieve data
+      get(dataRef).then((snapshot) => {
+        const data = snapshot.val();
+        // Check if data is retrieved successfully
+        if (data) {
+          loadFunction(data);
+        } else {
+          // Retry if data is not retrieved successfully
+          retryLoad();
+        }
+      }).catch(() => {
+        // Retry if there is an error in retrieving data
+        retryLoad();
+      });
+    } else {
+      // Log an error or handle the case when retries are exhausted
+      console.error(`Failed to load cards after multiple retries for ${dataRef}`);
+    }
+  }
+
+  // Initial attempt to retrieve data
+  retryLoad();
+}
+
+// Call the function to load cards with retries for accessories
+loadCardsWithRetries(accessoriesRef, loadCards);
+
 
 //electronics//
 
@@ -6141,11 +6278,39 @@ function handleScrollNew() {
 // Attach scroll event listener
 window.addEventListener("scroll", handleScrollNew);
 
-// Call the loadCards function when retrieving data
-get(electronicsRef).then((snapshot) => {
-  const data = snapshot.val();
-  loadCardsNew(data);
-});
+// Function to load cards with retries
+function loadCardsWithRetry(dataRef, loadFunction, retries = 1000) {
+  // Retry loading cards
+  function retryLoad() {
+    retries--;
+    if (retries >= 0) {
+      // Make the asynchronous call to retrieve data
+      get(dataRef).then((snapshot) => {
+        const data = snapshot.val();
+        // Check if data is retrieved successfully
+        if (data) {
+          loadFunction(data);
+        } else {
+          // Retry if data is not retrieved successfully
+          retryLoad();
+        }
+      }).catch(() => {
+        // Retry if there is an error in retrieving data
+        retryLoad();
+      });
+    } else {
+      // Log an error or handle the case when retries are exhausted
+      console.error(`Failed to load cards after multiple retries for ${dataRef}`);
+    }
+  }
+
+  // Initial attempt to retrieve data
+  retryLoad();
+}
+
+// Call the function to load cards with retries for electronics
+loadCardsWithRetry(electronicsRef, loadCardsNew);
+
      </script>
 
 <script>
