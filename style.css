@@ -742,7 +742,6 @@ body {
     display: flex;
     flex-direction: column;
     margin: 10px auto;
-    cursor: pointer;
     width: 98%;
     min-height: fit-content;
     padding: 5px;
@@ -754,7 +753,7 @@ body {
   }
   
   .card1:hover {
-    transform: scale(1.02); /* Scale the card by 5% on hover */
+    transform: scale(1.0); /* Scale the card by 5% on hover */
     border-color: orange;
     background-color: rgb(255, 251, 248);
     box-shadow: 0 2px 5px rgba(0, 0, 0,0.3);
@@ -1132,7 +1131,7 @@ transition: all 0.3s ease-in-out;
   }
   @media screen and (max-width: 480px){
     .image-slider{
-      height: 180px;
+      height: 200px;
     }
   }
 
@@ -1390,6 +1389,8 @@ transition: all 0.3s ease-in-out;
         overflow-y: auto;
         transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
       }
+
+
          /* Responsive Styles */
          @media (max-width: 768px) {
          
@@ -1441,8 +1442,8 @@ transition: all 0.3s ease-in-out;
       .cart-item p {
         margin: 0;
       }
-      .cart-item p {
-        margin: 0;
+      .cart h2{
+        font-weight: 200;
       }
       .quantity-input {
         width: 0px; /* Adjust the width as desired */
@@ -1884,6 +1885,7 @@ transition: all 0.3s ease-in-out;
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+  margin-top: 10px;
 }
 
 .success-popup button.okay-button:hover {
@@ -2257,10 +2259,12 @@ body.no-scroll {
 .receipt-container {
   margin-bottom: 20px;
   padding: 15px;
-  border: 1px solid #ddd;
+  border: 2px solid #006c28;
   font-size: small;
   width: 100%; /* Adjust the width as needed */
-  margin: auto; /* Center the receipt container */
+  margin: 15px auto; /* Center the receipt container */
+  border-radius: 10px;
+
 }
 
 /* Styles for each receipt info */
@@ -2735,4 +2739,39 @@ border-radius: 10px;
 .copied {
   color: #28a745; /* Green color for copied feedback */
   cursor: pointer;
+}
+
+#backToTopBtn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: fit-content;
+  display: none;
+  background-color: #2c3e99;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  font-size: 15px;
+}
+
+.receipt-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2px;
+}
+.receipt-info span{
+margin-right: 10px;
+}
+
+.watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.1; /* Adjust the opacity as needed */
+  z-index: 999; /* Ensure the watermark is on top of the content */
 }

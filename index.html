@@ -72,7 +72,7 @@
     </div>
     <div class="menu">
       <ul class="menu1">
-        <li ><a href="#"><i style="margin-right: 5px;" class="fa fa-download"></i>Price List</a></li>
+       
         <li ><a href="tel:+256759740405">Contact Us</a></li>
         <li ><a href="#" id="accountLink"> <i style="margin-right: 5px;" class="fa fa-user"></i>Account</a></li>
 
@@ -317,8 +317,10 @@ if($('.cookie-notice').length) {
   </form>
 </div>
 <div id="message-container"></div>
- 
-    
+<button id="backToTopBtn">
+  <i class="fas fa-arrow-up"></i> <!-- Font Awesome arrow-up icon -->
+</button>
+
 <!-- Include this element in your HTML for displaying the message -->
 <div id="messageContainer" class="message-container">
   <div id="messageContent" class="message-content">
@@ -1224,7 +1226,7 @@ function showSuccessPopup() {
     okayButton.addEventListener("click", () => {
        location.reload()
         document.body.removeChild(successPopup);
-        popupContainer.style.display = "none";
+       // popupContainer.style.display = "none";
        
     });
 
@@ -1248,7 +1250,7 @@ function showErrorPopup() {
 
     // Create the error message
     const errorMessage = document.createElement("h3");
-    errorMessage.innerText = "Oops...Order Failed, something went wrong! Check your internet connection and try again. If problem persists, contact support.";
+    errorMessage.innerText = "Oops..., something went wrong! Check your internet connection or else you have missing fields";
 
     // Create the okay button
     const okayButton = document.createElement("button");
@@ -1257,7 +1259,10 @@ function showErrorPopup() {
 
     // Add event listener to the okay button
     okayButton.addEventListener("click", () => {
-        location.reload(); // Refresh the page
+       // location.reload(); // Refresh the page
+       document.body.removeChild(errorPopup);
+       // popupContainer.style.display = "none";
+       
     });
 
     // Append the okay button to the error popup
@@ -1319,8 +1324,16 @@ const deliveryPlace = deliveryPlaceInput.value;
 // Get the selected means of transport
 const meansOfTransport = transportSelect.value;
 
+
 // Get the selected payment option
-const selectedPaymentOption = document.querySelector('input[name="payment-option"]:checked').value;
+const selectedPaymentOptionElement = document.querySelector('input[name="payment-option"]:checked');
+if (!selectedPaymentOptionElement) {
+    // Payment option not selected, show an error message
+    showErrorPopup("Please select a payment option");
+    return;
+}
+const selectedPaymentOption = selectedPaymentOptionElement.value;
+
 
 // Initialize orderSummary as an array
 const orderSummary = [];
@@ -1370,7 +1383,12 @@ const newOrderRef = push(orderRef);
 
 // Get the telephone number from the input field
 const telephoneNumber = telephoneInput.value;
-
+  // Validate required fields
+  if (!deliveryPlace || !meansOfTransport || !telephoneNumber) {
+        // Show an error message if any required field is empty
+        showErrorPopup("Please fill in all required fields");
+        return;
+    }
 // Get the selected order type
 const selectedOrderType = document.querySelector('input[name="order-type"]:checked').value;
 
@@ -1405,8 +1423,6 @@ const orderData = {
     userEmail, // Add the email of the user (if needed)
     telephoneNumber, // Add the telephone number
 };
-
-// Rest of your code...
 
 
     set(newOrderRef, orderData)
@@ -1603,7 +1619,7 @@ filterContainer.appendChild(clearDateButton);
 
 
 // Append the filter container to the document body or another container
-document.body.appendChild(filterContainer);
+popupContainer.appendChild(filterContainer);
 
 // Add fade-in animation to the popup container
 popupContainer.style.animation = "fadeIn 0.5s";
@@ -1664,19 +1680,27 @@ function handleDateFilter(event) {
 
     // Parse and format the orderDate to match the selectedDate format
     const formattedOrderDate = new Date(orderDate);
-    const formattedSelectedDate = formattedOrderDate.toLocaleDateString('en-US', {
-      month: 'numeric',
-      day: 'numeric',
-      year: 'numeric'
-    });
 
-    if (selectedDate && formattedOrderDate.toISOString().split('T')[0] !== selectedDate) {
-      receiptContainer.style.display = 'none'; // hide orders not matching the selected date
-    } else {
-      receiptContainer.style.display = 'block'; // show orders matching the selected date
-      ordersFound = true; // Orders are found for the selected date
+    // Check if formattedOrderDate is a valid date object
+    if (!isNaN(formattedOrderDate.getTime())) {
+      const formattedSelectedDate = formattedOrderDate.toLocaleDateString('en-US', {
+        month: 'numeric',
+        day: 'numeric',
+        year: 'numeric'
+      });
+
+      // Convert selectedDate to a Date object
+      const selectedDateObj = new Date(selectedDate);
+
+      if (selectedDate && formattedOrderDate.toISOString().split('T')[0] !== selectedDateObj.toISOString().split('T')[0]) {
+        receiptContainer.style.display = 'none'; // hide orders not matching the selected date
+      } else {
+        receiptContainer.style.display = 'block'; // show orders matching the selected date
+        ordersFound = true; // Orders are found for the selected date
+      }
     }
   });
+
 
   // Toggle the visibility of the message container based on orders found
   noOrdersMessageContainer.style.display = ordersFound ? 'none' : 'block';
@@ -1777,13 +1801,15 @@ function handleOrderIdSearch(event) {
 
     // Create elements for receipt details using template literals
     const receiptDetails = `
-      <p class="receipt-info">Order ID: ${receipt.orderId}</p>
-      <p class="receipt-info">Order Date: ${receipt.orderDate}</p>
-      <p class="receipt-info">Delivery Place: ${receipt.deliveryPlace}</p>
-      <p class="receipt-info">Means of Transport: ${receipt.meansOfTransport}</p>
-      <p class="receipt-info">Payment Option: ${receipt.selectedPaymentOption}</p>
-      <p class="receipt-info">Order Type: ${receipt.selectedOrderType}</p>
-      <p class="receipt-info">Order Type: ${receipt.orderTime}</p>
+ 
+<p class="receipt-info"><span>Order ID:  </span>   ${receipt.orderId}</p>
+<p class="receipt-info"><span>Order Date:  </span>   ${receipt.orderDate}</p>
+<p class="receipt-info"><span>Delivery Place: </span>   ${receipt.deliveryPlace}</p>
+<p class="receipt-info"><span>Means of Transport:  </span>   ${receipt.meansOfTransport}</p>
+<p class="receipt-info"><span>Payment Option:  </span>   ${receipt.selectedPaymentOption}</p>
+<p class="receipt-info"><span>Order Type:  </span>   ${receipt.selectedOrderType}</p>
+<p class="receipt-info"><span>Order Time:  </span>   ${receipt.orderTime}</p>
+
 
       <!-- Replace the existing order summary element with this table -->
 <table class="order-summary-table">
@@ -1981,16 +2007,18 @@ function clearSearchBar() {
     const promise = get(nodeRef).then((snapshot) => {
       const data = snapshot.val();
 
-      // Process the data and display matching products
-      const productsList = document.getElementById("products-list");
-      for (let i in data) {
-        const product = data[i];
-        const name = product.name.toLowerCase();
-        if (name.includes(query)) {
-          // Create a card for the matching product
-          const card = document.createElement("div");
-          card.classList.add("card1");
-      
+// Process the data and display matching products
+const productsList = document.getElementById("products-list");
+for (let i in data) {
+    const product = data[i];
+    const name = product.name.toLowerCase();
+    const description = product.description.toLowerCase();
+    const queryLower = query.toLowerCase();
+
+    if (name.includes(queryLower) || description.includes(queryLower)) {
+        // Create a card for the matching product
+        const card = document.createElement("div");
+        card.classList.add("card1");
 
       // Add product image
       const img = document.createElement("img");
@@ -2039,10 +2067,13 @@ function clearSearchBar() {
 
 
 
-      // Add product price
-      const price = document.createElement("h4");
-      price.innerText = `UGX ${product.price}`;
-      card.appendChild(price);
+// Add product price
+const price = document.createElement("h4");
+const formattedPrice = parseFloat(product.price).toLocaleString('en-US');
+
+price.innerText = `UGX ${formattedPrice}`;
+card.appendChild(price);
+
 
 
 
@@ -2313,10 +2344,13 @@ card.appendChild(guaranteeText);
       const desc = document.createElement("p");
       desc.innerText = product.description;
       card.appendChild(desc);
-      // Add product price
-      const price = document.createElement("h4");
-      price.innerText = `UGX ${product.price}`;
-      card.appendChild(price);
+// Add product price
+const price = document.createElement("h4");
+const formattedPrice = parseFloat(product.price).toLocaleString('en-US');
+
+price.innerText = `UGX ${formattedPrice}`;
+card.appendChild(price);
+
 
     
    
@@ -2571,10 +2605,13 @@ card.appendChild(guaranteeText);
       const desc = document.createElement("p");
       desc.innerText = product.description;
       card.appendChild(desc);
-      // Add product price
-      const price = document.createElement("h4");
-      price.innerText = `UGX ${product.price}`;
-      card.appendChild(price);
+// Add product price
+const price = document.createElement("h4");
+const formattedPrice = parseFloat(product.price).toLocaleString('en-US');
+
+price.innerText = `UGX ${formattedPrice}`;
+card.appendChild(price);
+
 
     
 // Create the "Add to Cart" button
@@ -2831,10 +2868,13 @@ document.querySelector("#newScreens-link").addEventListener("click", () => {
       const desc = document.createElement("p");
       desc.innerText = product.description;
       card.appendChild(desc);
-      // Add product price
-      const price = document.createElement("h4");
-      price.innerText = `UGX ${product.price}`;
-      card.appendChild(price);
+// Add product price
+const price = document.createElement("h4");
+const formattedPrice = parseFloat(product.price).toLocaleString('en-US');
+
+price.innerText = `UGX ${formattedPrice}`;
+card.appendChild(price);
+
 
      
 // Create the "Add to Cart" button
@@ -3085,10 +3125,13 @@ card.appendChild(guaranteeText);
       const desc = document.createElement("p");
       desc.innerText = product.description;
       card.appendChild(desc);
-      // Add product price
-      const price = document.createElement("h4");
-      price.innerText = `UGX ${product.price}`;
-      card.appendChild(price);
+// Add product price
+const price = document.createElement("h4");
+const formattedPrice = parseFloat(product.price).toLocaleString('en-US');
+
+price.innerText = `UGX ${formattedPrice}`;
+card.appendChild(price);
+
 
     
 // Create the "Add to Cart" button
@@ -3345,10 +3388,13 @@ document.querySelector("#touches-link").addEventListener("click", () => {
       const desc = document.createElement("p");
       desc.innerText = product.description;
       card.appendChild(desc);
-      // Add product price
-      const price = document.createElement("h4");
-      price.innerText = ` UGX ${product.price}`;
-      card.appendChild(price);
+// Add product price
+const price = document.createElement("h4");
+const formattedPrice = parseFloat(product.price).toLocaleString('en-US');
+
+price.innerText = `UGX ${formattedPrice}`;
+card.appendChild(price);
+
 
      
 // Create the "Add to Cart" button
@@ -3601,10 +3647,13 @@ document.querySelector("#electronics-link").addEventListener("click", () => {
       const desc = document.createElement("p");
       desc.innerText = product.description;
       card.appendChild(desc);
-      // Add product price
-      const price = document.createElement("h4");
-      price.innerText = `UGX ${product.price}`;
-      card.appendChild(price);
+// Add product price
+const price = document.createElement("h4");
+const formattedPrice = parseFloat(product.price).toLocaleString('en-US');
+
+price.innerText = `UGX ${formattedPrice}`;
+card.appendChild(price);
+
 
     
 // Create the "Add to Cart" button
@@ -3856,10 +3905,13 @@ document.querySelector("#accessories-link").addEventListener("click", () => {
       const desc = document.createElement("p");
       desc.innerText = product.description;
       card.appendChild(desc);
-      // Add product price
-      const price = document.createElement("h4");
-      price.innerText = `UGX ${product.price}`;
-      card.appendChild(price);
+// Add product price
+const price = document.createElement("h4");
+const formattedPrice = parseFloat(product.price).toLocaleString('en-US');
+
+price.innerText = `UGX ${formattedPrice}`;
+card.appendChild(price);
+
 
     
 // Create the "Add to Cart" button
@@ -4112,10 +4164,13 @@ document.querySelector("#ports-link").addEventListener("click", () => {
       const desc = document.createElement("p");
       desc.innerText = product.description;
       card.appendChild(desc);
-      // Add product price
-      const price = document.createElement("h4");
-      price.innerText = `UGX ${product.price}`;
-      card.appendChild(price);
+// Add product price
+const price = document.createElement("h4");
+const formattedPrice = parseFloat(product.price).toLocaleString('en-US');
+
+price.innerText = `UGX ${formattedPrice}`;
+card.appendChild(price);
+
 
      
 // Create the "Add to Cart" button
@@ -4318,12 +4373,12 @@ function loadNewScreenCards(data) {
   const usedBadge = document.createElement("div");
   usedBadge.classList.add("used-badge2");
   usedBadge.innerText = "Brand New";
-  card.appendChild(usedBadge);
+  newScreenCard.appendChild(usedBadge);
    // Add guarantee text
 const guaranteeText = document.createElement("div");
 guaranteeText.innerHTML = "<i class='fa fa-shield'></i>1 month Guarantee for Brand New";
 guaranteeText.classList.add("guarantee-text");
-card.appendChild(guaranteeText);
+newScreenCard.appendChild(guaranteeText);
                    const img = document.createElement("img");
       img.src = product.image;
       img.alt = product.name;
@@ -4334,7 +4389,7 @@ card.appendChild(guaranteeText);
         modal.style.display = "block";
         modalImg.src = img.src;
       });
-      card.appendChild(img);
+      newScreenCard.appendChild(img);
       
       const modal = document.querySelector(".modal");
       const closeBtn = document.querySelector(".close");
@@ -4346,7 +4401,7 @@ card.appendChild(guaranteeText);
 
                 const title = document.createElement("h2");
                 title.innerText = product.name;
-                card.appendChild(title);
+                newScreenCard.appendChild(title);
 
 
                       const stars = document.createElement("div");            
@@ -4357,7 +4412,7 @@ for (let j = 0; j < 5; j++) {
   star.innerHTML = "&#9733;"; // Unicode character for a star
   stars.appendChild(star);
 }
-card.appendChild(stars);
+newScreenCard.appendChild(stars);
 
 
         // Add fast delivery sticker with icon
@@ -4369,20 +4424,23 @@ card.appendChild(stars);
   fastDeliverySticker.innerHTML = '... <i class="fas fa-truck"></i> Fast Delivery';
 
   stickerContainer.appendChild(fastDeliverySticker);
-  card.appendChild(stickerContainer);
+  newScreenCard.appendChild(stickerContainer);
 
 
 
                 const desc = document.createElement("p");
                 desc.innerText = product.description;
-                card.appendChild(desc);
+                newScreenCard.appendChild(desc);
       
 
       
-                const price = document.createElement("h4");
-                price.innerText = `UGX ${product.price}`;
-                card.appendChild(price);
-      
+// Add product price
+const price = document.createElement("h4");
+const formattedPrice = parseFloat(product.price).toLocaleString('en-US');
+
+price.innerText = `UGX ${formattedPrice}`;
+newScreenCard.appendChild(price);
+
 
 
 
@@ -4525,7 +4583,7 @@ addToCartBtn.addEventListener("click", () => {
 });
 
 // Assuming `card` is the element representing the product card
-card.appendChild(addToCartBtn);
+newScreenCard.appendChild(addToCartBtn);
 
 // Function to show the "Added to Cart" message
 function showAddToCartMessage(productName) {
@@ -4663,12 +4721,12 @@ function loadGradeBScreenCards(data) {
   const usedBadge = document.createElement("div");
   usedBadge.classList.add("used-badge");
   usedBadge.innerText = "Grade B ";
-  card.appendChild(usedBadge);
+  gradeBScreenCard.appendChild(usedBadge);
    // Add guarantee text
 const guaranteeText = document.createElement("div");
 guaranteeText.innerHTML = "<i class='fa fa-shield'></i>No Guarantee for Grade B";
 guaranteeText.classList.add("guarantee-text");
-card.appendChild(guaranteeText);
+gradeBScreenCard.appendChild(guaranteeText);
       
                    const img = document.createElement("img");
       img.src = product.image;
@@ -4680,7 +4738,7 @@ card.appendChild(guaranteeText);
         modal.style.display = "block";
         modalImg.src = img.src;
       });
-      card.appendChild(img);
+      gradeBScreenCard.appendChild(img);
       
       const modal = document.querySelector(".modal");
       const closeBtn = document.querySelector(".close");
@@ -4692,7 +4750,7 @@ card.appendChild(guaranteeText);
 
                 const title = document.createElement("h2");
                 title.innerText = product.name;
-                card.appendChild(title);
+                gradeBScreenCard.appendChild(title);
       
                 const stars = document.createElement("div");            
 stars.classList.add("stars");
@@ -4702,7 +4760,7 @@ for (let j = 0; j < 5; j++) {
   star.innerHTML = "&#9733;"; // Unicode character for a star
   stars.appendChild(star);
 }
-card.appendChild(stars);
+gradeBScreenCard.appendChild(stars);
 
         // Add fast delivery sticker with icon
   const stickerContainer = document.createElement("div");
@@ -4713,19 +4771,23 @@ card.appendChild(stars);
   fastDeliverySticker.innerHTML = '... <i class="fas fa-truck"></i> Fast Delivery';
 
   stickerContainer.appendChild(fastDeliverySticker);
-  card.appendChild(stickerContainer);
+  gradeBScreenCard.appendChild(stickerContainer);
 
 
                 const desc = document.createElement("p");
                 desc.innerText = product.description;
-                card.appendChild(desc);
+                gradeBScreenCard.appendChild(desc);
       
      
       
       
-                const price = document.createElement("h4");
-                price.innerText = `UGX ${product.price}`;
-                card.appendChild(price);
+// Add product price
+const price = document.createElement("h4");
+const formattedPrice = parseFloat(product.price).toLocaleString('en-US');
+
+price.innerText = `UGX ${formattedPrice}`;
+gradeBScreenCard.appendChild(price);
+
       
 
 
@@ -4866,7 +4928,7 @@ addToCartBtn.addEventListener("click", () => {
 });
 
 // Assuming `card` is the element representing the product card
-card.appendChild(addToCartBtn);
+gradeBScreenCard.appendChild(addToCartBtn);
 
 // Function to show the "Added to Cart" message
 function showAddToCartMessage(productName) {
@@ -5013,7 +5075,7 @@ function loadPortCards(data) {
         modal.style.display = "block";
         modalImg.src = img.src;
       });
-      card.appendChild(img);
+      portCard.appendChild(img);
       
       const modal = document.querySelector(".modal");
       const closeBtn = document.querySelector(".close");
@@ -5025,7 +5087,7 @@ function loadPortCards(data) {
 
                 const title = document.createElement("h2");
                 title.innerText = product.name;
-                card.appendChild(title);
+                portCard.appendChild(title);
       
                 const stars = document.createElement("div");            
 stars.classList.add("stars");
@@ -5035,7 +5097,7 @@ for (let j = 0; j < 5; j++) {
   star.innerHTML = "&#9733;"; // Unicode character for a star
   stars.appendChild(star);
 }
-card.appendChild(stars);
+portCard.appendChild(stars);
 
 
 
@@ -5048,19 +5110,23 @@ card.appendChild(stars);
   fastDeliverySticker.innerHTML = '... <i class="fas fa-truck"></i> Fast Delivery';
 
   stickerContainer.appendChild(fastDeliverySticker);
-  card.appendChild(stickerContainer);
+  portCard.appendChild(stickerContainer);
 
 
 
                 const desc = document.createElement("p");
                 desc.innerText = product.description;
-                card.appendChild(desc);
+                portCard.appendChild(desc);
       
       
       
-                const price = document.createElement("h4");
-                price.innerText = `UGX ${product.price}`;
-                card.appendChild(price);
+// Add product price
+const price = document.createElement("h4");
+const formattedPrice = parseFloat(product.price).toLocaleString('en-US');
+
+price.innerText = `UGX ${formattedPrice}`;
+portCard.appendChild(price);
+
       
 
 
@@ -5200,7 +5266,7 @@ addToCartBtn.addEventListener("click", () => {
 });
 
 // Assuming `card` is the element representing the product card
-card.appendChild(addToCartBtn);
+portCard.appendChild(addToCartBtn);
 
 // Function to show the "Added to Cart" message
 function showAddToCartMessage(productName) {
@@ -5390,9 +5456,13 @@ card.appendChild(stars);
       
       
       
-                const price = document.createElement("h4");
-                price.innerText = `UGX ${product.price}`;
-                card.appendChild(price);
+// Add product price
+const price = document.createElement("h4");
+const formattedPrice = parseFloat(product.price).toLocaleString('en-US');
+
+price.innerText = `UGX ${formattedPrice}`;
+card.appendChild(price);
+
       
 
 
@@ -5734,10 +5804,13 @@ card.appendChild(stars);
      
       
       
-                const price = document.createElement("h4");
-                price.innerText = `UGX ${product.price}`;
-                card.appendChild(price);
-      
+// Add product price
+const price = document.createElement("h4");
+const formattedPrice = parseFloat(product.price).toLocaleString('en-US');
+
+price.innerText = `UGX ${formattedPrice}`;
+card.appendChild(price);
+
 
 
 
@@ -6047,9 +6120,13 @@ card.appendChild(stars);
       
       
       
-                const price = document.createElement("h4");
-                price.innerText = `UGX ${product.price}`;
-                card.appendChild(price);
+// Add product price
+const price = document.createElement("h4");
+const formattedPrice = parseFloat(product.price).toLocaleString('en-US');
+
+price.innerText = `UGX ${formattedPrice}`;
+card.appendChild(price);
+
       
 
 
@@ -6325,6 +6402,23 @@ setInterval(() => {
   images[index].classList.add('active');
 }, interval);
 
+const backToTopBtn = document.getElementById('backToTopBtn');
+
+window.addEventListener('scroll', () => {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        backToTopBtn.style.display = 'block';
+    } else {
+        backToTopBtn.style.display = 'none';
+    }
+});
+
+backToTopBtn.addEventListener('click', () => {
+    // Use smooth scrolling to scroll to the top
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
 
 
 </script>
