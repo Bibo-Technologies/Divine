@@ -1684,7 +1684,7 @@ let lastQuery = '';
 let suggestionsProcessed = true;
 
 // Function to fetch suggestions with retries
-function fetchSuggestions(query, retryCount = 100) {
+function fetchSuggestions(query, retryCount = 1) {
     return new Promise((resolve, reject) => {
       // Define an array of Firebase node references to search through
       const firebaseNodes = [newScreensRef, gradeBScreens, accessoriesRef, portsRef, touchesRef, electronicsRef];
