@@ -878,7 +878,7 @@ function showSuccessPopup() {
     // Create the success message
     const successMessage = document.createElement("h3");
     const successText = document.createElement("p");
-    successText.innerText = "Thank you for shopping with us... You can always find your receipts in your account. Thank you.";
+    successText.innerText = "Thank you for shopping with us... You can always find your receipts in your account and use ORDER IDs as reasons for payment. Thank you.";
     successMessage.innerText = "Order Successful !";
 
     // Create the okay button
