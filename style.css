@@ -681,16 +681,12 @@ body {
     border-radius: 50%;
     width: 15vw;
     height: 15vw;
-    background-color: transparent;
-    border-color: transparent;
     max-width: 90px;
     max-height: 90px;
     box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(5px);
     text-align: center;
-    
   }
-  
   .logo2 {
     width: 80px; /* Adjust the width of the logo as needed */
     height: auto;
@@ -984,13 +980,12 @@ button:hover{
   height: 50px;
   border-radius: 50%;
   border-top-color: #3498db;
+  border: 8px solid #f3f3f3; /* Light gray */
   animation: spin 1s infinite ease-in-out;
 }
-
 @keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 

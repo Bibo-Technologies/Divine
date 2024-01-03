@@ -1039,7 +1039,7 @@ const cartTotal = parseFloat(cartTotalElement.innerText.replace("TOTAL: UGX ", "
 
 // Rest of your code...
       
-      // Create the loader container
+// Create the loader container
 const loaderContainer = document.createElement("div");
 loaderContainer.classList.add("loader-container");
 
@@ -1055,14 +1055,20 @@ const newOrderRef = push(orderRef);
 
 // Get the telephone number from the input field
 const telephoneNumber = telephoneInput.value;
-  // Validate required fields
-  if (!deliveryPlace || !meansOfTransport || !telephoneNumber) {
-        // Show an error message if any required field is empty
-        showErrorPopup("Please fill in all required fields");
-        return;
-    }
+
 // Get the selected order type
-const selectedOrderType = document.querySelector('input[name="order-type"]:checked').value;
+const selectedOrderType = document.querySelector('input[name="order-type"]:checked');
+
+// Validate required fields, including the order type
+if (!deliveryPlace || !meansOfTransport || !telephoneNumber || !selectedOrderType) {
+    // Show an error message if any required field is empty or if the order type is not selected
+    showErrorPopup("Please fill in all required fields and select an order type");
+    document.body.removeChild(loaderContainer); // Remove the loader container
+    return;
+}
+
+// If you need the value of the selected order type, you can access it using selectedOrderType.value
+const orderTypeValue = selectedOrderType.value;
 
 // Function to generate a random alphanumeric string
 function generateRandomOrderId(length) {
@@ -1088,7 +1094,7 @@ const orderData = {
     deliveryPlace,
     meansOfTransport,
     selectedPaymentOption,
-    selectedOrderType, // Add the selected order type
+    selectedOrderType: orderTypeValue, // Add the selected order type
     orderSummary,
     cartTotal,
     userId, // Add the UID of the user
@@ -1096,63 +1102,62 @@ const orderData = {
     telephoneNumber, // Add the telephone number
 };
 
-
-    set(newOrderRef, orderData)
-        .then(() => {
-            // Order placed successfully
-            // Save the receipt in the customer's account
-
-            // Create a new reference to the customer's receipt in the "receipts" node
-            const userReceiptRef = ref(database, `users/${userId}/receipts`);
-            const newUserReceiptRef = push(userReceiptRef);
-
-// Save the receipt data under the user's account
-const receiptData = {
-  orderId: randomOrderId,
-    orderDate: orderData.orderDate,
-    orderTime: orderData.orderTime,
-    deliveryPlace: orderData.deliveryPlace,
-    meansOfTransport: orderData.meansOfTransport,
-    selectedPaymentOption: orderData.selectedPaymentOption,
-    selectedOrderType: orderData.selectedOrderType, // Add the selected order type
-    orderSummary: orderData.orderSummary,
-    cartTotal: orderData.cartTotal,
-    userId: userId, // Add the UID of the user
-    userEmail: user.email, // Add the email of the user (if needed)
-    // Add other user-related details as needed
-};
-
-
-set(newUserReceiptRef, receiptData)
+// Save the order data
+set(newOrderRef, orderData)
     .then(() => {
-        // Receipt saved successfully
-        showSuccessPopup();
-        clearCart();
+        // Order placed successfully
+        // Save the receipt in the customer's account
+
+        // Create a new reference to the customer's receipt in the "receipts" node
+        const userReceiptRef = ref(database, `users/${userId}/receipts`);
+        const newUserReceiptRef = push(userReceiptRef);
+
+        // Save the receipt data under the user's account
+        const receiptData = {
+            orderId: randomOrderId,
+            orderDate: orderData.orderDate,
+            orderTime: orderData.orderTime,
+            deliveryPlace: orderData.deliveryPlace,
+            meansOfTransport: orderData.meansOfTransport,
+            selectedPaymentOption: orderData.selectedPaymentOption,
+            selectedOrderType: orderData.selectedOrderType, // Add the selected order type
+            orderSummary: orderData.orderSummary,
+            cartTotal: orderData.cartTotal,
+            userId: userId, // Add the UID of the user
+            userEmail: user.email, // Add the email of the user (if needed)
+            // Add other user-related details as needed
+        };
+
+        // Save the receipt data
+        set(newUserReceiptRef, receiptData)
+            .then(() => {
+                // Receipt saved successfully
+                showSuccessPopup();
+                clearCart();
+            })
+            .catch((error) => {
+                console.error("Error saving receipt:", error.message);
+                showErrorPopup();
+            })
+            .finally(() => {
+                // Remove the loader container
+                document.body.removeChild(loaderContainer);
+            });
     })
     .catch((error) => {
-        console.error("Error saving receipt:", error.message);
+        console.error("Error placing order:", error.message);
         showErrorPopup();
+        document.body.removeChild(loaderContainer); // Remove the loader container in case of an error
     });
 
-        })
-        .catch((error) => {
-            console.error("Error placing order:", error.message);
-            showErrorPopup();
-        })
-        .finally(() => {
-            // Remove the loader container
-            document.body.removeChild(loaderContainer);
-        
-
-
-
 // Simulating the booking process
+// Note: This setTimeout should be removed in the actual implementation
 setTimeout(() => {
-  // Simulate successful booking
-  showSuccessPopup();
+    // Simulate successful booking
+    showSuccessPopup();
 
-  // Simulate failed booking
-  // showErrorPopup();
+    // Simulate failed booking
+    // showErrorPopup();
 }, 2000);
 
 
@@ -1166,7 +1171,7 @@ cartContent.style.display = "none";
 });
 
 });
-});
+
 
 
 
