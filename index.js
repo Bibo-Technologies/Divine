@@ -139,7 +139,7 @@ totalPriceParagraph.id = "total-price";
 // Create the checkout button
 const checkoutBtn = document.createElement("button");
 checkoutBtn.id = "checkout-btn";
-checkoutBtn.innerHTML = '<i class="fa fa-arrow-right"></i> Checkout';
+checkoutBtn.innerHTML = '<i class="fas fa-shopping-cart"></i> Checkout';
 
 // Create a div to contain the button and total
 const buttonAndTotalContainer = document.createElement("div");
@@ -1164,9 +1164,6 @@ setTimeout(() => {
 
 });
 
-// Close the cart content
-const cartContent = document.getElementById("cart-content");
-cartContent.style.display = "none";
 
 });
 
