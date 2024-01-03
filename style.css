@@ -679,12 +679,12 @@ body {
     transform: translate(-50%, -50%);
     z-index: 999999;
     border-radius: 50%;
-    width: 15vw;
+    width: 20vw;
     height: 15vw;
     max-width: 90px;
     max-height: 90px;
-    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(5px);
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(0px);
     text-align: center;
   }
   .logo2 {
@@ -1492,16 +1492,6 @@ transition: all 0.3s ease-in-out;
       }
       
 
-      #loader {
-        display: none;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        position: fixed;
-
-        background-color: rgba(0, 0, 0, 0.5);
-      }
-      
       
 
       .loader-text {
