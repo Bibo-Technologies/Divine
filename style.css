@@ -1405,13 +1405,13 @@ transition: all 0.3s ease-in-out;
       }
       
       #total-price {
-        font-size: 14px;
+        font-size: 20px;
         margin: 5px 0;
         background: lightgoldenrodyellow;
         padding: 10px;
         border-radius: 5px;
         color: #000;
-        font-weight: bold;
+        font-weight: 500;
       }
       
       #cart-buttons {
