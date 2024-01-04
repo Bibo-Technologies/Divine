@@ -424,7 +424,6 @@ document.getElementById("closePopupBtn").addEventListener("click", function() {
     popup.classList.remove('fade-in');
     document.body.classList.remove("no-scroll"); // Enable scrolling
 });
-
 // Get the checkout button element
 const checkoutBtn = document.getElementById("checkout-btn");
 
@@ -437,66 +436,65 @@ checkoutBtn.addEventListener("click", () => {
   for (let i = 0; i < cartItems.length; i++) {
     const cartItem = cartItems[i];
     const productName = cartItem.querySelector(".product-details h5").innerText;
-       const price = parseFloat(cartItem.querySelector(".product-details h4").dataset.price);
-    const quantity = parseInt(cartItem.querySelector(".product-details input").value);
-    const total = parseFloat(cartItem.querySelector(".product-details h4").dataset.total);
-    orderSummary.push({ productName, price, quantity, total });
+    const price = parseFloat(cartItem.querySelector(".product-details h4").dataset.price);
+    const quantity = parseInt(cartItem.querySelector(".quantity-input").value);
+    const total = quantity * price; // Calculate total by multiplying quantity with price
+    const isWholesale = cartItem.querySelector(".toggle-switch").checked;
+
+    orderSummary.push({ productName, price, quantity, total, isWholesale });
   }
 
   // Get the cart total
-  const cartTotal = parseFloat(document.getElementById("total-price").innerText.replace("TOTAL: UGX ", ""));
+  const cartTotal = orderSummary.reduce((acc, item) => acc + item.total, 0);
 
-// Create the popup with the order summary and customer details
-const popupContent = document.createElement("div");
-popupContent.classList.add("popup-content");
+  // Create the popup with the order summary and customer details
+  const popupContent = document.createElement("div");
+  popupContent.classList.add("popup-content");
 
+  // Add the title to the popup
+  const title = document.createElement("h4");
+  title.innerText = "Order Summary";
+  popupContent.appendChild(title);
 
-// Add the title to the popup
-const title = document.createElement("h4");
-title.innerText = "Order Summary";
-popupContent.appendChild(title);
-// ...
+  // Add the order summary to the popup
+  const orderTable = document.createElement("table");
+  orderTable.classList.add("order-table");
 
-// Add the order summary to the popup
-const orderTable = document.createElement("table");
-orderTable.classList.add("order-table");
-
-// Create table header
-const tableHeader = document.createElement("tr");
-tableHeader.innerHTML = `
-  <th>Product</th>
-  <th>Price</th>
-  <th>Qty</th>
-  <th>Total</th>
-`;
-orderTable.appendChild(tableHeader);
-
-// Iterate over the order summary and create table rows
-for (let i = 0; i < orderSummary.length; i++) {
-  const { productName, price, quantity, total } = orderSummary[i];
-  const tableRow = document.createElement("tr");
-  tableRow.innerHTML = `
-    <td>${productName}</td>
-    <td>UGX ${price}</td>
-    <td>${quantity}</td>
-    <td>UGX ${total.toFixed(2)}</td>
+  // Create table header
+  const tableHeader = document.createElement("tr");
+  tableHeader.innerHTML = `
+    <th>Product</th>
+    <th>Price</th>
+    <th>Qty</th>
+    <th>Total</th>
+    <th>Wholesale</th>
   `;
-  orderTable.appendChild(tableRow);
-}
+  orderTable.appendChild(tableHeader);
 
-// Append the table to the popup content
-popupContent.appendChild(orderTable);
+  // Iterate over the order summary and create table rows
+  for (let i = 0; i < orderSummary.length; i++) {
+    const { productName, price, quantity, total, isWholesale } = orderSummary[i];
+    const tableRow = document.createElement("tr");
+    tableRow.innerHTML = `
+      <td>${productName}</td>
+      <td>UGX ${price}</td>
+      <td>${quantity}</td>
+      <td>UGX ${total.toFixed(2)}</td>
+      <td>${isWholesale ? "Yes" : "No"}</td>
+    `;
+    orderTable.appendChild(tableRow);
+  }
 
-// ...
+  // Append the table to the popup content
+  popupContent.appendChild(orderTable);
 
-
-// Add the cart total to the popup
-const totalElement = document.createElement("h4");
-totalElement.innerText = `Total: UGX ${cartTotal.toFixed(2)}`;
-totalElement.style.fontSize = "18px";
-totalElement.style.marginTop = "10px";
-totalElement.style.color = "#333";
-popupContent.appendChild(totalElement);
+  // Add the cart total to the popup
+  const totalElement = document.createElement("h4");
+  totalElement.innerText = `Total: UGX ${cartTotal.toFixed(2)}`;
+  totalElement.style.fontSize = "18px";
+  totalElement.style.marginTop = "10px";
+  totalElement.style.color = "#333";
+  popupContent.appendChild(totalElement);
 
 
 // Create the popup container
@@ -527,7 +525,73 @@ closeButton.addEventListener("click", () => {
 
 // Append the close button to the popup container
 popupContainer.appendChild(closeButton);
+// Create the order type section
+/*
+const orderTypeSection = document.createElement("div");
+orderTypeSection.classList.add("order-type");
 
+// Create the title for the order type
+const orderTypeTitle = document.createElement("h4");
+orderTypeTitle.innerText = "Order Type";
+orderTypeSection.appendChild(orderTypeTitle);
+
+// Declare selectedOrderType outside the function scope
+let selectedOrderType;
+
+// Function to create order option with note
+function createOrderOption(id, value, label, note) {
+  const orderOption = document.createElement("div");
+  orderOption.classList.add("order-option");
+
+  // Create radio input
+  const radioInput = document.createElement("input");
+  radioInput.type = "radio";
+  radioInput.name = "order-type";
+  radioInput.id = id;
+  radioInput.value = value;
+
+  // Create label for radio input
+  const labelElement = document.createElement("label");
+  labelElement.for = id;
+  labelElement.innerText = label;
+
+  // Create note element
+  const noteElement = document.createElement("p");
+  noteElement.classList.add("order-note");
+  noteElement.innerText = note;
+
+  // Append elements to order option
+  orderOption.appendChild(radioInput);
+  orderOption.appendChild(labelElement);
+  orderOption.appendChild(noteElement);
+
+  // Append order option to order type section
+  orderTypeSection.appendChild(orderOption);
+
+  // Add event listener to show/hide notes
+  radioInput.addEventListener("change", () => {
+    // Set the selected order type
+    selectedOrderType = radioInput.value;
+
+    // Hide all notes
+    document.querySelectorAll(".order-note").forEach((note) => {
+      note.style.display = "none";
+    });
+
+    // Show the selected note
+    noteElement.style.display = "block";
+  });
+}
+
+// Create retail order option with note
+//createOrderOption("retail-order", "retail", "Retail Order", "Prices remain the same for all products.");
+
+// Create wholesale order option with note
+//createOrderOption("wholesale-order", "wholesale", "Wholesale Order", "Wholesale orders have special discounts and require a minimum order quantity.");
+
+// Append the order type section to the document or another container
+//popupContent.appendChild(orderTypeSection);
+*/
 // Create the customer details section
 const customerDetails = document.createElement("div");
 customerDetails.classList.add("customer-details");
@@ -755,71 +819,6 @@ orderButton.style.border = "none";
 orderButton.style.borderRadius = "4px";
 orderButton.style.fontSize = "16px";
 orderButton.style.marginTop = "20px";
-// Create the order type section
-const orderTypeSection = document.createElement("div");
-orderTypeSection.classList.add("order-type");
-
-// Create the title for the order type
-const orderTypeTitle = document.createElement("h4");
-orderTypeTitle.innerText = "Order Type";
-orderTypeSection.appendChild(orderTypeTitle);
-
-// Declare selectedOrderType outside the function scope
-let selectedOrderType;
-
-// Function to create order option with note
-function createOrderOption(id, value, label, note) {
-  const orderOption = document.createElement("div");
-  orderOption.classList.add("order-option");
-
-  // Create radio input
-  const radioInput = document.createElement("input");
-  radioInput.type = "radio";
-  radioInput.name = "order-type";
-  radioInput.id = id;
-  radioInput.value = value;
-
-  // Create label for radio input
-  const labelElement = document.createElement("label");
-  labelElement.for = id;
-  labelElement.innerText = label;
-
-  // Create note element
-  const noteElement = document.createElement("p");
-  noteElement.classList.add("order-note");
-  noteElement.innerText = note;
-
-  // Append elements to order option
-  orderOption.appendChild(radioInput);
-  orderOption.appendChild(labelElement);
-  orderOption.appendChild(noteElement);
-
-  // Append order option to order type section
-  orderTypeSection.appendChild(orderOption);
-
-  // Add event listener to show/hide notes
-  radioInput.addEventListener("change", () => {
-    // Set the selected order type
-    selectedOrderType = radioInput.value;
-
-    // Hide all notes
-    document.querySelectorAll(".order-note").forEach((note) => {
-      note.style.display = "none";
-    });
-
-    // Show the selected note
-    noteElement.style.display = "block";
-  });
-}
-
-// Create retail order option with note
-createOrderOption("retail-order", "retail", "Retail Order", "Prices remain the same for all products.");
-
-// Create wholesale order option with note
-createOrderOption("wholesale-order", "wholesale", "Wholesale Order", "Wholesale orders have special discounts and require a minimum order quantity.");
-
-// Append the order type section to the document or another container
-popupContent.appendChild(orderTypeSection);
 
 // Now you can use selectedOrderType globally in your code
 
@@ -1016,11 +1015,12 @@ rows.forEach((row, index) => {
   if (index > 0) { // Skip the header row
     const columns = row.querySelectorAll("td");
 
-    // Assuming the order of columns is Product, Price, Qty, Total
+    // Assuming the order of columns is Product, Price, Qty, Total, Wholesale
     const productName = columns[0].innerText;
     const price = parseFloat(columns[1].innerText.replace("UGX ", ""));
     const quantity = parseInt(columns[2].innerText, 10);
     const total = parseFloat(columns[3].innerText.replace("UGX ", ""));
+    const isWholesale = columns[4].innerText.toLowerCase() === "yes";
 
     // Push product details to orderSummary array
     orderSummary.push({
@@ -1028,9 +1028,11 @@ rows.forEach((row, index) => {
       price,
       quantity,
       total,
+      isWholesale,
     });
   }
 });
+
 
 
 // Get the cart total from the displayed element (assuming it's already calculated and displayed)
@@ -1060,7 +1062,7 @@ const telephoneNumber = telephoneInput.value;
 const selectedOrderType = document.querySelector('input[name="order-type"]:checked');
 
 // Validate required fields, including the order type
-if (!deliveryPlace || !meansOfTransport || !telephoneNumber || !selectedOrderType) {
+if (!deliveryPlace || !meansOfTransport || !telephoneNumber) {
     // Show an error message if any required field is empty or if the order type is not selected
     showErrorPopup("Please fill in all required fields and select an order type");
     document.body.removeChild(loaderContainer); // Remove the loader container
@@ -1068,7 +1070,7 @@ if (!deliveryPlace || !meansOfTransport || !telephoneNumber || !selectedOrderTyp
 }
 
 // If you need the value of the selected order type, you can access it using selectedOrderType.value
-const orderTypeValue = selectedOrderType.value;
+//const orderTypeValue = selectedOrderType.value;
 
 // Function to generate a random alphanumeric string
 function generateRandomOrderId(length) {
@@ -1094,7 +1096,7 @@ const orderData = {
     deliveryPlace,
     meansOfTransport,
     selectedPaymentOption,
-    selectedOrderType: orderTypeValue, // Add the selected order type
+    //selectedOrderType: orderTypeValue, // Add the selected order type
     orderSummary,
     cartTotal,
     userId, // Add the UID of the user
@@ -1120,7 +1122,7 @@ set(newOrderRef, orderData)
             deliveryPlace: orderData.deliveryPlace,
             meansOfTransport: orderData.meansOfTransport,
             selectedPaymentOption: orderData.selectedPaymentOption,
-            selectedOrderType: orderData.selectedOrderType, // Add the selected order type
+            //selectedOrderType: orderData.selectedOrderType, // Add the selected order type
             orderSummary: orderData.orderSummary,
             cartTotal: orderData.cartTotal,
             userId: userId, // Add the UID of the user
@@ -1486,6 +1488,7 @@ function handleOrderIdSearch(event) {
 <p class="receipt-info"><span>Order Time:  </span>   ${receipt.orderTime}</p>
 
 
+
       <!-- Replace the existing order summary element with this table -->
 <table class="order-summary-table">
   <caption>Order Summary</caption>
@@ -1495,6 +1498,7 @@ function handleOrderIdSearch(event) {
       <th>Qty</th>
       <th>Price</th>
       <th>Total</th>
+      <th>WholeSale</th>
     </tr>
   </thead>
   <tbody>
@@ -1505,6 +1509,7 @@ function handleOrderIdSearch(event) {
         <td>${item.quantity}</td>
         <td>UGX ${item.price.toFixed(2)}</td>
         <td>UGX ${item.total.toFixed(2)}</td>
+        <td>${item.isWholesale}</td>
       </tr>
     `).join('')}
   </tbody>
@@ -1921,10 +1926,34 @@ icon.classList.add("fas", "fa-shopping-cart"); // Assuming you're using Font Awe
 
 // Append the icon to the button
 addToCartBtn.prepend(icon);
+// Declare productPrice outside of addToCart to make it accessible to other functions
+let productPrice;
+// Initialize an object to store totals for each product
+const productTotals = {};
+// Initialize overall total variable
+let total = 0;
 
 function addToCart(product) {
   // Get the cart items container
   const cartItemsContainer = document.getElementById("cart-items");
+  // Create a container for the toggle switch
+  const toggleContainer = document.createElement("div");
+  toggleContainer.classList.add("toggle-container");
+
+  // Add title to the toggle
+  const toggleTitle = document.createElement("p");
+  toggleTitle.innerText = "Wholesale";
+  toggleContainer.appendChild(toggleTitle);
+
+  // Create the toggle switch
+  const toggleSwitch = document.createElement("input");
+  toggleSwitch.type = "checkbox";
+  toggleSwitch.classList.add("toggle-switch");
+  toggleSwitch.addEventListener("change", () => {
+    updatePriceBasedOnToggle(product, toggleSwitch.checked);
+  });
+
+  toggleContainer.appendChild(toggleSwitch);
 
   // Create a new cart item element
   const cartItem = document.createElement("div");
@@ -1933,6 +1962,7 @@ function addToCart(product) {
   // Create a container for the product details (name, price, quantity, and delete button)
   const productDetails = document.createElement("div");
   productDetails.classList.add("product-details");
+  productDetails.appendChild(toggleContainer);
 
   // Add product name
   const productName = document.createElement("h5");
@@ -1940,52 +1970,30 @@ function addToCart(product) {
   productDetails.appendChild(productName);
 
   // Add product price
-  const productPrice = document.createElement("h4");
+  productPrice = document.createElement("h4");
   productPrice.innerText = `UGX ${product.price}`;
   productPrice.dataset.price = product.price; // Store the price as a data attribute
   productDetails.appendChild(productPrice);
 
-// Create a quantity input field
-const quantityInput = document.createElement("input");
-quantityInput.type = "number";
-quantityInput.value = 1;
-quantityInput.min = 1;
-quantityInput.classList.add("quantity-input"); // Add the quantity-input class
-quantityInput.addEventListener("input", () => {
-  updateCartItemTotal(cartItem);
-  updateCartTotal();
-});
-productDetails.appendChild(quantityInput);
+  // Create a quantity input field
+  const quantityInput = document.createElement("input");
+  quantityInput.type = "number";
+  quantityInput.value = 1;
+  quantityInput.min = 1;
+  quantityInput.classList.add("quantity-input"); // Add the quantity-input class
 
+  quantityInput.addEventListener("input", () => {
+    // Log the input value to the console
+    console.log("Input value:", quantityInput.value);
 
-function updateCartItemTotal(cartItem) {
-  const priceElement = cartItem.querySelector(".product-details h4");
+    // Get the displayed product price from innerText
+    const displayedPrice = parseFloat(productPrice.innerText.replace("UGX ", ""));
 
-  // Check if the element is found before accessing properties
-  if (priceElement) {
-    const quantityInput = cartItem.querySelector(".product-details input");
-    const quantity = parseInt(quantityInput.value);
-    const price = parseFloat(priceElement.innerText.replace("UGX ", ""));
-    const total = quantity * price;
-    priceElement.dataset.total = total.toFixed(2);
-  }
-}
+    // Call the multiply function with the current input value and displayed price
+    multiplyInputByDisplayedPrice(quantityInput.value, displayedPrice, product.name);
+  });
 
-// Define the updateCartTotal function
-function updateCartTotal() {
-  const cartItems = document.getElementsByClassName("cart-item");
-  const totalPriceElement = document.getElementById("total-price");
-  let total = 0;
-
-  for (let i = 0; i < cartItems.length; i++) {
-    const cartItem = cartItems[i];
-    const priceElement = cartItem.querySelector(".product-details h4");
-    const totalForItem = parseFloat(priceElement.dataset.total);
-    total += totalForItem;
-  }
-
-  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
-}
+  productDetails.appendChild(quantityInput);
 
   // Create a delete button for the cart item
   const deleteButton = document.createElement("button");
@@ -1993,8 +2001,8 @@ function updateCartTotal() {
   deleteButton.classList.add("delete-button");
   deleteButton.addEventListener("click", () => {
     cartItemsContainer.removeChild(cartItem);
-    updateCartTotal();
     updateCartCount(-1);
+    updateCartTotal()
   });
   productDetails.appendChild(deleteButton);
 
@@ -2006,14 +2014,138 @@ function updateCartTotal() {
   // Update the cart count
   updateCartCount(1);
 
-  // Calculate and update the total price
-  updateCartItemTotal(cartItem);
-  updateCartTotal();
-
   // Show the "Added to Cart" message
   showAddToCartMessage(product.name);
+
+// Function to fetch wholesale price from Firebase
+async function fetchWholesalePriceFromFirebase(productName) {
+  // Define an array of subcategories you want to search through
+  const subcategories = ["accessories", "Ports", "touches", "newScreens", "gradeBScreens", "electronics"]; // Add more subcategories as needed
+
+  // Iterate through each subcategory and check for the product
+  for (const subcategory of subcategories) {
+    const productsRef = ref(database, `products/${subcategory}`);
+    const productSnapshot = await get(child(productsRef, productName));
+
+    if (productSnapshot.exists()) {
+      // Assuming there's a property named 'wholesalePrice' in the product data
+      const wholesalePrice = productSnapshot.val().wholesalePrice;
+
+      // Parse the wholesalePrice as a number
+      return wholesalePrice !== null ? parseFloat(wholesalePrice) : null;
+    }
+  }
+
+  // Return a default value or handle the case when the product is not found in any subcategory
+  return null;
 }
 
+
+  let originalTotal = 0;
+
+  // Function to update price based on the toggle switch
+  async function updatePriceBasedOnToggle(product, isWholesale) {
+    // Get the displayed product price from innerText
+    const displayedPrice = parseFloat(productPrice.innerText.replace("UGX ", ""));
+  
+    // Calculate the original total based on the current input value and displayed price
+    const originalQuantity = parseInt(quantityInput.value);
+    originalTotal = originalQuantity * displayedPrice;
+  
+    if (isWholesale) {
+      // Fetch wholesale price from Firebase based on the product name
+      const wholesalePrice = await fetchWholesalePriceFromFirebase(product.name);
+  
+      if (wholesalePrice !== null) {
+        productPrice.innerText = `UGX ${wholesalePrice}`;
+        productPrice.dataset.price = wholesalePrice;
+      } else {
+        // Handle the case when wholesale price is not found
+        //console.error(`Wholesale price not found for product: ${product.name}`);
+      }
+    } else {
+      productPrice.innerText = `UGX ${product.price}`;
+      productPrice.dataset.price = product.price;
+    }
+  
+    // Calculate the new total based on the current input value, displayed price, and product name
+    const newQuantity = parseInt(quantityInput.value);
+    const newTotal = newQuantity * parseFloat(productPrice.dataset.price);
+  
+    // Update the total element with the difference
+    updateTotalElement(newTotal - originalTotal);
+  
+    // Log the updated price to the console
+    console.log("Updated Price:", parseFloat(productPrice.dataset.price));
+  }
+  
+  // Function to update the total element
+  function updateTotalElement(result) {
+    const totalPriceElement = document.getElementById("total-price");
+  
+    // Parse the total as a number
+    const total = parseFloat(totalPriceElement.innerText.replace("TOTAL: UGX ", ""));
+  
+    // Display the updated total in the total element
+    totalPriceElement.innerText = "TOTAL: UGX " + (total + result).toFixed(2);
+  
+    // Log the updated total to the console
+    console.log("Updated Total:", total + result);
+  }
+  
+
+// Function to multiply input by displayed price and update the total element
+function multiplyInputByDisplayedPrice(inputValue, displayedPrice, productName) {
+  // Check if inputValue is not empty and is a valid number
+  if (inputValue && !isNaN(inputValue)) {
+    // Calculate the result by multiplying the input by the displayed product price
+    const result = inputValue * displayedPrice;
+
+    // Update the total for this product directly
+    productTotals[productName] = result;
+
+    // Update the overall total directly
+    updateCartTotal();
+
+    // Log the result to the console
+    console.log("Result of multiplication:", result);
+  } else {
+    // If inputValue is empty or not a valid number, reset the total for this product
+    productTotals[productName] = 0;
+
+    // Update the overall total directly
+    updateCartTotal();
+
+    // Log the result to the console
+    console.log("Result of multiplication:", 0);
+  }
+}}
+
+// Function to update the total element based on all cart items
+function updateCartTotal() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  let total = 0;
+
+  for (let i = 0; i < cartItems.length; i++) {
+    const cartItem = cartItems[i];
+    const quantityInput = cartItem.querySelector(".product-details .quantity-input");
+    const productPriceElement = cartItem.querySelector(".product-details h4");
+    const quantity = parseInt(quantityInput.value);
+    const price = parseFloat(productPriceElement.dataset.price);
+    const totalForItem = quantity * price;
+
+    total += totalForItem;
+  }
+
+  // Display the overall total in the total element
+  const totalPriceElement = document.getElementById("total-price");
+  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
+
+  // Log the updated total to the console
+  console.log("Updated Total:", total);
+}
+
+// Example of using the function
 
 
 
@@ -2030,6 +2162,8 @@ addToCartBtn.addEventListener("click", () => {
     const cart = document.getElementById('cart-container')
     cart.style.display = 'block';
   addToCart(product);
+  updateCartTotal();
+
 });
 
 // Assuming `card` is the element representing the product card
@@ -2055,7 +2189,8 @@ const overlay = document.getElementById('overlay4')
 openCartBtn.addEventListener("click", () => {
   if (cartIsEmpty()) {
     cartContent.style.display = "none"; // Hide the cart content on load
- 
+    updateCartTotal();
+
     // Show a message or perform any desired action when cart is empty
     return;
   }
@@ -2202,10 +2337,34 @@ icon.classList.add("fas", "fa-shopping-cart"); // Assuming you're using Font Awe
 
 // Append the icon to the button
 addToCartBtn.prepend(icon);
+// Declare productPrice outside of addToCart to make it accessible to other functions
+let productPrice;
+// Initialize an object to store totals for each product
+const productTotals = {};
+// Initialize overall total variable
+let total = 0;
 
 function addToCart(product) {
   // Get the cart items container
   const cartItemsContainer = document.getElementById("cart-items");
+  // Create a container for the toggle switch
+  const toggleContainer = document.createElement("div");
+  toggleContainer.classList.add("toggle-container");
+
+  // Add title to the toggle
+  const toggleTitle = document.createElement("p");
+  toggleTitle.innerText = "Wholesale";
+  toggleContainer.appendChild(toggleTitle);
+
+  // Create the toggle switch
+  const toggleSwitch = document.createElement("input");
+  toggleSwitch.type = "checkbox";
+  toggleSwitch.classList.add("toggle-switch");
+  toggleSwitch.addEventListener("change", () => {
+    updatePriceBasedOnToggle(product, toggleSwitch.checked);
+  });
+
+  toggleContainer.appendChild(toggleSwitch);
 
   // Create a new cart item element
   const cartItem = document.createElement("div");
@@ -2214,6 +2373,7 @@ function addToCart(product) {
   // Create a container for the product details (name, price, quantity, and delete button)
   const productDetails = document.createElement("div");
   productDetails.classList.add("product-details");
+  productDetails.appendChild(toggleContainer);
 
   // Add product name
   const productName = document.createElement("h5");
@@ -2221,53 +2381,30 @@ function addToCart(product) {
   productDetails.appendChild(productName);
 
   // Add product price
-  const productPrice = document.createElement("h4");
+  productPrice = document.createElement("h4");
   productPrice.innerText = `UGX ${product.price}`;
   productPrice.dataset.price = product.price; // Store the price as a data attribute
   productDetails.appendChild(productPrice);
 
-// Create a quantity input field
-const quantityInput = document.createElement("input");
-quantityInput.type = "number";
-quantityInput.value = 1;
-quantityInput.min = 1;
-quantityInput.classList.add("quantity-input"); // Add the quantity-input class
-quantityInput.addEventListener("input", () => {
-  updateCartItemTotal(cartItem);
-  updateCartTotal();
-});
-productDetails.appendChild(quantityInput);
+  // Create a quantity input field
+  const quantityInput = document.createElement("input");
+  quantityInput.type = "number";
+  quantityInput.value = 1;
+  quantityInput.min = 1;
+  quantityInput.classList.add("quantity-input"); // Add the quantity-input class
 
+  quantityInput.addEventListener("input", () => {
+    // Log the input value to the console
+    console.log("Input value:", quantityInput.value);
 
-function updateCartItemTotal(cartItem) {
-  const priceElement = cartItem.querySelector(".product-details h4");
+    // Get the displayed product price from innerText
+    const displayedPrice = parseFloat(productPrice.innerText.replace("UGX ", ""));
 
-  // Check if the element is found before accessing properties
-  if (priceElement) {
-    const quantityInput = cartItem.querySelector(".product-details input");
-    const quantity = parseInt(quantityInput.value);
-    const price = parseFloat(priceElement.innerText.replace("UGX ", ""));
-    const total = quantity * price;
-    priceElement.dataset.total = total.toFixed(2);
-  }
-}
+    // Call the multiply function with the current input value and displayed price
+    multiplyInputByDisplayedPrice(quantityInput.value, displayedPrice, product.name);
+  });
 
-
-// Define the updateCartTotal function
-function updateCartTotal() {
-  const cartItems = document.getElementsByClassName("cart-item");
-  const totalPriceElement = document.getElementById("total-price");
-  let total = 0;
-
-  for (let i = 0; i < cartItems.length; i++) {
-    const cartItem = cartItems[i];
-    const priceElement = cartItem.querySelector(".product-details h4");
-    const totalForItem = parseFloat(priceElement.dataset.total);
-    total += totalForItem;
-  }
-
-  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
-}
+  productDetails.appendChild(quantityInput);
 
   // Create a delete button for the cart item
   const deleteButton = document.createElement("button");
@@ -2275,8 +2412,8 @@ function updateCartTotal() {
   deleteButton.classList.add("delete-button");
   deleteButton.addEventListener("click", () => {
     cartItemsContainer.removeChild(cartItem);
-    updateCartTotal();
     updateCartCount(-1);
+    updateCartTotal()
   });
   productDetails.appendChild(deleteButton);
 
@@ -2288,14 +2425,131 @@ function updateCartTotal() {
   // Update the cart count
   updateCartCount(1);
 
-  // Calculate and update the total price
-  updateCartItemTotal(cartItem);
-  updateCartTotal();
-
   // Show the "Added to Cart" message
   showAddToCartMessage(product.name);
+
+  // Function to fetch wholesale price from Firebase
+  async function fetchWholesalePriceFromFirebase(productName) {
+    const productsRef = ref(database, "products/newScreens");
+    const productSnapshot = await get(child(productsRef, productName));
+
+    if (productSnapshot.exists()) {
+      // Assuming there's a property named 'wholesalePrice' in the product data
+      const wholesalePrice = productSnapshot.val().wholesalePrice;
+
+      // Parse the wholesalePrice as a number
+      return wholesalePrice !== null ? parseFloat(wholesalePrice) : null;
+    }
+
+    // Return a default value or handle the case when the product is not found
+    return null;
+  }
+
+  let originalTotal = 0;
+
+  // Function to update price based on the toggle switch
+  async function updatePriceBasedOnToggle(product, isWholesale) {
+    // Get the displayed product price from innerText
+    const displayedPrice = parseFloat(productPrice.innerText.replace("UGX ", ""));
+  
+    // Calculate the original total based on the current input value and displayed price
+    const originalQuantity = parseInt(quantityInput.value);
+    originalTotal = originalQuantity * displayedPrice;
+  
+    if (isWholesale) {
+      // Fetch wholesale price from Firebase based on the product name
+      const wholesalePrice = await fetchWholesalePriceFromFirebase(product.name);
+  
+      if (wholesalePrice !== null) {
+        productPrice.innerText = `UGX ${wholesalePrice}`;
+        productPrice.dataset.price = wholesalePrice;
+      } else {
+        // Handle the case when wholesale price is not found
+        //console.error(`Wholesale price not found for product: ${product.name}`);
+      }
+    } else {
+      productPrice.innerText = `UGX ${product.price}`;
+      productPrice.dataset.price = product.price;
+    }
+  
+    // Calculate the new total based on the current input value, displayed price, and product name
+    const newQuantity = parseInt(quantityInput.value);
+    const newTotal = newQuantity * parseFloat(productPrice.dataset.price);
+  
+    // Update the total element with the difference
+    updateTotalElement(newTotal - originalTotal);
+  
+    // Log the updated price to the console
+    console.log("Updated Price:", parseFloat(productPrice.dataset.price));
+  }
+  
+  // Function to update the total element
+  function updateTotalElement(result) {
+    const totalPriceElement = document.getElementById("total-price");
+  
+    // Parse the total as a number
+    const total = parseFloat(totalPriceElement.innerText.replace("TOTAL: UGX ", ""));
+  
+    // Display the updated total in the total element
+    totalPriceElement.innerText = "TOTAL: UGX " + (total + result).toFixed(2);
+  
+    // Log the updated total to the console
+    console.log("Updated Total:", total + result);
+  }
+  
+
+// Function to multiply input by displayed price and update the total element
+function multiplyInputByDisplayedPrice(inputValue, displayedPrice, productName) {
+  // Check if inputValue is not empty and is a valid number
+  if (inputValue && !isNaN(inputValue)) {
+    // Calculate the result by multiplying the input by the displayed product price
+    const result = inputValue * displayedPrice;
+
+    // Update the total for this product directly
+    productTotals[productName] = result;
+
+    // Update the overall total directly
+    updateCartTotal();
+
+    // Log the result to the console
+    console.log("Result of multiplication:", result);
+  } else {
+    // If inputValue is empty or not a valid number, reset the total for this product
+    productTotals[productName] = 0;
+
+    // Update the overall total directly
+    updateCartTotal();
+
+    // Log the result to the console
+    console.log("Result of multiplication:", 0);
+  }
+}}
+
+// Function to update the total element based on all cart items
+function updateCartTotal() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  let total = 0;
+
+  for (let i = 0; i < cartItems.length; i++) {
+    const cartItem = cartItems[i];
+    const quantityInput = cartItem.querySelector(".product-details .quantity-input");
+    const productPriceElement = cartItem.querySelector(".product-details h4");
+    const quantity = parseInt(quantityInput.value);
+    const price = parseFloat(productPriceElement.dataset.price);
+    const totalForItem = quantity * price;
+
+    total += totalForItem;
+  }
+
+  // Display the overall total in the total element
+  const totalPriceElement = document.getElementById("total-price");
+  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
+
+  // Log the updated total to the console
+  console.log("Updated Total:", total);
 }
 
+// Example of using the function
 
 
 
@@ -2312,8 +2566,9 @@ addToCartBtn.addEventListener("click", () => {
     const cart = document.getElementById('cart-container')
     cart.style.display = 'block';
   addToCart(product);
-});
+  updateCartTotal();
 
+});
 // Assuming `card` is the element representing the product card
 card.appendChild(addToCartBtn);
 
@@ -2465,10 +2720,34 @@ icon.classList.add("fas", "fa-shopping-cart"); // Assuming you're using Font Awe
 
 // Append the icon to the button
 addToCartBtn.prepend(icon);
+// Declare productPrice outside of addToCart to make it accessible to other functions
+let productPrice;
+// Initialize an object to store totals for each product
+const productTotals = {};
+// Initialize overall total variable
+let total = 0;
 
 function addToCart(product) {
   // Get the cart items container
   const cartItemsContainer = document.getElementById("cart-items");
+  // Create a container for the toggle switch
+  const toggleContainer = document.createElement("div");
+  toggleContainer.classList.add("toggle-container");
+
+  // Add title to the toggle
+  const toggleTitle = document.createElement("p");
+  toggleTitle.innerText = "Wholesale";
+  toggleContainer.appendChild(toggleTitle);
+
+  // Create the toggle switch
+  const toggleSwitch = document.createElement("input");
+  toggleSwitch.type = "checkbox";
+  toggleSwitch.classList.add("toggle-switch");
+  toggleSwitch.addEventListener("change", () => {
+    updatePriceBasedOnToggle(product, toggleSwitch.checked);
+  });
+
+  toggleContainer.appendChild(toggleSwitch);
 
   // Create a new cart item element
   const cartItem = document.createElement("div");
@@ -2477,6 +2756,7 @@ function addToCart(product) {
   // Create a container for the product details (name, price, quantity, and delete button)
   const productDetails = document.createElement("div");
   productDetails.classList.add("product-details");
+  productDetails.appendChild(toggleContainer);
 
   // Add product name
   const productName = document.createElement("h5");
@@ -2484,53 +2764,30 @@ function addToCart(product) {
   productDetails.appendChild(productName);
 
   // Add product price
-  const productPrice = document.createElement("h4");
+  productPrice = document.createElement("h4");
   productPrice.innerText = `UGX ${product.price}`;
   productPrice.dataset.price = product.price; // Store the price as a data attribute
   productDetails.appendChild(productPrice);
 
-// Create a quantity input field
-const quantityInput = document.createElement("input");
-quantityInput.type = "number";
-quantityInput.value = 1;
-quantityInput.min = 1;
-quantityInput.classList.add("quantity-input"); // Add the quantity-input class
-quantityInput.addEventListener("input", () => {
-  updateCartItemTotal(cartItem);
-  updateCartTotal();
-});
-productDetails.appendChild(quantityInput);
+  // Create a quantity input field
+  const quantityInput = document.createElement("input");
+  quantityInput.type = "number";
+  quantityInput.value = 1;
+  quantityInput.min = 1;
+  quantityInput.classList.add("quantity-input"); // Add the quantity-input class
 
+  quantityInput.addEventListener("input", () => {
+    // Log the input value to the console
+    console.log("Input value:", quantityInput.value);
 
-function updateCartItemTotal(cartItem) {
-  const priceElement = cartItem.querySelector(".product-details h4");
+    // Get the displayed product price from innerText
+    const displayedPrice = parseFloat(productPrice.innerText.replace("UGX ", ""));
 
-  // Check if the element is found before accessing properties
-  if (priceElement) {
-    const quantityInput = cartItem.querySelector(".product-details input");
-    const quantity = parseInt(quantityInput.value);
-    const price = parseFloat(priceElement.innerText.replace("UGX ", ""));
-    const total = quantity * price;
-    priceElement.dataset.total = total.toFixed(2);
-  }
-}
+    // Call the multiply function with the current input value and displayed price
+    multiplyInputByDisplayedPrice(quantityInput.value, displayedPrice, product.name);
+  });
 
-
-// Define the updateCartTotal function
-function updateCartTotal() {
-  const cartItems = document.getElementsByClassName("cart-item");
-  const totalPriceElement = document.getElementById("total-price");
-  let total = 0;
-
-  for (let i = 0; i < cartItems.length; i++) {
-    const cartItem = cartItems[i];
-    const priceElement = cartItem.querySelector(".product-details h4");
-    const totalForItem = parseFloat(priceElement.dataset.total);
-    total += totalForItem;
-  }
-
-  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
-}
+  productDetails.appendChild(quantityInput);
 
   // Create a delete button for the cart item
   const deleteButton = document.createElement("button");
@@ -2538,8 +2795,8 @@ function updateCartTotal() {
   deleteButton.classList.add("delete-button");
   deleteButton.addEventListener("click", () => {
     cartItemsContainer.removeChild(cartItem);
-    updateCartTotal();
     updateCartCount(-1);
+    updateCartTotal()
   });
   productDetails.appendChild(deleteButton);
 
@@ -2551,14 +2808,131 @@ function updateCartTotal() {
   // Update the cart count
   updateCartCount(1);
 
-  // Calculate and update the total price
-  updateCartItemTotal(cartItem);
-  updateCartTotal();
-
   // Show the "Added to Cart" message
   showAddToCartMessage(product.name);
+
+  // Function to fetch wholesale price from Firebase
+  async function fetchWholesalePriceFromFirebase(productName) {
+    const productsRef = ref(database, "products/gradeBScreens");
+    const productSnapshot = await get(child(productsRef, productName));
+
+    if (productSnapshot.exists()) {
+      // Assuming there's a property named 'wholesalePrice' in the product data
+      const wholesalePrice = productSnapshot.val().wholesalePrice;
+
+      // Parse the wholesalePrice as a number
+      return wholesalePrice !== null ? parseFloat(wholesalePrice) : null;
+    }
+
+    // Return a default value or handle the case when the product is not found
+    return null;
+  }
+
+  let originalTotal = 0;
+
+  // Function to update price based on the toggle switch
+  async function updatePriceBasedOnToggle(product, isWholesale) {
+    // Get the displayed product price from innerText
+    const displayedPrice = parseFloat(productPrice.innerText.replace("UGX ", ""));
+  
+    // Calculate the original total based on the current input value and displayed price
+    const originalQuantity = parseInt(quantityInput.value);
+    originalTotal = originalQuantity * displayedPrice;
+  
+    if (isWholesale) {
+      // Fetch wholesale price from Firebase based on the product name
+      const wholesalePrice = await fetchWholesalePriceFromFirebase(product.name);
+  
+      if (wholesalePrice !== null) {
+        productPrice.innerText = `UGX ${wholesalePrice}`;
+        productPrice.dataset.price = wholesalePrice;
+      } else {
+        // Handle the case when wholesale price is not found
+        //console.error(`Wholesale price not found for product: ${product.name}`);
+      }
+    } else {
+      productPrice.innerText = `UGX ${product.price}`;
+      productPrice.dataset.price = product.price;
+    }
+  
+    // Calculate the new total based on the current input value, displayed price, and product name
+    const newQuantity = parseInt(quantityInput.value);
+    const newTotal = newQuantity * parseFloat(productPrice.dataset.price);
+  
+    // Update the total element with the difference
+    updateTotalElement(newTotal - originalTotal);
+  
+    // Log the updated price to the console
+    console.log("Updated Price:", parseFloat(productPrice.dataset.price));
+  }
+  
+  // Function to update the total element
+  function updateTotalElement(result) {
+    const totalPriceElement = document.getElementById("total-price");
+  
+    // Parse the total as a number
+    const total = parseFloat(totalPriceElement.innerText.replace("TOTAL: UGX ", ""));
+  
+    // Display the updated total in the total element
+    totalPriceElement.innerText = "TOTAL: UGX " + (total + result).toFixed(2);
+  
+    // Log the updated total to the console
+    console.log("Updated Total:", total + result);
+  }
+  
+
+// Function to multiply input by displayed price and update the total element
+function multiplyInputByDisplayedPrice(inputValue, displayedPrice, productName) {
+  // Check if inputValue is not empty and is a valid number
+  if (inputValue && !isNaN(inputValue)) {
+    // Calculate the result by multiplying the input by the displayed product price
+    const result = inputValue * displayedPrice;
+
+    // Update the total for this product directly
+    productTotals[productName] = result;
+
+    // Update the overall total directly
+    updateCartTotal();
+
+    // Log the result to the console
+    console.log("Result of multiplication:", result);
+  } else {
+    // If inputValue is empty or not a valid number, reset the total for this product
+    productTotals[productName] = 0;
+
+    // Update the overall total directly
+    updateCartTotal();
+
+    // Log the result to the console
+    console.log("Result of multiplication:", 0);
+  }
+}}
+
+// Function to update the total element based on all cart items
+function updateCartTotal() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  let total = 0;
+
+  for (let i = 0; i < cartItems.length; i++) {
+    const cartItem = cartItems[i];
+    const quantityInput = cartItem.querySelector(".product-details .quantity-input");
+    const productPriceElement = cartItem.querySelector(".product-details h4");
+    const quantity = parseInt(quantityInput.value);
+    const price = parseFloat(productPriceElement.dataset.price);
+    const totalForItem = quantity * price;
+
+    total += totalForItem;
+  }
+
+  // Display the overall total in the total element
+  const totalPriceElement = document.getElementById("total-price");
+  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
+
+  // Log the updated total to the console
+  console.log("Updated Total:", total);
 }
 
+// Example of using the function
 
 
 
@@ -2575,8 +2949,9 @@ addToCartBtn.addEventListener("click", () => {
     const cart = document.getElementById('cart-container')
     cart.style.display = 'block';
   addToCart(product);
-});
+  updateCartTotal();
 
+});
 // Assuming `card` is the element representing the product card
 card.appendChild(addToCartBtn);
 
@@ -2731,10 +3106,34 @@ icon.classList.add("fas", "fa-shopping-cart"); // Assuming you're using Font Awe
 
 // Append the icon to the button
 addToCartBtn.prepend(icon);
+// Declare productPrice outside of addToCart to make it accessible to other functions
+let productPrice;
+// Initialize an object to store totals for each product
+const productTotals = {};
+// Initialize overall total variable
+let total = 0;
 
 function addToCart(product) {
   // Get the cart items container
   const cartItemsContainer = document.getElementById("cart-items");
+  // Create a container for the toggle switch
+  const toggleContainer = document.createElement("div");
+  toggleContainer.classList.add("toggle-container");
+
+  // Add title to the toggle
+  const toggleTitle = document.createElement("p");
+  toggleTitle.innerText = "Wholesale";
+  toggleContainer.appendChild(toggleTitle);
+
+  // Create the toggle switch
+  const toggleSwitch = document.createElement("input");
+  toggleSwitch.type = "checkbox";
+  toggleSwitch.classList.add("toggle-switch");
+  toggleSwitch.addEventListener("change", () => {
+    updatePriceBasedOnToggle(product, toggleSwitch.checked);
+  });
+
+  toggleContainer.appendChild(toggleSwitch);
 
   // Create a new cart item element
   const cartItem = document.createElement("div");
@@ -2743,6 +3142,7 @@ function addToCart(product) {
   // Create a container for the product details (name, price, quantity, and delete button)
   const productDetails = document.createElement("div");
   productDetails.classList.add("product-details");
+  productDetails.appendChild(toggleContainer);
 
   // Add product name
   const productName = document.createElement("h5");
@@ -2750,52 +3150,30 @@ function addToCart(product) {
   productDetails.appendChild(productName);
 
   // Add product price
-  const productPrice = document.createElement("h4");
+  productPrice = document.createElement("h4");
   productPrice.innerText = `UGX ${product.price}`;
   productPrice.dataset.price = product.price; // Store the price as a data attribute
   productDetails.appendChild(productPrice);
 
-// Create a quantity input field
-const quantityInput = document.createElement("input");
-quantityInput.type = "number";
-quantityInput.value = 1;
-quantityInput.min = 1;
-quantityInput.classList.add("quantity-input"); // Add the quantity-input class
-quantityInput.addEventListener("input", () => {
-  updateCartItemTotal(cartItem);
-  updateCartTotal();
-});
-productDetails.appendChild(quantityInput);
+  // Create a quantity input field
+  const quantityInput = document.createElement("input");
+  quantityInput.type = "number";
+  quantityInput.value = 1;
+  quantityInput.min = 1;
+  quantityInput.classList.add("quantity-input"); // Add the quantity-input class
 
+  quantityInput.addEventListener("input", () => {
+    // Log the input value to the console
+    console.log("Input value:", quantityInput.value);
 
-function updateCartItemTotal(cartItem) {
-  const priceElement = cartItem.querySelector(".product-details h4");
+    // Get the displayed product price from innerText
+    const displayedPrice = parseFloat(productPrice.innerText.replace("UGX ", ""));
 
-  // Check if the element is found before accessing properties
-  if (priceElement) {
-    const quantityInput = cartItem.querySelector(".product-details input");
-    const quantity = parseInt(quantityInput.value);
-    const price = parseFloat(priceElement.innerText.replace("UGX ", ""));
-    const total = quantity * price;
-    priceElement.dataset.total = total.toFixed(2);
-  }
-}
+    // Call the multiply function with the current input value and displayed price
+    multiplyInputByDisplayedPrice(quantityInput.value, displayedPrice, product.name);
+  });
 
-// Define the updateCartTotal function
-function updateCartTotal() {
-  const cartItems = document.getElementsByClassName("cart-item");
-  const totalPriceElement = document.getElementById("total-price");
-  let total = 0;
-
-  for (let i = 0; i < cartItems.length; i++) {
-    const cartItem = cartItems[i];
-    const priceElement = cartItem.querySelector(".product-details h4");
-    const totalForItem = parseFloat(priceElement.dataset.total);
-    total += totalForItem;
-  }
-
-  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
-}
+  productDetails.appendChild(quantityInput);
 
   // Create a delete button for the cart item
   const deleteButton = document.createElement("button");
@@ -2803,8 +3181,8 @@ function updateCartTotal() {
   deleteButton.classList.add("delete-button");
   deleteButton.addEventListener("click", () => {
     cartItemsContainer.removeChild(cartItem);
-    updateCartTotal();
     updateCartCount(-1);
+    updateCartTotal()
   });
   productDetails.appendChild(deleteButton);
 
@@ -2816,14 +3194,131 @@ function updateCartTotal() {
   // Update the cart count
   updateCartCount(1);
 
-  // Calculate and update the total price
-  updateCartItemTotal(cartItem);
-  updateCartTotal();
-
   // Show the "Added to Cart" message
   showAddToCartMessage(product.name);
+
+  // Function to fetch wholesale price from Firebase
+  async function fetchWholesalePriceFromFirebase(productName) {
+    const productsRef = ref(database, "products/newScreens");
+    const productSnapshot = await get(child(productsRef, productName));
+
+    if (productSnapshot.exists()) {
+      // Assuming there's a property named 'wholesalePrice' in the product data
+      const wholesalePrice = productSnapshot.val().wholesalePrice;
+
+      // Parse the wholesalePrice as a number
+      return wholesalePrice !== null ? parseFloat(wholesalePrice) : null;
+    }
+
+    // Return a default value or handle the case when the product is not found
+    return null;
+  }
+
+  let originalTotal = 0;
+
+  // Function to update price based on the toggle switch
+  async function updatePriceBasedOnToggle(product, isWholesale) {
+    // Get the displayed product price from innerText
+    const displayedPrice = parseFloat(productPrice.innerText.replace("UGX ", ""));
+  
+    // Calculate the original total based on the current input value and displayed price
+    const originalQuantity = parseInt(quantityInput.value);
+    originalTotal = originalQuantity * displayedPrice;
+  
+    if (isWholesale) {
+      // Fetch wholesale price from Firebase based on the product name
+      const wholesalePrice = await fetchWholesalePriceFromFirebase(product.name);
+  
+      if (wholesalePrice !== null) {
+        productPrice.innerText = `UGX ${wholesalePrice}`;
+        productPrice.dataset.price = wholesalePrice;
+      } else {
+        // Handle the case when wholesale price is not found
+        //console.error(`Wholesale price not found for product: ${product.name}`);
+      }
+    } else {
+      productPrice.innerText = `UGX ${product.price}`;
+      productPrice.dataset.price = product.price;
+    }
+  
+    // Calculate the new total based on the current input value, displayed price, and product name
+    const newQuantity = parseInt(quantityInput.value);
+    const newTotal = newQuantity * parseFloat(productPrice.dataset.price);
+  
+    // Update the total element with the difference
+    updateTotalElement(newTotal - originalTotal);
+  
+    // Log the updated price to the console
+    console.log("Updated Price:", parseFloat(productPrice.dataset.price));
+  }
+  
+  // Function to update the total element
+  function updateTotalElement(result) {
+    const totalPriceElement = document.getElementById("total-price");
+  
+    // Parse the total as a number
+    const total = parseFloat(totalPriceElement.innerText.replace("TOTAL: UGX ", ""));
+  
+    // Display the updated total in the total element
+    totalPriceElement.innerText = "TOTAL: UGX " + (total + result).toFixed(2);
+  
+    // Log the updated total to the console
+    console.log("Updated Total:", total + result);
+  }
+  
+
+// Function to multiply input by displayed price and update the total element
+function multiplyInputByDisplayedPrice(inputValue, displayedPrice, productName) {
+  // Check if inputValue is not empty and is a valid number
+  if (inputValue && !isNaN(inputValue)) {
+    // Calculate the result by multiplying the input by the displayed product price
+    const result = inputValue * displayedPrice;
+
+    // Update the total for this product directly
+    productTotals[productName] = result;
+
+    // Update the overall total directly
+    updateCartTotal();
+
+    // Log the result to the console
+    console.log("Result of multiplication:", result);
+  } else {
+    // If inputValue is empty or not a valid number, reset the total for this product
+    productTotals[productName] = 0;
+
+    // Update the overall total directly
+    updateCartTotal();
+
+    // Log the result to the console
+    console.log("Result of multiplication:", 0);
+  }
+}}
+
+// Function to update the total element based on all cart items
+function updateCartTotal() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  let total = 0;
+
+  for (let i = 0; i < cartItems.length; i++) {
+    const cartItem = cartItems[i];
+    const quantityInput = cartItem.querySelector(".product-details .quantity-input");
+    const productPriceElement = cartItem.querySelector(".product-details h4");
+    const quantity = parseInt(quantityInput.value);
+    const price = parseFloat(productPriceElement.dataset.price);
+    const totalForItem = quantity * price;
+
+    total += totalForItem;
+  }
+
+  // Display the overall total in the total element
+  const totalPriceElement = document.getElementById("total-price");
+  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
+
+  // Log the updated total to the console
+  console.log("Updated Total:", total);
 }
 
+// Example of using the function
 
 
 
@@ -2840,8 +3335,9 @@ addToCartBtn.addEventListener("click", () => {
     const cart = document.getElementById('cart-container')
     cart.style.display = 'block';
   addToCart(product);
-});
+  updateCartTotal();
 
+});
 // Assuming `card` is the element representing the product card
 card.appendChild(addToCartBtn);
 
@@ -2991,10 +3487,34 @@ icon.classList.add("fas", "fa-shopping-cart"); // Assuming you're using Font Awe
 
 // Append the icon to the button
 addToCartBtn.prepend(icon);
+// Declare productPrice outside of addToCart to make it accessible to other functions
+let productPrice;
+// Initialize an object to store totals for each product
+const productTotals = {};
+// Initialize overall total variable
+let total = 0;
 
 function addToCart(product) {
   // Get the cart items container
   const cartItemsContainer = document.getElementById("cart-items");
+  // Create a container for the toggle switch
+  const toggleContainer = document.createElement("div");
+  toggleContainer.classList.add("toggle-container");
+
+  // Add title to the toggle
+  const toggleTitle = document.createElement("p");
+  toggleTitle.innerText = "Wholesale";
+  toggleContainer.appendChild(toggleTitle);
+
+  // Create the toggle switch
+  const toggleSwitch = document.createElement("input");
+  toggleSwitch.type = "checkbox";
+  toggleSwitch.classList.add("toggle-switch");
+  toggleSwitch.addEventListener("change", () => {
+    updatePriceBasedOnToggle(product, toggleSwitch.checked);
+  });
+
+  toggleContainer.appendChild(toggleSwitch);
 
   // Create a new cart item element
   const cartItem = document.createElement("div");
@@ -3003,6 +3523,7 @@ function addToCart(product) {
   // Create a container for the product details (name, price, quantity, and delete button)
   const productDetails = document.createElement("div");
   productDetails.classList.add("product-details");
+  productDetails.appendChild(toggleContainer);
 
   // Add product name
   const productName = document.createElement("h5");
@@ -3010,53 +3531,30 @@ function addToCart(product) {
   productDetails.appendChild(productName);
 
   // Add product price
-  const productPrice = document.createElement("h4");
+  productPrice = document.createElement("h4");
   productPrice.innerText = `UGX ${product.price}`;
   productPrice.dataset.price = product.price; // Store the price as a data attribute
   productDetails.appendChild(productPrice);
 
-// Create a quantity input field
-const quantityInput = document.createElement("input");
-quantityInput.type = "number";
-quantityInput.value = 1;
-quantityInput.min = 1;
-quantityInput.classList.add("quantity-input"); // Add the quantity-input class
-quantityInput.addEventListener("input", () => {
-  updateCartItemTotal(cartItem);
-  updateCartTotal();
-});
-productDetails.appendChild(quantityInput);
+  // Create a quantity input field
+  const quantityInput = document.createElement("input");
+  quantityInput.type = "number";
+  quantityInput.value = 1;
+  quantityInput.min = 1;
+  quantityInput.classList.add("quantity-input"); // Add the quantity-input class
 
+  quantityInput.addEventListener("input", () => {
+    // Log the input value to the console
+    console.log("Input value:", quantityInput.value);
 
-function updateCartItemTotal(cartItem) {
-  const priceElement = cartItem.querySelector(".product-details h4");
+    // Get the displayed product price from innerText
+    const displayedPrice = parseFloat(productPrice.innerText.replace("UGX ", ""));
 
-  // Check if the element is found before accessing properties
-  if (priceElement) {
-    const quantityInput = cartItem.querySelector(".product-details input");
-    const quantity = parseInt(quantityInput.value);
-    const price = parseFloat(priceElement.innerText.replace("UGX ", ""));
-    const total = quantity * price;
-    priceElement.dataset.total = total.toFixed(2);
-  }
-}
+    // Call the multiply function with the current input value and displayed price
+    multiplyInputByDisplayedPrice(quantityInput.value, displayedPrice, product.name);
+  });
 
-
-// Define the updateCartTotal function
-function updateCartTotal() {
-  const cartItems = document.getElementsByClassName("cart-item");
-  const totalPriceElement = document.getElementById("total-price");
-  let total = 0;
-
-  for (let i = 0; i < cartItems.length; i++) {
-    const cartItem = cartItems[i];
-    const priceElement = cartItem.querySelector(".product-details h4");
-    const totalForItem = parseFloat(priceElement.dataset.total);
-    total += totalForItem;
-  }
-
-  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
-}
+  productDetails.appendChild(quantityInput);
 
   // Create a delete button for the cart item
   const deleteButton = document.createElement("button");
@@ -3064,8 +3562,8 @@ function updateCartTotal() {
   deleteButton.classList.add("delete-button");
   deleteButton.addEventListener("click", () => {
     cartItemsContainer.removeChild(cartItem);
-    updateCartTotal();
     updateCartCount(-1);
+    updateCartTotal()
   });
   productDetails.appendChild(deleteButton);
 
@@ -3077,14 +3575,131 @@ function updateCartTotal() {
   // Update the cart count
   updateCartCount(1);
 
-  // Calculate and update the total price
-  updateCartItemTotal(cartItem);
-  updateCartTotal();
-
   // Show the "Added to Cart" message
   showAddToCartMessage(product.name);
+
+  // Function to fetch wholesale price from Firebase
+  async function fetchWholesalePriceFromFirebase(productName) {
+    const productsRef = ref(database, "products/gradeBScreens");
+    const productSnapshot = await get(child(productsRef, productName));
+
+    if (productSnapshot.exists()) {
+      // Assuming there's a property named 'wholesalePrice' in the product data
+      const wholesalePrice = productSnapshot.val().wholesalePrice;
+
+      // Parse the wholesalePrice as a number
+      return wholesalePrice !== null ? parseFloat(wholesalePrice) : null;
+    }
+
+    // Return a default value or handle the case when the product is not found
+    return null;
+  }
+
+  let originalTotal = 0;
+
+  // Function to update price based on the toggle switch
+  async function updatePriceBasedOnToggle(product, isWholesale) {
+    // Get the displayed product price from innerText
+    const displayedPrice = parseFloat(productPrice.innerText.replace("UGX ", ""));
+  
+    // Calculate the original total based on the current input value and displayed price
+    const originalQuantity = parseInt(quantityInput.value);
+    originalTotal = originalQuantity * displayedPrice;
+  
+    if (isWholesale) {
+      // Fetch wholesale price from Firebase based on the product name
+      const wholesalePrice = await fetchWholesalePriceFromFirebase(product.name);
+  
+      if (wholesalePrice !== null) {
+        productPrice.innerText = `UGX ${wholesalePrice}`;
+        productPrice.dataset.price = wholesalePrice;
+      } else {
+        // Handle the case when wholesale price is not found
+        //console.error(`Wholesale price not found for product: ${product.name}`);
+      }
+    } else {
+      productPrice.innerText = `UGX ${product.price}`;
+      productPrice.dataset.price = product.price;
+    }
+  
+    // Calculate the new total based on the current input value, displayed price, and product name
+    const newQuantity = parseInt(quantityInput.value);
+    const newTotal = newQuantity * parseFloat(productPrice.dataset.price);
+  
+    // Update the total element with the difference
+    updateTotalElement(newTotal - originalTotal);
+  
+    // Log the updated price to the console
+    console.log("Updated Price:", parseFloat(productPrice.dataset.price));
+  }
+  
+  // Function to update the total element
+  function updateTotalElement(result) {
+    const totalPriceElement = document.getElementById("total-price");
+  
+    // Parse the total as a number
+    const total = parseFloat(totalPriceElement.innerText.replace("TOTAL: UGX ", ""));
+  
+    // Display the updated total in the total element
+    totalPriceElement.innerText = "TOTAL: UGX " + (total + result).toFixed(2);
+  
+    // Log the updated total to the console
+    console.log("Updated Total:", total + result);
+  }
+  
+
+// Function to multiply input by displayed price and update the total element
+function multiplyInputByDisplayedPrice(inputValue, displayedPrice, productName) {
+  // Check if inputValue is not empty and is a valid number
+  if (inputValue && !isNaN(inputValue)) {
+    // Calculate the result by multiplying the input by the displayed product price
+    const result = inputValue * displayedPrice;
+
+    // Update the total for this product directly
+    productTotals[productName] = result;
+
+    // Update the overall total directly
+    updateCartTotal();
+
+    // Log the result to the console
+    console.log("Result of multiplication:", result);
+  } else {
+    // If inputValue is empty or not a valid number, reset the total for this product
+    productTotals[productName] = 0;
+
+    // Update the overall total directly
+    updateCartTotal();
+
+    // Log the result to the console
+    console.log("Result of multiplication:", 0);
+  }
+}}
+
+// Function to update the total element based on all cart items
+function updateCartTotal() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  let total = 0;
+
+  for (let i = 0; i < cartItems.length; i++) {
+    const cartItem = cartItems[i];
+    const quantityInput = cartItem.querySelector(".product-details .quantity-input");
+    const productPriceElement = cartItem.querySelector(".product-details h4");
+    const quantity = parseInt(quantityInput.value);
+    const price = parseFloat(productPriceElement.dataset.price);
+    const totalForItem = quantity * price;
+
+    total += totalForItem;
+  }
+
+  // Display the overall total in the total element
+  const totalPriceElement = document.getElementById("total-price");
+  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
+
+  // Log the updated total to the console
+  console.log("Updated Total:", total);
 }
 
+// Example of using the function
 
 
 
@@ -3101,8 +3716,9 @@ addToCartBtn.addEventListener("click", () => {
     const cart = document.getElementById('cart-container')
     cart.style.display = 'block';
   addToCart(product);
-});
+  updateCartTotal();
 
+});
 // Assuming `card` is the element representing the product card
 card.appendChild(addToCartBtn);
 
@@ -3258,9 +3874,34 @@ icon.classList.add("fas", "fa-shopping-cart"); // Assuming you're using Font Awe
 // Append the icon to the button
 addToCartBtn.prepend(icon);
 
+// Declare productPrice outside of addToCart to make it accessible to other functions
+let productPrice;
+// Initialize an object to store totals for each product
+const productTotals = {};
+// Initialize overall total variable
+let total = 0;
+
 function addToCart(product) {
   // Get the cart items container
   const cartItemsContainer = document.getElementById("cart-items");
+  // Create a container for the toggle switch
+  const toggleContainer = document.createElement("div");
+  toggleContainer.classList.add("toggle-container");
+
+  // Add title to the toggle
+  const toggleTitle = document.createElement("p");
+  toggleTitle.innerText = "Wholesale";
+  toggleContainer.appendChild(toggleTitle);
+
+  // Create the toggle switch
+  const toggleSwitch = document.createElement("input");
+  toggleSwitch.type = "checkbox";
+  toggleSwitch.classList.add("toggle-switch");
+  toggleSwitch.addEventListener("change", () => {
+    updatePriceBasedOnToggle(product, toggleSwitch.checked);
+  });
+
+  toggleContainer.appendChild(toggleSwitch);
 
   // Create a new cart item element
   const cartItem = document.createElement("div");
@@ -3269,6 +3910,7 @@ function addToCart(product) {
   // Create a container for the product details (name, price, quantity, and delete button)
   const productDetails = document.createElement("div");
   productDetails.classList.add("product-details");
+  productDetails.appendChild(toggleContainer);
 
   // Add product name
   const productName = document.createElement("h5");
@@ -3276,52 +3918,30 @@ function addToCart(product) {
   productDetails.appendChild(productName);
 
   // Add product price
-  const productPrice = document.createElement("h4");
+  productPrice = document.createElement("h4");
   productPrice.innerText = `UGX ${product.price}`;
   productPrice.dataset.price = product.price; // Store the price as a data attribute
   productDetails.appendChild(productPrice);
 
-// Create a quantity input field
-const quantityInput = document.createElement("input");
-quantityInput.type = "number";
-quantityInput.value = 1;
-quantityInput.min = 1;
-quantityInput.classList.add("quantity-input"); // Add the quantity-input class
-quantityInput.addEventListener("input", () => {
-  updateCartItemTotal(cartItem);
-  updateCartTotal();
-});
-productDetails.appendChild(quantityInput);
+  // Create a quantity input field
+  const quantityInput = document.createElement("input");
+  quantityInput.type = "number";
+  quantityInput.value = 1;
+  quantityInput.min = 1;
+  quantityInput.classList.add("quantity-input"); // Add the quantity-input class
 
+  quantityInput.addEventListener("input", () => {
+    // Log the input value to the console
+    console.log("Input value:", quantityInput.value);
 
-function updateCartItemTotal(cartItem) {
-  const priceElement = cartItem.querySelector(".product-details h4");
+    // Get the displayed product price from innerText
+    const displayedPrice = parseFloat(productPrice.innerText.replace("UGX ", ""));
 
-  // Check if the element is found before accessing properties
-  if (priceElement) {
-    const quantityInput = cartItem.querySelector(".product-details input");
-    const quantity = parseInt(quantityInput.value);
-    const price = parseFloat(priceElement.innerText.replace("UGX ", ""));
-    const total = quantity * price;
-    priceElement.dataset.total = total.toFixed(2);
-  }
-}
+    // Call the multiply function with the current input value and displayed price
+    multiplyInputByDisplayedPrice(quantityInput.value, displayedPrice, product.name);
+  });
 
-// Define the updateCartTotal function
-function updateCartTotal() {
-  const cartItems = document.getElementsByClassName("cart-item");
-  const totalPriceElement = document.getElementById("total-price");
-  let total = 0;
-
-  for (let i = 0; i < cartItems.length; i++) {
-    const cartItem = cartItems[i];
-    const priceElement = cartItem.querySelector(".product-details h4");
-    const totalForItem = parseFloat(priceElement.dataset.total);
-    total += totalForItem;
-  }
-
-  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
-}
+  productDetails.appendChild(quantityInput);
 
   // Create a delete button for the cart item
   const deleteButton = document.createElement("button");
@@ -3329,8 +3949,8 @@ function updateCartTotal() {
   deleteButton.classList.add("delete-button");
   deleteButton.addEventListener("click", () => {
     cartItemsContainer.removeChild(cartItem);
-    updateCartTotal();
     updateCartCount(-1);
+    updateCartTotal()
   });
   productDetails.appendChild(deleteButton);
 
@@ -3342,14 +3962,131 @@ function updateCartTotal() {
   // Update the cart count
   updateCartCount(1);
 
-  // Calculate and update the total price
-  updateCartItemTotal(cartItem);
-  updateCartTotal();
-
   // Show the "Added to Cart" message
   showAddToCartMessage(product.name);
+
+  // Function to fetch wholesale price from Firebase
+  async function fetchWholesalePriceFromFirebase(productName) {
+    const productsRef = ref(database, "products/touches");
+    const productSnapshot = await get(child(productsRef, productName));
+
+    if (productSnapshot.exists()) {
+      // Assuming there's a property named 'wholesalePrice' in the product data
+      const wholesalePrice = productSnapshot.val().wholesalePrice;
+
+      // Parse the wholesalePrice as a number
+      return wholesalePrice !== null ? parseFloat(wholesalePrice) : null;
+    }
+
+    // Return a default value or handle the case when the product is not found
+    return null;
+  }
+
+  let originalTotal = 0;
+
+  // Function to update price based on the toggle switch
+  async function updatePriceBasedOnToggle(product, isWholesale) {
+    // Get the displayed product price from innerText
+    const displayedPrice = parseFloat(productPrice.innerText.replace("UGX ", ""));
+  
+    // Calculate the original total based on the current input value and displayed price
+    const originalQuantity = parseInt(quantityInput.value);
+    originalTotal = originalQuantity * displayedPrice;
+  
+    if (isWholesale) {
+      // Fetch wholesale price from Firebase based on the product name
+      const wholesalePrice = await fetchWholesalePriceFromFirebase(product.name);
+  
+      if (wholesalePrice !== null) {
+        productPrice.innerText = `UGX ${wholesalePrice}`;
+        productPrice.dataset.price = wholesalePrice;
+      } else {
+        // Handle the case when wholesale price is not found
+        //console.error(`Wholesale price not found for product: ${product.name}`);
+      }
+    } else {
+      productPrice.innerText = `UGX ${product.price}`;
+      productPrice.dataset.price = product.price;
+    }
+  
+    // Calculate the new total based on the current input value, displayed price, and product name
+    const newQuantity = parseInt(quantityInput.value);
+    const newTotal = newQuantity * parseFloat(productPrice.dataset.price);
+  
+    // Update the total element with the difference
+    updateTotalElement(newTotal - originalTotal);
+  
+    // Log the updated price to the console
+    console.log("Updated Price:", parseFloat(productPrice.dataset.price));
+  }
+  
+  // Function to update the total element
+  function updateTotalElement(result) {
+    const totalPriceElement = document.getElementById("total-price");
+  
+    // Parse the total as a number
+    const total = parseFloat(totalPriceElement.innerText.replace("TOTAL: UGX ", ""));
+  
+    // Display the updated total in the total element
+    totalPriceElement.innerText = "TOTAL: UGX " + (total + result).toFixed(2);
+  
+    // Log the updated total to the console
+    console.log("Updated Total:", total + result);
+  }
+  
+
+// Function to multiply input by displayed price and update the total element
+function multiplyInputByDisplayedPrice(inputValue, displayedPrice, productName) {
+  // Check if inputValue is not empty and is a valid number
+  if (inputValue && !isNaN(inputValue)) {
+    // Calculate the result by multiplying the input by the displayed product price
+    const result = inputValue * displayedPrice;
+
+    // Update the total for this product directly
+    productTotals[productName] = result;
+
+    // Update the overall total directly
+    updateCartTotal();
+
+    // Log the result to the console
+    console.log("Result of multiplication:", result);
+  } else {
+    // If inputValue is empty or not a valid number, reset the total for this product
+    productTotals[productName] = 0;
+
+    // Update the overall total directly
+    updateCartTotal();
+
+    // Log the result to the console
+    console.log("Result of multiplication:", 0);
+  }
+}}
+
+// Function to update the total element based on all cart items
+function updateCartTotal() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  let total = 0;
+
+  for (let i = 0; i < cartItems.length; i++) {
+    const cartItem = cartItems[i];
+    const quantityInput = cartItem.querySelector(".product-details .quantity-input");
+    const productPriceElement = cartItem.querySelector(".product-details h4");
+    const quantity = parseInt(quantityInput.value);
+    const price = parseFloat(productPriceElement.dataset.price);
+    const totalForItem = quantity * price;
+
+    total += totalForItem;
+  }
+
+  // Display the overall total in the total element
+  const totalPriceElement = document.getElementById("total-price");
+  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
+
+  // Log the updated total to the console
+  console.log("Updated Total:", total);
 }
 
+// Example of using the function
 
 
 
@@ -3366,6 +4103,8 @@ addToCartBtn.addEventListener("click", () => {
     const cart = document.getElementById('cart-container')
     cart.style.display = 'block';
   addToCart(product);
+  updateCartTotal();
+
 });
 
 // Assuming `card` is the element representing the product card
@@ -3520,9 +4259,34 @@ icon.classList.add("fas", "fa-shopping-cart"); // Assuming you're using Font Awe
 // Append the icon to the button
 addToCartBtn.prepend(icon);
 
+// Declare productPrice outside of addToCart to make it accessible to other functions
+let productPrice;
+// Initialize an object to store totals for each product
+const productTotals = {};
+// Initialize overall total variable
+let total = 0;
+
 function addToCart(product) {
   // Get the cart items container
   const cartItemsContainer = document.getElementById("cart-items");
+  // Create a container for the toggle switch
+  const toggleContainer = document.createElement("div");
+  toggleContainer.classList.add("toggle-container");
+
+  // Add title to the toggle
+  const toggleTitle = document.createElement("p");
+  toggleTitle.innerText = "Wholesale";
+  toggleContainer.appendChild(toggleTitle);
+
+  // Create the toggle switch
+  const toggleSwitch = document.createElement("input");
+  toggleSwitch.type = "checkbox";
+  toggleSwitch.classList.add("toggle-switch");
+  toggleSwitch.addEventListener("change", () => {
+    updatePriceBasedOnToggle(product, toggleSwitch.checked);
+  });
+
+  toggleContainer.appendChild(toggleSwitch);
 
   // Create a new cart item element
   const cartItem = document.createElement("div");
@@ -3531,6 +4295,7 @@ function addToCart(product) {
   // Create a container for the product details (name, price, quantity, and delete button)
   const productDetails = document.createElement("div");
   productDetails.classList.add("product-details");
+  productDetails.appendChild(toggleContainer);
 
   // Add product name
   const productName = document.createElement("h5");
@@ -3538,52 +4303,30 @@ function addToCart(product) {
   productDetails.appendChild(productName);
 
   // Add product price
-  const productPrice = document.createElement("h4");
+  productPrice = document.createElement("h4");
   productPrice.innerText = `UGX ${product.price}`;
   productPrice.dataset.price = product.price; // Store the price as a data attribute
   productDetails.appendChild(productPrice);
 
-// Create a quantity input field
-const quantityInput = document.createElement("input");
-quantityInput.type = "number";
-quantityInput.value = 1;
-quantityInput.min = 1;
-quantityInput.classList.add("quantity-input"); // Add the quantity-input class
-quantityInput.addEventListener("input", () => {
-  updateCartItemTotal(cartItem);
-  updateCartTotal();
-});
-productDetails.appendChild(quantityInput);
+  // Create a quantity input field
+  const quantityInput = document.createElement("input");
+  quantityInput.type = "number";
+  quantityInput.value = 1;
+  quantityInput.min = 1;
+  quantityInput.classList.add("quantity-input"); // Add the quantity-input class
 
+  quantityInput.addEventListener("input", () => {
+    // Log the input value to the console
+    console.log("Input value:", quantityInput.value);
 
-function updateCartItemTotal(cartItem) {
-  const priceElement = cartItem.querySelector(".product-details h4");
+    // Get the displayed product price from innerText
+    const displayedPrice = parseFloat(productPrice.innerText.replace("UGX ", ""));
 
-  // Check if the element is found before accessing properties
-  if (priceElement) {
-    const quantityInput = cartItem.querySelector(".product-details input");
-    const quantity = parseInt(quantityInput.value);
-    const price = parseFloat(priceElement.innerText.replace("UGX ", ""));
-    const total = quantity * price;
-    priceElement.dataset.total = total.toFixed(2);
-  }
-}
+    // Call the multiply function with the current input value and displayed price
+    multiplyInputByDisplayedPrice(quantityInput.value, displayedPrice, product.name);
+  });
 
-// Define the updateCartTotal function
-function updateCartTotal() {
-  const cartItems = document.getElementsByClassName("cart-item");
-  const totalPriceElement = document.getElementById("total-price");
-  let total = 0;
-
-  for (let i = 0; i < cartItems.length; i++) {
-    const cartItem = cartItems[i];
-    const priceElement = cartItem.querySelector(".product-details h4");
-    const totalForItem = parseFloat(priceElement.dataset.total);
-    total += totalForItem;
-  }
-
-  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
-}
+  productDetails.appendChild(quantityInput);
 
   // Create a delete button for the cart item
   const deleteButton = document.createElement("button");
@@ -3591,8 +4334,8 @@ function updateCartTotal() {
   deleteButton.classList.add("delete-button");
   deleteButton.addEventListener("click", () => {
     cartItemsContainer.removeChild(cartItem);
-    updateCartTotal();
     updateCartCount(-1);
+    updateCartTotal()
   });
   productDetails.appendChild(deleteButton);
 
@@ -3604,14 +4347,131 @@ function updateCartTotal() {
   // Update the cart count
   updateCartCount(1);
 
-  // Calculate and update the total price
-  updateCartItemTotal(cartItem);
-  updateCartTotal();
-
   // Show the "Added to Cart" message
   showAddToCartMessage(product.name);
+
+  // Function to fetch wholesale price from Firebase
+  async function fetchWholesalePriceFromFirebase(productName) {
+    const productsRef = ref(database, "products/electronics");
+    const productSnapshot = await get(child(productsRef, productName));
+
+    if (productSnapshot.exists()) {
+      // Assuming there's a property named 'wholesalePrice' in the product data
+      const wholesalePrice = productSnapshot.val().wholesalePrice;
+
+      // Parse the wholesalePrice as a number
+      return wholesalePrice !== null ? parseFloat(wholesalePrice) : null;
+    }
+
+    // Return a default value or handle the case when the product is not found
+    return null;
+  }
+
+  let originalTotal = 0;
+
+  // Function to update price based on the toggle switch
+  async function updatePriceBasedOnToggle(product, isWholesale) {
+    // Get the displayed product price from innerText
+    const displayedPrice = parseFloat(productPrice.innerText.replace("UGX ", ""));
+  
+    // Calculate the original total based on the current input value and displayed price
+    const originalQuantity = parseInt(quantityInput.value);
+    originalTotal = originalQuantity * displayedPrice;
+  
+    if (isWholesale) {
+      // Fetch wholesale price from Firebase based on the product name
+      const wholesalePrice = await fetchWholesalePriceFromFirebase(product.name);
+  
+      if (wholesalePrice !== null) {
+        productPrice.innerText = `UGX ${wholesalePrice}`;
+        productPrice.dataset.price = wholesalePrice;
+      } else {
+        // Handle the case when wholesale price is not found
+        //console.error(`Wholesale price not found for product: ${product.name}`);
+      }
+    } else {
+      productPrice.innerText = `UGX ${product.price}`;
+      productPrice.dataset.price = product.price;
+    }
+  
+    // Calculate the new total based on the current input value, displayed price, and product name
+    const newQuantity = parseInt(quantityInput.value);
+    const newTotal = newQuantity * parseFloat(productPrice.dataset.price);
+  
+    // Update the total element with the difference
+    updateTotalElement(newTotal - originalTotal);
+  
+    // Log the updated price to the console
+    console.log("Updated Price:", parseFloat(productPrice.dataset.price));
+  }
+  
+  // Function to update the total element
+  function updateTotalElement(result) {
+    const totalPriceElement = document.getElementById("total-price");
+  
+    // Parse the total as a number
+    const total = parseFloat(totalPriceElement.innerText.replace("TOTAL: UGX ", ""));
+  
+    // Display the updated total in the total element
+    totalPriceElement.innerText = "TOTAL: UGX " + (total + result).toFixed(2);
+  
+    // Log the updated total to the console
+    console.log("Updated Total:", total + result);
+  }
+  
+
+// Function to multiply input by displayed price and update the total element
+function multiplyInputByDisplayedPrice(inputValue, displayedPrice, productName) {
+  // Check if inputValue is not empty and is a valid number
+  if (inputValue && !isNaN(inputValue)) {
+    // Calculate the result by multiplying the input by the displayed product price
+    const result = inputValue * displayedPrice;
+
+    // Update the total for this product directly
+    productTotals[productName] = result;
+
+    // Update the overall total directly
+    updateCartTotal();
+
+    // Log the result to the console
+    console.log("Result of multiplication:", result);
+  } else {
+    // If inputValue is empty or not a valid number, reset the total for this product
+    productTotals[productName] = 0;
+
+    // Update the overall total directly
+    updateCartTotal();
+
+    // Log the result to the console
+    console.log("Result of multiplication:", 0);
+  }
+}}
+
+// Function to update the total element based on all cart items
+function updateCartTotal() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  let total = 0;
+
+  for (let i = 0; i < cartItems.length; i++) {
+    const cartItem = cartItems[i];
+    const quantityInput = cartItem.querySelector(".product-details .quantity-input");
+    const productPriceElement = cartItem.querySelector(".product-details h4");
+    const quantity = parseInt(quantityInput.value);
+    const price = parseFloat(productPriceElement.dataset.price);
+    const totalForItem = quantity * price;
+
+    total += totalForItem;
+  }
+
+  // Display the overall total in the total element
+  const totalPriceElement = document.getElementById("total-price");
+  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
+
+  // Log the updated total to the console
+  console.log("Updated Total:", total);
 }
 
+// Example of using the function
 
 
 
@@ -3628,8 +4488,9 @@ addToCartBtn.addEventListener("click", () => {
     const cart = document.getElementById('cart-container')
     cart.style.display = 'block';
   addToCart(product);
-});
+  updateCartTotal();
 
+});
 // Assuming `card` is the element representing the product card
 card.appendChild(addToCartBtn);
 
@@ -3781,9 +4642,34 @@ icon.classList.add("fas", "fa-shopping-cart"); // Assuming you're using Font Awe
 // Append the icon to the button
 addToCartBtn.prepend(icon);
 
+// Declare productPrice outside of addToCart to make it accessible to other functions
+let productPrice;
+// Initialize an object to store totals for each product
+const productTotals = {};
+// Initialize overall total variable
+let total = 0;
+
 function addToCart(product) {
   // Get the cart items container
   const cartItemsContainer = document.getElementById("cart-items");
+  // Create a container for the toggle switch
+  const toggleContainer = document.createElement("div");
+  toggleContainer.classList.add("toggle-container");
+
+  // Add title to the toggle
+  const toggleTitle = document.createElement("p");
+  toggleTitle.innerText = "Wholesale";
+  toggleContainer.appendChild(toggleTitle);
+
+  // Create the toggle switch
+  const toggleSwitch = document.createElement("input");
+  toggleSwitch.type = "checkbox";
+  toggleSwitch.classList.add("toggle-switch");
+  toggleSwitch.addEventListener("change", () => {
+    updatePriceBasedOnToggle(product, toggleSwitch.checked);
+  });
+
+  toggleContainer.appendChild(toggleSwitch);
 
   // Create a new cart item element
   const cartItem = document.createElement("div");
@@ -3792,6 +4678,7 @@ function addToCart(product) {
   // Create a container for the product details (name, price, quantity, and delete button)
   const productDetails = document.createElement("div");
   productDetails.classList.add("product-details");
+  productDetails.appendChild(toggleContainer);
 
   // Add product name
   const productName = document.createElement("h5");
@@ -3799,52 +4686,30 @@ function addToCart(product) {
   productDetails.appendChild(productName);
 
   // Add product price
-  const productPrice = document.createElement("h4");
+  productPrice = document.createElement("h4");
   productPrice.innerText = `UGX ${product.price}`;
   productPrice.dataset.price = product.price; // Store the price as a data attribute
   productDetails.appendChild(productPrice);
 
-// Create a quantity input field
-const quantityInput = document.createElement("input");
-quantityInput.type = "number";
-quantityInput.value = 1;
-quantityInput.min = 1;
-quantityInput.classList.add("quantity-input"); // Add the quantity-input class
-quantityInput.addEventListener("input", () => {
-  updateCartItemTotal(cartItem);
-  updateCartTotal();
-});
-productDetails.appendChild(quantityInput);
+  // Create a quantity input field
+  const quantityInput = document.createElement("input");
+  quantityInput.type = "number";
+  quantityInput.value = 1;
+  quantityInput.min = 1;
+  quantityInput.classList.add("quantity-input"); // Add the quantity-input class
 
+  quantityInput.addEventListener("input", () => {
+    // Log the input value to the console
+    console.log("Input value:", quantityInput.value);
 
-function updateCartItemTotal(cartItem) {
-  const priceElement = cartItem.querySelector(".product-details h4");
+    // Get the displayed product price from innerText
+    const displayedPrice = parseFloat(productPrice.innerText.replace("UGX ", ""));
 
-  // Check if the element is found before accessing properties
-  if (priceElement) {
-    const quantityInput = cartItem.querySelector(".product-details input");
-    const quantity = parseInt(quantityInput.value);
-    const price = parseFloat(priceElement.innerText.replace("UGX ", ""));
-    const total = quantity * price;
-    priceElement.dataset.total = total.toFixed(2);
-  }
-}
+    // Call the multiply function with the current input value and displayed price
+    multiplyInputByDisplayedPrice(quantityInput.value, displayedPrice, product.name);
+  });
 
-// Define the updateCartTotal function
-function updateCartTotal() {
-  const cartItems = document.getElementsByClassName("cart-item");
-  const totalPriceElement = document.getElementById("total-price");
-  let total = 0;
-
-  for (let i = 0; i < cartItems.length; i++) {
-    const cartItem = cartItems[i];
-    const priceElement = cartItem.querySelector(".product-details h4");
-    const totalForItem = parseFloat(priceElement.dataset.total);
-    total += totalForItem;
-  }
-
-  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
-}
+  productDetails.appendChild(quantityInput);
 
   // Create a delete button for the cart item
   const deleteButton = document.createElement("button");
@@ -3852,8 +4717,8 @@ function updateCartTotal() {
   deleteButton.classList.add("delete-button");
   deleteButton.addEventListener("click", () => {
     cartItemsContainer.removeChild(cartItem);
-    updateCartTotal();
     updateCartCount(-1);
+    updateCartTotal()
   });
   productDetails.appendChild(deleteButton);
 
@@ -3865,14 +4730,131 @@ function updateCartTotal() {
   // Update the cart count
   updateCartCount(1);
 
-  // Calculate and update the total price
-  updateCartItemTotal(cartItem);
-  updateCartTotal();
-
   // Show the "Added to Cart" message
   showAddToCartMessage(product.name);
+
+  // Function to fetch wholesale price from Firebase
+  async function fetchWholesalePriceFromFirebase(productName) {
+    const productsRef = ref(database, "products/accessories");
+    const productSnapshot = await get(child(productsRef, productName));
+
+    if (productSnapshot.exists()) {
+      // Assuming there's a property named 'wholesalePrice' in the product data
+      const wholesalePrice = productSnapshot.val().wholesalePrice;
+
+      // Parse the wholesalePrice as a number
+      return wholesalePrice !== null ? parseFloat(wholesalePrice) : null;
+    }
+
+    // Return a default value or handle the case when the product is not found
+    return null;
+  }
+
+  let originalTotal = 0;
+
+  // Function to update price based on the toggle switch
+  async function updatePriceBasedOnToggle(product, isWholesale) {
+    // Get the displayed product price from innerText
+    const displayedPrice = parseFloat(productPrice.innerText.replace("UGX ", ""));
+  
+    // Calculate the original total based on the current input value and displayed price
+    const originalQuantity = parseInt(quantityInput.value);
+    originalTotal = originalQuantity * displayedPrice;
+  
+    if (isWholesale) {
+      // Fetch wholesale price from Firebase based on the product name
+      const wholesalePrice = await fetchWholesalePriceFromFirebase(product.name);
+  
+      if (wholesalePrice !== null) {
+        productPrice.innerText = `UGX ${wholesalePrice}`;
+        productPrice.dataset.price = wholesalePrice;
+      } else {
+        // Handle the case when wholesale price is not found
+        //console.error(`Wholesale price not found for product: ${product.name}`);
+      }
+    } else {
+      productPrice.innerText = `UGX ${product.price}`;
+      productPrice.dataset.price = product.price;
+    }
+  
+    // Calculate the new total based on the current input value, displayed price, and product name
+    const newQuantity = parseInt(quantityInput.value);
+    const newTotal = newQuantity * parseFloat(productPrice.dataset.price);
+  
+    // Update the total element with the difference
+    updateTotalElement(newTotal - originalTotal);
+  
+    // Log the updated price to the console
+    console.log("Updated Price:", parseFloat(productPrice.dataset.price));
+  }
+  
+  // Function to update the total element
+  function updateTotalElement(result) {
+    const totalPriceElement = document.getElementById("total-price");
+  
+    // Parse the total as a number
+    const total = parseFloat(totalPriceElement.innerText.replace("TOTAL: UGX ", ""));
+  
+    // Display the updated total in the total element
+    totalPriceElement.innerText = "TOTAL: UGX " + (total + result).toFixed(2);
+  
+    // Log the updated total to the console
+    console.log("Updated Total:", total + result);
+  }
+  
+
+// Function to multiply input by displayed price and update the total element
+function multiplyInputByDisplayedPrice(inputValue, displayedPrice, productName) {
+  // Check if inputValue is not empty and is a valid number
+  if (inputValue && !isNaN(inputValue)) {
+    // Calculate the result by multiplying the input by the displayed product price
+    const result = inputValue * displayedPrice;
+
+    // Update the total for this product directly
+    productTotals[productName] = result;
+
+    // Update the overall total directly
+    updateCartTotal();
+
+    // Log the result to the console
+    console.log("Result of multiplication:", result);
+  } else {
+    // If inputValue is empty or not a valid number, reset the total for this product
+    productTotals[productName] = 0;
+
+    // Update the overall total directly
+    updateCartTotal();
+
+    // Log the result to the console
+    console.log("Result of multiplication:", 0);
+  }
+}}
+
+// Function to update the total element based on all cart items
+function updateCartTotal() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  let total = 0;
+
+  for (let i = 0; i < cartItems.length; i++) {
+    const cartItem = cartItems[i];
+    const quantityInput = cartItem.querySelector(".product-details .quantity-input");
+    const productPriceElement = cartItem.querySelector(".product-details h4");
+    const quantity = parseInt(quantityInput.value);
+    const price = parseFloat(productPriceElement.dataset.price);
+    const totalForItem = quantity * price;
+
+    total += totalForItem;
+  }
+
+  // Display the overall total in the total element
+  const totalPriceElement = document.getElementById("total-price");
+  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
+
+  // Log the updated total to the console
+  console.log("Updated Total:", total);
 }
 
+// Example of using the function
 
 
 
@@ -3889,6 +4871,8 @@ addToCartBtn.addEventListener("click", () => {
     const cart = document.getElementById('cart-container')
     cart.style.display = 'block';
   addToCart(product);
+  updateCartTotal();
+
 });
 
 // Assuming `card` is the element representing the product card
@@ -4043,9 +5027,34 @@ icon.classList.add("fas", "fa-shopping-cart"); // Assuming you're using Font Awe
 // Append the icon to the button
 addToCartBtn.prepend(icon);
 
+// Declare productPrice outside of addToCart to make it accessible to other functions
+let productPrice;
+// Initialize an object to store totals for each product
+const productTotals = {};
+// Initialize overall total variable
+let total = 0;
+
 function addToCart(product) {
   // Get the cart items container
   const cartItemsContainer = document.getElementById("cart-items");
+  // Create a container for the toggle switch
+  const toggleContainer = document.createElement("div");
+  toggleContainer.classList.add("toggle-container");
+
+  // Add title to the toggle
+  const toggleTitle = document.createElement("p");
+  toggleTitle.innerText = "Wholesale";
+  toggleContainer.appendChild(toggleTitle);
+
+  // Create the toggle switch
+  const toggleSwitch = document.createElement("input");
+  toggleSwitch.type = "checkbox";
+  toggleSwitch.classList.add("toggle-switch");
+  toggleSwitch.addEventListener("change", () => {
+    updatePriceBasedOnToggle(product, toggleSwitch.checked);
+  });
+
+  toggleContainer.appendChild(toggleSwitch);
 
   // Create a new cart item element
   const cartItem = document.createElement("div");
@@ -4054,6 +5063,7 @@ function addToCart(product) {
   // Create a container for the product details (name, price, quantity, and delete button)
   const productDetails = document.createElement("div");
   productDetails.classList.add("product-details");
+  productDetails.appendChild(toggleContainer);
 
   // Add product name
   const productName = document.createElement("h5");
@@ -4061,52 +5071,30 @@ function addToCart(product) {
   productDetails.appendChild(productName);
 
   // Add product price
-  const productPrice = document.createElement("h4");
+  productPrice = document.createElement("h4");
   productPrice.innerText = `UGX ${product.price}`;
   productPrice.dataset.price = product.price; // Store the price as a data attribute
   productDetails.appendChild(productPrice);
 
-// Create a quantity input field
-const quantityInput = document.createElement("input");
-quantityInput.type = "number";
-quantityInput.value = 1;
-quantityInput.min = 1;
-quantityInput.classList.add("quantity-input"); // Add the quantity-input class
-quantityInput.addEventListener("input", () => {
-  updateCartItemTotal(cartItem);
-  updateCartTotal();
-});
-productDetails.appendChild(quantityInput);
+  // Create a quantity input field
+  const quantityInput = document.createElement("input");
+  quantityInput.type = "number";
+  quantityInput.value = 1;
+  quantityInput.min = 1;
+  quantityInput.classList.add("quantity-input"); // Add the quantity-input class
 
+  quantityInput.addEventListener("input", () => {
+    // Log the input value to the console
+    console.log("Input value:", quantityInput.value);
 
-function updateCartItemTotal(cartItem) {
-  const priceElement = cartItem.querySelector(".product-details h4");
+    // Get the displayed product price from innerText
+    const displayedPrice = parseFloat(productPrice.innerText.replace("UGX ", ""));
 
-  // Check if the element is found before accessing properties
-  if (priceElement) {
-    const quantityInput = cartItem.querySelector(".product-details input");
-    const quantity = parseInt(quantityInput.value);
-    const price = parseFloat(priceElement.innerText.replace("UGX ", ""));
-    const total = quantity * price;
-    priceElement.dataset.total = total.toFixed(2);
-  }
-}
+    // Call the multiply function with the current input value and displayed price
+    multiplyInputByDisplayedPrice(quantityInput.value, displayedPrice, product.name);
+  });
 
-// Define the updateCartTotal function
-function updateCartTotal() {
-  const cartItems = document.getElementsByClassName("cart-item");
-  const totalPriceElement = document.getElementById("total-price");
-  let total = 0;
-
-  for (let i = 0; i < cartItems.length; i++) {
-    const cartItem = cartItems[i];
-    const priceElement = cartItem.querySelector(".product-details h4");
-    const totalForItem = parseFloat(priceElement.dataset.total);
-    total += totalForItem;
-  }
-
-  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
-}
+  productDetails.appendChild(quantityInput);
 
   // Create a delete button for the cart item
   const deleteButton = document.createElement("button");
@@ -4114,8 +5102,8 @@ function updateCartTotal() {
   deleteButton.classList.add("delete-button");
   deleteButton.addEventListener("click", () => {
     cartItemsContainer.removeChild(cartItem);
-    updateCartTotal();
     updateCartCount(-1);
+    updateCartTotal()
   });
   productDetails.appendChild(deleteButton);
 
@@ -4127,14 +5115,131 @@ function updateCartTotal() {
   // Update the cart count
   updateCartCount(1);
 
-  // Calculate and update the total price
-  updateCartItemTotal(cartItem);
-  updateCartTotal();
-
   // Show the "Added to Cart" message
   showAddToCartMessage(product.name);
+
+  // Function to fetch wholesale price from Firebase
+  async function fetchWholesalePriceFromFirebase(productName) {
+    const productsRef = ref(database, "products/Ports");
+    const productSnapshot = await get(child(productsRef, productName));
+
+    if (productSnapshot.exists()) {
+      // Assuming there's a property named 'wholesalePrice' in the product data
+      const wholesalePrice = productSnapshot.val().wholesalePrice;
+
+      // Parse the wholesalePrice as a number
+      return wholesalePrice !== null ? parseFloat(wholesalePrice) : null;
+    }
+
+    // Return a default value or handle the case when the product is not found
+    return null;
+  }
+
+  let originalTotal = 0;
+
+  // Function to update price based on the toggle switch
+  async function updatePriceBasedOnToggle(product, isWholesale) {
+    // Get the displayed product price from innerText
+    const displayedPrice = parseFloat(productPrice.innerText.replace("UGX ", ""));
+  
+    // Calculate the original total based on the current input value and displayed price
+    const originalQuantity = parseInt(quantityInput.value);
+    originalTotal = originalQuantity * displayedPrice;
+  
+    if (isWholesale) {
+      // Fetch wholesale price from Firebase based on the product name
+      const wholesalePrice = await fetchWholesalePriceFromFirebase(product.name);
+  
+      if (wholesalePrice !== null) {
+        productPrice.innerText = `UGX ${wholesalePrice}`;
+        productPrice.dataset.price = wholesalePrice;
+      } else {
+        // Handle the case when wholesale price is not found
+        //console.error(`Wholesale price not found for product: ${product.name}`);
+      }
+    } else {
+      productPrice.innerText = `UGX ${product.price}`;
+      productPrice.dataset.price = product.price;
+    }
+  
+    // Calculate the new total based on the current input value, displayed price, and product name
+    const newQuantity = parseInt(quantityInput.value);
+    const newTotal = newQuantity * parseFloat(productPrice.dataset.price);
+  
+    // Update the total element with the difference
+    updateTotalElement(newTotal - originalTotal);
+  
+    // Log the updated price to the console
+    console.log("Updated Price:", parseFloat(productPrice.dataset.price));
+  }
+  
+  // Function to update the total element
+  function updateTotalElement(result) {
+    const totalPriceElement = document.getElementById("total-price");
+  
+    // Parse the total as a number
+    const total = parseFloat(totalPriceElement.innerText.replace("TOTAL: UGX ", ""));
+  
+    // Display the updated total in the total element
+    totalPriceElement.innerText = "TOTAL: UGX " + (total + result).toFixed(2);
+  
+    // Log the updated total to the console
+    console.log("Updated Total:", total + result);
+  }
+  
+
+// Function to multiply input by displayed price and update the total element
+function multiplyInputByDisplayedPrice(inputValue, displayedPrice, productName) {
+  // Check if inputValue is not empty and is a valid number
+  if (inputValue && !isNaN(inputValue)) {
+    // Calculate the result by multiplying the input by the displayed product price
+    const result = inputValue * displayedPrice;
+
+    // Update the total for this product directly
+    productTotals[productName] = result;
+
+    // Update the overall total directly
+    updateCartTotal();
+
+    // Log the result to the console
+    console.log("Result of multiplication:", result);
+  } else {
+    // If inputValue is empty or not a valid number, reset the total for this product
+    productTotals[productName] = 0;
+
+    // Update the overall total directly
+    updateCartTotal();
+
+    // Log the result to the console
+    console.log("Result of multiplication:", 0);
+  }
+}}
+
+// Function to update the total element based on all cart items
+function updateCartTotal() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  let total = 0;
+
+  for (let i = 0; i < cartItems.length; i++) {
+    const cartItem = cartItems[i];
+    const quantityInput = cartItem.querySelector(".product-details .quantity-input");
+    const productPriceElement = cartItem.querySelector(".product-details h4");
+    const quantity = parseInt(quantityInput.value);
+    const price = parseFloat(productPriceElement.dataset.price);
+    const totalForItem = quantity * price;
+
+    total += totalForItem;
+  }
+
+  // Display the overall total in the total element
+  const totalPriceElement = document.getElementById("total-price");
+  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
+
+  // Log the updated total to the console
+  console.log("Updated Total:", total);
 }
 
+// Example of using the function
 
 
 
@@ -4151,6 +5256,8 @@ addToCartBtn.addEventListener("click", () => {
     const cart = document.getElementById('cart-container')
     cart.style.display = 'block';
   addToCart(product);
+  updateCartTotal();
+
 });
 
 // Assuming `card` is the element representing the product card
@@ -4333,9 +5440,34 @@ icon.classList.add("fas", "fa-shopping-cart"); // Assuming you're using Font Awe
 // Append the icon to the button
 addToCartBtn.prepend(icon);
 
+// Declare productPrice outside of addToCart to make it accessible to other functions
+let productPrice;
+// Initialize an object to store totals for each product
+const productTotals = {};
+// Initialize overall total variable
+let total = 0;
+
 function addToCart(product) {
   // Get the cart items container
   const cartItemsContainer = document.getElementById("cart-items");
+  // Create a container for the toggle switch
+  const toggleContainer = document.createElement("div");
+  toggleContainer.classList.add("toggle-container");
+
+  // Add title to the toggle
+  const toggleTitle = document.createElement("p");
+  toggleTitle.innerText = "Wholesale";
+  toggleContainer.appendChild(toggleTitle);
+
+  // Create the toggle switch
+  const toggleSwitch = document.createElement("input");
+  toggleSwitch.type = "checkbox";
+  toggleSwitch.classList.add("toggle-switch");
+  toggleSwitch.addEventListener("change", () => {
+    updatePriceBasedOnToggle(product, toggleSwitch.checked);
+  });
+
+  toggleContainer.appendChild(toggleSwitch);
 
   // Create a new cart item element
   const cartItem = document.createElement("div");
@@ -4344,6 +5476,7 @@ function addToCart(product) {
   // Create a container for the product details (name, price, quantity, and delete button)
   const productDetails = document.createElement("div");
   productDetails.classList.add("product-details");
+  productDetails.appendChild(toggleContainer);
 
   // Add product name
   const productName = document.createElement("h5");
@@ -4351,56 +5484,30 @@ function addToCart(product) {
   productDetails.appendChild(productName);
 
   // Add product price
-  const productPrice = document.createElement("h4");
+  productPrice = document.createElement("h4");
   productPrice.innerText = `UGX ${product.price}`;
   productPrice.dataset.price = product.price; // Store the price as a data attribute
   productDetails.appendChild(productPrice);
 
-// Create a quantity input field
-const quantityInput = document.createElement("input");
-quantityInput.type = "number";
-quantityInput.value = 1;
-quantityInput.min = 1;
-quantityInput.classList.add("quantity-input"); // Add the quantity-input class
-quantityInput.addEventListener("input", () => {
-  updateCartItemTotal(cartItem);
-  updateCartTotal();
-});
-productDetails.appendChild(quantityInput);
+  // Create a quantity input field
+  const quantityInput = document.createElement("input");
+  quantityInput.type = "number";
+  quantityInput.value = 1;
+  quantityInput.min = 1;
+  quantityInput.classList.add("quantity-input"); // Add the quantity-input class
 
+  quantityInput.addEventListener("input", () => {
+    // Log the input value to the console
+    console.log("Input value:", quantityInput.value);
 
-function updateCartItemTotal(cartItem) {
-  const priceElement = cartItem.querySelector(".product-details h4");
+    // Get the displayed product price from innerText
+    const displayedPrice = parseFloat(productPrice.innerText.replace("UGX ", ""));
 
-  // Check if the element is found before accessing properties
-  if (priceElement) {
-    const quantityInput = cartItem.querySelector(".product-details input");
-    const quantity = parseInt(quantityInput.value);
-    const price = parseFloat(priceElement.innerText.replace("UGX ", ""));
-    const total = quantity * price;
-    priceElement.dataset.total = total.toFixed(2);
-  }
-}
+    // Call the multiply function with the current input value and displayed price
+    multiplyInputByDisplayedPrice(quantityInput.value, displayedPrice, product.name);
+  });
 
-function updateCartTotal() {
-  const cartItems = document.getElementsByClassName("cart-item");
-  const totalPriceElement = document.getElementById("total-price");
-  let total = 0;
-
-  for (let i = 0; i < cartItems.length; i++) {
-    const cartItem = cartItems[i];
-    const priceElement = cartItem.querySelector(".product-details h4");
-
-    // Check if the element is found before accessing properties
-    if (priceElement) {
-      const totalForItem = parseFloat(priceElement.dataset.total);
-      total += totalForItem;
-    }
-  }
-
-  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
-}
-
+  productDetails.appendChild(quantityInput);
 
   // Create a delete button for the cart item
   const deleteButton = document.createElement("button");
@@ -4408,8 +5515,8 @@ function updateCartTotal() {
   deleteButton.classList.add("delete-button");
   deleteButton.addEventListener("click", () => {
     cartItemsContainer.removeChild(cartItem);
-    updateCartTotal();
     updateCartCount(-1);
+    updateCartTotal()
   });
   productDetails.appendChild(deleteButton);
 
@@ -4421,14 +5528,131 @@ function updateCartTotal() {
   // Update the cart count
   updateCartCount(1);
 
-  // Calculate and update the total price
-  updateCartItemTotal(cartItem);
-  updateCartTotal();
-
   // Show the "Added to Cart" message
   showAddToCartMessage(product.name);
+
+  // Function to fetch wholesale price from Firebase
+  async function fetchWholesalePriceFromFirebase(productName) {
+    const productsRef = ref(database, "products/newScreens");
+    const productSnapshot = await get(child(productsRef, productName));
+
+    if (productSnapshot.exists()) {
+      // Assuming there's a property named 'wholesalePrice' in the product data
+      const wholesalePrice = productSnapshot.val().wholesalePrice;
+
+      // Parse the wholesalePrice as a number
+      return wholesalePrice !== null ? parseFloat(wholesalePrice) : null;
+    }
+
+    // Return a default value or handle the case when the product is not found
+    return null;
+  }
+
+  let originalTotal = 0;
+
+  // Function to update price based on the toggle switch
+  async function updatePriceBasedOnToggle(product, isWholesale) {
+    // Get the displayed product price from innerText
+    const displayedPrice = parseFloat(productPrice.innerText.replace("UGX ", ""));
+  
+    // Calculate the original total based on the current input value and displayed price
+    const originalQuantity = parseInt(quantityInput.value);
+    originalTotal = originalQuantity * displayedPrice;
+  
+    if (isWholesale) {
+      // Fetch wholesale price from Firebase based on the product name
+      const wholesalePrice = await fetchWholesalePriceFromFirebase(product.name);
+  
+      if (wholesalePrice !== null) {
+        productPrice.innerText = `UGX ${wholesalePrice}`;
+        productPrice.dataset.price = wholesalePrice;
+      } else {
+        // Handle the case when wholesale price is not found
+        //console.error(`Wholesale price not found for product: ${product.name}`);
+      }
+    } else {
+      productPrice.innerText = `UGX ${product.price}`;
+      productPrice.dataset.price = product.price;
+    }
+  
+    // Calculate the new total based on the current input value, displayed price, and product name
+    const newQuantity = parseInt(quantityInput.value);
+    const newTotal = newQuantity * parseFloat(productPrice.dataset.price);
+  
+    // Update the total element with the difference
+    updateTotalElement(newTotal - originalTotal);
+  
+    // Log the updated price to the console
+    console.log("Updated Price:", parseFloat(productPrice.dataset.price));
+  }
+  
+  // Function to update the total element
+  function updateTotalElement(result) {
+    const totalPriceElement = document.getElementById("total-price");
+  
+    // Parse the total as a number
+    const total = parseFloat(totalPriceElement.innerText.replace("TOTAL: UGX ", ""));
+  
+    // Display the updated total in the total element
+    totalPriceElement.innerText = "TOTAL: UGX " + (total + result).toFixed(2);
+  
+    // Log the updated total to the console
+    console.log("Updated Total:", total + result);
+  }
+  
+
+// Function to multiply input by displayed price and update the total element
+function multiplyInputByDisplayedPrice(inputValue, displayedPrice, productName) {
+  // Check if inputValue is not empty and is a valid number
+  if (inputValue && !isNaN(inputValue)) {
+    // Calculate the result by multiplying the input by the displayed product price
+    const result = inputValue * displayedPrice;
+
+    // Update the total for this product directly
+    productTotals[productName] = result;
+
+    // Update the overall total directly
+    updateCartTotal();
+
+    // Log the result to the console
+    console.log("Result of multiplication:", result);
+  } else {
+    // If inputValue is empty or not a valid number, reset the total for this product
+    productTotals[productName] = 0;
+
+    // Update the overall total directly
+    updateCartTotal();
+
+    // Log the result to the console
+    console.log("Result of multiplication:", 0);
+  }
+}}
+
+// Function to update the total element based on all cart items
+function updateCartTotal() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  let total = 0;
+
+  for (let i = 0; i < cartItems.length; i++) {
+    const cartItem = cartItems[i];
+    const quantityInput = cartItem.querySelector(".product-details .quantity-input");
+    const productPriceElement = cartItem.querySelector(".product-details h4");
+    const quantity = parseInt(quantityInput.value);
+    const price = parseFloat(productPriceElement.dataset.price);
+    const totalForItem = quantity * price;
+
+    total += totalForItem;
+  }
+
+  // Display the overall total in the total element
+  const totalPriceElement = document.getElementById("total-price");
+  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
+
+  // Log the updated total to the console
+  console.log("Updated Total:", total);
 }
 
+// Example of using the function
 
 
 
@@ -4445,6 +5669,8 @@ addToCartBtn.addEventListener("click", () => {
     const cart = document.getElementById('cart-container')
     cart.style.display = 'block';
   addToCart(product);
+  updateCartTotal();
+
 });
 
 // Assuming `card` is the element representing the product card
@@ -4685,9 +5911,36 @@ icon.classList.add("fas", "fa-shopping-cart"); // Assuming you're using Font Awe
 
 // Append the icon to the button
 addToCartBtn.prepend(icon);
+
+
+// Declare productPrice outside of addToCart to make it accessible to other functions
+let productPrice;
+// Initialize an object to store totals for each product
+const productTotals = {};
+// Initialize overall total variable
+let total = 0;
+
 function addToCart(product) {
   // Get the cart items container
   const cartItemsContainer = document.getElementById("cart-items");
+  // Create a container for the toggle switch
+  const toggleContainer = document.createElement("div");
+  toggleContainer.classList.add("toggle-container");
+
+  // Add title to the toggle
+  const toggleTitle = document.createElement("p");
+  toggleTitle.innerText = "Wholesale";
+  toggleContainer.appendChild(toggleTitle);
+
+  // Create the toggle switch
+  const toggleSwitch = document.createElement("input");
+  toggleSwitch.type = "checkbox";
+  toggleSwitch.classList.add("toggle-switch");
+  toggleSwitch.addEventListener("change", () => {
+    updatePriceBasedOnToggle(product, toggleSwitch.checked);
+  });
+
+  toggleContainer.appendChild(toggleSwitch);
 
   // Create a new cart item element
   const cartItem = document.createElement("div");
@@ -4696,6 +5949,7 @@ function addToCart(product) {
   // Create a container for the product details (name, price, quantity, and delete button)
   const productDetails = document.createElement("div");
   productDetails.classList.add("product-details");
+  productDetails.appendChild(toggleContainer);
 
   // Add product name
   const productName = document.createElement("h5");
@@ -4703,52 +5957,30 @@ function addToCart(product) {
   productDetails.appendChild(productName);
 
   // Add product price
-  const productPrice = document.createElement("h4");
+  productPrice = document.createElement("h4");
   productPrice.innerText = `UGX ${product.price}`;
   productPrice.dataset.price = product.price; // Store the price as a data attribute
   productDetails.appendChild(productPrice);
 
-// Create a quantity input field
-const quantityInput = document.createElement("input");
-quantityInput.type = "number";
-quantityInput.value = 1;
-quantityInput.min = 1;
-quantityInput.classList.add("quantity-input"); // Add the quantity-input class
-quantityInput.addEventListener("input", () => {
-  updateCartItemTotal(cartItem);
-  updateCartTotal();
-});
-productDetails.appendChild(quantityInput);
+  // Create a quantity input field
+  const quantityInput = document.createElement("input");
+  quantityInput.type = "number";
+  quantityInput.value = 1;
+  quantityInput.min = 1;
+  quantityInput.classList.add("quantity-input"); // Add the quantity-input class
 
+  quantityInput.addEventListener("input", () => {
+    // Log the input value to the console
+    console.log("Input value:", quantityInput.value);
 
-function updateCartItemTotal(cartItem) {
-  const priceElement = cartItem.querySelector(".product-details h4");
+    // Get the displayed product price from innerText
+    const displayedPrice = parseFloat(productPrice.innerText.replace("UGX ", ""));
 
-  // Check if the element is found before accessing properties
-  if (priceElement) {
-    const quantityInput = cartItem.querySelector(".product-details input");
-    const quantity = parseInt(quantityInput.value);
-    const price = parseFloat(priceElement.innerText.replace("UGX ", ""));
-    const total = quantity * price;
-    priceElement.dataset.total = total.toFixed(2);
-  }
-}
+    // Call the multiply function with the current input value and displayed price
+    multiplyInputByDisplayedPrice(quantityInput.value, displayedPrice, product.name);
+  });
 
-// Define the updateCartTotal function
-function updateCartTotal() {
-  const cartItems = document.getElementsByClassName("cart-item");
-  const totalPriceElement = document.getElementById("total-price");
-  let total = 0;
-
-  for (let i = 0; i < cartItems.length; i++) {
-    const cartItem = cartItems[i];
-    const priceElement = cartItem.querySelector(".product-details h4");
-    const totalForItem = parseFloat(priceElement.dataset.total);
-    total += totalForItem;
-  }
-
-  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
-}
+  productDetails.appendChild(quantityInput);
 
   // Create a delete button for the cart item
   const deleteButton = document.createElement("button");
@@ -4756,8 +5988,8 @@ function updateCartTotal() {
   deleteButton.classList.add("delete-button");
   deleteButton.addEventListener("click", () => {
     cartItemsContainer.removeChild(cartItem);
-    updateCartTotal();
     updateCartCount(-1);
+    updateCartTotal()
   });
   productDetails.appendChild(deleteButton);
 
@@ -4769,14 +6001,131 @@ function updateCartTotal() {
   // Update the cart count
   updateCartCount(1);
 
-  // Calculate and update the total price
-  updateCartItemTotal(cartItem);
-  updateCartTotal();
-
   // Show the "Added to Cart" message
   showAddToCartMessage(product.name);
+
+  // Function to fetch wholesale price from Firebase
+  async function fetchWholesalePriceFromFirebase(productName) {
+    const productsRef = ref(database, "products/gradeBScreens");
+    const productSnapshot = await get(child(productsRef, productName));
+
+    if (productSnapshot.exists()) {
+      // Assuming there's a property named 'wholesalePrice' in the product data
+      const wholesalePrice = productSnapshot.val().wholesalePrice;
+
+      // Parse the wholesalePrice as a number
+      return wholesalePrice !== null ? parseFloat(wholesalePrice) : null;
+    }
+
+    // Return a default value or handle the case when the product is not found
+    return null;
+  }
+
+  let originalTotal = 0;
+
+  // Function to update price based on the toggle switch
+  async function updatePriceBasedOnToggle(product, isWholesale) {
+    // Get the displayed product price from innerText
+    const displayedPrice = parseFloat(productPrice.innerText.replace("UGX ", ""));
+  
+    // Calculate the original total based on the current input value and displayed price
+    const originalQuantity = parseInt(quantityInput.value);
+    originalTotal = originalQuantity * displayedPrice;
+  
+    if (isWholesale) {
+      // Fetch wholesale price from Firebase based on the product name
+      const wholesalePrice = await fetchWholesalePriceFromFirebase(product.name);
+  
+      if (wholesalePrice !== null) {
+        productPrice.innerText = `UGX ${wholesalePrice}`;
+        productPrice.dataset.price = wholesalePrice;
+      } else {
+        // Handle the case when wholesale price is not found
+        //console.error(`Wholesale price not found for product: ${product.name}`);
+      }
+    } else {
+      productPrice.innerText = `UGX ${product.price}`;
+      productPrice.dataset.price = product.price;
+    }
+  
+    // Calculate the new total based on the current input value, displayed price, and product name
+    const newQuantity = parseInt(quantityInput.value);
+    const newTotal = newQuantity * parseFloat(productPrice.dataset.price);
+  
+    // Update the total element with the difference
+    updateTotalElement(newTotal - originalTotal);
+  
+    // Log the updated price to the console
+    console.log("Updated Price:", parseFloat(productPrice.dataset.price));
+  }
+  
+  // Function to update the total element
+  function updateTotalElement(result) {
+    const totalPriceElement = document.getElementById("total-price");
+  
+    // Parse the total as a number
+    const total = parseFloat(totalPriceElement.innerText.replace("TOTAL: UGX ", ""));
+  
+    // Display the updated total in the total element
+    totalPriceElement.innerText = "TOTAL: UGX " + (total + result).toFixed(2);
+  
+    // Log the updated total to the console
+    console.log("Updated Total:", total + result);
+  }
+  
+
+// Function to multiply input by displayed price and update the total element
+function multiplyInputByDisplayedPrice(inputValue, displayedPrice, productName) {
+  // Check if inputValue is not empty and is a valid number
+  if (inputValue && !isNaN(inputValue)) {
+    // Calculate the result by multiplying the input by the displayed product price
+    const result = inputValue * displayedPrice;
+
+    // Update the total for this product directly
+    productTotals[productName] = result;
+
+    // Update the overall total directly
+    updateCartTotal();
+
+    // Log the result to the console
+    console.log("Result of multiplication:", result);
+  } else {
+    // If inputValue is empty or not a valid number, reset the total for this product
+    productTotals[productName] = 0;
+
+    // Update the overall total directly
+    updateCartTotal();
+
+    // Log the result to the console
+    console.log("Result of multiplication:", 0);
+  }
+}}
+
+// Function to update the total element based on all cart items
+function updateCartTotal() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  let total = 0;
+
+  for (let i = 0; i < cartItems.length; i++) {
+    const cartItem = cartItems[i];
+    const quantityInput = cartItem.querySelector(".product-details .quantity-input");
+    const productPriceElement = cartItem.querySelector(".product-details h4");
+    const quantity = parseInt(quantityInput.value);
+    const price = parseFloat(productPriceElement.dataset.price);
+    const totalForItem = quantity * price;
+
+    total += totalForItem;
+  }
+
+  // Display the overall total in the total element
+  const totalPriceElement = document.getElementById("total-price");
+  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
+
+  // Log the updated total to the console
+  console.log("Updated Total:", total);
 }
 
+// Example of using the function
 
 
 
@@ -4793,6 +6142,8 @@ addToCartBtn.addEventListener("click", () => {
     const cart = document.getElementById('cart-container')
     cart.style.display = 'block';
   addToCart(product);
+  updateCartTotal();
+
 });
 
 // Assuming `card` is the element representing the product card
@@ -5026,9 +6377,34 @@ icon.classList.add("fas", "fa-shopping-cart"); // Assuming you're using Font Awe
 // Append the icon to the button
 addToCartBtn.prepend(icon);
 
+// Declare productPrice outside of addToCart to make it accessible to other functions
+let productPrice;
+// Initialize an object to store totals for each product
+const productTotals = {};
+// Initialize overall total variable
+let total = 0;
+
 function addToCart(product) {
   // Get the cart items container
   const cartItemsContainer = document.getElementById("cart-items");
+  // Create a container for the toggle switch
+  const toggleContainer = document.createElement("div");
+  toggleContainer.classList.add("toggle-container");
+
+  // Add title to the toggle
+  const toggleTitle = document.createElement("p");
+  toggleTitle.innerText = "Wholesale";
+  toggleContainer.appendChild(toggleTitle);
+
+  // Create the toggle switch
+  const toggleSwitch = document.createElement("input");
+  toggleSwitch.type = "checkbox";
+  toggleSwitch.classList.add("toggle-switch");
+  toggleSwitch.addEventListener("change", () => {
+    updatePriceBasedOnToggle(product, toggleSwitch.checked);
+  });
+
+  toggleContainer.appendChild(toggleSwitch);
 
   // Create a new cart item element
   const cartItem = document.createElement("div");
@@ -5037,6 +6413,7 @@ function addToCart(product) {
   // Create a container for the product details (name, price, quantity, and delete button)
   const productDetails = document.createElement("div");
   productDetails.classList.add("product-details");
+  productDetails.appendChild(toggleContainer);
 
   // Add product name
   const productName = document.createElement("h5");
@@ -5044,52 +6421,30 @@ function addToCart(product) {
   productDetails.appendChild(productName);
 
   // Add product price
-  const productPrice = document.createElement("h4");
+  productPrice = document.createElement("h4");
   productPrice.innerText = `UGX ${product.price}`;
   productPrice.dataset.price = product.price; // Store the price as a data attribute
   productDetails.appendChild(productPrice);
 
-// Create a quantity input field
-const quantityInput = document.createElement("input");
-quantityInput.type = "number";
-quantityInput.value = 1;
-quantityInput.min = 1;
-quantityInput.classList.add("quantity-input"); // Add the quantity-input class
-quantityInput.addEventListener("input", () => {
-  updateCartItemTotal(cartItem);
-  updateCartTotal();
-});
-productDetails.appendChild(quantityInput);
+  // Create a quantity input field
+  const quantityInput = document.createElement("input");
+  quantityInput.type = "number";
+  quantityInput.value = 1;
+  quantityInput.min = 1;
+  quantityInput.classList.add("quantity-input"); // Add the quantity-input class
 
+  quantityInput.addEventListener("input", () => {
+    // Log the input value to the console
+    console.log("Input value:", quantityInput.value);
 
-function updateCartItemTotal(cartItem) {
-  const priceElement = cartItem.querySelector(".product-details h4");
+    // Get the displayed product price from innerText
+    const displayedPrice = parseFloat(productPrice.innerText.replace("UGX ", ""));
 
-  // Check if the element is found before accessing properties
-  if (priceElement) {
-    const quantityInput = cartItem.querySelector(".product-details input");
-    const quantity = parseInt(quantityInput.value);
-    const price = parseFloat(priceElement.innerText.replace("UGX ", ""));
-    const total = quantity * price;
-    priceElement.dataset.total = total.toFixed(2);
-  }
-}
+    // Call the multiply function with the current input value and displayed price
+    multiplyInputByDisplayedPrice(quantityInput.value, displayedPrice, product.name);
+  });
 
-// Define the updateCartTotal function
-function updateCartTotal() {
-  const cartItems = document.getElementsByClassName("cart-item");
-  const totalPriceElement = document.getElementById("total-price");
-  let total = 0;
-
-  for (let i = 0; i < cartItems.length; i++) {
-    const cartItem = cartItems[i];
-    const priceElement = cartItem.querySelector(".product-details h4");
-    const totalForItem = parseFloat(priceElement.dataset.total);
-    total += totalForItem;
-  }
-
-  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
-}
+  productDetails.appendChild(quantityInput);
 
   // Create a delete button for the cart item
   const deleteButton = document.createElement("button");
@@ -5097,8 +6452,8 @@ function updateCartTotal() {
   deleteButton.classList.add("delete-button");
   deleteButton.addEventListener("click", () => {
     cartItemsContainer.removeChild(cartItem);
-    updateCartTotal();
     updateCartCount(-1);
+    updateCartTotal()
   });
   productDetails.appendChild(deleteButton);
 
@@ -5110,14 +6465,131 @@ function updateCartTotal() {
   // Update the cart count
   updateCartCount(1);
 
-  // Calculate and update the total price
-  updateCartItemTotal(cartItem);
-  updateCartTotal();
-
   // Show the "Added to Cart" message
   showAddToCartMessage(product.name);
+
+  // Function to fetch wholesale price from Firebase
+  async function fetchWholesalePriceFromFirebase(productName) {
+    const productsRef = ref(database, "products/Ports");
+    const productSnapshot = await get(child(productsRef, productName));
+
+    if (productSnapshot.exists()) {
+      // Assuming there's a property named 'wholesalePrice' in the product data
+      const wholesalePrice = productSnapshot.val().wholesalePrice;
+
+      // Parse the wholesalePrice as a number
+      return wholesalePrice !== null ? parseFloat(wholesalePrice) : null;
+    }
+
+    // Return a default value or handle the case when the product is not found
+    return null;
+  }
+
+  let originalTotal = 0;
+
+  // Function to update price based on the toggle switch
+  async function updatePriceBasedOnToggle(product, isWholesale) {
+    // Get the displayed product price from innerText
+    const displayedPrice = parseFloat(productPrice.innerText.replace("UGX ", ""));
+  
+    // Calculate the original total based on the current input value and displayed price
+    const originalQuantity = parseInt(quantityInput.value);
+    originalTotal = originalQuantity * displayedPrice;
+  
+    if (isWholesale) {
+      // Fetch wholesale price from Firebase based on the product name
+      const wholesalePrice = await fetchWholesalePriceFromFirebase(product.name);
+  
+      if (wholesalePrice !== null) {
+        productPrice.innerText = `UGX ${wholesalePrice}`;
+        productPrice.dataset.price = wholesalePrice;
+      } else {
+        // Handle the case when wholesale price is not found
+        //console.error(`Wholesale price not found for product: ${product.name}`);
+      }
+    } else {
+      productPrice.innerText = `UGX ${product.price}`;
+      productPrice.dataset.price = product.price;
+    }
+  
+    // Calculate the new total based on the current input value, displayed price, and product name
+    const newQuantity = parseInt(quantityInput.value);
+    const newTotal = newQuantity * parseFloat(productPrice.dataset.price);
+  
+    // Update the total element with the difference
+    updateTotalElement(newTotal - originalTotal);
+  
+    // Log the updated price to the console
+    console.log("Updated Price:", parseFloat(productPrice.dataset.price));
+  }
+  
+  // Function to update the total element
+  function updateTotalElement(result) {
+    const totalPriceElement = document.getElementById("total-price");
+  
+    // Parse the total as a number
+    const total = parseFloat(totalPriceElement.innerText.replace("TOTAL: UGX ", ""));
+  
+    // Display the updated total in the total element
+    totalPriceElement.innerText = "TOTAL: UGX " + (total + result).toFixed(2);
+  
+    // Log the updated total to the console
+    console.log("Updated Total:", total + result);
+  }
+  
+
+// Function to multiply input by displayed price and update the total element
+function multiplyInputByDisplayedPrice(inputValue, displayedPrice, productName) {
+  // Check if inputValue is not empty and is a valid number
+  if (inputValue && !isNaN(inputValue)) {
+    // Calculate the result by multiplying the input by the displayed product price
+    const result = inputValue * displayedPrice;
+
+    // Update the total for this product directly
+    productTotals[productName] = result;
+
+    // Update the overall total directly
+    updateCartTotal();
+
+    // Log the result to the console
+    console.log("Result of multiplication:", result);
+  } else {
+    // If inputValue is empty or not a valid number, reset the total for this product
+    productTotals[productName] = 0;
+
+    // Update the overall total directly
+    updateCartTotal();
+
+    // Log the result to the console
+    console.log("Result of multiplication:", 0);
+  }
+}}
+
+// Function to update the total element based on all cart items
+function updateCartTotal() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  let total = 0;
+
+  for (let i = 0; i < cartItems.length; i++) {
+    const cartItem = cartItems[i];
+    const quantityInput = cartItem.querySelector(".product-details .quantity-input");
+    const productPriceElement = cartItem.querySelector(".product-details h4");
+    const quantity = parseInt(quantityInput.value);
+    const price = parseFloat(productPriceElement.dataset.price);
+    const totalForItem = quantity * price;
+
+    total += totalForItem;
+  }
+
+  // Display the overall total in the total element
+  const totalPriceElement = document.getElementById("total-price");
+  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
+
+  // Log the updated total to the console
+  console.log("Updated Total:", total);
 }
 
+// Example of using the function
 
 
 
@@ -5134,6 +6606,8 @@ addToCartBtn.addEventListener("click", () => {
     const cart = document.getElementById('cart-container')
     cart.style.display = 'block';
   addToCart(product);
+  updateCartTotal();
+
 });
 
 // Assuming `card` is the element representing the product card
@@ -5367,9 +6841,34 @@ icon.classList.add("fas", "fa-shopping-cart"); // Assuming you're using Font Awe
 addToCartBtn.prepend(icon);
 
 
+// Declare productPrice outside of addToCart to make it accessible to other functions
+let productPrice;
+// Initialize an object to store totals for each product
+const productTotals = {};
+// Initialize overall total variable
+let total = 0;
+
 function addToCart(product) {
   // Get the cart items container
   const cartItemsContainer = document.getElementById("cart-items");
+  // Create a container for the toggle switch
+  const toggleContainer = document.createElement("div");
+  toggleContainer.classList.add("toggle-container");
+
+  // Add title to the toggle
+  const toggleTitle = document.createElement("p");
+  toggleTitle.innerText = "Wholesale";
+  toggleContainer.appendChild(toggleTitle);
+
+  // Create the toggle switch
+  const toggleSwitch = document.createElement("input");
+  toggleSwitch.type = "checkbox";
+  toggleSwitch.classList.add("toggle-switch");
+  toggleSwitch.addEventListener("change", () => {
+    updatePriceBasedOnToggle(product, toggleSwitch.checked);
+  });
+
+  toggleContainer.appendChild(toggleSwitch);
 
   // Create a new cart item element
   const cartItem = document.createElement("div");
@@ -5378,6 +6877,7 @@ function addToCart(product) {
   // Create a container for the product details (name, price, quantity, and delete button)
   const productDetails = document.createElement("div");
   productDetails.classList.add("product-details");
+  productDetails.appendChild(toggleContainer);
 
   // Add product name
   const productName = document.createElement("h5");
@@ -5385,52 +6885,30 @@ function addToCart(product) {
   productDetails.appendChild(productName);
 
   // Add product price
-  const productPrice = document.createElement("h4");
+  productPrice = document.createElement("h4");
   productPrice.innerText = `UGX ${product.price}`;
   productPrice.dataset.price = product.price; // Store the price as a data attribute
   productDetails.appendChild(productPrice);
 
-// Create a quantity input field
-const quantityInput = document.createElement("input");
-quantityInput.type = "number";
-quantityInput.value = 1;
-quantityInput.min = 1;
-quantityInput.classList.add("quantity-input"); // Add the quantity-input class
-quantityInput.addEventListener("input", () => {
-  updateCartItemTotal(cartItem);
-  updateCartTotal();
-});
-productDetails.appendChild(quantityInput);
+  // Create a quantity input field
+  const quantityInput = document.createElement("input");
+  quantityInput.type = "number";
+  quantityInput.value = 1;
+  quantityInput.min = 1;
+  quantityInput.classList.add("quantity-input"); // Add the quantity-input class
 
+  quantityInput.addEventListener("input", () => {
+    // Log the input value to the console
+    console.log("Input value:", quantityInput.value);
 
-function updateCartItemTotal(cartItem) {
-  const priceElement = cartItem.querySelector(".product-details h4");
+    // Get the displayed product price from innerText
+    const displayedPrice = parseFloat(productPrice.innerText.replace("UGX ", ""));
 
-  // Check if the element is found before accessing properties
-  if (priceElement) {
-    const quantityInput = cartItem.querySelector(".product-details input");
-    const quantity = parseInt(quantityInput.value);
-    const price = parseFloat(priceElement.innerText.replace("UGX ", ""));
-    const total = quantity * price;
-    priceElement.dataset.total = total.toFixed(2);
-  }
-}
+    // Call the multiply function with the current input value and displayed price
+    multiplyInputByDisplayedPrice(quantityInput.value, displayedPrice, product.name);
+  });
 
-// Define the updateCartTotal function
-function updateCartTotal() {
-  const cartItems = document.getElementsByClassName("cart-item");
-  const totalPriceElement = document.getElementById("total-price");
-  let total = 0;
-
-  for (let i = 0; i < cartItems.length; i++) {
-    const cartItem = cartItems[i];
-    const priceElement = cartItem.querySelector(".product-details h4");
-    const totalForItem = parseFloat(priceElement.dataset.total);
-    total += totalForItem;
-  }
-
-  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
-}
+  productDetails.appendChild(quantityInput);
 
   // Create a delete button for the cart item
   const deleteButton = document.createElement("button");
@@ -5438,8 +6916,8 @@ function updateCartTotal() {
   deleteButton.classList.add("delete-button");
   deleteButton.addEventListener("click", () => {
     cartItemsContainer.removeChild(cartItem);
-    updateCartTotal();
     updateCartCount(-1);
+    updateCartTotal()
   });
   productDetails.appendChild(deleteButton);
 
@@ -5451,14 +6929,131 @@ function updateCartTotal() {
   // Update the cart count
   updateCartCount(1);
 
-  // Calculate and update the total price
-  updateCartItemTotal(cartItem);
-  updateCartTotal();
-
   // Show the "Added to Cart" message
   showAddToCartMessage(product.name);
+
+  // Function to fetch wholesale price from Firebase
+  async function fetchWholesalePriceFromFirebase(productName) {
+    const productsRef = ref(database, "products/touches");
+    const productSnapshot = await get(child(productsRef, productName));
+
+    if (productSnapshot.exists()) {
+      // Assuming there's a property named 'wholesalePrice' in the product data
+      const wholesalePrice = productSnapshot.val().wholesalePrice;
+
+      // Parse the wholesalePrice as a number
+      return wholesalePrice !== null ? parseFloat(wholesalePrice) : null;
+    }
+
+    // Return a default value or handle the case when the product is not found
+    return null;
+  }
+
+  let originalTotal = 0;
+
+  // Function to update price based on the toggle switch
+  async function updatePriceBasedOnToggle(product, isWholesale) {
+    // Get the displayed product price from innerText
+    const displayedPrice = parseFloat(productPrice.innerText.replace("UGX ", ""));
+  
+    // Calculate the original total based on the current input value and displayed price
+    const originalQuantity = parseInt(quantityInput.value);
+    originalTotal = originalQuantity * displayedPrice;
+  
+    if (isWholesale) {
+      // Fetch wholesale price from Firebase based on the product name
+      const wholesalePrice = await fetchWholesalePriceFromFirebase(product.name);
+  
+      if (wholesalePrice !== null) {
+        productPrice.innerText = `UGX ${wholesalePrice}`;
+        productPrice.dataset.price = wholesalePrice;
+      } else {
+        // Handle the case when wholesale price is not found
+        //console.error(`Wholesale price not found for product: ${product.name}`);
+      }
+    } else {
+      productPrice.innerText = `UGX ${product.price}`;
+      productPrice.dataset.price = product.price;
+    }
+  
+    // Calculate the new total based on the current input value, displayed price, and product name
+    const newQuantity = parseInt(quantityInput.value);
+    const newTotal = newQuantity * parseFloat(productPrice.dataset.price);
+  
+    // Update the total element with the difference
+    updateTotalElement(newTotal - originalTotal);
+  
+    // Log the updated price to the console
+    console.log("Updated Price:", parseFloat(productPrice.dataset.price));
+  }
+  
+  // Function to update the total element
+  function updateTotalElement(result) {
+    const totalPriceElement = document.getElementById("total-price");
+  
+    // Parse the total as a number
+    const total = parseFloat(totalPriceElement.innerText.replace("TOTAL: UGX ", ""));
+  
+    // Display the updated total in the total element
+    totalPriceElement.innerText = "TOTAL: UGX " + (total + result).toFixed(2);
+  
+    // Log the updated total to the console
+    console.log("Updated Total:", total + result);
+  }
+  
+
+// Function to multiply input by displayed price and update the total element
+function multiplyInputByDisplayedPrice(inputValue, displayedPrice, productName) {
+  // Check if inputValue is not empty and is a valid number
+  if (inputValue && !isNaN(inputValue)) {
+    // Calculate the result by multiplying the input by the displayed product price
+    const result = inputValue * displayedPrice;
+
+    // Update the total for this product directly
+    productTotals[productName] = result;
+
+    // Update the overall total directly
+    updateCartTotal();
+
+    // Log the result to the console
+    console.log("Result of multiplication:", result);
+  } else {
+    // If inputValue is empty or not a valid number, reset the total for this product
+    productTotals[productName] = 0;
+
+    // Update the overall total directly
+    updateCartTotal();
+
+    // Log the result to the console
+    console.log("Result of multiplication:", 0);
+  }
+}}
+
+// Function to update the total element based on all cart items
+function updateCartTotal() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  let total = 0;
+
+  for (let i = 0; i < cartItems.length; i++) {
+    const cartItem = cartItems[i];
+    const quantityInput = cartItem.querySelector(".product-details .quantity-input");
+    const productPriceElement = cartItem.querySelector(".product-details h4");
+    const quantity = parseInt(quantityInput.value);
+    const price = parseFloat(productPriceElement.dataset.price);
+    const totalForItem = quantity * price;
+
+    total += totalForItem;
+  }
+
+  // Display the overall total in the total element
+  const totalPriceElement = document.getElementById("total-price");
+  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
+
+  // Log the updated total to the console
+  console.log("Updated Total:", total);
 }
 
+// Example of using the function
 
 
 
@@ -5475,6 +7070,8 @@ addToCartBtn.addEventListener("click", () => {
     const cart = document.getElementById('cart-container')
     cart.style.display = 'block';
   addToCart(product);
+  updateCartTotal();
+
 });
 
 // Assuming `card` is the element representing the product card
@@ -5716,9 +7313,34 @@ icon.classList.add("fas", "fa-shopping-cart"); // Assuming you're using Font Awe
 addToCartBtn.prepend(icon);
 
 
+// Declare productPrice outside of addToCart to make it accessible to other functions
+let productPrice;
+// Initialize an object to store totals for each product
+const productTotals = {};
+// Initialize overall total variable
+let total = 0;
+
 function addToCart(product) {
   // Get the cart items container
   const cartItemsContainer = document.getElementById("cart-items");
+  // Create a container for the toggle switch
+  const toggleContainer = document.createElement("div");
+  toggleContainer.classList.add("toggle-container");
+
+  // Add title to the toggle
+  const toggleTitle = document.createElement("p");
+  toggleTitle.innerText = "Wholesale";
+  toggleContainer.appendChild(toggleTitle);
+
+  // Create the toggle switch
+  const toggleSwitch = document.createElement("input");
+  toggleSwitch.type = "checkbox";
+  toggleSwitch.classList.add("toggle-switch");
+  toggleSwitch.addEventListener("change", () => {
+    updatePriceBasedOnToggle(product, toggleSwitch.checked);
+  });
+
+  toggleContainer.appendChild(toggleSwitch);
 
   // Create a new cart item element
   const cartItem = document.createElement("div");
@@ -5727,6 +7349,7 @@ function addToCart(product) {
   // Create a container for the product details (name, price, quantity, and delete button)
   const productDetails = document.createElement("div");
   productDetails.classList.add("product-details");
+  productDetails.appendChild(toggleContainer);
 
   // Add product name
   const productName = document.createElement("h5");
@@ -5734,52 +7357,30 @@ function addToCart(product) {
   productDetails.appendChild(productName);
 
   // Add product price
-  const productPrice = document.createElement("h4");
+  productPrice = document.createElement("h4");
   productPrice.innerText = `UGX ${product.price}`;
   productPrice.dataset.price = product.price; // Store the price as a data attribute
   productDetails.appendChild(productPrice);
 
-// Create a quantity input field
-const quantityInput = document.createElement("input");
-quantityInput.type = "number";
-quantityInput.value = 1;
-quantityInput.min = 1;
-quantityInput.classList.add("quantity-input"); // Add the quantity-input class
-quantityInput.addEventListener("input", () => {
-  updateCartItemTotal(cartItem);
-  updateCartTotal();
-});
-productDetails.appendChild(quantityInput);
+  // Create a quantity input field
+  const quantityInput = document.createElement("input");
+  quantityInput.type = "number";
+  quantityInput.value = 1;
+  quantityInput.min = 1;
+  quantityInput.classList.add("quantity-input"); // Add the quantity-input class
 
+  quantityInput.addEventListener("input", () => {
+    // Log the input value to the console
+    console.log("Input value:", quantityInput.value);
 
-function updateCartItemTotal(cartItem) {
-  const priceElement = cartItem.querySelector(".product-details h4");
+    // Get the displayed product price from innerText
+    const displayedPrice = parseFloat(productPrice.innerText.replace("UGX ", ""));
 
-  // Check if the element is found before accessing properties
-  if (priceElement) {
-    const quantityInput = cartItem.querySelector(".product-details input");
-    const quantity = parseInt(quantityInput.value);
-    const price = parseFloat(priceElement.innerText.replace("UGX ", ""));
-    const total = quantity * price;
-    priceElement.dataset.total = total.toFixed(2);
-  }
-}
+    // Call the multiply function with the current input value and displayed price
+    multiplyInputByDisplayedPrice(quantityInput.value, displayedPrice, product.name);
+  });
 
-// Define the updateCartTotal function
-function updateCartTotal() {
-  const cartItems = document.getElementsByClassName("cart-item");
-  const totalPriceElement = document.getElementById("total-price");
-  let total = 0;
-
-  for (let i = 0; i < cartItems.length; i++) {
-    const cartItem = cartItems[i];
-    const priceElement = cartItem.querySelector(".product-details h4");
-    const totalForItem = parseFloat(priceElement.dataset.total);
-    total += totalForItem;
-  }
-
-  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
-}
+  productDetails.appendChild(quantityInput);
 
   // Create a delete button for the cart item
   const deleteButton = document.createElement("button");
@@ -5787,8 +7388,8 @@ function updateCartTotal() {
   deleteButton.classList.add("delete-button");
   deleteButton.addEventListener("click", () => {
     cartItemsContainer.removeChild(cartItem);
-    updateCartTotal();
     updateCartCount(-1);
+    updateCartTotal()
   });
   productDetails.appendChild(deleteButton);
 
@@ -5800,14 +7401,131 @@ function updateCartTotal() {
   // Update the cart count
   updateCartCount(1);
 
-  // Calculate and update the total price
-  updateCartItemTotal(cartItem);
-  updateCartTotal();
-
   // Show the "Added to Cart" message
   showAddToCartMessage(product.name);
+
+  // Function to fetch wholesale price from Firebase
+  async function fetchWholesalePriceFromFirebase(productName) {
+    const productsRef = ref(database, "products/accessories");
+    const productSnapshot = await get(child(productsRef, productName));
+
+    if (productSnapshot.exists()) {
+      // Assuming there's a property named 'wholesalePrice' in the product data
+      const wholesalePrice = productSnapshot.val().wholesalePrice;
+
+      // Parse the wholesalePrice as a number
+      return wholesalePrice !== null ? parseFloat(wholesalePrice) : null;
+    }
+
+    // Return a default value or handle the case when the product is not found
+    return null;
+  }
+
+  let originalTotal = 0;
+
+  // Function to update price based on the toggle switch
+  async function updatePriceBasedOnToggle(product, isWholesale) {
+    // Get the displayed product price from innerText
+    const displayedPrice = parseFloat(productPrice.innerText.replace("UGX ", ""));
+  
+    // Calculate the original total based on the current input value and displayed price
+    const originalQuantity = parseInt(quantityInput.value);
+    originalTotal = originalQuantity * displayedPrice;
+  
+    if (isWholesale) {
+      // Fetch wholesale price from Firebase based on the product name
+      const wholesalePrice = await fetchWholesalePriceFromFirebase(product.name);
+  
+      if (wholesalePrice !== null) {
+        productPrice.innerText = `UGX ${wholesalePrice}`;
+        productPrice.dataset.price = wholesalePrice;
+      } else {
+        // Handle the case when wholesale price is not found
+        //console.error(`Wholesale price not found for product: ${product.name}`);
+      }
+    } else {
+      productPrice.innerText = `UGX ${product.price}`;
+      productPrice.dataset.price = product.price;
+    }
+  
+    // Calculate the new total based on the current input value, displayed price, and product name
+    const newQuantity = parseInt(quantityInput.value);
+    const newTotal = newQuantity * parseFloat(productPrice.dataset.price);
+  
+    // Update the total element with the difference
+    updateTotalElement(newTotal - originalTotal);
+  
+    // Log the updated price to the console
+    console.log("Updated Price:", parseFloat(productPrice.dataset.price));
+  }
+  
+  // Function to update the total element
+  function updateTotalElement(result) {
+    const totalPriceElement = document.getElementById("total-price");
+  
+    // Parse the total as a number
+    const total = parseFloat(totalPriceElement.innerText.replace("TOTAL: UGX ", ""));
+  
+    // Display the updated total in the total element
+    totalPriceElement.innerText = "TOTAL: UGX " + (total + result).toFixed(2);
+  
+    // Log the updated total to the console
+    console.log("Updated Total:", total + result);
+  }
+  
+
+// Function to multiply input by displayed price and update the total element
+function multiplyInputByDisplayedPrice(inputValue, displayedPrice, productName) {
+  // Check if inputValue is not empty and is a valid number
+  if (inputValue && !isNaN(inputValue)) {
+    // Calculate the result by multiplying the input by the displayed product price
+    const result = inputValue * displayedPrice;
+
+    // Update the total for this product directly
+    productTotals[productName] = result;
+
+    // Update the overall total directly
+    updateCartTotal();
+
+    // Log the result to the console
+    console.log("Result of multiplication:", result);
+  } else {
+    // If inputValue is empty or not a valid number, reset the total for this product
+    productTotals[productName] = 0;
+
+    // Update the overall total directly
+    updateCartTotal();
+
+    // Log the result to the console
+    console.log("Result of multiplication:", 0);
+  }
+}}
+
+// Function to update the total element based on all cart items
+function updateCartTotal() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  let total = 0;
+
+  for (let i = 0; i < cartItems.length; i++) {
+    const cartItem = cartItems[i];
+    const quantityInput = cartItem.querySelector(".product-details .quantity-input");
+    const productPriceElement = cartItem.querySelector(".product-details h4");
+    const quantity = parseInt(quantityInput.value);
+    const price = parseFloat(productPriceElement.dataset.price);
+    const totalForItem = quantity * price;
+
+    total += totalForItem;
+  }
+
+  // Display the overall total in the total element
+  const totalPriceElement = document.getElementById("total-price");
+  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
+
+  // Log the updated total to the console
+  console.log("Updated Total:", total);
 }
 
+// Example of using the function
 
 
 
@@ -5824,8 +7542,9 @@ addToCartBtn.addEventListener("click", () => {
     const cart = document.getElementById('cart-container')
     cart.style.display = 'block';
   addToCart(product);
-});
+  updateCartTotal();
 
+});
 // Assuming `card` is the element representing the product card
 card.appendChild(addToCartBtn);
 
@@ -6037,9 +7756,34 @@ addToCartBtn.prepend(icon);
 
 
 
+// Declare productPrice outside of addToCart to make it accessible to other functions
+let productPrice;
+// Initialize an object to store totals for each product
+const productTotals = {};
+// Initialize overall total variable
+let total = 0;
+
 function addToCart(product) {
   // Get the cart items container
   const cartItemsContainer = document.getElementById("cart-items");
+  // Create a container for the toggle switch
+  const toggleContainer = document.createElement("div");
+  toggleContainer.classList.add("toggle-container");
+
+  // Add title to the toggle
+  const toggleTitle = document.createElement("p");
+  toggleTitle.innerText = "Wholesale";
+  toggleContainer.appendChild(toggleTitle);
+
+  // Create the toggle switch
+  const toggleSwitch = document.createElement("input");
+  toggleSwitch.type = "checkbox";
+  toggleSwitch.classList.add("toggle-switch");
+  toggleSwitch.addEventListener("change", () => {
+    updatePriceBasedOnToggle(product, toggleSwitch.checked);
+  });
+
+  toggleContainer.appendChild(toggleSwitch);
 
   // Create a new cart item element
   const cartItem = document.createElement("div");
@@ -6048,6 +7792,7 @@ function addToCart(product) {
   // Create a container for the product details (name, price, quantity, and delete button)
   const productDetails = document.createElement("div");
   productDetails.classList.add("product-details");
+  productDetails.appendChild(toggleContainer);
 
   // Add product name
   const productName = document.createElement("h5");
@@ -6055,52 +7800,30 @@ function addToCart(product) {
   productDetails.appendChild(productName);
 
   // Add product price
-  const productPrice = document.createElement("h4");
+  productPrice = document.createElement("h4");
   productPrice.innerText = `UGX ${product.price}`;
   productPrice.dataset.price = product.price; // Store the price as a data attribute
   productDetails.appendChild(productPrice);
 
-// Create a quantity input field
-const quantityInput = document.createElement("input");
-quantityInput.type = "number";
-quantityInput.value = 1;
-quantityInput.min = 1;
-quantityInput.classList.add("quantity-input"); // Add the quantity-input class
-quantityInput.addEventListener("input", () => {
-  updateCartItemTotal(cartItem);
-  updateCartTotal();
-});
-productDetails.appendChild(quantityInput);
+  // Create a quantity input field
+  const quantityInput = document.createElement("input");
+  quantityInput.type = "number";
+  quantityInput.value = 1;
+  quantityInput.min = 1;
+  quantityInput.classList.add("quantity-input"); // Add the quantity-input class
 
+  quantityInput.addEventListener("input", () => {
+    // Log the input value to the console
+    console.log("Input value:", quantityInput.value);
 
-function updateCartItemTotal(cartItem) {
-  const priceElement = cartItem.querySelector(".product-details h4");
+    // Get the displayed product price from innerText
+    const displayedPrice = parseFloat(productPrice.innerText.replace("UGX ", ""));
 
-  // Check if the element is found before accessing properties
-  if (priceElement) {
-    const quantityInput = cartItem.querySelector(".product-details input");
-    const quantity = parseInt(quantityInput.value);
-    const price = parseFloat(priceElement.innerText.replace("UGX ", ""));
-    const total = quantity * price;
-    priceElement.dataset.total = total.toFixed(2);
-  }
-}
+    // Call the multiply function with the current input value and displayed price
+    multiplyInputByDisplayedPrice(quantityInput.value, displayedPrice, product.name);
+  });
 
-// Define the updateCartTotal function
-function updateCartTotal() {
-  const cartItems = document.getElementsByClassName("cart-item");
-  const totalPriceElement = document.getElementById("total-price");
-  let total = 0;
-
-  for (let i = 0; i < cartItems.length; i++) {
-    const cartItem = cartItems[i];
-    const priceElement = cartItem.querySelector(".product-details h4");
-    const totalForItem = parseFloat(priceElement.dataset.total);
-    total += totalForItem;
-  }
-
-  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
-}
+  productDetails.appendChild(quantityInput);
 
   // Create a delete button for the cart item
   const deleteButton = document.createElement("button");
@@ -6108,8 +7831,8 @@ function updateCartTotal() {
   deleteButton.classList.add("delete-button");
   deleteButton.addEventListener("click", () => {
     cartItemsContainer.removeChild(cartItem);
-    updateCartTotal();
     updateCartCount(-1);
+    updateCartTotal()
   });
   productDetails.appendChild(deleteButton);
 
@@ -6121,14 +7844,131 @@ function updateCartTotal() {
   // Update the cart count
   updateCartCount(1);
 
-  // Calculate and update the total price
-  updateCartItemTotal(cartItem);
-  updateCartTotal();
-
   // Show the "Added to Cart" message
   showAddToCartMessage(product.name);
+
+  // Function to fetch wholesale price from Firebase
+  async function fetchWholesalePriceFromFirebase(productName) {
+    const productsRef = ref(database, "products/electronics");
+    const productSnapshot = await get(child(productsRef, productName));
+
+    if (productSnapshot.exists()) {
+      // Assuming there's a property named 'wholesalePrice' in the product data
+      const wholesalePrice = productSnapshot.val().wholesalePrice;
+
+      // Parse the wholesalePrice as a number
+      return wholesalePrice !== null ? parseFloat(wholesalePrice) : null;
+    }
+
+    // Return a default value or handle the case when the product is not found
+    return null;
+  }
+
+  let originalTotal = 0;
+
+  // Function to update price based on the toggle switch
+  async function updatePriceBasedOnToggle(product, isWholesale) {
+    // Get the displayed product price from innerText
+    const displayedPrice = parseFloat(productPrice.innerText.replace("UGX ", ""));
+  
+    // Calculate the original total based on the current input value and displayed price
+    const originalQuantity = parseInt(quantityInput.value);
+    originalTotal = originalQuantity * displayedPrice;
+  
+    if (isWholesale) {
+      // Fetch wholesale price from Firebase based on the product name
+      const wholesalePrice = await fetchWholesalePriceFromFirebase(product.name);
+  
+      if (wholesalePrice !== null) {
+        productPrice.innerText = `UGX ${wholesalePrice}`;
+        productPrice.dataset.price = wholesalePrice;
+      } else {
+        // Handle the case when wholesale price is not found
+        //console.error(`Wholesale price not found for product: ${product.name}`);
+      }
+    } else {
+      productPrice.innerText = `UGX ${product.price}`;
+      productPrice.dataset.price = product.price;
+    }
+  
+    // Calculate the new total based on the current input value, displayed price, and product name
+    const newQuantity = parseInt(quantityInput.value);
+    const newTotal = newQuantity * parseFloat(productPrice.dataset.price);
+  
+    // Update the total element with the difference
+    updateTotalElement(newTotal - originalTotal);
+  
+    // Log the updated price to the console
+    console.log("Updated Price:", parseFloat(productPrice.dataset.price));
+  }
+  
+  // Function to update the total element
+  function updateTotalElement(result) {
+    const totalPriceElement = document.getElementById("total-price");
+  
+    // Parse the total as a number
+    const total = parseFloat(totalPriceElement.innerText.replace("TOTAL: UGX ", ""));
+  
+    // Display the updated total in the total element
+    totalPriceElement.innerText = "TOTAL: UGX " + (total + result).toFixed(2);
+  
+    // Log the updated total to the console
+    console.log("Updated Total:", total + result);
+  }
+  
+
+// Function to multiply input by displayed price and update the total element
+function multiplyInputByDisplayedPrice(inputValue, displayedPrice, productName) {
+  // Check if inputValue is not empty and is a valid number
+  if (inputValue && !isNaN(inputValue)) {
+    // Calculate the result by multiplying the input by the displayed product price
+    const result = inputValue * displayedPrice;
+
+    // Update the total for this product directly
+    productTotals[productName] = result;
+
+    // Update the overall total directly
+    updateCartTotal();
+
+    // Log the result to the console
+    console.log("Result of multiplication:", result);
+  } else {
+    // If inputValue is empty or not a valid number, reset the total for this product
+    productTotals[productName] = 0;
+
+    // Update the overall total directly
+    updateCartTotal();
+
+    // Log the result to the console
+    console.log("Result of multiplication:", 0);
+  }
+}}
+
+// Function to update the total element based on all cart items
+function updateCartTotal() {
+  const cartItems = document.getElementsByClassName("cart-item");
+  let total = 0;
+
+  for (let i = 0; i < cartItems.length; i++) {
+    const cartItem = cartItems[i];
+    const quantityInput = cartItem.querySelector(".product-details .quantity-input");
+    const productPriceElement = cartItem.querySelector(".product-details h4");
+    const quantity = parseInt(quantityInput.value);
+    const price = parseFloat(productPriceElement.dataset.price);
+    const totalForItem = quantity * price;
+
+    total += totalForItem;
+  }
+
+  // Display the overall total in the total element
+  const totalPriceElement = document.getElementById("total-price");
+  totalPriceElement.innerText = "TOTAL: UGX " + total.toFixed(2);
+
+  // Log the updated total to the console
+  console.log("Updated Total:", total);
 }
 
+// Example of using the function
 
 
 
@@ -6145,8 +7985,9 @@ addToCartBtn.addEventListener("click", () => {
     const cart = document.getElementById('cart-container')
     cart.style.display = 'block';
   addToCart(product);
-});
+  updateCartTotal();
 
+});
 // Assuming `card` is the element representing the product card
 card.appendChild(addToCartBtn);
 

@@ -226,6 +226,7 @@ onValue(ordersRef, (snapshot) => {
         `Order Summary:\n`;
 
       const orderSummary = order.orderSummary.map((item) =>
+       ` Whole Sale: ${item.isWholesale}\n` +
         `Product Name: ${item.productName}\n` +
         `Price: UGX ${item.price}\n` +
         `Quantity: ${item.quantity}\n` +
@@ -243,50 +244,92 @@ onValue(ordersRef, (snapshot) => {
     const orderDetails = document.createElement("ul");
     orderDetails.classList.add("order-details");
 
-    for (const property in order) {
-      if (property === "orderSummary") {
-        const summaryList = document.createElement("ul");
-        summaryList.classList.add("order-summary");
+// Iterate over the order properties
+for (const property in order) {
+  const listItem = document.createElement("li");
 
-        order[property].forEach((item) => {
-          const summaryItem = document.createElement("li");
-          summaryItem.innerHTML = `
-            <strong>Product Name:</strong> ${item.productName}<br>
-            <strong>Price:</strong> UGX ${item.price}<br>
-            <strong>Quantity:</strong> ${item.quantity}<br>
-            <strong>Total:</strong> UGX ${item.total.toFixed(2)}
-          `;
-          summaryList.appendChild(summaryItem);
-        });
+  if (property === "orderSummary") {
+    const summaryList = document.createElement("ul");
+    summaryList.classList.add("order-summary");
 
-        const summaryListItem = document.createElement("li");
-        summaryListItem.innerHTML = "<strong>Order Summary:</strong>";
-        summaryListItem.appendChild(summaryList);
+    order[property].forEach((item) => {
+      const summaryItem = document.createElement("li");
+      summaryItem.innerHTML = `
+        <strong>WholeSale:</strong> ${item.isWholesale}<br>
+        <strong>Product Name:</strong> ${item.productName}<br>
+        <strong>Price:</strong> UGX ${item.price}<br>
+        <strong>Quantity:</strong> ${item.quantity}<br>
+        <strong>Total:</strong> UGX ${item.total.toFixed(2)}
+      `;
+      summaryList.appendChild(summaryItem);
+    });
 
-        orderDetails.appendChild(summaryListItem);
-      } else {
-        const listItem = document.createElement("li");
-        listItem.innerHTML = `<strong>${property}:</strong> ${order[property]}`;
-        orderDetails.appendChild(listItem);
-      }
-    }
+    listItem.innerHTML = "<strong>Order Summary:</strong>";
+    listItem.appendChild(summaryList);
+  } else {
+    listItem.innerHTML = `<strong>${property}:</strong> ${order[property]}`;
+  }
+
+  orderDetails.appendChild(listItem);
+}
 
     const paymentButton = document.createElement("button");
     paymentButton.classList.add("payment-button");
     paymentButton.textContent = "Receive Payment";
-    paymentButton.addEventListener("click", () => {
-        // Add logic to update the payment status to "Payment Received"
-        const paymentStatusRef = ref(database, `orders/${orderId}/paymentStatus`);
-        set(paymentStatusRef, "Payment Received").then(() => {
-            // Update background color immediately after payment is received
-            orderContainer.style.backgroundColor = "lightgreen";
+ 
+  // Add event listener to the payment button
+  paymentButton.addEventListener("click", () => {
+// Get the user ID from the clicked order
+const userId = order.userId;
 
-            // Optionally, you can update the UI or perform other actions after updating the payment status
-            console.log(`Payment received for Order ID: ${orderId}`);
+// Check if userId is defined before proceeding
+if (userId) {
+  // Add logic to update the payment status in the orders node
+  const orderPaymentStatusRef = ref(database, `orders/${orderId}/paymentStatus`);
+  set(orderPaymentStatusRef, "Payment Received").then(() => {
+    // Update background color immediately after payment is received
+    orderContainer.style.backgroundColor = "lightgreen";
+
+    // Optionally, you can update the UI or perform other actions after updating the payment status
+    console.log(`Payment received for Order ID: ${orderId}`);
+
+ // Assuming you have a receipts node in your database
+const receiptsRef = ref(database, `users/${userId}/receipts`);
+
+// Fetch the customer's receipts
+onValue(receiptsRef, (snapshot) => {
+  const receiptsData = snapshot.val();
+
+  // Check if receiptsData is defined
+  if (receiptsData) {
+    // Iterate over the receipts
+    for (const receiptId in receiptsData) {
+      const receipt = receiptsData[receiptId];
+
+      // Check if the receipt corresponds to the current order by checking orderId in both places
+      if (receipt.orderId === orderId || receiptId === orderId) {
+        // Update the payment status in the receipts node
+        const receiptPaymentStatusRef = ref(database, `users/${userId}/receipts/${receiptId}/paymentStatus`);
+        set(receiptPaymentStatusRef, "Payment Received").then(() => {
+          // Optionally, you can update the UI or perform other actions after updating the payment status
+          console.log(`Payment received for Receipt ID: ${receiptId}`);
         }).catch((error) => {
-            console.error("Error updating payment status:", error.message);
+          console.error("Error updating receipt payment status:", error.message);
         });
-    });
+
+        // You may also want to break the loop if the order is found in receipts
+        break;
+      }
+    }
+  } else {
+    console.error("receiptsData is undefined for userId:", userId);
+  }
+});})}
+
+  });
+
+  orderDetails.appendChild(paymentButton);
+
     orderContainer.appendChild(orderTitle);
     orderContainer.appendChild(paymentButton);
     orderContainer.appendChild(shareButton);
