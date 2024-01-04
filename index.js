@@ -1484,7 +1484,6 @@ function handleOrderIdSearch(event) {
 <p class="receipt-info"><span>Delivery Place: </span>   ${receipt.deliveryPlace}</p>
 <p class="receipt-info"><span>Means of Transport:  </span>   ${receipt.meansOfTransport}</p>
 <p class="receipt-info"><span>Payment Option:  </span>   ${receipt.selectedPaymentOption}</p>
-<p class="receipt-info"><span>Order Type:  </span>   ${receipt.selectedOrderType}</p>
 <p class="receipt-info"><span>Order Time:  </span>   ${receipt.orderTime}</p>
 
 
