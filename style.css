@@ -148,7 +148,6 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -163,9 +162,23 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 350px;
+  width: 400px;
   height: 100%;
   margin: 0 auto;
+}
+
+/* Media query for small screens */
+@media (max-width: 768px) {
+  .search-bar {
+    position: static; /* Reset position for small screens */
+    transform: none; /* Reset transform */
+    width: 100%; /* Adjust width as needed */
+    margin: 20px auto; /* Add some margin for spacing */
+  }
+
+  .search-bar form {
+    width: 100%; /* Full width on small screens */
+  }
 }
 
 .search-bar form input[type="text"] {
@@ -2285,6 +2298,7 @@ body.no-scroll {
 #messageContainer{
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 z-index: 10000000;
+
 }
 
 #userDetailsContainer{
@@ -2817,7 +2831,7 @@ margin-right: 10px;
   position: absolute;
   top: 100%; /* Position suggestions below the search bar */
   left: 0;
-  width: 81%; /* Match the width of the search bar */
+  width: 85%; /* Match the width of the search bar */
   background-color: #fff;
   color: black;
   border: 1px solid #ccc;
@@ -2827,8 +2841,17 @@ margin-right: 10px;
   overflow-y: auto; /* Enable vertical scrolling if the content exceeds the maximum height */
   z-index: 1000; /* Ensure the suggestions appear above other elements */
   display: none; /* Initially hide the suggestions */
-margin-top: 5px;
+  margin-top: 5px;
 }
+
+/* Media query for small screens */
+@media (max-width: 768px) {
+  #suggestions-container {
+    width: 100%; /* Full width on small screens */
+    max-height: 200px; /* Adjust maximum height for smaller screens */
+  }
+}
+
 
 .suggestion-item {
   padding: 7px 12px;
