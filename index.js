@@ -2185,27 +2185,32 @@ const closeCartBtn = document.getElementById("close-cart-btn");
 const cartContent = document.getElementById("cart-content");
 const overlay = document.getElementById('overlay4')
 
+const body = document.body;
+
 openCartBtn.addEventListener("click", () => {
   if (cartIsEmpty()) {
     cartContent.style.display = "none"; // Hide the cart content on load
-    updateCartTotal();
 
     // Show a message or perform any desired action when cart is empty
     return;
   }
-     overlay.style.display = 'block'
+  overlay.style.display = 'block';
   cartContent.style.display = "block";
+  openCartBtn.style.display = "none";
   closeCartBtn.style.display = "inline-block";
+  body.classList.add("no-scroll"); // Add class to disable scrolling
 });
 
+closeCartBtn.style.display = "none"; // Hide the close button initially
 
 closeCartBtn.addEventListener("click", () => {
   cartContent.style.display = "none";
   closeCartBtn.style.display = "none";
   openCartBtn.style.display = "inline-block";
-  overlay.style.display = 'none'
-
+  overlay.style.display = 'none';
+  body.classList.remove("no-scroll"); // Remove class to enable scrolling
 });
+
 
 function cartIsEmpty() {
   const cartItems = document.getElementsByClassName("cart-item");
@@ -2589,17 +2594,20 @@ const cartContent = document.getElementById("cart-content");
 const overlay = document.getElementById('overlay4')
 cartContent.style.display = "none"; // Hide the cart content on load
 
+const body = document.body;
+
 openCartBtn.addEventListener("click", () => {
   if (cartIsEmpty()) {
     cartContent.style.display = "none"; // Hide the cart content on load
- 
+
     // Show a message or perform any desired action when cart is empty
     return;
   }
-     overlay.style.display = 'block'
+  overlay.style.display = 'block';
   cartContent.style.display = "block";
   openCartBtn.style.display = "none";
   closeCartBtn.style.display = "inline-block";
+  body.classList.add("no-scroll"); // Add class to disable scrolling
 });
 
 closeCartBtn.style.display = "none"; // Hide the close button initially
@@ -2608,9 +2616,10 @@ closeCartBtn.addEventListener("click", () => {
   cartContent.style.display = "none";
   closeCartBtn.style.display = "none";
   openCartBtn.style.display = "inline-block";
-  overlay.style.display = 'none'
-
+  overlay.style.display = 'none';
+  body.classList.remove("no-scroll"); // Remove class to enable scrolling
 });
+
 
 function cartIsEmpty() {
   const cartItems = document.getElementsByClassName("cart-item");
@@ -2973,17 +2982,20 @@ const cartContent = document.getElementById("cart-content");
 const overlay = document.getElementById('overlay4')
 cartContent.style.display = "none"; // Hide the cart content on load
 
+const body = document.body;
+
 openCartBtn.addEventListener("click", () => {
   if (cartIsEmpty()) {
     cartContent.style.display = "none"; // Hide the cart content on load
- 
+
     // Show a message or perform any desired action when cart is empty
     return;
   }
-     overlay.style.display = 'block'
+  overlay.style.display = 'block';
   cartContent.style.display = "block";
   openCartBtn.style.display = "none";
   closeCartBtn.style.display = "inline-block";
+  body.classList.add("no-scroll"); // Add class to disable scrolling
 });
 
 closeCartBtn.style.display = "none"; // Hide the close button initially
@@ -2992,9 +3004,10 @@ closeCartBtn.addEventListener("click", () => {
   cartContent.style.display = "none";
   closeCartBtn.style.display = "none";
   openCartBtn.style.display = "inline-block";
-  overlay.style.display = 'none'
-
+  overlay.style.display = 'none';
+  body.classList.remove("no-scroll"); // Remove class to enable scrolling
 });
+
 
 function cartIsEmpty() {
   const cartItems = document.getElementsByClassName("cart-item");
@@ -3359,17 +3372,20 @@ const cartContent = document.getElementById("cart-content");
 const overlay = document.getElementById('overlay4')
 cartContent.style.display = "none"; // Hide the cart content on load
 
+const body = document.body;
+
 openCartBtn.addEventListener("click", () => {
   if (cartIsEmpty()) {
     cartContent.style.display = "none"; // Hide the cart content on load
- 
+
     // Show a message or perform any desired action when cart is empty
     return;
   }
-     overlay.style.display = 'block'
+  overlay.style.display = 'block';
   cartContent.style.display = "block";
   openCartBtn.style.display = "none";
   closeCartBtn.style.display = "inline-block";
+  body.classList.add("no-scroll"); // Add class to disable scrolling
 });
 
 closeCartBtn.style.display = "none"; // Hide the close button initially
@@ -3378,9 +3394,10 @@ closeCartBtn.addEventListener("click", () => {
   cartContent.style.display = "none";
   closeCartBtn.style.display = "none";
   openCartBtn.style.display = "inline-block";
-  overlay.style.display = 'none'
-
+  overlay.style.display = 'none';
+  body.classList.remove("no-scroll"); // Remove class to enable scrolling
 });
+
 
 
 function cartIsEmpty() {
@@ -3740,17 +3757,20 @@ const cartContent = document.getElementById("cart-content");
 const overlay = document.getElementById('overlay4')
 cartContent.style.display = "none"; // Hide the cart content on load
 
+const body = document.body;
+
 openCartBtn.addEventListener("click", () => {
   if (cartIsEmpty()) {
     cartContent.style.display = "none"; // Hide the cart content on load
- 
+
     // Show a message or perform any desired action when cart is empty
     return;
   }
-     overlay.style.display = 'block'
+  overlay.style.display = 'block';
   cartContent.style.display = "block";
   openCartBtn.style.display = "none";
   closeCartBtn.style.display = "inline-block";
+  body.classList.add("no-scroll"); // Add class to disable scrolling
 });
 
 closeCartBtn.style.display = "none"; // Hide the close button initially
@@ -3759,9 +3779,10 @@ closeCartBtn.addEventListener("click", () => {
   cartContent.style.display = "none";
   closeCartBtn.style.display = "none";
   openCartBtn.style.display = "inline-block";
-  overlay.style.display = 'none'
-
+  overlay.style.display = 'none';
+  body.classList.remove("no-scroll"); // Remove class to enable scrolling
 });
+
 
 
 function cartIsEmpty() {
@@ -4128,17 +4149,20 @@ const cartContent = document.getElementById("cart-content");
 const overlay = document.getElementById('overlay4')
 cartContent.style.display = "none"; // Hide the cart content on load
 
+const body = document.body;
+
 openCartBtn.addEventListener("click", () => {
   if (cartIsEmpty()) {
     cartContent.style.display = "none"; // Hide the cart content on load
- 
+
     // Show a message or perform any desired action when cart is empty
     return;
   }
-     overlay.style.display = 'block'
+  overlay.style.display = 'block';
   cartContent.style.display = "block";
   openCartBtn.style.display = "none";
   closeCartBtn.style.display = "inline-block";
+  body.classList.add("no-scroll"); // Add class to disable scrolling
 });
 
 closeCartBtn.style.display = "none"; // Hide the close button initially
@@ -4147,9 +4171,10 @@ closeCartBtn.addEventListener("click", () => {
   cartContent.style.display = "none";
   closeCartBtn.style.display = "none";
   openCartBtn.style.display = "inline-block";
-  overlay.style.display = 'none'
-
+  overlay.style.display = 'none';
+  body.classList.remove("no-scroll"); // Remove class to enable scrolling
 });
+
 
 function cartIsEmpty() {
   const cartItems = document.getElementsByClassName("cart-item");
@@ -4512,17 +4537,20 @@ const cartContent = document.getElementById("cart-content");
 const overlay = document.getElementById('overlay4')
 cartContent.style.display = "none"; // Hide the cart content on load
 
+const body = document.body;
+
 openCartBtn.addEventListener("click", () => {
   if (cartIsEmpty()) {
     cartContent.style.display = "none"; // Hide the cart content on load
- 
+
     // Show a message or perform any desired action when cart is empty
     return;
   }
-     overlay.style.display = 'block'
+  overlay.style.display = 'block';
   cartContent.style.display = "block";
   openCartBtn.style.display = "none";
   closeCartBtn.style.display = "inline-block";
+  body.classList.add("no-scroll"); // Add class to disable scrolling
 });
 
 closeCartBtn.style.display = "none"; // Hide the close button initially
@@ -4531,9 +4559,10 @@ closeCartBtn.addEventListener("click", () => {
   cartContent.style.display = "none";
   closeCartBtn.style.display = "none";
   openCartBtn.style.display = "inline-block";
-  overlay.style.display = 'none'
-
+  overlay.style.display = 'none';
+  body.classList.remove("no-scroll"); // Remove class to enable scrolling
 });
+
 
 
 function cartIsEmpty() {
@@ -4896,17 +4925,20 @@ const cartContent = document.getElementById("cart-content");
 const overlay = document.getElementById('overlay4')
 cartContent.style.display = "none"; // Hide the cart content on load
 
+const body = document.body;
+
 openCartBtn.addEventListener("click", () => {
   if (cartIsEmpty()) {
     cartContent.style.display = "none"; // Hide the cart content on load
- 
+
     // Show a message or perform any desired action when cart is empty
     return;
   }
-     overlay.style.display = 'block'
+  overlay.style.display = 'block';
   cartContent.style.display = "block";
   openCartBtn.style.display = "none";
   closeCartBtn.style.display = "inline-block";
+  body.classList.add("no-scroll"); // Add class to disable scrolling
 });
 
 closeCartBtn.style.display = "none"; // Hide the close button initially
@@ -4915,9 +4947,10 @@ closeCartBtn.addEventListener("click", () => {
   cartContent.style.display = "none";
   closeCartBtn.style.display = "none";
   openCartBtn.style.display = "inline-block";
-  overlay.style.display = 'none'
-
+  overlay.style.display = 'none';
+  body.classList.remove("no-scroll"); // Remove class to enable scrolling
 });
+
 
 
 function cartIsEmpty() {
@@ -5281,17 +5314,20 @@ const cartContent = document.getElementById("cart-content");
 const overlay = document.getElementById('overlay4')
 cartContent.style.display = "none"; // Hide the cart content on load
 
+const body = document.body;
+
 openCartBtn.addEventListener("click", () => {
   if (cartIsEmpty()) {
     cartContent.style.display = "none"; // Hide the cart content on load
- 
+
     // Show a message or perform any desired action when cart is empty
     return;
   }
-     overlay.style.display = 'block'
+  overlay.style.display = 'block';
   cartContent.style.display = "block";
   openCartBtn.style.display = "none";
   closeCartBtn.style.display = "inline-block";
+  body.classList.add("no-scroll"); // Add class to disable scrolling
 });
 
 closeCartBtn.style.display = "none"; // Hide the close button initially
@@ -5300,9 +5336,10 @@ closeCartBtn.addEventListener("click", () => {
   cartContent.style.display = "none";
   closeCartBtn.style.display = "none";
   openCartBtn.style.display = "inline-block";
-  overlay.style.display = 'none'
-
+  overlay.style.display = 'none';
+  body.classList.remove("no-scroll"); // Remove class to enable scrolling
 });
+
 
 function cartIsEmpty() {
   const cartItems = document.getElementsByClassName("cart-item");
@@ -5694,17 +5731,20 @@ const cartContent = document.getElementById("cart-content");
 const overlay = document.getElementById('overlay4')
 cartContent.style.display = "none"; // Hide the cart content on load
 
+const body = document.body;
+
 openCartBtn.addEventListener("click", () => {
   if (cartIsEmpty()) {
     cartContent.style.display = "none"; // Hide the cart content on load
- 
+
     // Show a message or perform any desired action when cart is empty
     return;
   }
-     overlay.style.display = 'block'
+  overlay.style.display = 'block';
   cartContent.style.display = "block";
   openCartBtn.style.display = "none";
   closeCartBtn.style.display = "inline-block";
+  body.classList.add("no-scroll"); // Add class to disable scrolling
 });
 
 closeCartBtn.style.display = "none"; // Hide the close button initially
@@ -5713,9 +5753,10 @@ closeCartBtn.addEventListener("click", () => {
   cartContent.style.display = "none";
   closeCartBtn.style.display = "none";
   openCartBtn.style.display = "inline-block";
-  overlay.style.display = 'none'
-
+  overlay.style.display = 'none';
+  body.classList.remove("no-scroll"); // Remove class to enable scrolling
 });
+
 
 
 function cartIsEmpty() {
@@ -6167,17 +6208,20 @@ const cartContent = document.getElementById("cart-content");
 const overlay = document.getElementById('overlay4')
 cartContent.style.display = "none"; // Hide the cart content on load
 
+const body = document.body;
+
 openCartBtn.addEventListener("click", () => {
   if (cartIsEmpty()) {
     cartContent.style.display = "none"; // Hide the cart content on load
- 
+
     // Show a message or perform any desired action when cart is empty
     return;
   }
-     overlay.style.display = 'block'
+  overlay.style.display = 'block';
   cartContent.style.display = "block";
   openCartBtn.style.display = "none";
   closeCartBtn.style.display = "inline-block";
+  body.classList.add("no-scroll"); // Add class to disable scrolling
 });
 
 closeCartBtn.style.display = "none"; // Hide the close button initially
@@ -6186,9 +6230,10 @@ closeCartBtn.addEventListener("click", () => {
   cartContent.style.display = "none";
   closeCartBtn.style.display = "none";
   openCartBtn.style.display = "inline-block";
-  overlay.style.display = 'none'
-
+  overlay.style.display = 'none';
+  body.classList.remove("no-scroll"); // Remove class to enable scrolling
 });
+
 
 function cartIsEmpty() {
   const cartItems = document.getElementsByClassName("cart-item");
@@ -6631,17 +6676,20 @@ const cartContent = document.getElementById("cart-content");
 const overlay = document.getElementById('overlay4')
 cartContent.style.display = "none"; // Hide the cart content on load
 
+const body = document.body;
+
 openCartBtn.addEventListener("click", () => {
   if (cartIsEmpty()) {
     cartContent.style.display = "none"; // Hide the cart content on load
- 
+
     // Show a message or perform any desired action when cart is empty
     return;
   }
-     overlay.style.display = 'block'
+  overlay.style.display = 'block';
   cartContent.style.display = "block";
   openCartBtn.style.display = "none";
   closeCartBtn.style.display = "inline-block";
+  body.classList.add("no-scroll"); // Add class to disable scrolling
 });
 
 closeCartBtn.style.display = "none"; // Hide the close button initially
@@ -6650,9 +6698,10 @@ closeCartBtn.addEventListener("click", () => {
   cartContent.style.display = "none";
   closeCartBtn.style.display = "none";
   openCartBtn.style.display = "inline-block";
-  overlay.style.display = 'none'
-
+  overlay.style.display = 'none';
+  body.classList.remove("no-scroll"); // Remove class to enable scrolling
 });
+
 
 function cartIsEmpty() {
   const cartItems = document.getElementsByClassName("cart-item");
@@ -7095,17 +7144,20 @@ const cartContent = document.getElementById("cart-content");
 const overlay = document.getElementById('overlay4')
 cartContent.style.display = "none"; // Hide the cart content on load
 
+const body = document.body;
+
 openCartBtn.addEventListener("click", () => {
   if (cartIsEmpty()) {
     cartContent.style.display = "none"; // Hide the cart content on load
- 
+
     // Show a message or perform any desired action when cart is empty
     return;
   }
-     overlay.style.display = 'block'
+  overlay.style.display = 'block';
   cartContent.style.display = "block";
   openCartBtn.style.display = "none";
   closeCartBtn.style.display = "inline-block";
+  body.classList.add("no-scroll"); // Add class to disable scrolling
 });
 
 closeCartBtn.style.display = "none"; // Hide the close button initially
@@ -7114,8 +7166,8 @@ closeCartBtn.addEventListener("click", () => {
   cartContent.style.display = "none";
   closeCartBtn.style.display = "none";
   openCartBtn.style.display = "inline-block";
-  overlay.style.display = 'none'
-
+  overlay.style.display = 'none';
+  body.classList.remove("no-scroll"); // Remove class to enable scrolling
 });
 
 
@@ -7567,17 +7619,20 @@ const overlay = document.getElementById('overlay4')
 const cart = document.getElementById('cart-container')
 cartContent.style.display = "none"; // Hide the cart content on load
 
+const body = document.body;
+
 openCartBtn.addEventListener("click", () => {
   if (cartIsEmpty()) {
     cartContent.style.display = "none"; // Hide the cart content on load
- 
+
     // Show a message or perform any desired action when cart is empty
     return;
   }
-     overlay.style.display = 'block'
+  overlay.style.display = 'block';
   cartContent.style.display = "block";
   openCartBtn.style.display = "none";
   closeCartBtn.style.display = "inline-block";
+  body.classList.add("no-scroll"); // Add class to disable scrolling
 });
 
 closeCartBtn.style.display = "none"; // Hide the close button initially
@@ -7586,9 +7641,10 @@ closeCartBtn.addEventListener("click", () => {
   cartContent.style.display = "none";
   closeCartBtn.style.display = "none";
   openCartBtn.style.display = "inline-block";
-  overlay.style.display = 'none'
-
+  overlay.style.display = 'none';
+  body.classList.remove("no-scroll"); // Remove class to enable scrolling
 });
+
 
 function cartIsEmpty() {
   const cartItems = document.getElementsByClassName("cart-item");
@@ -8009,17 +8065,20 @@ const cartContent = document.getElementById("cart-content");
 const overlay = document.getElementById('overlay4')
 cartContent.style.display = "none"; // Hide the cart content on load
 
+const body = document.body;
+
 openCartBtn.addEventListener("click", () => {
   if (cartIsEmpty()) {
     cartContent.style.display = "none"; // Hide the cart content on load
- 
+
     // Show a message or perform any desired action when cart is empty
     return;
   }
-     overlay.style.display = 'block'
+  overlay.style.display = 'block';
   cartContent.style.display = "block";
   openCartBtn.style.display = "none";
   closeCartBtn.style.display = "inline-block";
+  body.classList.add("no-scroll"); // Add class to disable scrolling
 });
 
 closeCartBtn.style.display = "none"; // Hide the close button initially
@@ -8028,8 +8087,8 @@ closeCartBtn.addEventListener("click", () => {
   cartContent.style.display = "none";
   closeCartBtn.style.display = "none";
   openCartBtn.style.display = "inline-block";
-  overlay.style.display = 'none'
-
+  overlay.style.display = 'none';
+  body.classList.remove("no-scroll"); // Remove class to enable scrolling
 });
 
 

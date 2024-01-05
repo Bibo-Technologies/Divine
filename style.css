@@ -2952,3 +2952,7 @@ margin: 5px;
   transform: translate(25px, -50%);
   background-color: white;
 }
+
+.no-scroll {
+  overflow: hidden;
+}
