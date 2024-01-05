@@ -1840,20 +1840,20 @@ initializeSearch();
   // Create an array to store the promises returned by the Firebase queries
   const promises = [];
 
-  // Search for query in each relevant Firebase node
-  firebaseNodes.forEach((nodeRef) => {
-    const promise = get(nodeRef).then((snapshot) => {
-      const data = snapshot.val();
+// Search for query in each relevant Firebase node
+firebaseNodes.forEach((nodeRef) => {
+  const promise = get(nodeRef).then((snapshot) => {
+    const data = snapshot.val();
 
-// Process the data and display matching products
-const productsList = document.getElementById("products-list");
-for (let i in data) {
-    const product = data[i];
-    const name = product.name.toLowerCase();
-    const description = product.description.toLowerCase();
-    const queryLower = query.toLowerCase();
+    // Process the data and display matching products
+    const productsList = document.getElementById("products-list");
+    for (let i in data) {
+      const product = data[i];
+      const name = product.name.toLowerCase();
+      const description = product.description.toLowerCase();
+      const queryLower = query.toLowerCase();
 
-    if (name.includes(queryLower) || description.includes(queryLower)) {
+      if (!queryLower || name.includes(queryLower) || description.includes(queryLower)) {
         // Create a card for the matching product
         const card = document.createElement("div");
         card.classList.add("card1");
@@ -1991,15 +1991,33 @@ function addToCart(product) {
   toggleTitle.innerText = "Wholesale";
   toggleContainer.appendChild(toggleTitle);
 
-  // Create the toggle switch
-  const toggleSwitch = document.createElement("input");
-  toggleSwitch.type = "checkbox";
-  toggleSwitch.classList.add("toggle-switch");
-  toggleSwitch.addEventListener("change", () => {
-    updatePriceBasedOnToggle(product, toggleSwitch.checked);
-  });
+ // Create the toggle switch
+ const toggleSwitch = document.createElement("input");
+ toggleSwitch.type = "checkbox";
+ toggleSwitch.classList.add("toggle-switch");
 
-  toggleContainer.appendChild(toggleSwitch);
+ // Create a loading spinner
+ const loadingSpinner = document.createElement("div");
+ loadingSpinner.classList.add("loading-spinner");
+
+ // Add the toggle switch and spinner to the toggle container
+ toggleContainer.appendChild(toggleSwitch);
+ toggleContainer.appendChild(loadingSpinner);
+
+ toggleSwitch.addEventListener("change", async () => {
+   // Show the loading spinner
+   loadingSpinner.style.display = "inline-block";
+
+   // Fetch the wholesale price asynchronously
+   const wholesalePrice = await fetchWholesalePriceFromFirebase(product.name);
+
+   // Hide the loading spinner
+   loadingSpinner.style.display = "none";
+
+   // Update the price based on the toggle state
+   updatePriceBasedOnToggle(product, toggleSwitch.checked, wholesalePrice);
+ });
+
 
   // Create a new cart item element
   const cartItem = document.createElement("div");
@@ -2273,23 +2291,68 @@ function cartIsEmpty() {
     promises.push(promise);
   });
 
-  // Wait for all Firebase queries to complete
-  Promise.all(promises).then(() => {
-    // Hide the loader
-    loader.style.display = "none";
+ // Wait for all promises to resolve before proceeding
+Promise.all(promises).then(() => {
+  // Sort products by relevance based on similarity to the query
+  const products = Array.from(document.querySelectorAll('.card1'));
+  products.sort((a, b) => {
+    const aSimilarity = calculateSimilarity(a, query);
+    const bSimilarity = calculateSimilarity(b, query);
+    return bSimilarity - aSimilarity; // Sort in descending order of similarity
   });
+
+  // Clear the products list
+  document.getElementById("products-list").innerHTML = "";
+
+  // Append sorted products to the productsList
+  const productsList = document.getElementById("products-list");
+  products.forEach(product => productsList.appendChild(product));
+
+  // Hide the loader
+  loader.style.display = "none";
+});
+
 }
- 
-  
-
-
 
 }
 
 );
 
 
+// Function to calculate string similarity (Levenshtein distance)
+function similarity(str1, str2) {
+  const maxLength = Math.max(str1.length, str2.length);
+  const distance = levenshteinDistance(str1, str2);
+  return 1 - distance / maxLength;
+}
 
+function levenshteinDistance(str1, str2) {
+  const m = str1.length;
+  const n = str2.length;
+  const dp = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0));
+
+  for (let i = 0; i <= m; i++) {
+    for (let j = 0; j <= n; j++) {
+      if (i === 0) {
+        dp[i][j] = j;
+      } else if (j === 0) {
+        dp[i][j] = i;
+      } else if (str1[i - 1] === str2[j - 1]) {
+        dp[i][j] = dp[i - 1][j - 1];
+      } else {
+        dp[i][j] = 1 + Math.min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]);
+      }
+    }
+  }
+
+  return dp[m][n];
+}
+
+// Function to calculate similarity between product and query
+function calculateSimilarity(productCard, query) {
+  const productText = productCard.innerText.toLowerCase();
+  return similarity(productText, query.toLowerCase());
+}
 
 
 //button for brand new//
@@ -2422,15 +2485,33 @@ function addToCart(product) {
   toggleTitle.innerText = "Wholesale";
   toggleContainer.appendChild(toggleTitle);
 
-  // Create the toggle switch
-  const toggleSwitch = document.createElement("input");
-  toggleSwitch.type = "checkbox";
-  toggleSwitch.classList.add("toggle-switch");
-  toggleSwitch.addEventListener("change", () => {
-    updatePriceBasedOnToggle(product, toggleSwitch.checked);
-  });
+ // Create the toggle switch
+ const toggleSwitch = document.createElement("input");
+ toggleSwitch.type = "checkbox";
+ toggleSwitch.classList.add("toggle-switch");
 
-  toggleContainer.appendChild(toggleSwitch);
+ // Create a loading spinner
+ const loadingSpinner = document.createElement("div");
+ loadingSpinner.classList.add("loading-spinner");
+
+ // Add the toggle switch and spinner to the toggle container
+ toggleContainer.appendChild(toggleSwitch);
+ toggleContainer.appendChild(loadingSpinner);
+
+ toggleSwitch.addEventListener("change", async () => {
+   // Show the loading spinner
+   loadingSpinner.style.display = "inline-block";
+
+   // Fetch the wholesale price asynchronously
+   const wholesalePrice = await fetchWholesalePriceFromFirebase(product.name);
+
+   // Hide the loading spinner
+   loadingSpinner.style.display = "none";
+
+   // Update the price based on the toggle state
+   updatePriceBasedOnToggle(product, toggleSwitch.checked, wholesalePrice);
+ });
+
 
   // Create a new cart item element
   const cartItem = document.createElement("div");
@@ -2825,15 +2906,33 @@ function addToCart(product) {
   toggleTitle.innerText = "Wholesale";
   toggleContainer.appendChild(toggleTitle);
 
-  // Create the toggle switch
-  const toggleSwitch = document.createElement("input");
-  toggleSwitch.type = "checkbox";
-  toggleSwitch.classList.add("toggle-switch");
-  toggleSwitch.addEventListener("change", () => {
-    updatePriceBasedOnToggle(product, toggleSwitch.checked);
-  });
+ // Create the toggle switch
+ const toggleSwitch = document.createElement("input");
+ toggleSwitch.type = "checkbox";
+ toggleSwitch.classList.add("toggle-switch");
 
-  toggleContainer.appendChild(toggleSwitch);
+ // Create a loading spinner
+ const loadingSpinner = document.createElement("div");
+ loadingSpinner.classList.add("loading-spinner");
+
+ // Add the toggle switch and spinner to the toggle container
+ toggleContainer.appendChild(toggleSwitch);
+ toggleContainer.appendChild(loadingSpinner);
+
+ toggleSwitch.addEventListener("change", async () => {
+   // Show the loading spinner
+   loadingSpinner.style.display = "inline-block";
+
+   // Fetch the wholesale price asynchronously
+   const wholesalePrice = await fetchWholesalePriceFromFirebase(product.name);
+
+   // Hide the loading spinner
+   loadingSpinner.style.display = "none";
+
+   // Update the price based on the toggle state
+   updatePriceBasedOnToggle(product, toggleSwitch.checked, wholesalePrice);
+ });
+
 
   // Create a new cart item element
   const cartItem = document.createElement("div");
@@ -3229,15 +3328,32 @@ function addToCart(product) {
   toggleTitle.innerText = "Wholesale";
   toggleContainer.appendChild(toggleTitle);
 
-  // Create the toggle switch
-  const toggleSwitch = document.createElement("input");
-  toggleSwitch.type = "checkbox";
-  toggleSwitch.classList.add("toggle-switch");
-  toggleSwitch.addEventListener("change", () => {
-    updatePriceBasedOnToggle(product, toggleSwitch.checked);
-  });
+ // Create the toggle switch
+ const toggleSwitch = document.createElement("input");
+ toggleSwitch.type = "checkbox";
+ toggleSwitch.classList.add("toggle-switch");
 
-  toggleContainer.appendChild(toggleSwitch);
+ // Create a loading spinner
+ const loadingSpinner = document.createElement("div");
+ loadingSpinner.classList.add("loading-spinner");
+
+ // Add the toggle switch and spinner to the toggle container
+ toggleContainer.appendChild(toggleSwitch);
+ toggleContainer.appendChild(loadingSpinner);
+
+ toggleSwitch.addEventListener("change", async () => {
+   // Show the loading spinner
+   loadingSpinner.style.display = "inline-block";
+
+   // Fetch the wholesale price asynchronously
+   const wholesalePrice = await fetchWholesalePriceFromFirebase(product.name);
+
+   // Hide the loading spinner
+   loadingSpinner.style.display = "none";
+
+   // Update the price based on the toggle state
+   updatePriceBasedOnToggle(product, toggleSwitch.checked, wholesalePrice);
+ });
 
   // Create a new cart item element
   const cartItem = document.createElement("div");
@@ -3629,15 +3745,33 @@ function addToCart(product) {
   toggleTitle.innerText = "Wholesale";
   toggleContainer.appendChild(toggleTitle);
 
-  // Create the toggle switch
-  const toggleSwitch = document.createElement("input");
-  toggleSwitch.type = "checkbox";
-  toggleSwitch.classList.add("toggle-switch");
-  toggleSwitch.addEventListener("change", () => {
-    updatePriceBasedOnToggle(product, toggleSwitch.checked);
-  });
+ // Create the toggle switch
+ const toggleSwitch = document.createElement("input");
+ toggleSwitch.type = "checkbox";
+ toggleSwitch.classList.add("toggle-switch");
 
-  toggleContainer.appendChild(toggleSwitch);
+ // Create a loading spinner
+ const loadingSpinner = document.createElement("div");
+ loadingSpinner.classList.add("loading-spinner");
+
+ // Add the toggle switch and spinner to the toggle container
+ toggleContainer.appendChild(toggleSwitch);
+ toggleContainer.appendChild(loadingSpinner);
+
+ toggleSwitch.addEventListener("change", async () => {
+   // Show the loading spinner
+   loadingSpinner.style.display = "inline-block";
+
+   // Fetch the wholesale price asynchronously
+   const wholesalePrice = await fetchWholesalePriceFromFirebase(product.name);
+
+   // Hide the loading spinner
+   loadingSpinner.style.display = "none";
+
+   // Update the price based on the toggle state
+   updatePriceBasedOnToggle(product, toggleSwitch.checked, wholesalePrice);
+ });
+
 
   // Create a new cart item element
   const cartItem = document.createElement("div");
@@ -4035,15 +4169,33 @@ function addToCart(product) {
   toggleTitle.innerText = "Wholesale";
   toggleContainer.appendChild(toggleTitle);
 
-  // Create the toggle switch
-  const toggleSwitch = document.createElement("input");
-  toggleSwitch.type = "checkbox";
-  toggleSwitch.classList.add("toggle-switch");
-  toggleSwitch.addEventListener("change", () => {
-    updatePriceBasedOnToggle(product, toggleSwitch.checked);
-  });
+ // Create the toggle switch
+ const toggleSwitch = document.createElement("input");
+ toggleSwitch.type = "checkbox";
+ toggleSwitch.classList.add("toggle-switch");
 
-  toggleContainer.appendChild(toggleSwitch);
+ // Create a loading spinner
+ const loadingSpinner = document.createElement("div");
+ loadingSpinner.classList.add("loading-spinner");
+
+ // Add the toggle switch and spinner to the toggle container
+ toggleContainer.appendChild(toggleSwitch);
+ toggleContainer.appendChild(loadingSpinner);
+
+ toggleSwitch.addEventListener("change", async () => {
+   // Show the loading spinner
+   loadingSpinner.style.display = "inline-block";
+
+   // Fetch the wholesale price asynchronously
+   const wholesalePrice = await fetchWholesalePriceFromFirebase(product.name);
+
+   // Hide the loading spinner
+   loadingSpinner.style.display = "none";
+
+   // Update the price based on the toggle state
+   updatePriceBasedOnToggle(product, toggleSwitch.checked, wholesalePrice);
+ });
+
 
   // Create a new cart item element
   const cartItem = document.createElement("div");
@@ -4438,15 +4590,33 @@ function addToCart(product) {
   toggleTitle.innerText = "Wholesale";
   toggleContainer.appendChild(toggleTitle);
 
-  // Create the toggle switch
-  const toggleSwitch = document.createElement("input");
-  toggleSwitch.type = "checkbox";
-  toggleSwitch.classList.add("toggle-switch");
-  toggleSwitch.addEventListener("change", () => {
-    updatePriceBasedOnToggle(product, toggleSwitch.checked);
-  });
+ // Create the toggle switch
+ const toggleSwitch = document.createElement("input");
+ toggleSwitch.type = "checkbox";
+ toggleSwitch.classList.add("toggle-switch");
 
-  toggleContainer.appendChild(toggleSwitch);
+ // Create a loading spinner
+ const loadingSpinner = document.createElement("div");
+ loadingSpinner.classList.add("loading-spinner");
+
+ // Add the toggle switch and spinner to the toggle container
+ toggleContainer.appendChild(toggleSwitch);
+ toggleContainer.appendChild(loadingSpinner);
+
+ toggleSwitch.addEventListener("change", async () => {
+   // Show the loading spinner
+   loadingSpinner.style.display = "inline-block";
+
+   // Fetch the wholesale price asynchronously
+   const wholesalePrice = await fetchWholesalePriceFromFirebase(product.name);
+
+   // Hide the loading spinner
+   loadingSpinner.style.display = "none";
+
+   // Update the price based on the toggle state
+   updatePriceBasedOnToggle(product, toggleSwitch.checked, wholesalePrice);
+ });
+
 
   // Create a new cart item element
   const cartItem = document.createElement("div");
@@ -4839,15 +5009,33 @@ function addToCart(product) {
   toggleTitle.innerText = "Wholesale";
   toggleContainer.appendChild(toggleTitle);
 
-  // Create the toggle switch
-  const toggleSwitch = document.createElement("input");
-  toggleSwitch.type = "checkbox";
-  toggleSwitch.classList.add("toggle-switch");
-  toggleSwitch.addEventListener("change", () => {
-    updatePriceBasedOnToggle(product, toggleSwitch.checked);
-  });
+ // Create the toggle switch
+ const toggleSwitch = document.createElement("input");
+ toggleSwitch.type = "checkbox";
+ toggleSwitch.classList.add("toggle-switch");
 
-  toggleContainer.appendChild(toggleSwitch);
+ // Create a loading spinner
+ const loadingSpinner = document.createElement("div");
+ loadingSpinner.classList.add("loading-spinner");
+
+ // Add the toggle switch and spinner to the toggle container
+ toggleContainer.appendChild(toggleSwitch);
+ toggleContainer.appendChild(loadingSpinner);
+
+ toggleSwitch.addEventListener("change", async () => {
+   // Show the loading spinner
+   loadingSpinner.style.display = "inline-block";
+
+   // Fetch the wholesale price asynchronously
+   const wholesalePrice = await fetchWholesalePriceFromFirebase(product.name);
+
+   // Hide the loading spinner
+   loadingSpinner.style.display = "none";
+
+   // Update the price based on the toggle state
+   updatePriceBasedOnToggle(product, toggleSwitch.checked, wholesalePrice);
+ });
+
 
   // Create a new cart item element
   const cartItem = document.createElement("div");
@@ -5242,15 +5430,33 @@ function addToCart(product) {
   toggleTitle.innerText = "Wholesale";
   toggleContainer.appendChild(toggleTitle);
 
-  // Create the toggle switch
-  const toggleSwitch = document.createElement("input");
-  toggleSwitch.type = "checkbox";
-  toggleSwitch.classList.add("toggle-switch");
-  toggleSwitch.addEventListener("change", () => {
-    updatePriceBasedOnToggle(product, toggleSwitch.checked);
-  });
+ // Create the toggle switch
+ const toggleSwitch = document.createElement("input");
+ toggleSwitch.type = "checkbox";
+ toggleSwitch.classList.add("toggle-switch");
 
-  toggleContainer.appendChild(toggleSwitch);
+ // Create a loading spinner
+ const loadingSpinner = document.createElement("div");
+ loadingSpinner.classList.add("loading-spinner");
+
+ // Add the toggle switch and spinner to the toggle container
+ toggleContainer.appendChild(toggleSwitch);
+ toggleContainer.appendChild(loadingSpinner);
+
+ toggleSwitch.addEventListener("change", async () => {
+   // Show the loading spinner
+   loadingSpinner.style.display = "inline-block";
+
+   // Fetch the wholesale price asynchronously
+   const wholesalePrice = await fetchWholesalePriceFromFirebase(product.name);
+
+   // Hide the loading spinner
+   loadingSpinner.style.display = "none";
+
+   // Update the price based on the toggle state
+   updatePriceBasedOnToggle(product, toggleSwitch.checked, wholesalePrice);
+ });
+
 
   // Create a new cart item element
   const cartItem = document.createElement("div");
@@ -5673,15 +5879,33 @@ function addToCart(product) {
   toggleTitle.innerText = "Wholesale";
   toggleContainer.appendChild(toggleTitle);
 
-  // Create the toggle switch
-  const toggleSwitch = document.createElement("input");
-  toggleSwitch.type = "checkbox";
-  toggleSwitch.classList.add("toggle-switch");
-  toggleSwitch.addEventListener("change", () => {
-    updatePriceBasedOnToggle(product, toggleSwitch.checked);
-  });
+ // Create the toggle switch
+ const toggleSwitch = document.createElement("input");
+ toggleSwitch.type = "checkbox";
+ toggleSwitch.classList.add("toggle-switch");
 
-  toggleContainer.appendChild(toggleSwitch);
+ // Create a loading spinner
+ const loadingSpinner = document.createElement("div");
+ loadingSpinner.classList.add("loading-spinner");
+
+ // Add the toggle switch and spinner to the toggle container
+ toggleContainer.appendChild(toggleSwitch);
+ toggleContainer.appendChild(loadingSpinner);
+
+ toggleSwitch.addEventListener("change", async () => {
+   // Show the loading spinner
+   loadingSpinner.style.display = "inline-block";
+
+   // Fetch the wholesale price asynchronously
+   const wholesalePrice = await fetchWholesalePriceFromFirebase(product.name);
+
+   // Hide the loading spinner
+   loadingSpinner.style.display = "none";
+
+   // Update the price based on the toggle state
+   updatePriceBasedOnToggle(product, toggleSwitch.checked, wholesalePrice);
+ });
+
 
   // Create a new cart item element
   const cartItem = document.createElement("div");
@@ -6165,15 +6389,33 @@ function addToCart(product) {
   toggleTitle.innerText = "Wholesale";
   toggleContainer.appendChild(toggleTitle);
 
-  // Create the toggle switch
-  const toggleSwitch = document.createElement("input");
-  toggleSwitch.type = "checkbox";
-  toggleSwitch.classList.add("toggle-switch");
-  toggleSwitch.addEventListener("change", () => {
-    updatePriceBasedOnToggle(product, toggleSwitch.checked);
-  });
+ // Create the toggle switch
+ const toggleSwitch = document.createElement("input");
+ toggleSwitch.type = "checkbox";
+ toggleSwitch.classList.add("toggle-switch");
 
-  toggleContainer.appendChild(toggleSwitch);
+ // Create a loading spinner
+ const loadingSpinner = document.createElement("div");
+ loadingSpinner.classList.add("loading-spinner");
+
+ // Add the toggle switch and spinner to the toggle container
+ toggleContainer.appendChild(toggleSwitch);
+ toggleContainer.appendChild(loadingSpinner);
+
+ toggleSwitch.addEventListener("change", async () => {
+   // Show the loading spinner
+   loadingSpinner.style.display = "inline-block";
+
+   // Fetch the wholesale price asynchronously
+   const wholesalePrice = await fetchWholesalePriceFromFirebase(product.name);
+
+   // Hide the loading spinner
+   loadingSpinner.style.display = "none";
+
+   // Update the price based on the toggle state
+   updatePriceBasedOnToggle(product, toggleSwitch.checked, wholesalePrice);
+ });
+
 
   // Create a new cart item element
   const cartItem = document.createElement("div");
@@ -6646,15 +6888,33 @@ function addToCart(product) {
   toggleTitle.innerText = "Wholesale";
   toggleContainer.appendChild(toggleTitle);
 
-  // Create the toggle switch
-  const toggleSwitch = document.createElement("input");
-  toggleSwitch.type = "checkbox";
-  toggleSwitch.classList.add("toggle-switch");
-  toggleSwitch.addEventListener("change", () => {
-    updatePriceBasedOnToggle(product, toggleSwitch.checked);
-  });
+ // Create the toggle switch
+ const toggleSwitch = document.createElement("input");
+ toggleSwitch.type = "checkbox";
+ toggleSwitch.classList.add("toggle-switch");
 
-  toggleContainer.appendChild(toggleSwitch);
+ // Create a loading spinner
+ const loadingSpinner = document.createElement("div");
+ loadingSpinner.classList.add("loading-spinner");
+
+ // Add the toggle switch and spinner to the toggle container
+ toggleContainer.appendChild(toggleSwitch);
+ toggleContainer.appendChild(loadingSpinner);
+
+ toggleSwitch.addEventListener("change", async () => {
+   // Show the loading spinner
+   loadingSpinner.style.display = "inline-block";
+
+   // Fetch the wholesale price asynchronously
+   const wholesalePrice = await fetchWholesalePriceFromFirebase(product.name);
+
+   // Hide the loading spinner
+   loadingSpinner.style.display = "none";
+
+   // Update the price based on the toggle state
+   updatePriceBasedOnToggle(product, toggleSwitch.checked, wholesalePrice);
+ });
+
 
   // Create a new cart item element
   const cartItem = document.createElement("div");
@@ -7130,15 +7390,33 @@ function addToCart(product) {
   toggleTitle.innerText = "Wholesale";
   toggleContainer.appendChild(toggleTitle);
 
-  // Create the toggle switch
-  const toggleSwitch = document.createElement("input");
-  toggleSwitch.type = "checkbox";
-  toggleSwitch.classList.add("toggle-switch");
-  toggleSwitch.addEventListener("change", () => {
-    updatePriceBasedOnToggle(product, toggleSwitch.checked);
-  });
+ // Create the toggle switch
+ const toggleSwitch = document.createElement("input");
+ toggleSwitch.type = "checkbox";
+ toggleSwitch.classList.add("toggle-switch");
 
-  toggleContainer.appendChild(toggleSwitch);
+ // Create a loading spinner
+ const loadingSpinner = document.createElement("div");
+ loadingSpinner.classList.add("loading-spinner");
+
+ // Add the toggle switch and spinner to the toggle container
+ toggleContainer.appendChild(toggleSwitch);
+ toggleContainer.appendChild(loadingSpinner);
+
+ toggleSwitch.addEventListener("change", async () => {
+   // Show the loading spinner
+   loadingSpinner.style.display = "inline-block";
+
+   // Fetch the wholesale price asynchronously
+   const wholesalePrice = await fetchWholesalePriceFromFirebase(product.name);
+
+   // Hide the loading spinner
+   loadingSpinner.style.display = "none";
+
+   // Update the price based on the toggle state
+   updatePriceBasedOnToggle(product, toggleSwitch.checked, wholesalePrice);
+ });
+
 
   // Create a new cart item element
   const cartItem = document.createElement("div");
@@ -7620,15 +7898,33 @@ function addToCart(product) {
   toggleTitle.innerText = "Wholesale";
   toggleContainer.appendChild(toggleTitle);
 
-  // Create the toggle switch
-  const toggleSwitch = document.createElement("input");
-  toggleSwitch.type = "checkbox";
-  toggleSwitch.classList.add("toggle-switch");
-  toggleSwitch.addEventListener("change", () => {
-    updatePriceBasedOnToggle(product, toggleSwitch.checked);
-  });
+ // Create the toggle switch
+ const toggleSwitch = document.createElement("input");
+ toggleSwitch.type = "checkbox";
+ toggleSwitch.classList.add("toggle-switch");
 
-  toggleContainer.appendChild(toggleSwitch);
+ // Create a loading spinner
+ const loadingSpinner = document.createElement("div");
+ loadingSpinner.classList.add("loading-spinner");
+
+ // Add the toggle switch and spinner to the toggle container
+ toggleContainer.appendChild(toggleSwitch);
+ toggleContainer.appendChild(loadingSpinner);
+
+ toggleSwitch.addEventListener("change", async () => {
+   // Show the loading spinner
+   loadingSpinner.style.display = "inline-block";
+
+   // Fetch the wholesale price asynchronously
+   const wholesalePrice = await fetchWholesalePriceFromFirebase(product.name);
+
+   // Hide the loading spinner
+   loadingSpinner.style.display = "none";
+
+   // Update the price based on the toggle state
+   updatePriceBasedOnToggle(product, toggleSwitch.checked, wholesalePrice);
+ });
+
 
   // Create a new cart item element
   const cartItem = document.createElement("div");
@@ -8080,15 +8376,33 @@ function addToCart(product) {
   toggleTitle.innerText = "Wholesale";
   toggleContainer.appendChild(toggleTitle);
 
-  // Create the toggle switch
-  const toggleSwitch = document.createElement("input");
-  toggleSwitch.type = "checkbox";
-  toggleSwitch.classList.add("toggle-switch");
-  toggleSwitch.addEventListener("change", () => {
-    updatePriceBasedOnToggle(product, toggleSwitch.checked);
-  });
+ // Create the toggle switch
+ const toggleSwitch = document.createElement("input");
+ toggleSwitch.type = "checkbox";
+ toggleSwitch.classList.add("toggle-switch");
 
-  toggleContainer.appendChild(toggleSwitch);
+ // Create a loading spinner
+ const loadingSpinner = document.createElement("div");
+ loadingSpinner.classList.add("loading-spinner");
+
+ // Add the toggle switch and spinner to the toggle container
+ toggleContainer.appendChild(toggleSwitch);
+ toggleContainer.appendChild(loadingSpinner);
+
+ toggleSwitch.addEventListener("change", async () => {
+   // Show the loading spinner
+   loadingSpinner.style.display = "inline-block";
+
+   // Fetch the wholesale price asynchronously
+   const wholesalePrice = await fetchWholesalePriceFromFirebase(product.name);
+
+   // Hide the loading spinner
+   loadingSpinner.style.display = "none";
+
+   // Update the price based on the toggle state
+   updatePriceBasedOnToggle(product, toggleSwitch.checked, wholesalePrice);
+ });
+
 
   // Create a new cart item element
   const cartItem = document.createElement("div");

@@ -2977,3 +2977,19 @@ margin: 5px;
   left: 100px;
   font-style: italic;
 }
+
+.loading-spinner {
+  display: none;
+  border: 4px solid rgb(255, 255, 255);
+  border-radius: 50%;
+  border-top: 4px solid #3fdb34;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+  margin-left: 5px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
