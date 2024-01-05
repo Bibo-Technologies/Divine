@@ -68,9 +68,17 @@ img {
   .video-container video {
 	min-width: 100%;
 	min-height: 100%;
-	object-fit: cover;
   }
-  
+  .video-container {
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .video-container img {
+    width: 100%;
+    height: auto;
+    display: none; /* Hide all images initially */
+  }
 
 
 
@@ -93,7 +101,7 @@ img {
 	width: 500px;
   height: auto;
 	background: rgba(183, 183, 183, 0.9);
-	margin: 10px auto;
+	margin: 0 auto;
 	display: flex;
     border-radius: 10px;
 	flex-direction: column;
@@ -129,7 +137,14 @@ font-size: small;
 }
 
 
-
+#toggle-btn {
+  padding: 10px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 .signup,
 .formm h1 {
 	margin-bottom: 20px;
@@ -338,7 +353,7 @@ input {
   border-radius: 10px;
   transition: transform 0.5s ease-in-out;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.9);
-  height: fit-content;
+  height: auto;
 }
 
 .signup {

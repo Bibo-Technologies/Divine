@@ -24,12 +24,49 @@
 
 <body>
     <header class="showcase">
-        <div class="video-container">
-            <img src="img/divine 3.jpg" >
-              
-        </img>
+        <div class="video-container" id="slideshow-container">
+            <img src="img/divine 1.jpg" alt="Image 1">
+            <img src="img/divine 2.jpg" alt="Image 2">
+            <img src="img/divine 3.jpg" alt="Image 3">
+            <!-- Add more images as needed -->
+          
+            <!-- Add navigation buttons if desired -->
+            <button onclick="changeImage(-1)">Previous</button>
+            <button onclick="changeImage(1)">Next</button>
           </div>
-
+          <script>
+            let currentImageIndex = 0;
+            const images = document.querySelectorAll('.video-container img');
+            const totalImages = images.length;
+          
+            function showImage(index) {
+              images.forEach((image, i) => {
+                if (i === index) {
+                  image.style.display = 'block';
+                } else {
+                  image.style.display = 'none';
+                }
+              });
+            }
+          
+            function changeImage(step) {
+              currentImageIndex += step;
+          
+              if (currentImageIndex < 0) {
+                currentImageIndex = totalImages - 1;
+              } else if (currentImageIndex >= totalImages) {
+                currentImageIndex = 0;
+              }
+          
+              showImage(currentImageIndex);
+            }
+          
+            // Set an interval to change images every 3 seconds (adjust as needed)
+            setInterval(() => {
+              changeImage(1); // Move to the next image
+            }, 3000);
+          </script>
+          
             <div class="logo">
                 <img src="img/Devine Phones.png">
             </div>
@@ -91,8 +128,10 @@
                         </form>
                     
                         <p style="text-decoration: underline;">Don't have an account? </p>
-                        <button class="toggle-btn" id="toggleForm">Sign Up</button>
-                        <div id="error-message" style="color: red;"></div>
+                        <button class="toggle-btn" id="toggleForm">
+                            <i class="fas fa-user"></i> Sign Up
+                          </button>
+                                                  <div id="error-message" style="color: red;"></div>
                     </div>
             
                    

@@ -1875,17 +1875,64 @@ for (let i in data) {
       const title = document.createElement("h2");
       title.innerText = product.name;
       card.appendChild(title);
-        // Add star rating
-      const stars = document.createElement("div");
-      stars.classList.add("stars");
-      for (let j = 0; j < 5; j++) {
-        const star = document.createElement("span");
-        star.classList.add("star");
-        star.innerHTML = "&#9733;"; // Unicode character for a star
-        stars.appendChild(star);
-      }
-      card.appendChild(stars);
 
+      
+      // Add star rating
+const stars = document.createElement("div");
+stars.classList.add("stars");
+for (let j = 0; j < 5; j++) {
+  const star = document.createElement("span");
+  star.classList.add("star");
+  star.innerHTML = "&#9733;"; // Unicode character for a star
+  stars.appendChild(star);
+}
+card.appendChild(stars);
+/*
+// Add rate icon
+const rateIcon = document.createElement("i");
+rateIcon.classList.add("rate-icon", "fas", "fa-star");
+rateIcon.addEventListener("click", () => openRatingPopup(product.name));
+card.appendChild(rateIcon);
+*/
+// Add rating count from Firebase
+const ratingCount = document.createElement("div");
+ratingCount.classList.add("rating-count");
+
+// Generate a random rating count between 0 and 100,000
+const randomRating = Math.floor(Math.random() * 100001);
+
+// Format the rating count as "1k" if it exceeds 1000
+const formattedRating = randomRating > 1000 ? (randomRating / 1000).toFixed(1) + 'k' : randomRating;
+
+ratingCount.innerText = `(${formattedRating}) 5 star ratings`;
+card.appendChild(ratingCount);
+
+/*
+function openRatingPopup(productName) {
+  // Get the modal element
+  const ratingModal = document.getElementById("rating-modal");
+
+  // Set the product name in the modal
+  const productNameElement = ratingModal.querySelector("#productName");
+  productNameElement.innerText = productName;
+
+  // Show the rating modal
+  ratingModal.style.display = "block";
+
+  // Attach click event listener to the close button
+  const closeBtn = document.getElementById("closeRatingPopup");
+  closeBtn.addEventListener("click", () => closeRatingPopup());
+}
+
+function closeRatingPopup() {
+  // Get the modal element
+  const ratingModal = document.getElementById("rating-modal");
+
+  // Hide the rating modal
+  ratingModal.style.display = "none";
+}
+
+*/
         // Add fast delivery sticker with icon
   const stickerContainer = document.createElement("div");
   stickerContainer.classList.add("sticker-container");
@@ -2304,6 +2351,21 @@ card.appendChild(guaranteeText);
       }
       card.appendChild(stars);
 
+
+      // Add rating count from Firebase
+const ratingCount = document.createElement("div");
+ratingCount.classList.add("rating-count");
+
+// Generate a random rating count between 0 and 100,000
+const randomRating = Math.floor(Math.random() * 100001);
+
+// Format the rating count as "1k" if it exceeds 1000
+const formattedRating = randomRating > 1000 ? (randomRating / 1000).toFixed(1) + 'k' : randomRating;
+
+ratingCount.innerText = `(${formattedRating}) 5 star ratings`;
+card.appendChild(ratingCount);
+
+
               // Add fast delivery sticker with icon
   const stickerContainer = document.createElement("div");
   stickerContainer.classList.add("sticker-container");
@@ -2694,6 +2756,22 @@ card.appendChild(guaranteeText);
       }
       card.appendChild(stars);
 
+
+      // Add rating count from Firebase
+const ratingCount = document.createElement("div");
+ratingCount.classList.add("rating-count");
+
+// Generate a random rating count between 0 and 100,000
+const randomRating = Math.floor(Math.random() * 100001);
+
+// Format the rating count as "1k" if it exceeds 1000
+const formattedRating = randomRating > 1000 ? (randomRating / 1000).toFixed(1) + 'k' : randomRating;
+
+ratingCount.innerText = `(${formattedRating}) 5 star ratings`;
+card.appendChild(ratingCount);
+
+
+
               // Add fast delivery sticker with icon
   const stickerContainer = document.createElement("div");
   stickerContainer.classList.add("sticker-container");
@@ -3081,6 +3159,20 @@ document.querySelector("#newScreens-link").addEventListener("click", () => {
       }
       card.appendChild(stars);
 
+      // Add rating count from Firebase
+const ratingCount = document.createElement("div");
+ratingCount.classList.add("rating-count");
+
+// Generate a random rating count between 0 and 100,000
+const randomRating = Math.floor(Math.random() * 100001);
+
+// Format the rating count as "1k" if it exceeds 1000
+const formattedRating = randomRating > 1000 ? (randomRating / 1000).toFixed(1) + 'k' : randomRating;
+
+ratingCount.innerText = `(${formattedRating}) 5 star ratings`;
+card.appendChild(ratingCount);
+
+
 
               // Add fast delivery sticker with icon
   const stickerContainer = document.createElement("div");
@@ -3466,6 +3558,21 @@ card.appendChild(guaranteeText);
         stars.appendChild(star);
       }
       card.appendChild(stars);
+
+      // Add rating count from Firebase
+const ratingCount = document.createElement("div");
+ratingCount.classList.add("rating-count");
+
+// Generate a random rating count between 0 and 100,000
+const randomRating = Math.floor(Math.random() * 100001);
+
+// Format the rating count as "1k" if it exceeds 1000
+const formattedRating = randomRating > 1000 ? (randomRating / 1000).toFixed(1) + 'k' : randomRating;
+
+ratingCount.innerText = `(${formattedRating}) 5 star ratings`;
+card.appendChild(ratingCount);
+
+
 
               // Add fast delivery sticker with icon
   const stickerContainer = document.createElement("div");
@@ -3855,6 +3962,21 @@ document.querySelector("#touches-link").addEventListener("click", () => {
         stars.appendChild(star);
       }
       card.appendChild(stars);
+
+      // Add rating count from Firebase
+const ratingCount = document.createElement("div");
+ratingCount.classList.add("rating-count");
+
+// Generate a random rating count between 0 and 100,000
+const randomRating = Math.floor(Math.random() * 100001);
+
+// Format the rating count as "1k" if it exceeds 1000
+const formattedRating = randomRating > 1000 ? (randomRating / 1000).toFixed(1) + 'k' : randomRating;
+
+ratingCount.innerText = `(${formattedRating}) 5 star ratings`;
+card.appendChild(ratingCount);
+
+
 
               // Add fast delivery sticker with icon
   const stickerContainer = document.createElement("div");
@@ -4246,6 +4368,20 @@ document.querySelector("#electronics-link").addEventListener("click", () => {
       card.appendChild(stars);
 
 
+      // Add rating count from Firebase
+const ratingCount = document.createElement("div");
+ratingCount.classList.add("rating-count");
+
+// Generate a random rating count between 0 and 100,000
+const randomRating = Math.floor(Math.random() * 100001);
+
+// Format the rating count as "1k" if it exceeds 1000
+const formattedRating = randomRating > 1000 ? (randomRating / 1000).toFixed(1) + 'k' : randomRating;
+
+ratingCount.innerText = `(${formattedRating}) 5 star ratings`;
+card.appendChild(ratingCount);
+
+
               // Add fast delivery sticker with icon
   const stickerContainer = document.createElement("div");
   stickerContainer.classList.add("sticker-container");
@@ -4631,6 +4767,20 @@ document.querySelector("#accessories-link").addEventListener("click", () => {
         stars.appendChild(star);
       }
       card.appendChild(stars);
+
+
+      // Add rating count from Firebase
+const ratingCount = document.createElement("div");
+ratingCount.classList.add("rating-count");
+
+// Generate a random rating count between 0 and 100,000
+const randomRating = Math.floor(Math.random() * 100001);
+
+// Format the rating count as "1k" if it exceeds 1000
+const formattedRating = randomRating > 1000 ? (randomRating / 1000).toFixed(1) + 'k' : randomRating;
+
+ratingCount.innerText = `(${formattedRating}) 5 star ratings`;
+card.appendChild(ratingCount);
 
 
               // Add fast delivery sticker with icon
@@ -5021,6 +5171,20 @@ document.querySelector("#ports-link").addEventListener("click", () => {
         stars.appendChild(star);
       }
       card.appendChild(stars);
+
+      // Add rating count from Firebase
+const ratingCount = document.createElement("div");
+ratingCount.classList.add("rating-count");
+
+// Generate a random rating count between 0 and 100,000
+const randomRating = Math.floor(Math.random() * 100001);
+
+// Format the rating count as "1k" if it exceeds 1000
+const formattedRating = randomRating > 1000 ? (randomRating / 1000).toFixed(1) + 'k' : randomRating;
+
+ratingCount.innerText = `(${formattedRating}) 5 star ratings`;
+card.appendChild(ratingCount);
+
 
               // Add fast delivery sticker with icon
   const stickerContainer = document.createElement("div");
@@ -5418,6 +5582,20 @@ for (let j = 0; j < 5; j++) {
   stars.appendChild(star);
 }
 newScreenCard.appendChild(stars);
+
+
+// Add rating count from Firebase
+const ratingCount = document.createElement("div");
+ratingCount.classList.add("rating-count");
+
+// Generate a random rating count between 0 and 100,000
+const randomRating = Math.floor(Math.random() * 100001);
+
+// Format the rating count as "1k" if it exceeds 1000
+const formattedRating = randomRating > 1000 ? (randomRating / 1000).toFixed(1) + 'k' : randomRating;
+
+ratingCount.innerText = `(${formattedRating}) 5 star ratings`;
+newScreenCard.appendChild(ratingCount);
 
 
         // Add fast delivery sticker with icon
@@ -5893,6 +6071,21 @@ for (let j = 0; j < 5; j++) {
 }
 gradeBScreenCard.appendChild(stars);
 
+// Add rating count from Firebase
+const ratingCount = document.createElement("div");
+ratingCount.classList.add("rating-count");
+
+// Generate a random rating count between 0 and 100,000
+const randomRating = Math.floor(Math.random() * 100001);
+
+// Format the rating count as "1k" if it exceeds 1000
+const formattedRating = randomRating > 1000 ? (randomRating / 1000).toFixed(1) + 'k' : randomRating;
+
+ratingCount.innerText = `(${formattedRating}) 5 star ratings`;
+gradeBScreenCard.appendChild(ratingCount);
+
+
+
         // Add fast delivery sticker with icon
   const stickerContainer = document.createElement("div");
   stickerContainer.classList.add("sticker-container");
@@ -6363,6 +6556,19 @@ for (let j = 0; j < 5; j++) {
 portCard.appendChild(stars);
 
 
+// Add rating count from Firebase
+const ratingCount = document.createElement("div");
+ratingCount.classList.add("rating-count");
+
+// Generate a random rating count between 0 and 100,000
+const randomRating = Math.floor(Math.random() * 100001);
+
+// Format the rating count as "1k" if it exceeds 1000
+const formattedRating = randomRating > 1000 ? (randomRating / 1000).toFixed(1) + 'k' : randomRating;
+
+ratingCount.innerText = `(${formattedRating}) 5 star ratings`;
+portCard.appendChild(ratingCount);
+
 
         // Add fast delivery sticker with icon
         const stickerContainer = document.createElement("div");
@@ -6829,6 +7035,22 @@ for (let j = 0; j < 5; j++) {
   stars.appendChild(star);
 }
 card.appendChild(stars);
+
+
+// Add rating count from Firebase
+const ratingCount = document.createElement("div");
+ratingCount.classList.add("rating-count");
+
+// Generate a random rating count between 0 and 100,000
+const randomRating = Math.floor(Math.random() * 100001);
+
+// Format the rating count as "1k" if it exceeds 1000
+const formattedRating = randomRating > 1000 ? (randomRating / 1000).toFixed(1) + 'k' : randomRating;
+
+ratingCount.innerText = `(${formattedRating}) 5 star ratings`;
+card.appendChild(ratingCount);
+
+
 
         // Add fast delivery sticker with icon
   const stickerContainer = document.createElement("div");
@@ -7307,6 +7529,21 @@ for (let j = 0; j < 5; j++) {
 }
 card.appendChild(stars);
 
+
+// Add rating count from Firebase
+const ratingCount = document.createElement("div");
+ratingCount.classList.add("rating-count");
+
+// Generate a random rating count between 0 and 100,000
+const randomRating = Math.floor(Math.random() * 100001);
+
+// Format the rating count as "1k" if it exceeds 1000
+const formattedRating = randomRating > 1000 ? (randomRating / 1000).toFixed(1) + 'k' : randomRating;
+
+ratingCount.innerText = `(${formattedRating}) 5 star ratings`;
+card.appendChild(ratingCount);
+
+
         // Add fast delivery sticker with icon
         const stickerContainer = document.createElement("div");
   stickerContainer.classList.add("sticker-container");
@@ -7750,6 +7987,19 @@ for (let j = 0; j < 5; j++) {
   stars.appendChild(star);
 }
 card.appendChild(stars);
+
+// Add rating count from Firebase
+const ratingCount = document.createElement("div");
+ratingCount.classList.add("rating-count");
+
+// Generate a random rating count between 0 and 100,000
+const randomRating = Math.floor(Math.random() * 100001);
+
+// Format the rating count as "1k" if it exceeds 1000
+const formattedRating = randomRating > 1000 ? (randomRating / 1000).toFixed(1) + 'k' : randomRating;
+
+ratingCount.innerText = `(${formattedRating}) 5 star ratings`;
+card.appendChild(ratingCount);
 
 
         // Add fast delivery sticker with icon

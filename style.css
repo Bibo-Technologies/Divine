@@ -2938,7 +2938,7 @@ margin: 5px;
   background-color: rgb(255, 255, 255);
   border-radius: 50%;
   top: 50%;
-  transform: translate(7%, -50%);
+  transform: translate(10%, -50%);
   transition: transform 0.3s, background-color 0.3s;
 }
 
@@ -2955,4 +2955,25 @@ margin: 5px;
 
 .no-scroll {
   overflow: hidden;
+}
+.stars {
+  /* Flex container for stars to align horizontally */
+  display: flex;
+  align-items: center;
+}
+
+.rate-icon {
+  color: #ffac33; /* Change the color to your preference */
+  cursor: pointer;
+  margin-left: 5px; /* Adjust margin between icon and product name */
+}
+
+.rating-count {
+  /* Style for rating count */
+  font-size: 9px;
+  color: #666;
+  display: flex;
+  float: right;
+  left: 100px;
+  font-style: italic;
 }
