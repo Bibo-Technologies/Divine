@@ -32,24 +32,31 @@
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" class="form-control" required>
           </div>
-      
+        
           <div class="form-group">
             <label for="description">Description:</label>
             <textarea id="description" name="description" class="form-control" required></textarea>
           </div>
-      
+        
           <div class="form-group">
             <label for="price">Price:</label>
             <input type="number" id="price" name="price" class="form-control" required>
           </div>
-      
+        
+          <!-- Add a new form-group for wholesale price -->
+          <div class="form-group">
+            <label for="wholesalePrice">Wholesale Price:</label>
+            <input type="number" id="wholesalePrice" name="wholesalePrice" class="form-control">
+          </div>
+        
           <div class="form-group">
             <label for="image">Image:</label>
             <input type="file" id="image" name="image" accept="image/*" class="form-control" required>
           </div>
-      
+        
           <button style="width:30%;" type="submit" id="submit" class="btn btn-primary">Add Product</button>
         </form>
+        
       
        
       
@@ -139,40 +146,43 @@ document.addEventListener('DOMContentLoaded', () => {
   const successMessage = document.getElementById('success-message');
 
   form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    loader.style.display = 'block'; // Display the loader
-    successMessage.style.display = 'none'; // Hide the success message (if any)
+  e.preventDefault();
+  loader.style.display = 'block'; // Display the loader
+  successMessage.style.display = 'none'; // Hide the success message (if any)
 
-    const name = document.getElementById('name').value;
-    const description = document.getElementById('description').value;
-    const price = document.getElementById('price').value;
-    const file = document.getElementById('image').files[0];
+  const name = document.getElementById('name').value;
+  const description = document.getElementById('description').value;
+  const price = document.getElementById('price').value;
+  const wholesalePrice = document.getElementById('wholesalePrice').value; // Added line for wholesalePrice
+  const file = document.getElementById('image').files[0];
 
-    // Convert image to WebP
-    const webPDataURL = await convertToWebP(file);
+  // Convert image to WebP
+  const webPDataURL = await convertToWebP(file);
 
-    const fileName = `${Date.now()}_${file.name}`;
-    const fileRef = storageRef(imagesRef, fileName);
-    await uploadBytes(fileRef, dataURLtoFile(webPDataURL, fileName));
-    const downloadURL = await getDownloadURL(fileRef);
+  const fileName = `${Date.now()}_${file.name}`;
+  const fileRef = storageRef(imagesRef, fileName);
+  await uploadBytes(fileRef, dataURLtoFile(webPDataURL, fileName));
+  const downloadURL = await getDownloadURL(fileRef);
 
-    const newProduct = {
-      name,
-      description,
-      price,
-      image: downloadURL,
-    };
-    await set(child(productsRef, name), newProduct);
+  const newProduct = {
+    name,
+    description,
+    price,
+    wholesalePrice, // Added line for wholesalePrice
+    image: downloadURL,
+  };
+  await set(child(productsRef, name), newProduct);
 
-    form.reset();
-    loader.style.display = 'none'; // Hide the loader
-    successMessage.innerText = 'Success! Your product has been added.';
-    successMessage.style.display = 'block'; // Display the success message
-    setTimeout(() => {
-      successMessage.innerText = '';
-      successMessage.style.display = 'none';
-    }, 5000);
-  });
+  form.reset();
+  loader.style.display = 'none'; // Hide the loader
+  successMessage.innerText = 'Success! Your product has been added.';
+  successMessage.style.display = 'block'; // Display the success message
+  setTimeout(() => {
+    successMessage.innerText = '';
+    successMessage.style.display = 'none';
+  }, 5000);
+});
+
 
   // Function to convert image to WebP
   async function convertToWebP(file) {
