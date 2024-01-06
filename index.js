@@ -1609,14 +1609,25 @@ searchBtn.addEventListener("click", function (event) {
     // If currently searching, clear search bar and perform search
     searchProducts();
   } else {
-    // If not currently searching, append the refresh icon to the search bar and perform search
-    appendRefreshIcon();
-    searchProducts();
-    isSearching = true;
+    // If not currently searching and search bar is not empty, append the refresh icon and perform search
+    if (shouldShowRefreshIcon()) {
+      appendRefreshIcon();
+      searchProducts();
+      isSearching = true;
+    }
   }
 
 
+function shouldShowRefreshIcon() {
+  const searchBar = document.getElementById("search-bar");
+  return searchBar.value.trim() !== "";
+}
+
 function appendRefreshIcon() {
+  if (!shouldShowRefreshIcon()) {
+    return;
+  }
+
   // Create a new element for the refresh icon
   const refreshIcon = document.createElement("i");
   refreshIcon.classList.add("fa", "fa-refresh", "refresh-icon");
@@ -1654,6 +1665,7 @@ function revertSearchButton() {
   searchBtn.style.background = '#008abf';
 }
 
+});
 
 
 
@@ -2328,9 +2340,6 @@ loader.style.display = "none";
 
 }
 
-}
-
-);
 
 
 // Function to calculate string similarity (Levenshtein distance)
