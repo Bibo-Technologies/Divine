@@ -209,93 +209,98 @@ document.addEventListener("DOMContentLoaded", () => {
     // Declare userData variable in a higher scope
     let userData = {};
 
-  // Function to show the popup with user details
+// Function to show the popup with user details
 async function showPopupWithUserDetails() {
-    // Check if the user is authenticated
-    const user = auth.currentUser;
-    if (!user) {
-        console.log('User not authenticated');
+  // Check if the user is authenticated
+  const user = auth.currentUser;
+  if (!user) {
+      console.log('User not authenticated');
 
-        // Display a message and fade it in with an overlay
-        const messageContainer = document.getElementById('messageContainer');
-        const messageContent = document.getElementById('messageContent');
-const overlay2 = document.getElementById('overlay')
-        // Set the message content HTML, including the company logo and login button
-        messageContent.innerHTML = `
-            <div id="companyLogo" class="company-logo">
-                <img src="img/Devine Phones.png" alt="Company Logo">
-            </div>
-            <p>You are not signed in. Please sign in to access your account.</p>
-            <button id="loginButton" class="login-button">
-                <i class="fa fa-sign-in"></i> Login
-            </button>
-        `;
+      // Display a message and fade it in with an overlay
+      const messageContainer = document.getElementById('messageContainer');
+      const messageContent = document.getElementById('messageContent');
+      const overlay2 = document.getElementById('overlay6');
 
-        // Add the "fade-in" class to apply the fade-in animation
-        messageContainer.classList.add('fade-in');
-        messageContainer.style.display = 'flex'; // Make the message container visible
-overlay2.style.display = 'block'
-        // Add a click event listener to the login button
-        const loginButton = document.getElementById('loginButton');
-        loginButton.addEventListener('click', function() {
-            window.location.href = 'login.html'; // Adjust the login page URL
-        });
+      // Set the message content HTML, including the company logo and login button
+      messageContent.innerHTML = `
+          <div id="companyLogo" class="company-logo">
+              <img src="img/Devine Phones.png" alt="Company Logo">
+          </div>
+          <p>You are not signed in. Please sign in to access your account.</p>
+          <button id="loginButton" class="login-button">
+              <i class="fa fa-sign-in"></i> Login
+          </button>
+      `;
 
-        return;
-    }
+      // Add the "fade-in" class to apply the fade-in animation
+      messageContainer.classList.add('fade-in');
+      messageContainer.style.display = 'flex'; // Make the message container visible
+      overlay2.style.display = 'block';
 
+      // Add a click event listener to the login button
+      const loginButton = document.getElementById('loginButton');
+      loginButton.addEventListener('click', function () {
+          window.location.href = 'login.html'; // Adjust the login page URL
+      });
 
+      return;
+  }
 
-   
-    // Display an overlay
-    const overlay = document.getElementById('overlay');
-    overlay.style.display = 'block';
+  // Display an overlay
+  const overlay2 = document.getElementById('overlay6');
+  overlay2.style.display = 'block';
 
-    // Retrieve user details from local storage
-    const userDetails = JSON.parse(localStorage.getItem('userDetails'));
+  // Show loader while fetching user details
+  const loader = document.getElementById('loader');
+  loader.style.display = 'block';
 
-    // Display user details in the popup with lazy load effect
-    const popup = document.getElementById('popup');
-    popup.style.display = 'block';
-    popup.classList.add('fade-in');
+  // Retrieve user details from local storage
+  const userDetails = JSON.parse(localStorage.getItem('userDetails'));
 
-    const userDetailsElement = document.getElementById('userDetails');
-    userDetailsElement.innerHTML = `
-        <div class="user-info">
+  // Display user details in the popup with lazy load effect
+  const popup = document.getElementById('popup');
+  popup.style.display = 'block';
+  popup.classList.add('fade-in');
+
+  const userDetailsElement = document.getElementById('userDetails');
+  userDetailsElement.innerHTML = `
+      <div class="user-info">
           <p class="accountt"> Account Details </p>
-            <p>Email: ${userDetails.email}</p>
-        </div>
-    `;
+          <p>Email: ${userDetails.email}</p>
+      </div>
+  `;
 
-    // Fetch additional details from Firebase using the user's UID
-    const userId = userDetails.uid;
-    const userRef = ref(database, 'users/' + userId);
+  // Fetch additional details from Firebase using the user's UID
+  const userId = userDetails.uid;
+  const userRef = ref(database, 'users/' + userId);
 
-    try {
-        const snapshot = await get(userRef);
-        if (snapshot.exists()) {
-            const userData = snapshot.val();
-            userDetailsElement.innerHTML += `
-            <table class="additional-info-table">
-  <tr>
-    <th>First Name</th>
-    <td>${userData.firstName || 'N/A'}</td>
-  </tr>
-  <tr>
-    <th>Last Name</th>
-    <td>${userData.lastName || 'N/A'}</td>
-  </tr>
-  <tr>
-    <th>Telephone</th>
-    <td>${userData.telephone || 'N/A'}</td>
-  </tr>
-  <tr>
-    <th>Date of Birth</th>
-    <td>${userData.dob || 'N/A'}</td>
-  </tr>
-</table>
-
-            `;
+  try {
+      const snapshot = await get(userRef);
+      if (snapshot.exists()) {
+          const userData = snapshot.val();
+          userDetailsElement.innerHTML += `
+              <table class="additional-info-table">
+                  <tr>
+                      <th>First Name</th>
+                      <td>${userData.firstName || 'N/A'}</td>
+                  </tr>
+                  <tr>
+                      <th>Last Name</th>
+                      <td>${userData.lastName || 'N/A'}</td>
+                  </tr>
+                  <tr>
+                      <th>Telephone</th>
+                      <td>${userData.telephone || 'N/A'}</td>
+                  </tr>
+                  <tr>
+                      <th>Date of Birth</th>
+                      <td>${userData.dob || 'N/A'}</td>
+                  </tr>
+              </table>
+          `;
+            // Hide the loader when user details are loaded
+            loader.style.display = 'none';
+        
 
             // Display profile picture if available or show a default profile icon
             const profilePictureElement = document.getElementById('profilePicture');
@@ -331,11 +336,17 @@ document.body.classList.add("no-scroll"); // Disable scrolling
         }
     });
 
-    // Function to close the popup
-    function closePopup() {
-        document.getElementById("popup").style.display = "none";
-        
-    }
+// Add an event listener to the close button
+document.getElementById("closePopupBtn").addEventListener("click", function() {
+  closePopup();
+});
+
+// Function to close the popup
+function closePopup() {
+  document.getElementById("popup").style.display = "none";
+  document.getElementById('overlay6').style.display = 'none';
+  document.body.classList.remove("no-scroll"); // Enable scrolling
+}
 
 
 // Event listener for the "Logout" button
