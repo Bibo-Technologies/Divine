@@ -736,7 +736,7 @@ body {
     grid-template-columns: repeat(2, 1fr);
     gap: 1px;
     margin-bottom: 20px;
-    background: #e9e9e9;
+    background: #ffffff;
     margin-top: 20px;
     padding: 5px;
     align-items: stretch; /* Ensure equal height for all items */
@@ -759,7 +759,7 @@ body {
     padding: 5px;
     border: transparent;
     border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, );
+    box-shadow: 0 2px 5px rgba(0, 0, 0,0.2);
     background: #ffffff;
     transition: transform 0.3s ease-in-out; /* Add a transition to the transform property */
   }
@@ -768,7 +768,7 @@ body {
     transform: scale(1.0); /* Scale the card by 5% on hover */
     border-color: orange;
     background-color: rgb(255, 251, 248);
-    box-shadow: 0 2px 5px rgba(0, 0, 0,0.3);
+    box-shadow: 0 2px 5px rgba(0, 0, 0,0.4);
 
   }
   
@@ -2842,6 +2842,7 @@ margin-right: 10px;
   z-index: 1000; /* Ensure the suggestions appear above other elements */
   display: none; /* Initially hide the suggestions */
   margin-top: 5px;
+  
 }
 
 /* Media query for small screens */
@@ -2852,6 +2853,23 @@ margin-right: 10px;
   }
 }
 
+/* Add this CSS to your stylesheet or in a <style> tag in your HTML */
+
+.no-results-container {
+  text-align: center;
+  margin-top: 50px; /* Adjust as needed to center vertically */
+}
+
+.no-results-image {
+  width: 200px; /* Adjust the width as needed */
+  height: auto;
+  margin-bottom: 20px; /* Adjust as needed to provide space between image and text */
+}
+
+.no-results-message {
+  font-size: 16px;
+  color: #555; /* Adjust the color as needed */
+}
 
 .suggestion-item {
   padding: 7px 12px;
@@ -2992,4 +3010,21 @@ margin: 5px;
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+.no-results-container {
+  text-align: center;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  margin-top: 10vh; /* Adjusted margin-top to center it within the product list */
+  margin-bottom: 10vh; /* Adjusted margin-top to center it within the product list */
+  margin-left: 10px;
+}
+
+.no-results-message {
+  font-size: 18px;
+  margin-top: 10px;
 }

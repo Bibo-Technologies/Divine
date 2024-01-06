@@ -1606,64 +1606,52 @@ searchBtn.addEventListener("click", function (event) {
   event.preventDefault();
 
   if (isSearching) {
-    // If currently searching, clear search bar and revert button
-    clearSearchBar();
-    revertSearchButton();
-    isSearching = false;
-  } else {
-    // If not currently searching, append the "X" icon to the search bar and perform search
-    if (shouldShowClearIcon()) {
-      appendIconToSearchBar();
-      isSearching = true;
-    }
+    // If currently searching, clear search bar and perform search
     searchProducts();
+  } else {
+    // If not currently searching, append the refresh icon to the search bar and perform search
+    appendRefreshIcon();
+    searchProducts();
+    isSearching = true;
   }
 
 
-function shouldShowClearIcon() {
+function appendRefreshIcon() {
+  // Create a new element for the refresh icon
+  const refreshIcon = document.createElement("i");
+  refreshIcon.classList.add("fa", "fa-refresh", "refresh-icon");
+
+  // Append the refresh icon to the right side of the search bar
   const searchBar = document.getElementById("search-bar");
-  return searchBar.value.trim() !== "";
-}
+  searchBar.parentNode.insertBefore(refreshIcon, searchBar.nextSibling);
 
-function appendIconToSearchBar() {
-  if (!shouldShowClearIcon()) {
-    return;
-  }
-
-  // Create a new element for the "X" icon
-  const clearIcon = document.createElement("i");
-  clearIcon.classList.add("fa", "fa-times", "clear-icon");
-
-  // Append the "X" icon to the right side of the search bar
-  const searchBar = document.getElementById("search-bar");
-  searchBar.parentNode.insertBefore(clearIcon, searchBar.nextSibling);
-
-  // Add an event listener to the "X" icon to clear the search bar
-  clearIcon.addEventListener("click", function () {
+  // Add an event listener to the refresh icon to clear the search bar and perform search
+  refreshIcon.addEventListener("click", function () {
     clearSearchBar();
-    revertSearchButton();
-    isSearching = false;
+    searchProducts();
   });
 
   // Style the search button
   searchBtn.style.background = 'orange';
 }
 
+function clearSearchBar() {
+  const searchBar = document.getElementById("search-bar");
+  searchBar.value = "";
+  isSearching = false;
+  revertSearchButton();
+}
+
 function revertSearchButton() {
-  // Remove the icon from the search bar
+  // Remove the refresh icon from the search bar
   const searchBar = document.getElementById("search-bar");
   const icon = searchBar.nextSibling;
-  if (icon && icon.classList.contains("clear-icon")) {
+  if (icon && icon.classList.contains("refresh-icon")) {
     searchBar.parentNode.removeChild(icon);
   }
 
   // Style the search button
   searchBtn.style.background = '#008abf';
-}
-
-function clearSearchBar() {
-  const searchBar = document.getElementById("search-bar");
-  searchBar.value = "";
 }
 
 
@@ -1853,7 +1841,12 @@ firebaseNodes.forEach((nodeRef) => {
       const description = product.description.toLowerCase();
       const queryLower = query.toLowerCase();
 
-      if (!queryLower || name.includes(queryLower) || description.includes(queryLower)) {
+      // Check for similarity with a minimum threshold (adjust as needed)
+      const nameSimilarity = calculateSimilarity({innerText: name}, queryLower);
+      const descriptionSimilarity = calculateSimilarity({innerText: description}, queryLower);
+
+      // If the query is empty or there is a match (even for one word), create a card for the product
+      if (!queryLower || nameSimilarity > 0.5 || descriptionSimilarity > 0.5 || name.includes(queryLower) || description.includes(queryLower)) {
         // Create a card for the matching product
         const card = document.createElement("div");
         card.classList.add("card1");
@@ -2301,15 +2294,38 @@ Promise.all(promises).then(() => {
     return bSimilarity - aSimilarity; // Sort in descending order of similarity
   });
 
-  // Clear the products list
-  document.getElementById("products-list").innerHTML = "";
+// Clear the products list
+document.getElementById("products-list").innerHTML = "";
 
-  // Append sorted products to the productsList
-  const productsList = document.getElementById("products-list");
-  products.forEach(product => productsList.appendChild(product));
+// Append sorted products or display a message
+const productsList = document.getElementById("products-list");
 
-  // Hide the loader
-  loader.style.display = "none";
+if (products.length === 0) {
+  // If no relevant products found, create a container for the message and image
+  const noResultsContainer = document.createElement("div");
+  noResultsContainer.classList.add("no-results-container");
+
+  // Add an image on top
+  const noResultsImage = document.createElement("img");
+  noResultsImage.src = "img/nothing found.png"; // Replace with the actual path to your image
+  noResultsImage.alt = "No Results Image";
+  noResultsContainer.appendChild(noResultsImage);
+
+  // Add the message
+  const noResultsMessage = document.createElement("p");
+  noResultsMessage.innerText = "Oops...No relevant products found. If you cant find your desired product, please contact us to add it. Thank you!";
+  noResultsMessage.classList.add("no-results-message");
+  noResultsContainer.appendChild(noResultsMessage);
+
+  // Append the container to the productsList
+  productsList.appendChild(noResultsContainer);
+} else {
+  // If relevant products found, append them to the productsList
+  products.forEach((product) => productsList.appendChild(product));
+}
+
+// Hide the loader
+loader.style.display = "none";
 });
 
 }
@@ -2351,7 +2367,38 @@ function levenshteinDistance(str1, str2) {
 // Function to calculate similarity between product and query
 function calculateSimilarity(productCard, query) {
   const productText = productCard.innerText.toLowerCase();
-  return similarity(productText, query.toLowerCase());
+  const queryWords = query.toLowerCase().split(' ');
+
+  // Generate all possible permutations of query words
+  const permutations = generatePermutations(queryWords);
+
+  // Calculate similarity for each permutation and find the maximum
+  let maxSimilarity = 0;
+  for (const perm of permutations) {
+    const permString = perm.join(' ');
+    const currentSimilarity = similarity(productText, permString);
+    maxSimilarity = Math.max(maxSimilarity, currentSimilarity);
+  }
+
+  return maxSimilarity;
+}
+
+// Function to generate all possible permutations of an array
+function generatePermutations(arr) {
+  if (arr.length <= 1) {
+    return [arr];
+  }
+
+  const result = [];
+  for (let i = 0; i < arr.length; i++) {
+    const rest = [...arr.slice(0, i), ...arr.slice(i + 1)];
+    const permutations = generatePermutations(rest);
+    for (const perm of permutations) {
+      result.push([arr[i], ...perm]);
+    }
+  }
+
+  return result;
 }
 
 
