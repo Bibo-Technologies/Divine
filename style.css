@@ -1536,7 +1536,7 @@ transition: all 0.3s ease-in-out;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.8);
   z-index: 9998;
 }
 #overlay {
@@ -1546,7 +1546,7 @@ transition: all 0.3s ease-in-out;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.8);
   z-index: 9998;
 }
 #overlay4 {
@@ -1556,7 +1556,7 @@ transition: all 0.3s ease-in-out;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.8);
   z-index: 9999;
 }
 #overlay5 {
@@ -1566,7 +1566,7 @@ transition: all 0.3s ease-in-out;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.8);
   z-index: 99999;
 }
 #overlay2 {
@@ -1576,7 +1576,7 @@ transition: all 0.3s ease-in-out;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.8);
   z-index: 9999999;
 }
 #overlay6 {
@@ -1586,7 +1586,7 @@ transition: all 0.3s ease-in-out;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.8);
   z-index: 99999;
 }
 #overlay3 {
@@ -1596,7 +1596,7 @@ transition: all 0.3s ease-in-out;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.8);
   z-index: 999999;
 }
 
