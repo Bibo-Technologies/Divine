@@ -1797,7 +1797,6 @@ function initializeSearch() {
     const searchBar = document.getElementById("search-bar");
     const suggestionsContainer = document.getElementById("suggestions-container");
     const overlay = document.getElementById('overlay');
-
     // Check if the click target is not the search bar or suggestions container
     if (event.target !== searchBar && !searchBar.contains(event.target) && event.target !== suggestionsContainer && !suggestionsContainer.contains(event.target)) {
       // Click occurred outside the search bar and suggestions container
@@ -1809,7 +1808,6 @@ function initializeSearch() {
 
 // Call the function to initialize Firebase data and attach event listener
 initializeSearch();
-
 
   
   function searchProducts(searchTerm) {
