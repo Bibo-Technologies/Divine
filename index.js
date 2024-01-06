@@ -1735,21 +1735,30 @@ function fetchSuggestions(query, retryCount = 1) {
             ) {
               matchingProductsFound = true;
   
-              // Create a suggestion element
-              const suggestionItem = document.createElement("div");
-              suggestionItem.classList.add("suggestion-item");
-              suggestionItem.textContent = name;
-  
-              // Add a click event listener to log the suggestion into the search bar and perform search
-              suggestionItem.addEventListener("click", function () {
-                searchBar.value = name;
-                suggestionsContainer.style.display = "none"; // Hide suggestions
-                overlay.style.display = 'none';
-                searchProducts(name); // Perform search for the selected suggestion
-              });
-  
-              // Append the suggestion to the suggestions container
-              suggestionsContainer.appendChild(suggestionItem);
+// Create a suggestion element
+const suggestionItem = document.createElement("div");
+suggestionItem.classList.add("suggestion-item");
+
+// Create a search icon element
+const searchIcon = document.createElement("i");
+searchIcon.classList.add("fa", "fa-search", "search-icon");
+suggestionItem.appendChild(searchIcon);
+
+// Create a text node for the suggestion item
+const suggestionText = document.createTextNode(name);
+suggestionItem.appendChild(suggestionText);
+
+// Add a click event listener to log the suggestion into the search bar and perform search
+suggestionItem.addEventListener("click", function () {
+  searchBar.value = name;
+  suggestionsContainer.style.display = "none"; // Hide suggestions
+  overlay.style.display = 'none';
+  searchProducts(name); // Perform search for the selected suggestion
+});
+
+// Append the suggestion to the suggestions container
+suggestionsContainer.appendChild(suggestionItem);
+
             }
           }
         });

@@ -2845,7 +2845,7 @@ margin-right: 10px;
   background-color: #fff;
   color: black;
   border: 1px solid #ccc;
-  border-radius: 10px;
+  border-radius: 0px 0px 15px 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
   max-height: 300px; /* Set a maximum height for the suggestions container */
   overflow-y: auto; /* Enable vertical scrolling if the content exceeds the maximum height */
@@ -2860,6 +2860,8 @@ margin-right: 10px;
   #suggestions-container {
     width: 100%; /* Full width on small screens */
     max-height: 200px; /* Adjust maximum height for smaller screens */
+    top: 90%; /* Position suggestions below the search bar */
+
   }
 }
 
@@ -2901,7 +2903,7 @@ margin: 5px;
 }
 
 .suggestion-item:hover {
-  background-color: #c1f4ff;
+  background-color: #fff6c1;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 
 }
@@ -3047,4 +3049,10 @@ margin: 5px;
 .refresh-icon:hover{
   background-color: rgb(2, 194, 2);
 
+}
+/* Add styling for the search icon */
+.suggestion-item i.search-icon {
+  margin-right: 5px; /* Adjust the margin as needed */
+  color: grey;
+  font-size: small;
 }
