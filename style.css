@@ -1000,9 +1000,7 @@ button:hover{
 .loader2 {
   margin: auto;
   border-radius: 50%;
-  border: 8px solid #ededed; /* Light gray */
   width: auto;
-  padding: 3px;
 }
 
 @keyframes spin {
