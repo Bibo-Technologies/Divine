@@ -1877,22 +1877,51 @@ firebaseNodes.forEach((nodeRef) => {
 
       // If the query is empty or there is a match (even for one word), create a card for the product
       if (!queryLower || nameSimilarity > 0.5 || descriptionSimilarity > 0.5 || name.includes(queryLower) || description.includes(queryLower)) {
-        // Create a card for the matching product
-        const card = document.createElement("div");
-        card.classList.add("card1");
 
-      // Add product image
-      const img = document.createElement("img");
-      img.src = product.image;
-      img.alt = product.name;
-      img.classList.add("product-img");
-      img.addEventListener("click", () => {
-        const modal = document.querySelector(".modal");
-        const modalImg = document.querySelector("#modalImg");
-        modal.style.display = "block";
-        modalImg.src = img.src;
-      });
-      card.appendChild(img);
+      // Create a card for the matching product
+const card = document.createElement("div");
+card.classList.add("card1");
+
+// Add product image
+const img = document.createElement("img");
+img.src = product.image;
+img.alt = product.name;
+img.classList.add("product-img");
+
+// Create a loader element
+const loader2 = document.createElement("div");
+loader2.classList.add("loader2");
+loader2.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; // You can use any loading icon
+
+// Append the loader to the card
+card.appendChild(loader2);
+
+// Add a load event listener to toggle the loader visibility
+img.addEventListener("load", () => {
+  // Hide the loader when the image is loaded
+  loader2.style.display = "none";
+});
+img.addEventListener("click", () => {
+  const modal = document.querySelector(".modal");
+  const modalImg = document.querySelector("#modalImg");
+  modal.style.display = "block";
+  modalImg.src = img.src;
+});
+card.appendChild(img);
+
+
+// Add an error event listener to handle image load errors
+img.addEventListener("error", () => {
+  // Hide the loader and display an alternative text or image for load errors
+  loader2.style.display = "none";
+  img.src = "img/no photo.png"; // Replace with your error image path
+  img.alt = "Image Load Error"; // Replace with your error message
+});
+
+// Append the image to the card
+card.appendChild(img);
+
+
 
       // Add product name
       const title = document.createElement("h2");
@@ -2460,18 +2489,44 @@ const guaranteeText = document.createElement("div");
 guaranteeText.innerHTML = "<i class='fa fa-shield'></i>1 month Guarantee for Brand New";
 guaranteeText.classList.add("guarantee-text");
 card.appendChild(guaranteeText);
-      // Add product image
-      const img = document.createElement("img");
-      img.src = product.image;
-      img.alt = product.name;
-      img.classList.add("product-img");
-      img.addEventListener("click", () => {
-        const modal = document.querySelector(".modal");
-        const modalImg = document.querySelector("#modalImg");
-        modal.style.display = "block";
-        modalImg.src = img.src;
-      });
-      card.appendChild(img);
+// Add product image
+const img = document.createElement("img");
+img.src = product.image;
+img.alt = product.name;
+img.classList.add("product-img");
+
+// Create a loader element
+const loader2 = document.createElement("div");
+loader2.classList.add("loader2");
+loader2.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; // You can use any loading icon
+
+// Append the loader to the card
+card.appendChild(loader2);
+
+// Add a load event listener to toggle the loader visibility
+img.addEventListener("load", () => {
+  // Hide the loader when the image is loaded
+  loader2.style.display = "none";
+});
+img.addEventListener("click", () => {
+  const modal = document.querySelector(".modal");
+  const modalImg = document.querySelector("#modalImg");
+  modal.style.display = "block";
+  modalImg.src = img.src;
+});
+card.appendChild(img);
+
+
+// Add an error event listener to handle image load errors
+img.addEventListener("error", () => {
+  // Hide the loader and display an alternative text or image for load errors
+  loader2.style.display = "none";
+  img.src = "img/no photo.png"; // Replace with your error image path
+  img.alt = "Image Load Error"; // Replace with your error message
+});
+
+// Append the image to the card
+card.appendChild(img);
       // Add product name
       const title = document.createElement("h2");
       title.innerText = product.name;
@@ -2882,18 +2937,44 @@ const guaranteeText = document.createElement("div");
 guaranteeText.innerHTML = "<i class='fa fa-shield'></i>No Guarantee for Grade B";
 guaranteeText.classList.add("guarantee-text");
 card.appendChild(guaranteeText);
-      // Add product image
-      const img = document.createElement("img");
-      img.src = product.image;
-      img.alt = product.name;
-      img.classList.add("product-img");
-      img.addEventListener("click", () => {
-        const modal = document.querySelector(".modal");
-        const modalImg = document.querySelector("#modalImg");
-        modal.style.display = "block";
-        modalImg.src = img.src;
-      });
-      card.appendChild(img);
+// Add product image
+const img = document.createElement("img");
+img.src = product.image;
+img.alt = product.name;
+img.classList.add("product-img");
+
+// Create a loader element
+const loader2 = document.createElement("div");
+loader2.classList.add("loader2");
+loader2.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; // You can use any loading icon
+
+// Append the loader to the card
+card.appendChild(loader2);
+
+// Add a load event listener to toggle the loader visibility
+img.addEventListener("load", () => {
+  // Hide the loader when the image is loaded
+  loader2.style.display = "none";
+});
+img.addEventListener("click", () => {
+  const modal = document.querySelector(".modal");
+  const modalImg = document.querySelector("#modalImg");
+  modal.style.display = "block";
+  modalImg.src = img.src;
+});
+card.appendChild(img);
+
+
+// Add an error event listener to handle image load errors
+img.addEventListener("error", () => {
+  // Hide the loader and display an alternative text or image for load errors
+  loader2.style.display = "none";
+  img.src = "img/no photo.png"; // Replace with your error image path
+  img.alt = "Image Load Error"; // Replace with your error message
+});
+
+// Append the image to the card
+card.appendChild(img);
       // Add product name
       const title = document.createElement("h2");
       title.innerText = product.name;
@@ -3303,18 +3384,44 @@ document.querySelector("#newScreens-link").addEventListener("click", () => {
       guaranteeText.innerHTML = "<i class='fa fa-shield'></i>1 month Guarantee for Brand New Screens";
       guaranteeText.classList.add("guarantee-text");
       card.appendChild(guaranteeText);
-      // Add product image
-      const img = document.createElement("img");
-      img.src = product.image;
-      img.alt = product.name;
-      img.classList.add("product-img");
-      img.addEventListener("click", () => {
-        const modal = document.querySelector(".modal");
-        const modalImg = document.querySelector("#modalImg");
-        modal.style.display = "block";
-        modalImg.src = img.src;
-      });
-      card.appendChild(img);
+// Add product image
+const img = document.createElement("img");
+img.src = product.image;
+img.alt = product.name;
+img.classList.add("product-img");
+
+// Create a loader element
+const loader2 = document.createElement("div");
+loader2.classList.add("loader2");
+loader2.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; // You can use any loading icon
+
+// Append the loader to the card
+card.appendChild(loader2);
+
+// Add a load event listener to toggle the loader visibility
+img.addEventListener("load", () => {
+  // Hide the loader when the image is loaded
+  loader2.style.display = "none";
+});
+img.addEventListener("click", () => {
+  const modal = document.querySelector(".modal");
+  const modalImg = document.querySelector("#modalImg");
+  modal.style.display = "block";
+  modalImg.src = img.src;
+});
+card.appendChild(img);
+
+
+// Add an error event listener to handle image load errors
+img.addEventListener("error", () => {
+  // Hide the loader and display an alternative text or image for load errors
+  loader2.style.display = "none";
+  img.src = "img/no photo.png"; // Replace with your error image path
+  img.alt = "Image Load Error"; // Replace with your error message
+});
+
+// Append the image to the card
+card.appendChild(img);
       // Add product name
       const title = document.createElement("h2");
       title.innerText = product.name;
@@ -3720,18 +3827,44 @@ const guaranteeText = document.createElement("div");
 guaranteeText.innerHTML = "<i class='fa fa-shield'></i> No Guarantee for Grede B";
 guaranteeText.classList.add("guarantee-text");
 card.appendChild(guaranteeText);
-      // Add product image
-      const img = document.createElement("img");
-      img.src = product.image;
-      img.alt = product.name;
-      img.classList.add("product-img");
-      img.addEventListener("click", () => {
-        const modal = document.querySelector(".modal");
-        const modalImg = document.querySelector("#modalImg");
-        modal.style.display = "block";
-        modalImg.src = img.src;
-      });
-      card.appendChild(img);
+// Add product image
+const img = document.createElement("img");
+img.src = product.image;
+img.alt = product.name;
+img.classList.add("product-img");
+
+// Create a loader element
+const loader2 = document.createElement("div");
+loader2.classList.add("loader2");
+loader2.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; // You can use any loading icon
+
+// Append the loader to the card
+card.appendChild(loader2);
+
+// Add a load event listener to toggle the loader visibility
+img.addEventListener("load", () => {
+  // Hide the loader when the image is loaded
+  loader2.style.display = "none";
+});
+img.addEventListener("click", () => {
+  const modal = document.querySelector(".modal");
+  const modalImg = document.querySelector("#modalImg");
+  modal.style.display = "block";
+  modalImg.src = img.src;
+});
+card.appendChild(img);
+
+
+// Add an error event listener to handle image load errors
+img.addEventListener("error", () => {
+  // Hide the loader and display an alternative text or image for load errors
+  loader2.style.display = "none";
+  img.src = "img/no photo.png"; // Replace with your error image path
+  img.alt = "Image Load Error"; // Replace with your error message
+});
+
+// Append the image to the card
+card.appendChild(img);
       // Add product name
       const title = document.createElement("h2");
       title.innerText = product.name;
@@ -4142,18 +4275,44 @@ document.querySelector("#touches-link").addEventListener("click", () => {
       badge.classList.add("used-badge2");
       badge.innerText = "Brand New";
       card.appendChild(badge);
-      // Add product image
-      const img = document.createElement("img");
-      img.src = product.image;
-      img.alt = product.name;
-      img.classList.add("product-img");
-      img.addEventListener("click", () => {
-        const modal = document.querySelector(".modal");
-        const modalImg = document.querySelector("#modalImg");
-        modal.style.display = "block";
-        modalImg.src = img.src;
-      });
-      card.appendChild(img);
+// Add product image
+const img = document.createElement("img");
+img.src = product.image;
+img.alt = product.name;
+img.classList.add("product-img");
+
+// Create a loader element
+const loader2 = document.createElement("div");
+loader2.classList.add("loader2");
+loader2.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; // You can use any loading icon
+
+// Append the loader to the card
+card.appendChild(loader2);
+
+// Add a load event listener to toggle the loader visibility
+img.addEventListener("load", () => {
+  // Hide the loader when the image is loaded
+  loader2.style.display = "none";
+});
+img.addEventListener("click", () => {
+  const modal = document.querySelector(".modal");
+  const modalImg = document.querySelector("#modalImg");
+  modal.style.display = "block";
+  modalImg.src = img.src;
+});
+card.appendChild(img);
+
+
+// Add an error event listener to handle image load errors
+img.addEventListener("error", () => {
+  // Hide the loader and display an alternative text or image for load errors
+  loader2.style.display = "none";
+  img.src = "img/no photo.png"; // Replace with your error image path
+  img.alt = "Image Load Error"; // Replace with your error message
+});
+
+// Append the image to the card
+card.appendChild(img);
       // Add product name
       const title = document.createElement("h2");
       title.innerText = product.name;
@@ -4564,18 +4723,44 @@ document.querySelector("#electronics-link").addEventListener("click", () => {
       badge.classList.add("used-badge2");
       badge.innerText = "Brand New";
       card.appendChild(badge);
-      // Add product image
-      const img = document.createElement("img");
-      img.src = product.image;
-      img.alt = product.name;
-      img.classList.add("product-img");
-      img.addEventListener("click", () => {
-        const modal = document.querySelector(".modal");
-        const modalImg = document.querySelector("#modalImg");
-        modal.style.display = "block";
-        modalImg.src = img.src;
-      });
-      card.appendChild(img);
+// Add product image
+const img = document.createElement("img");
+img.src = product.image;
+img.alt = product.name;
+img.classList.add("product-img");
+
+// Create a loader element
+const loader2 = document.createElement("div");
+loader2.classList.add("loader2");
+loader2.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; // You can use any loading icon
+
+// Append the loader to the card
+card.appendChild(loader2);
+
+// Add a load event listener to toggle the loader visibility
+img.addEventListener("load", () => {
+  // Hide the loader when the image is loaded
+  loader2.style.display = "none";
+});
+img.addEventListener("click", () => {
+  const modal = document.querySelector(".modal");
+  const modalImg = document.querySelector("#modalImg");
+  modal.style.display = "block";
+  modalImg.src = img.src;
+});
+card.appendChild(img);
+
+
+// Add an error event listener to handle image load errors
+img.addEventListener("error", () => {
+  // Hide the loader and display an alternative text or image for load errors
+  loader2.style.display = "none";
+  img.src = "img/no photo.png"; // Replace with your error image path
+  img.alt = "Image Load Error"; // Replace with your error message
+});
+
+// Append the image to the card
+card.appendChild(img);
       // Add product name
       const title = document.createElement("h2");
       title.innerText = product.name;
@@ -4984,18 +5169,44 @@ document.querySelector("#accessories-link").addEventListener("click", () => {
       badge.classList.add("used-badge2");
       badge.innerText = "Brand New";
       card.appendChild(badge);
-      // Add product image
-      const img = document.createElement("img");
-      img.src = product.image;
-      img.alt = product.name;
-      img.classList.add("product-img");
-      img.addEventListener("click", () => {
-        const modal = document.querySelector(".modal");
-        const modalImg = document.querySelector("#modalImg");
-        modal.style.display = "block";
-        modalImg.src = img.src;
-      });
-      card.appendChild(img);
+// Add product image
+const img = document.createElement("img");
+img.src = product.image;
+img.alt = product.name;
+img.classList.add("product-img");
+
+// Create a loader element
+const loader2 = document.createElement("div");
+loader2.classList.add("loader2");
+loader2.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; // You can use any loading icon
+
+// Append the loader to the card
+card.appendChild(loader2);
+
+// Add a load event listener to toggle the loader visibility
+img.addEventListener("load", () => {
+  // Hide the loader when the image is loaded
+  loader2.style.display = "none";
+});
+img.addEventListener("click", () => {
+  const modal = document.querySelector(".modal");
+  const modalImg = document.querySelector("#modalImg");
+  modal.style.display = "block";
+  modalImg.src = img.src;
+});
+card.appendChild(img);
+
+
+// Add an error event listener to handle image load errors
+img.addEventListener("error", () => {
+  // Hide the loader and display an alternative text or image for load errors
+  loader2.style.display = "none";
+  img.src = "img/no photo.png"; // Replace with your error image path
+  img.alt = "Image Load Error"; // Replace with your error message
+});
+
+// Append the image to the card
+card.appendChild(img);
       // Add product name
       const title = document.createElement("h2");
       title.innerText = product.name;
@@ -5405,18 +5616,44 @@ document.querySelector("#ports-link").addEventListener("click", () => {
       badge.classList.add("used-badge2");
       badge.innerText = "Brand New";
       card.appendChild(badge);
-      // Add product image
-      const img = document.createElement("img");
-      img.src = product.image;
-      img.alt = product.name;
-      img.classList.add("product-img");
-      img.addEventListener("click", () => {
-        const modal = document.querySelector(".modal");
-        const modalImg = document.querySelector("#modalImg");
-        modal.style.display = "block";
-        modalImg.src = img.src;
-      });
-      card.appendChild(img);
+// Add product image
+const img = document.createElement("img");
+img.src = product.image;
+img.alt = product.name;
+img.classList.add("product-img");
+
+// Create a loader element
+const loader2 = document.createElement("div");
+loader2.classList.add("loader2");
+loader2.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; // You can use any loading icon
+
+// Append the loader to the card
+card.appendChild(loader2);
+
+// Add a load event listener to toggle the loader visibility
+img.addEventListener("load", () => {
+  // Hide the loader when the image is loaded
+  loader2.style.display = "none";
+});
+img.addEventListener("click", () => {
+  const modal = document.querySelector(".modal");
+  const modalImg = document.querySelector("#modalImg");
+  modal.style.display = "block";
+  modalImg.src = img.src;
+});
+card.appendChild(img);
+
+
+// Add an error event listener to handle image load errors
+img.addEventListener("error", () => {
+  // Hide the loader and display an alternative text or image for load errors
+  loader2.style.display = "none";
+  img.src = "img/no photo.png"; // Replace with your error image path
+  img.alt = "Image Load Error"; // Replace with your error message
+});
+
+// Append the image to the card
+card.appendChild(img);
       // Add product name
       const title = document.createElement("h2");
       title.innerText = product.name;
@@ -5828,17 +6065,44 @@ const guaranteeText = document.createElement("div");
 guaranteeText.innerHTML = "<i class='fa fa-shield'></i>1 month Guarantee for Brand New";
 guaranteeText.classList.add("guarantee-text");
 newScreenCard.appendChild(guaranteeText);
-                   const img = document.createElement("img");
-      img.src = product.image;
-      img.alt = product.name;
-      img.classList.add("product-img");
-      img.addEventListener("click", () => {
-        const modal = document.querySelector(".modal");
-        const modalImg = document.querySelector("#modalImg");
-        modal.style.display = "block";
-        modalImg.src = img.src;
-      });
-      newScreenCard.appendChild(img);
+// Add product image
+const img = document.createElement("img");
+img.src = product.image;
+img.alt = product.name;
+img.classList.add("product-img");
+
+// Create a loader element
+const loader2 = document.createElement("div");
+loader2.classList.add("loader2");
+loader2.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; // You can use any loading icon
+
+// Append the loader to the card
+card.appendChild(loader2);
+
+// Add a load event listener to toggle the loader visibility
+img.addEventListener("load", () => {
+  // Hide the loader when the image is loaded
+  loader2.style.display = "none";
+});
+img.addEventListener("click", () => {
+  const modal = document.querySelector(".modal");
+  const modalImg = document.querySelector("#modalImg");
+  modal.style.display = "block";
+  modalImg.src = img.src;
+});
+card.appendChild(img);
+
+
+// Add an error event listener to handle image load errors
+img.addEventListener("error", () => {
+  // Hide the loader and display an alternative text or image for load errors
+  loader2.style.display = "none";
+  img.src = "img/no photo.png"; // Replace with your error image path
+  img.alt = "Image Load Error"; // Replace with your error message
+});
+
+// Append the image to the card
+card.appendChild(img);
       
       const modal = document.querySelector(".modal");
       const closeBtn = document.querySelector(".close");
@@ -6333,17 +6597,44 @@ guaranteeText.innerHTML = "<i class='fa fa-shield'></i>No Guarantee for Grade B"
 guaranteeText.classList.add("guarantee-text");
 gradeBScreenCard.appendChild(guaranteeText);
       
-                   const img = document.createElement("img");
-      img.src = product.image;
-      img.alt = product.name;
-      img.classList.add("product-img");
-      img.addEventListener("click", () => {
-        const modal = document.querySelector(".modal");
-        const modalImg = document.querySelector("#modalImg");
-        modal.style.display = "block";
-        modalImg.src = img.src;
-      });
-      gradeBScreenCard.appendChild(img);
+// Add product image
+const img = document.createElement("img");
+img.src = product.image;
+img.alt = product.name;
+img.classList.add("product-img");
+
+// Create a loader element
+const loader2 = document.createElement("div");
+loader2.classList.add("loader2");
+loader2.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; // You can use any loading icon
+
+// Append the loader to the card
+card.appendChild(loader2);
+
+// Add a load event listener to toggle the loader visibility
+img.addEventListener("load", () => {
+  // Hide the loader when the image is loaded
+  loader2.style.display = "none";
+});
+img.addEventListener("click", () => {
+  const modal = document.querySelector(".modal");
+  const modalImg = document.querySelector("#modalImg");
+  modal.style.display = "block";
+  modalImg.src = img.src;
+});
+card.appendChild(img);
+
+
+// Add an error event listener to handle image load errors
+img.addEventListener("error", () => {
+  // Hide the loader and display an alternative text or image for load errors
+  loader2.style.display = "none";
+  img.src = "img/no photo.png"; // Replace with your error image path
+  img.alt = "Image Load Error"; // Replace with your error message
+});
+
+// Append the image to the card
+card.appendChild(img);
       
       const modal = document.querySelector(".modal");
       const closeBtn = document.querySelector(".close");
@@ -6830,18 +7121,44 @@ function loadPortCards(data) {
     const portCard = document.createElement("div");
     portCard.classList.add("card1");
 
-      
-                   const img = document.createElement("img");
-      img.src = product.image;
-      img.alt = product.name;
-      img.classList.add("product-img");
-      img.addEventListener("click", () => {
-        const modal = document.querySelector(".modal");
-        const modalImg = document.querySelector("#modalImg");
-        modal.style.display = "block";
-        modalImg.src = img.src;
-      });
-      portCard.appendChild(img);
+// Add product image
+const img = document.createElement("img");
+img.src = product.image;
+img.alt = product.name;
+img.classList.add("product-img");
+
+// Create a loader element
+const loader2 = document.createElement("div");
+loader2.classList.add("loader2");
+loader2.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; // You can use any loading icon
+
+// Append the loader to the card
+card.appendChild(loader2);
+
+// Add a load event listener to toggle the loader visibility
+img.addEventListener("load", () => {
+  // Hide the loader when the image is loaded
+  loader2.style.display = "none";
+});
+img.addEventListener("click", () => {
+  const modal = document.querySelector(".modal");
+  const modalImg = document.querySelector("#modalImg");
+  modal.style.display = "block";
+  modalImg.src = img.src;
+});
+card.appendChild(img);
+
+
+// Add an error event listener to handle image load errors
+img.addEventListener("error", () => {
+  // Hide the loader and display an alternative text or image for load errors
+  loader2.style.display = "none";
+  img.src = "img/no photo.png"; // Replace with your error image path
+  img.alt = "Image Load Error"; // Replace with your error message
+});
+
+// Append the image to the card
+card.appendChild(img);
       
       const modal = document.querySelector(".modal");
       const closeBtn = document.querySelector(".close");
@@ -7327,17 +7644,44 @@ function loadTouchesCards(data) {
     card.classList.add("card1");
 
       
-                   const img = document.createElement("img");
-      img.src = product.image;
-      img.alt = product.name;
-      img.classList.add("product-img");
-      img.addEventListener("click", () => {
-        const modal = document.querySelector(".modal");
-        const modalImg = document.querySelector("#modalImg");
-        modal.style.display = "block";
-        modalImg.src = img.src;
-      });
-      card.appendChild(img);
+// Add product image
+const img = document.createElement("img");
+img.src = product.image;
+img.alt = product.name;
+img.classList.add("product-img");
+
+// Create a loader element
+const loader2 = document.createElement("div");
+loader2.classList.add("loader2");
+loader2.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; // You can use any loading icon
+
+// Append the loader to the card
+card.appendChild(loader2);
+
+// Add a load event listener to toggle the loader visibility
+img.addEventListener("load", () => {
+  // Hide the loader when the image is loaded
+  loader2.style.display = "none";
+});
+img.addEventListener("click", () => {
+  const modal = document.querySelector(".modal");
+  const modalImg = document.querySelector("#modalImg");
+  modal.style.display = "block";
+  modalImg.src = img.src;
+});
+card.appendChild(img);
+
+
+// Add an error event listener to handle image load errors
+img.addEventListener("error", () => {
+  // Hide the loader and display an alternative text or image for load errors
+  loader2.style.display = "none";
+  img.src = "img/no photo.png"; // Replace with your error image path
+  img.alt = "Image Load Error"; // Replace with your error message
+});
+
+// Append the image to the card
+card.appendChild(img);
       
       const modal = document.querySelector(".modal");
       const closeBtn = document.querySelector(".close");
@@ -7836,17 +8180,44 @@ function loadCards(data) {
     card.classList.add("card1");
 
       
-                   const img = document.createElement("img");
-      img.src = product.image;
-      img.alt = product.name;
-      img.classList.add("product-img");
-      img.addEventListener("click", () => {
-        const modal = document.querySelector(".modal");
-        const modalImg = document.querySelector("#modalImg");
-        modal.style.display = "block";
-        modalImg.src = img.src;
-      });
-      card.appendChild(img);
+// Add product image
+const img = document.createElement("img");
+img.src = product.image;
+img.alt = product.name;
+img.classList.add("product-img");
+
+// Create a loader element
+const loader2 = document.createElement("div");
+loader2.classList.add("loader2");
+loader2.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; // You can use any loading icon
+
+// Append the loader to the card
+card.appendChild(loader2);
+
+// Add a load event listener to toggle the loader visibility
+img.addEventListener("load", () => {
+  // Hide the loader when the image is loaded
+  loader2.style.display = "none";
+});
+img.addEventListener("click", () => {
+  const modal = document.querySelector(".modal");
+  const modalImg = document.querySelector("#modalImg");
+  modal.style.display = "block";
+  modalImg.src = img.src;
+});
+card.appendChild(img);
+
+
+// Add an error event listener to handle image load errors
+img.addEventListener("error", () => {
+  // Hide the loader and display an alternative text or image for load errors
+  loader2.style.display = "none";
+  img.src = "img/no photo.png"; // Replace with your error image path
+  img.alt = "Image Load Error"; // Replace with your error message
+});
+
+// Append the image to the card
+card.appendChild(img);
       
       const modal = document.querySelector(".modal");
       const closeBtn = document.querySelector(".close");
@@ -8310,17 +8681,44 @@ function loadCardsNew(data) {
     const card = document.createElement("div");
     card.classList.add("card1");
 
-                   const img = document.createElement("img");
-      img.src = product.image;
-      img.alt = product.name;
-      img.classList.add("product-img");
-      img.addEventListener("click", () => {
-        const modal = document.querySelector(".modal");
-        const modalImg = document.querySelector("#modalImg");
-        modal.style.display = "block";
-        modalImg.src = img.src;
-      });
-      card.appendChild(img);
+// Add product image
+const img = document.createElement("img");
+img.src = product.image;
+img.alt = product.name;
+img.classList.add("product-img");
+
+// Create a loader element
+const loader2 = document.createElement("div");
+loader2.classList.add("loader2");
+loader2.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; // You can use any loading icon
+
+// Append the loader to the card
+card.appendChild(loader2);
+
+// Add a load event listener to toggle the loader visibility
+img.addEventListener("load", () => {
+  // Hide the loader when the image is loaded
+  loader2.style.display = "none";
+});
+img.addEventListener("click", () => {
+  const modal = document.querySelector(".modal");
+  const modalImg = document.querySelector("#modalImg");
+  modal.style.display = "block";
+  modalImg.src = img.src;
+});
+card.appendChild(img);
+
+
+// Add an error event listener to handle image load errors
+img.addEventListener("error", () => {
+  // Hide the loader and display an alternative text or image for load errors
+  loader2.style.display = "none";
+  img.src = "img/no photo.png"; // Replace with your error image path
+  img.alt = "Image Load Error"; // Replace with your error message
+});
+
+// Append the image to the card
+card.appendChild(img);
       
       const modal = document.querySelector(".modal");
       const closeBtn = document.querySelector(".close");
