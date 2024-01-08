@@ -1392,9 +1392,9 @@ transition: all 0.3s ease-in-out;
       .cart {
         position: fixed;
         display: none;
-        top: 90px;
+        top: 80px;
         max-height: 80%;
-        max-width: 90%;
+        max-width: 500vh;
         right: 15px;
         padding: 10px;
         border: transparent;
@@ -1403,8 +1403,8 @@ transition: all 0.3s ease-in-out;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
         z-index: 99999;
         overflow-y: auto;
-        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-      }
+        opacity: 0;
+    }
 
 
          /* Responsive Styles */
@@ -1412,6 +1412,7 @@ transition: all 0.3s ease-in-out;
          
       .cart {      
         top: 70px;
+        max-width: 80%;
       }
         }
       
@@ -1419,7 +1420,6 @@ transition: all 0.3s ease-in-out;
         color: white;
         font-size: 16px;
         font-weight: bold;
-        margin: auto;
         margin-right: 5px;
       }
       
@@ -1445,7 +1445,6 @@ transition: all 0.3s ease-in-out;
         background-color: green;
         border: none;
         width: fit-content;
-        
       }
       
       .cart-item {
@@ -1491,26 +1490,34 @@ transition: all 0.3s ease-in-out;
         right: 20px;
         padding: 8px;
         color: white;
-        background-color: #00e70c;
+        background-color: #00b809;
         border: transparent;
         border-radius: 4px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         z-index: 9999;
         font-size: small;
         max-width: 300px;
         display: none;
         animation: slideInUp 0.5s ease-in-out;
-      }
-      
-      @keyframes slideInUp {
+    }
+    
+    @keyframes slideInUp {
         0% {
-          transform: translateY(100%);
+            transform: translateY(100%);
         }
         100% {
-          transform: translateY(0);
+            transform: translateY(0);
         }
-      }
-      
+    }
+    
+    /* Responsive Styles for Small Screens */
+    @media only screen and (max-width: 600px) {
+        #message-container {
+            right: 10px; /* Adjust the position for small screens */
+            max-width: 70%; /* Allow the container to take full width */
+        }
+    }
+    
 
       
 
@@ -1544,6 +1551,8 @@ transition: all 0.3s ease-in-out;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 9998;
+  transition: display 0.4s ease-in-out;
+
 }
 #overlay {
   position: fixed;
@@ -1554,6 +1563,8 @@ transition: all 0.3s ease-in-out;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 9998;
+  transition: display 0.4s ease-in-out;
+
 }
 #overlay4 {
   position: fixed;
@@ -1563,7 +1574,9 @@ transition: all 0.3s ease-in-out;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
-  z-index: 9999;
+  z-index: 1000;
+  transition: display 0.4s ease-in-out;
+
 }
 #overlay5 {
   position: fixed;
@@ -1574,6 +1587,8 @@ transition: all 0.3s ease-in-out;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 99999;
+  transition: display 0.4s ease-in-out;
+
 }
 #overlay2 {
   position: fixed;
@@ -1584,6 +1599,8 @@ transition: all 0.3s ease-in-out;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 9999999;
+  transition: display 0.4s ease-in-out;
+
 }
 #overlay6 {
   position: fixed;
@@ -1594,6 +1611,8 @@ transition: all 0.3s ease-in-out;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 99999;
+  transition: display 0.4s ease-in-out;
+
 }
 #overlay3 {
   position: fixed;
@@ -1604,6 +1623,8 @@ transition: all 0.3s ease-in-out;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 999999;
+  transition: display 0.4s ease-in-out;
+
 }
 
 
@@ -2106,6 +2127,8 @@ body.no-scroll {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
     z-index: 1; /* Place the overlay below the message content */
+    transition: display 0.4s ease-in-out;
+
 }
 
 .company-images {
@@ -2312,7 +2335,7 @@ body.no-scroll {
 }
 
 #messageContainer{
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 z-index: 10000000;
 
 }
@@ -2809,8 +2832,14 @@ margin-right: 10px;
     padding: 8px; /* Adjust the padding for smaller screens */
   }
 }
-#cart-container{
+#cart-container {
   display: none;
+  opacity: 0;
+}
+#cart-content {
+  margin-top: 22px;
+  display: none;
+  transition: opacity 0.4s ease-in-out;
 }
 
 .button-and-total-container {
@@ -3068,4 +3097,51 @@ margin: 5px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+/* Apply styles to the entire scrollbar */
+#cart::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 10px; /* Adjust the width of the scrollbar */
+}
+
+/* Specify the track (the area behind the thumb) */
+#cart::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Color of the track */
+}
+
+/* Specify the appearance of the scrollbar thumb */
+#cart::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color of the thumb */
+  border-radius: 6px; /* Round the corners of the thumb */
+}
+
+/* Specify the appearance of the scrollbar on hover */
+#cart::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Color of the thumb on hover */
+}
+#addToCartBtn.removed {
+  background-color: red; /* Changed background color */
+}
+
+/* Add this CSS for the icon */
+#addToCartBtn .icon {
+  margin-right: 4px;
+}
+
+/* Style for the specific class added to the wholesalePrice element */
+.wholesale-price {
+  color: rgb(0, 0, 0); /* Change to your desired text color */
+  font-weight: 400;
+  font-style: small;
+margin-bottom: 5px;
+}
+/* Style for the specific class added to the wholesalePrice element */
+.wholesale-price span {
+  color: green; /* Change to your desired text color */
+  font-weight: 600;
+  font-style: small;
+margin-bottom: 5px;
 }

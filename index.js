@@ -186,10 +186,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const scrollThreshold = 200; // Set the scroll height to trigger the cart display
 
   if (distanceFromTop > scrollThreshold) {
+    // Fade in
     cart.style.display = "block";
-  } else {
-    cart.style.display = "none";
-  }
+    setTimeout(() => {
+        cart.style.opacity = "1";
+    }, 10); // Adjust the delay (in milliseconds) if needed
+} else {
+    // Fade out
+    cart.style.opacity = "0";
+    setTimeout(() => {
+        cart.style.display = "none";
+    }, 300); // Adjust the delay (in milliseconds) to match the transition duration
+}
 });
 
 
@@ -1914,7 +1922,7 @@ card.appendChild(img);
 img.addEventListener("error", () => {
   // Hide the loader and display an alternative text or image for load errors
   loader2.style.display = "none";
-  img.src = "img/no photo.png"; // Replace with your error image path
+  img.src = "img/no photo.jpg"; // Replace with your error image path
   img.alt = "Image Load Error"; // Replace with your error message
 });
 
@@ -2010,6 +2018,15 @@ const formattedPrice = parseFloat(product.price).toLocaleString('en-US');
 
 price.innerText = `UGX ${formattedPrice}`;
 card.appendChild(price);
+
+// Add product price
+const wholesalePrice = document.createElement("h6");
+const formattedWholesalePrice = parseFloat(product.wholesalePrice).toLocaleString('en-US');
+
+wholesalePrice.innerHTML = ` Wholesale UGX:<span class="value"> ${formattedWholesalePrice}</span>`;
+wholesalePrice.classList.add("wholesale-price"); // Add your custom class name
+
+card.appendChild(wholesalePrice);
 
 
 
@@ -2273,10 +2290,14 @@ function updateCartCount(count) {
 }
 
 // Add the event listener to the "Add to Cart" button
-// Add the event listener to the "Add to Cart" button
 addToCartBtn.addEventListener("click", () => {
     const cart = document.getElementById('cart-container')
     cart.style.display = 'block';
+    const closeCartBtn = document.getElementById("close-cart-btn");
+    closeCartBtn.style.display = 'none'
+    setTimeout(() => {
+        cart.style.opacity = '1';
+    }, 10);
   addToCart(product);
   updateCartTotal();
 
@@ -2304,29 +2325,40 @@ const overlay = document.getElementById('overlay4')
 
 const body = document.body;
 
-openCartBtn.addEventListener("click", () => {
-  if (cartIsEmpty()) {
-    cartContent.style.display = "none"; // Hide the cart content on load
+        openCartBtn.addEventListener("click", () => {
+            if (cartIsEmpty()) {
+                cartContent.style.display = "none"; // Hide the cart content on load
+                showAddToCartMessage('Cart is Empty! Nothing is')
+                // Show a message or perform any desired action when cart is empty
+                return;
+            }
 
-    // Show a message or perform any desired action when cart is empty
-    return;
-  }
-  overlay.style.display = 'block';
-  cartContent.style.display = "block";
-  openCartBtn.style.display = "none";
-  closeCartBtn.style.display = "inline-block";
-  body.classList.add("no-scroll"); // Add class to disable scrolling
-});
+            // Fade in
+            overlay.style.display = 'block';
+            cartContent.style.display = "block";
+            openCartBtn.style.display = "none";
+            closeCartBtn.style.display = "inline-block";
+            body.classList.add("no-scroll"); // Add class to disable scrolling
 
-closeCartBtn.style.display = "none"; // Hide the close button initially
+            setTimeout(() => {
+                overlay.style.opacity = '1';
+                cartContent.style.opacity = '1';
+            }, 10); // Adjust the delay (in milliseconds) if needed
+        });
 
-closeCartBtn.addEventListener("click", () => {
-  cartContent.style.display = "none";
-  closeCartBtn.style.display = "none";
-  openCartBtn.style.display = "inline-block";
-  overlay.style.display = 'none';
-  body.classList.remove("no-scroll"); // Remove class to enable scrolling
-});
+        closeCartBtn.addEventListener("click", () => {
+            // Fade out
+            overlay.style.opacity = '0';
+            cartContent.style.opacity = '0';
+
+            setTimeout(() => {
+                cartContent.style.display = "none";
+                closeCartBtn.style.display = "none";
+                openCartBtn.style.display = "inline-block";
+                overlay.style.display = 'none';
+                body.classList.remove("no-scroll"); // Remove class to enable scrolling
+            }, 300); // Adjust the delay to match the transition duration
+        });
 
 
 function cartIsEmpty() {
@@ -2521,7 +2553,7 @@ card.appendChild(img);
 img.addEventListener("error", () => {
   // Hide the loader and display an alternative text or image for load errors
   loader2.style.display = "none";
-  img.src = "img/no photo.png"; // Replace with your error image path
+  img.src = "img/no photo.jpg"; // Replace with your error image path
   img.alt = "Image Load Error"; // Replace with your error message
 });
 
@@ -2582,7 +2614,14 @@ const formattedPrice = parseFloat(product.price).toLocaleString('en-US');
 price.innerText = `UGX ${formattedPrice}`;
 card.appendChild(price);
 
+// Add product price
+const wholesalePrice = document.createElement("h6");
+const formattedWholesalePrice = parseFloat(product.wholesalePrice).toLocaleString('en-US');
 
+wholesalePrice.innerHTML = ` Wholesale UGX:<span class="value"> ${formattedWholesalePrice}</span>`;
+wholesalePrice.classList.add("wholesale-price"); // Add your custom class name
+
+card.appendChild(wholesalePrice);
     
    
 // Create the "Add to Cart" button
@@ -2841,10 +2880,16 @@ function updateCartCount(count) {
 addToCartBtn.addEventListener("click", () => {
     const cart = document.getElementById('cart-container')
     cart.style.display = 'block';
+    const closeCartBtn = document.getElementById("close-cart-btn");
+    closeCartBtn.style.display = 'none'
+    setTimeout(() => {
+        cart.style.opacity = '1';
+    }, 10);
   addToCart(product);
   updateCartTotal();
 
 });
+
 // Assuming `card` is the element representing the product card
 card.appendChild(addToCartBtn);
 
@@ -2868,29 +2913,40 @@ cartContent.style.display = "none"; // Hide the cart content on load
 
 const body = document.body;
 
-openCartBtn.addEventListener("click", () => {
-  if (cartIsEmpty()) {
-    cartContent.style.display = "none"; // Hide the cart content on load
+        openCartBtn.addEventListener("click", () => {
+            if (cartIsEmpty()) {
+                cartContent.style.display = "none"; // Hide the cart content on load
 
-    // Show a message or perform any desired action when cart is empty
-    return;
-  }
-  overlay.style.display = 'block';
-  cartContent.style.display = "block";
-  openCartBtn.style.display = "none";
-  closeCartBtn.style.display = "inline-block";
-  body.classList.add("no-scroll"); // Add class to disable scrolling
-});
+                // Show a message or perform any desired action when cart is empty
+                return;
+            }
 
-closeCartBtn.style.display = "none"; // Hide the close button initially
+            // Fade in
+            overlay.style.display = 'block';
+            cartContent.style.display = "block";
+            openCartBtn.style.display = "none";
+            closeCartBtn.style.display = "inline-block";
+            body.classList.add("no-scroll"); // Add class to disable scrolling
 
-closeCartBtn.addEventListener("click", () => {
-  cartContent.style.display = "none";
-  closeCartBtn.style.display = "none";
-  openCartBtn.style.display = "inline-block";
-  overlay.style.display = 'none';
-  body.classList.remove("no-scroll"); // Remove class to enable scrolling
-});
+            setTimeout(() => {
+                overlay.style.opacity = '1';
+                cartContent.style.opacity = '1';
+            }, 10); // Adjust the delay (in milliseconds) if needed
+        });
+
+        closeCartBtn.addEventListener("click", () => {
+            // Fade out
+            overlay.style.opacity = '0';
+            cartContent.style.opacity = '0';
+
+            setTimeout(() => {
+                cartContent.style.display = "none";
+                closeCartBtn.style.display = "none";
+                openCartBtn.style.display = "inline-block";
+                overlay.style.display = 'none';
+                body.classList.remove("no-scroll"); // Remove class to enable scrolling
+            }, 300); // Adjust the delay to match the transition duration
+        });
 
 
 function cartIsEmpty() {
@@ -2969,7 +3025,7 @@ card.appendChild(img);
 img.addEventListener("error", () => {
   // Hide the loader and display an alternative text or image for load errors
   loader2.style.display = "none";
-  img.src = "img/no photo.png"; // Replace with your error image path
+  img.src = "img/no photo.jpg"; // Replace with your error image path
   img.alt = "Image Load Error"; // Replace with your error message
 });
 
@@ -3030,6 +3086,14 @@ const formattedPrice = parseFloat(product.price).toLocaleString('en-US');
 price.innerText = `UGX ${formattedPrice}`;
 card.appendChild(price);
 
+// Add product price
+const wholesalePrice = document.createElement("h6");
+const formattedWholesalePrice = parseFloat(product.wholesalePrice).toLocaleString('en-US');
+
+wholesalePrice.innerHTML = ` Wholesale UGX:<span class="value"> ${formattedWholesalePrice}</span>`;
+wholesalePrice.classList.add("wholesale-price"); // Add your custom class name
+
+card.appendChild(wholesalePrice);
 
     
 // Create the "Add to Cart" button
@@ -3288,10 +3352,16 @@ function updateCartCount(count) {
 addToCartBtn.addEventListener("click", () => {
     const cart = document.getElementById('cart-container')
     cart.style.display = 'block';
+    const closeCartBtn = document.getElementById("close-cart-btn");
+    closeCartBtn.style.display = 'none'
+    setTimeout(() => {
+        cart.style.opacity = '1';
+    }, 10);
   addToCart(product);
   updateCartTotal();
 
 });
+
 // Assuming `card` is the element representing the product card
 card.appendChild(addToCartBtn);
 
@@ -3316,29 +3386,40 @@ cartContent.style.display = "none"; // Hide the cart content on load
 
 const body = document.body;
 
-openCartBtn.addEventListener("click", () => {
-  if (cartIsEmpty()) {
-    cartContent.style.display = "none"; // Hide the cart content on load
+        openCartBtn.addEventListener("click", () => {
+            if (cartIsEmpty()) {
+                cartContent.style.display = "none"; // Hide the cart content on load
 
-    // Show a message or perform any desired action when cart is empty
-    return;
-  }
-  overlay.style.display = 'block';
-  cartContent.style.display = "block";
-  openCartBtn.style.display = "none";
-  closeCartBtn.style.display = "inline-block";
-  body.classList.add("no-scroll"); // Add class to disable scrolling
-});
+                // Show a message or perform any desired action when cart is empty
+                return;
+            }
 
-closeCartBtn.style.display = "none"; // Hide the close button initially
+            // Fade in
+            overlay.style.display = 'block';
+            cartContent.style.display = "block";
+            openCartBtn.style.display = "none";
+            closeCartBtn.style.display = "inline-block";
+            body.classList.add("no-scroll"); // Add class to disable scrolling
 
-closeCartBtn.addEventListener("click", () => {
-  cartContent.style.display = "none";
-  closeCartBtn.style.display = "none";
-  openCartBtn.style.display = "inline-block";
-  overlay.style.display = 'none';
-  body.classList.remove("no-scroll"); // Remove class to enable scrolling
-});
+            setTimeout(() => {
+                overlay.style.opacity = '1';
+                cartContent.style.opacity = '1';
+            }, 10); // Adjust the delay (in milliseconds) if needed
+        });
+
+        closeCartBtn.addEventListener("click", () => {
+            // Fade out
+            overlay.style.opacity = '0';
+            cartContent.style.opacity = '0';
+
+            setTimeout(() => {
+                cartContent.style.display = "none";
+                closeCartBtn.style.display = "none";
+                openCartBtn.style.display = "inline-block";
+                overlay.style.display = 'none';
+                body.classList.remove("no-scroll"); // Remove class to enable scrolling
+            }, 300); // Adjust the delay to match the transition duration
+        });
 
 
 function cartIsEmpty() {
@@ -3416,7 +3497,7 @@ card.appendChild(img);
 img.addEventListener("error", () => {
   // Hide the loader and display an alternative text or image for load errors
   loader2.style.display = "none";
-  img.src = "img/no photo.png"; // Replace with your error image path
+  img.src = "img/no photo.jpg"; // Replace with your error image path
   img.alt = "Image Load Error"; // Replace with your error message
 });
 
@@ -3478,7 +3559,14 @@ const formattedPrice = parseFloat(product.price).toLocaleString('en-US');
 price.innerText = `UGX ${formattedPrice}`;
 card.appendChild(price);
 
+// Add product price
+const wholesalePrice = document.createElement("h6");
+const formattedWholesalePrice = parseFloat(product.wholesalePrice).toLocaleString('en-US');
 
+wholesalePrice.innerHTML = ` Wholesale UGX:<span class="value"> ${formattedWholesalePrice}</span>`;
+wholesalePrice.classList.add("wholesale-price"); // Add your custom class name
+
+card.appendChild(wholesalePrice);
      
 // Create the "Add to Cart" button
 const addToCartBtn = document.createElement("button");
@@ -3735,10 +3823,16 @@ function updateCartCount(count) {
 addToCartBtn.addEventListener("click", () => {
     const cart = document.getElementById('cart-container')
     cart.style.display = 'block';
+    const closeCartBtn = document.getElementById("close-cart-btn");
+    closeCartBtn.style.display = 'none'
+    setTimeout(() => {
+        cart.style.opacity = '1';
+    }, 10);
   addToCart(product);
   updateCartTotal();
 
 });
+
 // Assuming `card` is the element representing the product card
 card.appendChild(addToCartBtn);
 
@@ -3763,29 +3857,40 @@ cartContent.style.display = "none"; // Hide the cart content on load
 
 const body = document.body;
 
-openCartBtn.addEventListener("click", () => {
-  if (cartIsEmpty()) {
-    cartContent.style.display = "none"; // Hide the cart content on load
+        openCartBtn.addEventListener("click", () => {
+            if (cartIsEmpty()) {
+                cartContent.style.display = "none"; // Hide the cart content on load
 
-    // Show a message or perform any desired action when cart is empty
-    return;
-  }
-  overlay.style.display = 'block';
-  cartContent.style.display = "block";
-  openCartBtn.style.display = "none";
-  closeCartBtn.style.display = "inline-block";
-  body.classList.add("no-scroll"); // Add class to disable scrolling
-});
+                // Show a message or perform any desired action when cart is empty
+                return;
+            }
 
-closeCartBtn.style.display = "none"; // Hide the close button initially
+            // Fade in
+            overlay.style.display = 'block';
+            cartContent.style.display = "block";
+            openCartBtn.style.display = "none";
+            closeCartBtn.style.display = "inline-block";
+            body.classList.add("no-scroll"); // Add class to disable scrolling
 
-closeCartBtn.addEventListener("click", () => {
-  cartContent.style.display = "none";
-  closeCartBtn.style.display = "none";
-  openCartBtn.style.display = "inline-block";
-  overlay.style.display = 'none';
-  body.classList.remove("no-scroll"); // Remove class to enable scrolling
-});
+            setTimeout(() => {
+                overlay.style.opacity = '1';
+                cartContent.style.opacity = '1';
+            }, 10); // Adjust the delay (in milliseconds) if needed
+        });
+
+        closeCartBtn.addEventListener("click", () => {
+            // Fade out
+            overlay.style.opacity = '0';
+            cartContent.style.opacity = '0';
+
+            setTimeout(() => {
+                cartContent.style.display = "none";
+                closeCartBtn.style.display = "none";
+                openCartBtn.style.display = "inline-block";
+                overlay.style.display = 'none';
+                body.classList.remove("no-scroll"); // Remove class to enable scrolling
+            }, 300); // Adjust the delay to match the transition duration
+        });
 
 
 
@@ -3859,7 +3964,7 @@ card.appendChild(img);
 img.addEventListener("error", () => {
   // Hide the loader and display an alternative text or image for load errors
   loader2.style.display = "none";
-  img.src = "img/no photo.png"; // Replace with your error image path
+  img.src = "img/no photo.jpg"; // Replace with your error image path
   img.alt = "Image Load Error"; // Replace with your error message
 });
 
@@ -3921,7 +4026,14 @@ const formattedPrice = parseFloat(product.price).toLocaleString('en-US');
 price.innerText = `UGX ${formattedPrice}`;
 card.appendChild(price);
 
+// Add product price
+const wholesalePrice = document.createElement("h6");
+const formattedWholesalePrice = parseFloat(product.wholesalePrice).toLocaleString('en-US');
 
+wholesalePrice.innerHTML = ` Wholesale UGX:<span class="value"> ${formattedWholesalePrice}</span>`;
+wholesalePrice.classList.add("wholesale-price"); // Add your custom class name
+
+card.appendChild(wholesalePrice);
     
 // Create the "Add to Cart" button
 const addToCartBtn = document.createElement("button");
@@ -4179,10 +4291,16 @@ function updateCartCount(count) {
 addToCartBtn.addEventListener("click", () => {
     const cart = document.getElementById('cart-container')
     cart.style.display = 'block';
+    const closeCartBtn = document.getElementById("close-cart-btn");
+    closeCartBtn.style.display = 'none'
+    setTimeout(() => {
+        cart.style.opacity = '1';
+    }, 10);
   addToCart(product);
   updateCartTotal();
 
 });
+
 // Assuming `card` is the element representing the product card
 card.appendChild(addToCartBtn);
 
@@ -4207,29 +4325,40 @@ cartContent.style.display = "none"; // Hide the cart content on load
 
 const body = document.body;
 
-openCartBtn.addEventListener("click", () => {
-  if (cartIsEmpty()) {
-    cartContent.style.display = "none"; // Hide the cart content on load
+        openCartBtn.addEventListener("click", () => {
+            if (cartIsEmpty()) {
+                cartContent.style.display = "none"; // Hide the cart content on load
 
-    // Show a message or perform any desired action when cart is empty
-    return;
-  }
-  overlay.style.display = 'block';
-  cartContent.style.display = "block";
-  openCartBtn.style.display = "none";
-  closeCartBtn.style.display = "inline-block";
-  body.classList.add("no-scroll"); // Add class to disable scrolling
-});
+                // Show a message or perform any desired action when cart is empty
+                return;
+            }
 
-closeCartBtn.style.display = "none"; // Hide the close button initially
+            // Fade in
+            overlay.style.display = 'block';
+            cartContent.style.display = "block";
+            openCartBtn.style.display = "none";
+            closeCartBtn.style.display = "inline-block";
+            body.classList.add("no-scroll"); // Add class to disable scrolling
 
-closeCartBtn.addEventListener("click", () => {
-  cartContent.style.display = "none";
-  closeCartBtn.style.display = "none";
-  openCartBtn.style.display = "inline-block";
-  overlay.style.display = 'none';
-  body.classList.remove("no-scroll"); // Remove class to enable scrolling
-});
+            setTimeout(() => {
+                overlay.style.opacity = '1';
+                cartContent.style.opacity = '1';
+            }, 10); // Adjust the delay (in milliseconds) if needed
+        });
+
+        closeCartBtn.addEventListener("click", () => {
+            // Fade out
+            overlay.style.opacity = '0';
+            cartContent.style.opacity = '0';
+
+            setTimeout(() => {
+                cartContent.style.display = "none";
+                closeCartBtn.style.display = "none";
+                openCartBtn.style.display = "inline-block";
+                overlay.style.display = 'none';
+                body.classList.remove("no-scroll"); // Remove class to enable scrolling
+            }, 300); // Adjust the delay to match the transition duration
+        });
 
 
 
@@ -4307,7 +4436,7 @@ card.appendChild(img);
 img.addEventListener("error", () => {
   // Hide the loader and display an alternative text or image for load errors
   loader2.style.display = "none";
-  img.src = "img/no photo.png"; // Replace with your error image path
+  img.src = "img/no photo.jpg"; // Replace with your error image path
   img.alt = "Image Load Error"; // Replace with your error message
 });
 
@@ -4370,7 +4499,14 @@ const formattedPrice = parseFloat(product.price).toLocaleString('en-US');
 price.innerText = `UGX ${formattedPrice}`;
 card.appendChild(price);
 
+// Add product price
+const wholesalePrice = document.createElement("h6");
+const formattedWholesalePrice = parseFloat(product.wholesalePrice).toLocaleString('en-US');
 
+wholesalePrice.innerHTML = ` Wholesale UGX:<span class="value"> ${formattedWholesalePrice}</span>`;
+wholesalePrice.classList.add("wholesale-price"); // Add your custom class name
+
+card.appendChild(wholesalePrice);
      
 // Create the "Add to Cart" button
 const addToCartBtn = document.createElement("button");
@@ -4629,6 +4765,11 @@ function updateCartCount(count) {
 addToCartBtn.addEventListener("click", () => {
     const cart = document.getElementById('cart-container')
     cart.style.display = 'block';
+    const closeCartBtn = document.getElementById("close-cart-btn");
+    closeCartBtn.style.display = 'none'
+    setTimeout(() => {
+        cart.style.opacity = '1';
+    }, 10);
   addToCart(product);
   updateCartTotal();
 
@@ -4658,29 +4799,40 @@ cartContent.style.display = "none"; // Hide the cart content on load
 
 const body = document.body;
 
-openCartBtn.addEventListener("click", () => {
-  if (cartIsEmpty()) {
-    cartContent.style.display = "none"; // Hide the cart content on load
+        openCartBtn.addEventListener("click", () => {
+            if (cartIsEmpty()) {
+                cartContent.style.display = "none"; // Hide the cart content on load
 
-    // Show a message or perform any desired action when cart is empty
-    return;
-  }
-  overlay.style.display = 'block';
-  cartContent.style.display = "block";
-  openCartBtn.style.display = "none";
-  closeCartBtn.style.display = "inline-block";
-  body.classList.add("no-scroll"); // Add class to disable scrolling
-});
+                // Show a message or perform any desired action when cart is empty
+                return;
+            }
 
-closeCartBtn.style.display = "none"; // Hide the close button initially
+            // Fade in
+            overlay.style.display = 'block';
+            cartContent.style.display = "block";
+            openCartBtn.style.display = "none";
+            closeCartBtn.style.display = "inline-block";
+            body.classList.add("no-scroll"); // Add class to disable scrolling
 
-closeCartBtn.addEventListener("click", () => {
-  cartContent.style.display = "none";
-  closeCartBtn.style.display = "none";
-  openCartBtn.style.display = "inline-block";
-  overlay.style.display = 'none';
-  body.classList.remove("no-scroll"); // Remove class to enable scrolling
-});
+            setTimeout(() => {
+                overlay.style.opacity = '1';
+                cartContent.style.opacity = '1';
+            }, 10); // Adjust the delay (in milliseconds) if needed
+        });
+
+        closeCartBtn.addEventListener("click", () => {
+            // Fade out
+            overlay.style.opacity = '0';
+            cartContent.style.opacity = '0';
+
+            setTimeout(() => {
+                cartContent.style.display = "none";
+                closeCartBtn.style.display = "none";
+                openCartBtn.style.display = "inline-block";
+                overlay.style.display = 'none';
+                body.classList.remove("no-scroll"); // Remove class to enable scrolling
+            }, 300); // Adjust the delay to match the transition duration
+        });
 
 
 function cartIsEmpty() {
@@ -4755,7 +4907,7 @@ card.appendChild(img);
 img.addEventListener("error", () => {
   // Hide the loader and display an alternative text or image for load errors
   loader2.style.display = "none";
-  img.src = "img/no photo.png"; // Replace with your error image path
+  img.src = "img/no photo.jpg"; // Replace with your error image path
   img.alt = "Image Load Error"; // Replace with your error message
 });
 
@@ -4817,7 +4969,14 @@ const formattedPrice = parseFloat(product.price).toLocaleString('en-US');
 price.innerText = `UGX ${formattedPrice}`;
 card.appendChild(price);
 
+// Add product price
+const wholesalePrice = document.createElement("h6");
+const formattedWholesalePrice = parseFloat(product.wholesalePrice).toLocaleString('en-US');
 
+wholesalePrice.innerHTML = ` Wholesale UGX:<span class="value"> ${formattedWholesalePrice}</span>`;
+wholesalePrice.classList.add("wholesale-price"); // Add your custom class name
+
+card.appendChild(wholesalePrice);
     
 // Create the "Add to Cart" button
 const addToCartBtn = document.createElement("button");
@@ -5076,10 +5235,16 @@ function updateCartCount(count) {
 addToCartBtn.addEventListener("click", () => {
     const cart = document.getElementById('cart-container')
     cart.style.display = 'block';
+    const closeCartBtn = document.getElementById("close-cart-btn");
+    closeCartBtn.style.display = 'none'
+    setTimeout(() => {
+        cart.style.opacity = '1';
+    }, 10);
   addToCart(product);
   updateCartTotal();
 
 });
+
 // Assuming `card` is the element representing the product card
 card.appendChild(addToCartBtn);
 
@@ -5104,29 +5269,40 @@ cartContent.style.display = "none"; // Hide the cart content on load
 
 const body = document.body;
 
-openCartBtn.addEventListener("click", () => {
-  if (cartIsEmpty()) {
-    cartContent.style.display = "none"; // Hide the cart content on load
+        openCartBtn.addEventListener("click", () => {
+            if (cartIsEmpty()) {
+                cartContent.style.display = "none"; // Hide the cart content on load
 
-    // Show a message or perform any desired action when cart is empty
-    return;
-  }
-  overlay.style.display = 'block';
-  cartContent.style.display = "block";
-  openCartBtn.style.display = "none";
-  closeCartBtn.style.display = "inline-block";
-  body.classList.add("no-scroll"); // Add class to disable scrolling
-});
+                // Show a message or perform any desired action when cart is empty
+                return;
+            }
 
-closeCartBtn.style.display = "none"; // Hide the close button initially
+            // Fade in
+            overlay.style.display = 'block';
+            cartContent.style.display = "block";
+            openCartBtn.style.display = "none";
+            closeCartBtn.style.display = "inline-block";
+            body.classList.add("no-scroll"); // Add class to disable scrolling
 
-closeCartBtn.addEventListener("click", () => {
-  cartContent.style.display = "none";
-  closeCartBtn.style.display = "none";
-  openCartBtn.style.display = "inline-block";
-  overlay.style.display = 'none';
-  body.classList.remove("no-scroll"); // Remove class to enable scrolling
-});
+            setTimeout(() => {
+                overlay.style.opacity = '1';
+                cartContent.style.opacity = '1';
+            }, 10); // Adjust the delay (in milliseconds) if needed
+        });
+
+        closeCartBtn.addEventListener("click", () => {
+            // Fade out
+            overlay.style.opacity = '0';
+            cartContent.style.opacity = '0';
+
+            setTimeout(() => {
+                cartContent.style.display = "none";
+                closeCartBtn.style.display = "none";
+                openCartBtn.style.display = "inline-block";
+                overlay.style.display = 'none';
+                body.classList.remove("no-scroll"); // Remove class to enable scrolling
+            }, 300); // Adjust the delay to match the transition duration
+        });
 
 
 
@@ -5201,7 +5377,7 @@ card.appendChild(img);
 img.addEventListener("error", () => {
   // Hide the loader and display an alternative text or image for load errors
   loader2.style.display = "none";
-  img.src = "img/no photo.png"; // Replace with your error image path
+  img.src = "img/no photo.jpg"; // Replace with your error image path
   img.alt = "Image Load Error"; // Replace with your error message
 });
 
@@ -5262,7 +5438,14 @@ const formattedPrice = parseFloat(product.price).toLocaleString('en-US');
 price.innerText = `UGX ${formattedPrice}`;
 card.appendChild(price);
 
+// Add product price
+const wholesalePrice = document.createElement("h6");
+const formattedWholesalePrice = parseFloat(product.wholesalePrice).toLocaleString('en-US');
 
+wholesalePrice.innerHTML = ` Wholesale UGX:<span class="value"> ${formattedWholesalePrice}</span>`;
+wholesalePrice.classList.add("wholesale-price"); // Add your custom class name
+
+card.appendChild(wholesalePrice);
     
 // Create the "Add to Cart" button
 const addToCartBtn = document.createElement("button");
@@ -5521,10 +5704,16 @@ function updateCartCount(count) {
 addToCartBtn.addEventListener("click", () => {
     const cart = document.getElementById('cart-container')
     cart.style.display = 'block';
+    const closeCartBtn = document.getElementById("close-cart-btn");
+    closeCartBtn.style.display = 'none'
+    setTimeout(() => {
+        cart.style.opacity = '1';
+    }, 10);
   addToCart(product);
   updateCartTotal();
 
 });
+
 
 // Assuming `card` is the element representing the product card
 card.appendChild(addToCartBtn);
@@ -5550,29 +5739,40 @@ cartContent.style.display = "none"; // Hide the cart content on load
 
 const body = document.body;
 
-openCartBtn.addEventListener("click", () => {
-  if (cartIsEmpty()) {
-    cartContent.style.display = "none"; // Hide the cart content on load
+        openCartBtn.addEventListener("click", () => {
+            if (cartIsEmpty()) {
+                cartContent.style.display = "none"; // Hide the cart content on load
 
-    // Show a message or perform any desired action when cart is empty
-    return;
-  }
-  overlay.style.display = 'block';
-  cartContent.style.display = "block";
-  openCartBtn.style.display = "none";
-  closeCartBtn.style.display = "inline-block";
-  body.classList.add("no-scroll"); // Add class to disable scrolling
-});
+                // Show a message or perform any desired action when cart is empty
+                return;
+            }
 
-closeCartBtn.style.display = "none"; // Hide the close button initially
+            // Fade in
+            overlay.style.display = 'block';
+            cartContent.style.display = "block";
+            openCartBtn.style.display = "none";
+            closeCartBtn.style.display = "inline-block";
+            body.classList.add("no-scroll"); // Add class to disable scrolling
 
-closeCartBtn.addEventListener("click", () => {
-  cartContent.style.display = "none";
-  closeCartBtn.style.display = "none";
-  openCartBtn.style.display = "inline-block";
-  overlay.style.display = 'none';
-  body.classList.remove("no-scroll"); // Remove class to enable scrolling
-});
+            setTimeout(() => {
+                overlay.style.opacity = '1';
+                cartContent.style.opacity = '1';
+            }, 10); // Adjust the delay (in milliseconds) if needed
+        });
+
+        closeCartBtn.addEventListener("click", () => {
+            // Fade out
+            overlay.style.opacity = '0';
+            cartContent.style.opacity = '0';
+
+            setTimeout(() => {
+                cartContent.style.display = "none";
+                closeCartBtn.style.display = "none";
+                openCartBtn.style.display = "inline-block";
+                overlay.style.display = 'none';
+                body.classList.remove("no-scroll"); // Remove class to enable scrolling
+            }, 300); // Adjust the delay to match the transition duration
+        });
 
 
 
@@ -5648,7 +5848,7 @@ card.appendChild(img);
 img.addEventListener("error", () => {
   // Hide the loader and display an alternative text or image for load errors
   loader2.style.display = "none";
-  img.src = "img/no photo.png"; // Replace with your error image path
+  img.src = "img/no photo.jpg"; // Replace with your error image path
   img.alt = "Image Load Error"; // Replace with your error message
 });
 
@@ -5709,7 +5909,14 @@ const formattedPrice = parseFloat(product.price).toLocaleString('en-US');
 price.innerText = `UGX ${formattedPrice}`;
 card.appendChild(price);
 
+// Add product price
+const wholesalePrice = document.createElement("h6");
+const formattedWholesalePrice = parseFloat(product.wholesalePrice).toLocaleString('en-US');
 
+wholesalePrice.innerHTML = ` Wholesale UGX:<span class="value"> ${formattedWholesalePrice}</span>`;
+wholesalePrice.classList.add("wholesale-price"); // Add your custom class name
+
+card.appendChild(wholesalePrice);
      
 // Create the "Add to Cart" button
 const addToCartBtn = document.createElement("button");
@@ -5968,6 +6175,11 @@ function updateCartCount(count) {
 addToCartBtn.addEventListener("click", () => {
     const cart = document.getElementById('cart-container')
     cart.style.display = 'block';
+    const closeCartBtn = document.getElementById("close-cart-btn");
+    closeCartBtn.style.display = 'none'
+    setTimeout(() => {
+        cart.style.opacity = '1';
+    }, 10);
   addToCart(product);
   updateCartTotal();
 
@@ -5997,29 +6209,40 @@ cartContent.style.display = "none"; // Hide the cart content on load
 
 const body = document.body;
 
-openCartBtn.addEventListener("click", () => {
-  if (cartIsEmpty()) {
-    cartContent.style.display = "none"; // Hide the cart content on load
+        openCartBtn.addEventListener("click", () => {
+            if (cartIsEmpty()) {
+                cartContent.style.display = "none"; // Hide the cart content on load
 
-    // Show a message or perform any desired action when cart is empty
-    return;
-  }
-  overlay.style.display = 'block';
-  cartContent.style.display = "block";
-  openCartBtn.style.display = "none";
-  closeCartBtn.style.display = "inline-block";
-  body.classList.add("no-scroll"); // Add class to disable scrolling
-});
+                // Show a message or perform any desired action when cart is empty
+                return;
+            }
 
-closeCartBtn.style.display = "none"; // Hide the close button initially
+            // Fade in
+            overlay.style.display = 'block';
+            cartContent.style.display = "block";
+            openCartBtn.style.display = "none";
+            closeCartBtn.style.display = "inline-block";
+            body.classList.add("no-scroll"); // Add class to disable scrolling
 
-closeCartBtn.addEventListener("click", () => {
-  cartContent.style.display = "none";
-  closeCartBtn.style.display = "none";
-  openCartBtn.style.display = "inline-block";
-  overlay.style.display = 'none';
-  body.classList.remove("no-scroll"); // Remove class to enable scrolling
-});
+            setTimeout(() => {
+                overlay.style.opacity = '1';
+                cartContent.style.opacity = '1';
+            }, 10); // Adjust the delay (in milliseconds) if needed
+        });
+
+        closeCartBtn.addEventListener("click", () => {
+            // Fade out
+            overlay.style.opacity = '0';
+            cartContent.style.opacity = '0';
+
+            setTimeout(() => {
+                cartContent.style.display = "none";
+                closeCartBtn.style.display = "none";
+                openCartBtn.style.display = "inline-block";
+                overlay.style.display = 'none';
+                body.classList.remove("no-scroll"); // Remove class to enable scrolling
+            }, 300); // Adjust the delay to match the transition duration
+        });
 
 
 function cartIsEmpty() {
@@ -6097,7 +6320,7 @@ card.appendChild(img);
 img.addEventListener("error", () => {
   // Hide the loader and display an alternative text or image for load errors
   loader2.style.display = "none";
-  img.src = "img/no photo.png"; // Replace with your error image path
+  img.src = "img/no photo.jpg"; // Replace with your error image path
   img.alt = "Image Load Error"; // Replace with your error message
 });
 
@@ -6169,7 +6392,14 @@ price.innerText = `UGX ${formattedPrice}`;
 newScreenCard.appendChild(price);
 
 
+// Add product price
+const wholesalePrice = document.createElement("h6");
+const formattedWholesalePrice = parseFloat(product.wholesalePrice).toLocaleString('en-US');
 
+wholesalePrice.innerHTML = ` Wholesale UGX:<span class="value"> ${formattedWholesalePrice}</span>`;
+wholesalePrice.classList.add("wholesale-price"); // Add your custom class name
+
+newScreenCard.appendChild(wholesalePrice);
 
       
       
@@ -6473,29 +6703,40 @@ cartContent.style.display = "none"; // Hide the cart content on load
 
 const body = document.body;
 
-openCartBtn.addEventListener("click", () => {
-  if (cartIsEmpty()) {
-    cartContent.style.display = "none"; // Hide the cart content on load
+        openCartBtn.addEventListener("click", () => {
+            if (cartIsEmpty()) {
+                cartContent.style.display = "none"; // Hide the cart content on load
 
-    // Show a message or perform any desired action when cart is empty
-    return;
-  }
-  overlay.style.display = 'block';
-  cartContent.style.display = "block";
-  openCartBtn.style.display = "none";
-  closeCartBtn.style.display = "inline-block";
-  body.classList.add("no-scroll"); // Add class to disable scrolling
-});
+                // Show a message or perform any desired action when cart is empty
+                return;
+            }
 
-closeCartBtn.style.display = "none"; // Hide the close button initially
+            // Fade in
+            overlay.style.display = 'block';
+            cartContent.style.display = "block";
+            openCartBtn.style.display = "none";
+            closeCartBtn.style.display = "inline-block";
+            body.classList.add("no-scroll"); // Add class to disable scrolling
 
-closeCartBtn.addEventListener("click", () => {
-  cartContent.style.display = "none";
-  closeCartBtn.style.display = "none";
-  openCartBtn.style.display = "inline-block";
-  overlay.style.display = 'none';
-  body.classList.remove("no-scroll"); // Remove class to enable scrolling
-});
+            setTimeout(() => {
+                overlay.style.opacity = '1';
+                cartContent.style.opacity = '1';
+            }, 10); // Adjust the delay (in milliseconds) if needed
+        });
+
+        closeCartBtn.addEventListener("click", () => {
+            // Fade out
+            overlay.style.opacity = '0';
+            cartContent.style.opacity = '0';
+
+            setTimeout(() => {
+                cartContent.style.display = "none";
+                closeCartBtn.style.display = "none";
+                openCartBtn.style.display = "inline-block";
+                overlay.style.display = 'none';
+                body.classList.remove("no-scroll"); // Remove class to enable scrolling
+            }, 300); // Adjust the delay to match the transition duration
+        });
 
 
 
@@ -6541,7 +6782,7 @@ function handleNewScreenScroll() {
 window.addEventListener("scroll", handleNewScreenScroll);
 
 // Function to load new screen cards with retries and backoff strategy
-function loadNewScreenCardsWithRetriesAndBackoff(retries = 5, initialDelay = 1000, maxDelay = 16000) {
+function loadNewScreenCardsWithRetriesAndBackoff(retries = 5, initialDelay = 3000, maxDelay = 16000) {
   // Retry loading new screen cards with backoff
   function retryLoad(delay) {
     setTimeout(() => {
@@ -6629,7 +6870,7 @@ card.appendChild(img);
 img.addEventListener("error", () => {
   // Hide the loader and display an alternative text or image for load errors
   loader2.style.display = "none";
-  img.src = "img/no photo.png"; // Replace with your error image path
+  img.src = "img/no photo.jpg"; // Replace with your error image path
   img.alt = "Image Load Error"; // Replace with your error message
 });
 
@@ -6700,7 +6941,14 @@ price.innerText = `UGX ${formattedPrice}`;
 gradeBScreenCard.appendChild(price);
 
       
+// Add product price
+const wholesalePrice = document.createElement("h6");
+const formattedWholesalePrice = parseFloat(product.wholesalePrice).toLocaleString('en-US');
 
+wholesalePrice.innerHTML = ` Wholesale UGX:<span class="value"> ${formattedWholesalePrice}</span>`;
+wholesalePrice.classList.add("wholesale-price"); // Add your custom class name
+
+gradeBScreenCard.appendChild(wholesalePrice);
 
 
 
@@ -6979,10 +7227,16 @@ function updateCartCount(count) {
 addToCartBtn.addEventListener("click", () => {
     const cart = document.getElementById('cart-container')
     cart.style.display = 'block';
+    const closeCartBtn = document.getElementById("close-cart-btn");
+    closeCartBtn.style.display = 'none'
+    setTimeout(() => {
+        cart.style.opacity = '1';
+    }, 10);
   addToCart(product);
   updateCartTotal();
 
 });
+
 
 // Assuming `card` is the element representing the product card
 gradeBScreenCard.appendChild(addToCartBtn);
@@ -7008,29 +7262,40 @@ cartContent.style.display = "none"; // Hide the cart content on load
 
 const body = document.body;
 
-openCartBtn.addEventListener("click", () => {
-  if (cartIsEmpty()) {
-    cartContent.style.display = "none"; // Hide the cart content on load
+        openCartBtn.addEventListener("click", () => {
+            if (cartIsEmpty()) {
+                cartContent.style.display = "none"; // Hide the cart content on load
 
-    // Show a message or perform any desired action when cart is empty
-    return;
-  }
-  overlay.style.display = 'block';
-  cartContent.style.display = "block";
-  openCartBtn.style.display = "none";
-  closeCartBtn.style.display = "inline-block";
-  body.classList.add("no-scroll"); // Add class to disable scrolling
-});
+                // Show a message or perform any desired action when cart is empty
+                return;
+            }
 
-closeCartBtn.style.display = "none"; // Hide the close button initially
+            // Fade in
+            overlay.style.display = 'block';
+            cartContent.style.display = "block";
+            openCartBtn.style.display = "none";
+            closeCartBtn.style.display = "inline-block";
+            body.classList.add("no-scroll"); // Add class to disable scrolling
 
-closeCartBtn.addEventListener("click", () => {
-  cartContent.style.display = "none";
-  closeCartBtn.style.display = "none";
-  openCartBtn.style.display = "inline-block";
-  overlay.style.display = 'none';
-  body.classList.remove("no-scroll"); // Remove class to enable scrolling
-});
+            setTimeout(() => {
+                overlay.style.opacity = '1';
+                cartContent.style.opacity = '1';
+            }, 10); // Adjust the delay (in milliseconds) if needed
+        });
+
+        closeCartBtn.addEventListener("click", () => {
+            // Fade out
+            overlay.style.opacity = '0';
+            cartContent.style.opacity = '0';
+
+            setTimeout(() => {
+                cartContent.style.display = "none";
+                closeCartBtn.style.display = "none";
+                openCartBtn.style.display = "inline-block";
+                overlay.style.display = 'none';
+                body.classList.remove("no-scroll"); // Remove class to enable scrolling
+            }, 300); // Adjust the delay to match the transition duration
+        });
 
 
 function cartIsEmpty() {
@@ -7075,7 +7340,7 @@ function handleGradeBScreenScroll() {
 // Attach scroll event listener for gradeB screens
 window.addEventListener("scroll", handleGradeBScreenScroll);
 // Function to load gradeB screen cards with retries and backoff strategy
-function loadGradeBScreenCardsWithRetriesAndBackoff(retries = 5, initialDelay = 1000, maxDelay = 16000) {
+function loadGradeBScreenCardsWithRetriesAndBackoff(retries = 5, initialDelay = 3000, maxDelay = 16000) {
   // Retry loading gradeB screen cards with backoff
   function retryLoad(delay) {
     setTimeout(() => {
@@ -7153,7 +7418,7 @@ card.appendChild(img);
 img.addEventListener("error", () => {
   // Hide the loader and display an alternative text or image for load errors
   loader2.style.display = "none";
-  img.src = "img/no photo.png"; // Replace with your error image path
+  img.src = "img/no photo.jpg"; // Replace with your error image path
   img.alt = "Image Load Error"; // Replace with your error message
 });
 
@@ -7224,7 +7489,14 @@ price.innerText = `UGX ${formattedPrice}`;
 portCard.appendChild(price);
 
       
+// Add product price
+const wholesalePrice = document.createElement("h6");
+const formattedWholesalePrice = parseFloat(product.wholesalePrice).toLocaleString('en-US');
 
+wholesalePrice.innerHTML = ` Wholesale UGX:<span class="value"> ${formattedWholesalePrice}</span>`;
+wholesalePrice.classList.add("wholesale-price"); // Add your custom class name
+
+portCard.appendChild(wholesalePrice);
 
 
       
@@ -7500,10 +7772,16 @@ function updateCartCount(count) {
 addToCartBtn.addEventListener("click", () => {
     const cart = document.getElementById('cart-container')
     cart.style.display = 'block';
+    const closeCartBtn = document.getElementById("close-cart-btn");
+    closeCartBtn.style.display = 'none'
+    setTimeout(() => {
+        cart.style.opacity = '1';
+    }, 10);
   addToCart(product);
   updateCartTotal();
 
 });
+
 
 // Assuming `card` is the element representing the product card
 portCard.appendChild(addToCartBtn);
@@ -7529,29 +7807,40 @@ cartContent.style.display = "none"; // Hide the cart content on load
 
 const body = document.body;
 
-openCartBtn.addEventListener("click", () => {
-  if (cartIsEmpty()) {
-    cartContent.style.display = "none"; // Hide the cart content on load
+        openCartBtn.addEventListener("click", () => {
+            if (cartIsEmpty()) {
+                cartContent.style.display = "none"; // Hide the cart content on load
 
-    // Show a message or perform any desired action when cart is empty
-    return;
-  }
-  overlay.style.display = 'block';
-  cartContent.style.display = "block";
-  openCartBtn.style.display = "none";
-  closeCartBtn.style.display = "inline-block";
-  body.classList.add("no-scroll"); // Add class to disable scrolling
-});
+                // Show a message or perform any desired action when cart is empty
+                return;
+            }
 
-closeCartBtn.style.display = "none"; // Hide the close button initially
+            // Fade in
+            overlay.style.display = 'block';
+            cartContent.style.display = "block";
+            openCartBtn.style.display = "none";
+            closeCartBtn.style.display = "inline-block";
+            body.classList.add("no-scroll"); // Add class to disable scrolling
 
-closeCartBtn.addEventListener("click", () => {
-  cartContent.style.display = "none";
-  closeCartBtn.style.display = "none";
-  openCartBtn.style.display = "inline-block";
-  overlay.style.display = 'none';
-  body.classList.remove("no-scroll"); // Remove class to enable scrolling
-});
+            setTimeout(() => {
+                overlay.style.opacity = '1';
+                cartContent.style.opacity = '1';
+            }, 10); // Adjust the delay (in milliseconds) if needed
+        });
+
+        closeCartBtn.addEventListener("click", () => {
+            // Fade out
+            overlay.style.opacity = '0';
+            cartContent.style.opacity = '0';
+
+            setTimeout(() => {
+                cartContent.style.display = "none";
+                closeCartBtn.style.display = "none";
+                openCartBtn.style.display = "inline-block";
+                overlay.style.display = 'none';
+                body.classList.remove("no-scroll"); // Remove class to enable scrolling
+            }, 300); // Adjust the delay to match the transition duration
+        });
 
 
 function cartIsEmpty() {
@@ -7599,7 +7888,7 @@ function handlePortScroll() {
 // Attach scroll event listener for ports
 window.addEventListener("scroll", handlePortScroll);
 // Function to load port cards with retries and backoff strategy
-function loadPortCardsWithRetriesAndBackoff(retries = 5, initialDelay = 1000, maxDelay = 16000) {
+function loadPortCardsWithRetriesAndBackoff(retries = 5, initialDelay = 3000, maxDelay = 16000) {
   // Retry loading port cards with backoff
   function retryLoad(delay) {
     setTimeout(() => {
@@ -7676,7 +7965,7 @@ card.appendChild(img);
 img.addEventListener("error", () => {
   // Hide the loader and display an alternative text or image for load errors
   loader2.style.display = "none";
-  img.src = "img/no photo.png"; // Replace with your error image path
+  img.src = "img/no photo.jpg"; // Replace with your error image path
   img.alt = "Image Load Error"; // Replace with your error message
 });
 
@@ -7748,7 +8037,14 @@ price.innerText = `UGX ${formattedPrice}`;
 card.appendChild(price);
 
       
+// Add product price
+const wholesalePrice = document.createElement("h6");
+const formattedWholesalePrice = parseFloat(product.wholesalePrice).toLocaleString('en-US');
 
+wholesalePrice.innerHTML = ` Wholesale UGX:<span class="value"> ${formattedWholesalePrice}</span>`;
+wholesalePrice.classList.add("wholesale-price"); // Add your custom class name
+
+card.appendChild(wholesalePrice);
 
 
       
@@ -8026,6 +8322,11 @@ function updateCartCount(count) {
 addToCartBtn.addEventListener("click", () => {
     const cart = document.getElementById('cart-container')
     cart.style.display = 'block';
+    const closeCartBtn = document.getElementById("close-cart-btn");
+    closeCartBtn.style.display = 'none'
+    setTimeout(() => {
+        cart.style.opacity = '1';
+    }, 10);
   addToCart(product);
   updateCartTotal();
 
@@ -8055,29 +8356,40 @@ cartContent.style.display = "none"; // Hide the cart content on load
 
 const body = document.body;
 
-openCartBtn.addEventListener("click", () => {
-  if (cartIsEmpty()) {
-    cartContent.style.display = "none"; // Hide the cart content on load
+        openCartBtn.addEventListener("click", () => {
+            if (cartIsEmpty()) {
+                cartContent.style.display = "none"; // Hide the cart content on load
 
-    // Show a message or perform any desired action when cart is empty
-    return;
-  }
-  overlay.style.display = 'block';
-  cartContent.style.display = "block";
-  openCartBtn.style.display = "none";
-  closeCartBtn.style.display = "inline-block";
-  body.classList.add("no-scroll"); // Add class to disable scrolling
-});
+                // Show a message or perform any desired action when cart is empty
+                return;
+            }
 
-closeCartBtn.style.display = "none"; // Hide the close button initially
+            // Fade in
+            overlay.style.display = 'block';
+            cartContent.style.display = "block";
+            openCartBtn.style.display = "none";
+            closeCartBtn.style.display = "inline-block";
+            body.classList.add("no-scroll"); // Add class to disable scrolling
 
-closeCartBtn.addEventListener("click", () => {
-  cartContent.style.display = "none";
-  closeCartBtn.style.display = "none";
-  openCartBtn.style.display = "inline-block";
-  overlay.style.display = 'none';
-  body.classList.remove("no-scroll"); // Remove class to enable scrolling
-});
+            setTimeout(() => {
+                overlay.style.opacity = '1';
+                cartContent.style.opacity = '1';
+            }, 10); // Adjust the delay (in milliseconds) if needed
+        });
+
+        closeCartBtn.addEventListener("click", () => {
+            // Fade out
+            overlay.style.opacity = '0';
+            cartContent.style.opacity = '0';
+
+            setTimeout(() => {
+                cartContent.style.display = "none";
+                closeCartBtn.style.display = "none";
+                openCartBtn.style.display = "inline-block";
+                overlay.style.display = 'none';
+                body.classList.remove("no-scroll"); // Remove class to enable scrolling
+            }, 300); // Adjust the delay to match the transition duration
+        });
 
 
 function cartIsEmpty() {
@@ -8125,7 +8437,7 @@ function handleScrollTouches() {
 window.addEventListener("scroll", handleScrollTouches);
 
 // Function to load touches cards with retries and backoff strategy
-function loadTouchesCardsWithRetriesAndBackoff(retries = 5, initialDelay = 1000, maxDelay = 16000) {
+function loadTouchesCardsWithRetriesAndBackoff(retries = 5, initialDelay = 3000, maxDelay = 16000) {
   // Retry loading touches cards with backoff
   function retryLoad(delay) {
     setTimeout(() => {
@@ -8212,7 +8524,7 @@ card.appendChild(img);
 img.addEventListener("error", () => {
   // Hide the loader and display an alternative text or image for load errors
   loader2.style.display = "none";
-  img.src = "img/no photo.png"; // Replace with your error image path
+  img.src = "img/no photo.jpg"; // Replace with your error image path
   img.alt = "Image Load Error"; // Replace with your error message
 });
 
@@ -8284,7 +8596,14 @@ card.appendChild(price);
 
 
 
+// Add product price
+const wholesalePrice = document.createElement("h6");
+const formattedWholesalePrice = parseFloat(product.wholesalePrice).toLocaleString('en-US');
 
+wholesalePrice.innerHTML = ` Wholesale UGX:<span class="value"> ${formattedWholesalePrice}</span>`;
+wholesalePrice.classList.add("wholesale-price"); // Add your custom class name
+
+card.appendChild(wholesalePrice);
 
       
       
@@ -8559,10 +8878,16 @@ function updateCartCount(count) {
 addToCartBtn.addEventListener("click", () => {
     const cart = document.getElementById('cart-container')
     cart.style.display = 'block';
+    const closeCartBtn = document.getElementById("close-cart-btn");
+    closeCartBtn.style.display = 'none'
+    setTimeout(() => {
+        cart.style.opacity = '1';
+    }, 10);
   addToCart(product);
   updateCartTotal();
 
 });
+
 // Assuming `card` is the element representing the product card
 card.appendChild(addToCartBtn);
 
@@ -8588,29 +8913,40 @@ cartContent.style.display = "none"; // Hide the cart content on load
 
 const body = document.body;
 
-openCartBtn.addEventListener("click", () => {
-  if (cartIsEmpty()) {
-    cartContent.style.display = "none"; // Hide the cart content on load
+        openCartBtn.addEventListener("click", () => {
+            if (cartIsEmpty()) {
+                cartContent.style.display = "none"; // Hide the cart content on load
 
-    // Show a message or perform any desired action when cart is empty
-    return;
-  }
-  overlay.style.display = 'block';
-  cartContent.style.display = "block";
-  openCartBtn.style.display = "none";
-  closeCartBtn.style.display = "inline-block";
-  body.classList.add("no-scroll"); // Add class to disable scrolling
-});
+                // Show a message or perform any desired action when cart is empty
+                return;
+            }
 
-closeCartBtn.style.display = "none"; // Hide the close button initially
+            // Fade in
+            overlay.style.display = 'block';
+            cartContent.style.display = "block";
+            openCartBtn.style.display = "none";
+            closeCartBtn.style.display = "inline-block";
+            body.classList.add("no-scroll"); // Add class to disable scrolling
 
-closeCartBtn.addEventListener("click", () => {
-  cartContent.style.display = "none";
-  closeCartBtn.style.display = "none";
-  openCartBtn.style.display = "inline-block";
-  overlay.style.display = 'none';
-  body.classList.remove("no-scroll"); // Remove class to enable scrolling
-});
+            setTimeout(() => {
+                overlay.style.opacity = '1';
+                cartContent.style.opacity = '1';
+            }, 10); // Adjust the delay (in milliseconds) if needed
+        });
+
+        closeCartBtn.addEventListener("click", () => {
+            // Fade out
+            overlay.style.opacity = '0';
+            cartContent.style.opacity = '0';
+
+            setTimeout(() => {
+                cartContent.style.display = "none";
+                closeCartBtn.style.display = "none";
+                openCartBtn.style.display = "inline-block";
+                overlay.style.display = 'none';
+                body.classList.remove("no-scroll"); // Remove class to enable scrolling
+            }, 300); // Adjust the delay to match the transition duration
+        });
 
 
 function cartIsEmpty() {
@@ -8640,7 +8976,7 @@ function handleScroll() {
 // Attach scroll event listener
 window.addEventListener("scroll", handleScroll);
 // Function to load cards with retries and backoff strategy
-function loadCardsWithRetriesAndBackoff(dataRef, loadFunction, retries = 5, initialDelay = 1000, maxDelay = 16000) {
+function loadCardsWithRetriesAndBackoff(dataRef, loadFunction, retries = 5, initialDelay = 3000, maxDelay = 16000) {
   // Retry loading cards with backoff
   function retryLoad(delay) {
     setTimeout(() => {
@@ -8713,7 +9049,7 @@ card.appendChild(img);
 img.addEventListener("error", () => {
   // Hide the loader and display an alternative text or image for load errors
   loader2.style.display = "none";
-  img.src = "img/no photo.png"; // Replace with your error image path
+  img.src = "img/no photo.jpg"; // Replace with your error image path
   img.alt = "Image Load Error"; // Replace with your error message
 });
 
@@ -8784,7 +9120,14 @@ price.innerText = `UGX ${formattedPrice}`;
 card.appendChild(price);
 
       
+// Add product price
+const wholesalePrice = document.createElement("h6");
+const formattedWholesalePrice = parseFloat(product.wholesalePrice).toLocaleString('en-US');
 
+wholesalePrice.innerHTML = ` Wholesale UGX:<span class="value"> ${formattedWholesalePrice}</span>`;
+wholesalePrice.classList.add("wholesale-price"); // Add your custom class name
+
+card.appendChild(wholesalePrice);
 
       
       
@@ -9061,10 +9404,16 @@ function updateCartCount(count) {
 addToCartBtn.addEventListener("click", () => {
     const cart = document.getElementById('cart-container')
     cart.style.display = 'block';
+    const closeCartBtn = document.getElementById("close-cart-btn");
+    closeCartBtn.style.display = 'none'
+    setTimeout(() => {
+        cart.style.opacity = '1';
+    }, 10);
   addToCart(product);
   updateCartTotal();
 
 });
+
 // Assuming `card` is the element representing the product card
 card.appendChild(addToCartBtn);
 
@@ -9089,29 +9438,40 @@ cartContent.style.display = "none"; // Hide the cart content on load
 
 const body = document.body;
 
-openCartBtn.addEventListener("click", () => {
-  if (cartIsEmpty()) {
-    cartContent.style.display = "none"; // Hide the cart content on load
+        openCartBtn.addEventListener("click", () => {
+            if (cartIsEmpty()) {
+                cartContent.style.display = "none"; // Hide the cart content on load
 
-    // Show a message or perform any desired action when cart is empty
-    return;
-  }
-  overlay.style.display = 'block';
-  cartContent.style.display = "block";
-  openCartBtn.style.display = "none";
-  closeCartBtn.style.display = "inline-block";
-  body.classList.add("no-scroll"); // Add class to disable scrolling
-});
+                // Show a message or perform any desired action when cart is empty
+                return;
+            }
 
-closeCartBtn.style.display = "none"; // Hide the close button initially
+            // Fade in
+            overlay.style.display = 'block';
+            cartContent.style.display = "block";
+            openCartBtn.style.display = "none";
+            closeCartBtn.style.display = "inline-block";
+            body.classList.add("no-scroll"); // Add class to disable scrolling
 
-closeCartBtn.addEventListener("click", () => {
-  cartContent.style.display = "none";
-  closeCartBtn.style.display = "none";
-  openCartBtn.style.display = "inline-block";
-  overlay.style.display = 'none';
-  body.classList.remove("no-scroll"); // Remove class to enable scrolling
-});
+            setTimeout(() => {
+                overlay.style.opacity = '1';
+                cartContent.style.opacity = '1';
+            }, 10); // Adjust the delay (in milliseconds) if needed
+        });
+
+        closeCartBtn.addEventListener("click", () => {
+            // Fade out
+            overlay.style.opacity = '0';
+            cartContent.style.opacity = '0';
+
+            setTimeout(() => {
+                cartContent.style.display = "none";
+                closeCartBtn.style.display = "none";
+                openCartBtn.style.display = "inline-block";
+                overlay.style.display = 'none';
+                body.classList.remove("no-scroll"); // Remove class to enable scrolling
+            }, 300); // Adjust the delay to match the transition duration
+        });
 
 
 function cartIsEmpty() {
@@ -9158,7 +9518,7 @@ function handleScrollNew() {
 window.addEventListener("scroll", handleScrollNew);
 
 // Function to load cards with retries and backoff strategy
-function loadCardsWithRetryAndBackoff(dataRef, loadFunction, retries = 5, initialDelay = 1000, maxDelay = 16000) {
+function loadCardsWithRetryAndBackoff(dataRef, loadFunction, retries = 5, initialDelay = 3000, maxDelay = 16000) {
   // Retry loading cards with backoff
   function retryLoad(delay) {
     setTimeout(() => {
