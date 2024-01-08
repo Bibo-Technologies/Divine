@@ -2916,7 +2916,7 @@ const body = document.body;
         openCartBtn.addEventListener("click", () => {
             if (cartIsEmpty()) {
                 cartContent.style.display = "none"; // Hide the cart content on load
-
+                showAddToCartMessage('Cart is Empty! Nothing is')
                 // Show a message or perform any desired action when cart is empty
                 return;
             }
@@ -3389,7 +3389,7 @@ const body = document.body;
         openCartBtn.addEventListener("click", () => {
             if (cartIsEmpty()) {
                 cartContent.style.display = "none"; // Hide the cart content on load
-
+                showAddToCartMessage('Cart is Empty! Nothing is')
                 // Show a message or perform any desired action when cart is empty
                 return;
             }
@@ -3860,7 +3860,7 @@ const body = document.body;
         openCartBtn.addEventListener("click", () => {
             if (cartIsEmpty()) {
                 cartContent.style.display = "none"; // Hide the cart content on load
-
+                showAddToCartMessage('Cart is Empty! Nothing is')
                 // Show a message or perform any desired action when cart is empty
                 return;
             }
@@ -4328,7 +4328,7 @@ const body = document.body;
         openCartBtn.addEventListener("click", () => {
             if (cartIsEmpty()) {
                 cartContent.style.display = "none"; // Hide the cart content on load
-
+                showAddToCartMessage('Cart is Empty! Nothing is')
                 // Show a message or perform any desired action when cart is empty
                 return;
             }
@@ -4802,7 +4802,7 @@ const body = document.body;
         openCartBtn.addEventListener("click", () => {
             if (cartIsEmpty()) {
                 cartContent.style.display = "none"; // Hide the cart content on load
-
+                showAddToCartMessage('Cart is Empty! Nothing is')
                 // Show a message or perform any desired action when cart is empty
                 return;
             }
@@ -5272,7 +5272,7 @@ const body = document.body;
         openCartBtn.addEventListener("click", () => {
             if (cartIsEmpty()) {
                 cartContent.style.display = "none"; // Hide the cart content on load
-
+                showAddToCartMessage('Cart is Empty! Nothing is')
                 // Show a message or perform any desired action when cart is empty
                 return;
             }
@@ -5742,7 +5742,7 @@ const body = document.body;
         openCartBtn.addEventListener("click", () => {
             if (cartIsEmpty()) {
                 cartContent.style.display = "none"; // Hide the cart content on load
-
+                showAddToCartMessage('Cart is Empty! Nothing is')
                 // Show a message or perform any desired action when cart is empty
                 return;
             }
@@ -6212,7 +6212,7 @@ const body = document.body;
         openCartBtn.addEventListener("click", () => {
             if (cartIsEmpty()) {
                 cartContent.style.display = "none"; // Hide the cart content on load
-
+                showAddToCartMessage('Cart is Empty! Nothing is')
                 // Show a message or perform any desired action when cart is empty
                 return;
             }
@@ -6706,7 +6706,7 @@ const body = document.body;
         openCartBtn.addEventListener("click", () => {
             if (cartIsEmpty()) {
                 cartContent.style.display = "none"; // Hide the cart content on load
-
+                showAddToCartMessage('Cart is Empty! Nothing is')
                 // Show a message or perform any desired action when cart is empty
                 return;
             }
@@ -7265,7 +7265,7 @@ const body = document.body;
         openCartBtn.addEventListener("click", () => {
             if (cartIsEmpty()) {
                 cartContent.style.display = "none"; // Hide the cart content on load
-
+                showAddToCartMessage('Cart is Empty! Nothing is')
                 // Show a message or perform any desired action when cart is empty
                 return;
             }
@@ -7810,7 +7810,7 @@ const body = document.body;
         openCartBtn.addEventListener("click", () => {
             if (cartIsEmpty()) {
                 cartContent.style.display = "none"; // Hide the cart content on load
-
+                showAddToCartMessage('Cart is Empty! Nothing is')
                 // Show a message or perform any desired action when cart is empty
                 return;
             }
@@ -8359,7 +8359,7 @@ const body = document.body;
         openCartBtn.addEventListener("click", () => {
             if (cartIsEmpty()) {
                 cartContent.style.display = "none"; // Hide the cart content on load
-
+                showAddToCartMessage('Cart is Empty! Nothing is')
                 // Show a message or perform any desired action when cart is empty
                 return;
             }
@@ -8916,7 +8916,7 @@ const body = document.body;
         openCartBtn.addEventListener("click", () => {
             if (cartIsEmpty()) {
                 cartContent.style.display = "none"; // Hide the cart content on load
-
+                showAddToCartMessage('Cart is Empty! Nothing is')
                 // Show a message or perform any desired action when cart is empty
                 return;
             }
@@ -9441,7 +9441,7 @@ const body = document.body;
         openCartBtn.addEventListener("click", () => {
             if (cartIsEmpty()) {
                 cartContent.style.display = "none"; // Hide the cart content on load
-
+                showAddToCartMessage('Cart is Empty! Nothing is')
                 // Show a message or perform any desired action when cart is empty
                 return;
             }
