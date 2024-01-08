@@ -1404,6 +1404,8 @@ transition: all 0.3s ease-in-out;
         z-index: 99999;
         overflow-y: auto;
         opacity: 0;
+        transition: opacity 0.2s ease-in-out;
+
     }
 
 
@@ -3144,4 +3146,18 @@ margin-bottom: 5px;
   font-weight: 600;
   font-style: small;
 margin-bottom: 5px;
+}
+
+/* Add these styles to your CSS */
+.success-message {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+  transition: transform 0.3s ease-in-out;
+  z-index: 99999;
 }

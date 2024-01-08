@@ -29,27 +29,33 @@
         <h1 class="card-title">Add Electronics</h1>
         <form id="form" class="card-body">
           <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" class="form-control" required>
+              <label for="name">Name:</label>
+              <input type="text" id="name" name="name" class="form-control" required>
           </div>
       
           <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea id="description" name="description" class="form-control" required></textarea>
+              <label for="description">Description:</label>
+              <textarea id="description" name="description" class="form-control" required></textarea>
           </div>
       
           <div class="form-group">
-            <label for="price">Price:</label>
-            <input type="number" id="price" name="price" class="form-control" required>
+              <label for="price">Price:</label>
+              <input type="number" id="price" name="price" class="form-control" required>
           </div>
       
           <div class="form-group">
-            <label for="image">Image:</label>
-            <input type="file" id="image" name="image" accept="image/*" class="form-control" required>
+              <label for="wholesalePrice">Wholesale Price:</label>
+              <input type="number" id="wholesalePrice" name="wholesalePrice" class="form-control">
+          </div>
+      
+          <div class="form-group">
+              <label for="image">Image:</label>
+              <input type="file" id="image" name="image" accept="image/*" class="form-control" required>
           </div>
       
           <button style="width:30%;" type="submit" id="submit" class="btn btn-primary">Add Product</button>
-        </form>
+      </form>
+      
       
        
       
@@ -147,6 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const name = document.getElementById('name').value;
     const description = document.getElementById('description').value;
     const price = document.getElementById('price').value;
+    const wholesalePrice = document.getElementById('wholesalePrice').value; // Added line
     const file = document.getElementById('image').files[0];
 
     // Convert image to WebP format
@@ -160,11 +167,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const downloadURL = await getDownloadURL(fileRef);
 
     const newProduct = {
-      name,
-      description,
-      price,
-      image: downloadURL,
+        name,
+        description,
+        price,
+        wholesalePrice, // Added line
+        image: downloadURL,
     };
+
     await set(child(productsRef, name), newProduct);
 
     form.reset();
@@ -172,10 +181,11 @@ document.addEventListener('DOMContentLoaded', () => {
     successMessage.innerText = 'Success! Your product has been added.';
     successMessage.style.display = 'block'; // Display the success message
     setTimeout(() => {
-      successMessage.innerText = '';
-      successMessage.style.display = 'none';
+        successMessage.innerText = '';
+        successMessage.style.display = 'none';
     }, 5000);
-  });
+});
+
 
   // Function to convert image to WebP
   async function convertToWebP(file) {
