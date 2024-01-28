@@ -1991,24 +1991,28 @@ function closeRatingPopup() {
   // Hide the rating modal
   ratingModal.style.display = "none";
 }
+\
 
 */
-        // Add fast delivery sticker with icon
-  const stickerContainer = document.createElement("div");
-  stickerContainer.classList.add("sticker-container");
-
-  const fastDeliverySticker = document.createElement("div");
-  fastDeliverySticker.classList.add("sticker", "fast-delivery");
-  fastDeliverySticker.innerHTML = '... <i class="fas fa-truck"></i> Fast Delivery';
-
-  stickerContainer.appendChild(fastDeliverySticker);
-  card.appendChild(stickerContainer);
-
-
       // Add product description
-      const desc = document.createElement("p");
-      desc.innerText = product.description;
-      card.appendChild(desc);
+const maxDescriptionLength = 70; // Set your desired maximum length
+
+const desc = document.createElement("p");
+const originalDescription = product.description;
+
+if (originalDescription.length > maxDescriptionLength) {
+    // Truncate the description if it's too long
+    const truncatedDescription = originalDescription.substring(0, maxDescriptionLength);
+    desc.innerText = truncatedDescription + '...';
+
+    // Add a tooltip with the full description
+    desc.title = originalDescription;
+} else {
+    desc.innerText = originalDescription;
+}
+
+card.appendChild(desc);
+
 
 
 
@@ -2590,23 +2594,28 @@ ratingCount.innerText = `(${formattedRating}) 5 star ratings`;
 card.appendChild(ratingCount);
 
 
-              // Add fast delivery sticker with icon
-  const stickerContainer = document.createElement("div");
-  stickerContainer.classList.add("sticker-container");
-
-  const fastDeliverySticker = document.createElement("div");
-  fastDeliverySticker.classList.add("sticker", "fast-delivery");
-  fastDeliverySticker.innerHTML = '... <i class="fas fa-truck"></i> Fast Delivery';
-
-  stickerContainer.appendChild(fastDeliverySticker);
-  card.appendChild(stickerContainer);
 
 
 
       // Add product description
-      const desc = document.createElement("p");
-      desc.innerText = product.description;
-      card.appendChild(desc);
+const maxDescriptionLength = 70; // Set your desired maximum length
+
+const desc = document.createElement("p");
+const originalDescription = product.description;
+
+if (originalDescription.length > maxDescriptionLength) {
+    // Truncate the description if it's too long
+    const truncatedDescription = originalDescription.substring(0, maxDescriptionLength);
+    desc.innerText = truncatedDescription + '...';
+
+    // Add a tooltip with the full description
+    desc.title = originalDescription;
+} else {
+    desc.innerText = originalDescription;
+}
+
+card.appendChild(desc);
+
 // Add product price
 const price = document.createElement("h4");
 const formattedPrice = parseFloat(product.price).toLocaleString('en-US');
@@ -3064,21 +3073,26 @@ card.appendChild(ratingCount);
 
 
 
-              // Add fast delivery sticker with icon
-  const stickerContainer = document.createElement("div");
-  stickerContainer.classList.add("sticker-container");
-
-  const fastDeliverySticker = document.createElement("div");
-  fastDeliverySticker.classList.add("sticker", "fast-delivery");
-  fastDeliverySticker.innerHTML = '... <i class="fas fa-truck"></i> Fast Delivery';
-
-  stickerContainer.appendChild(fastDeliverySticker);
-  card.appendChild(stickerContainer);
 
       // Add product description
-      const desc = document.createElement("p");
-      desc.innerText = product.description;
-      card.appendChild(desc);
+const maxDescriptionLength = 70; // Set your desired maximum length
+
+const desc = document.createElement("p");
+const originalDescription = product.description;
+
+if (originalDescription.length > maxDescriptionLength) {
+    // Truncate the description if it's too long
+    const truncatedDescription = originalDescription.substring(0, maxDescriptionLength);
+    desc.innerText = truncatedDescription + '...';
+
+    // Add a tooltip with the full description
+    desc.title = originalDescription;
+} else {
+    desc.innerText = originalDescription;
+}
+
+card.appendChild(desc);
+
 // Add product price
 const price = document.createElement("h4");
 const formattedPrice = parseFloat(product.price).toLocaleString('en-US');
@@ -3535,23 +3549,28 @@ card.appendChild(ratingCount);
 
 
 
-              // Add fast delivery sticker with icon
-  const stickerContainer = document.createElement("div");
-  stickerContainer.classList.add("sticker-container");
-
-  const fastDeliverySticker = document.createElement("div");
-  fastDeliverySticker.classList.add("sticker", "fast-delivery");
-  fastDeliverySticker.innerHTML = '... <i class="fas fa-truck"></i> Fast Delivery';
-
-  stickerContainer.appendChild(fastDeliverySticker);
-  card.appendChild(stickerContainer);
 
 
 
       // Add product description
-      const desc = document.createElement("p");
-      desc.innerText = product.description;
-      card.appendChild(desc);
+const maxDescriptionLength = 70; // Set your desired maximum length
+
+const desc = document.createElement("p");
+const originalDescription = product.description;
+
+if (originalDescription.length > maxDescriptionLength) {
+    // Truncate the description if it's too long
+    const truncatedDescription = originalDescription.substring(0, maxDescriptionLength);
+    desc.innerText = truncatedDescription + '...';
+
+    // Add a tooltip with the full description
+    desc.title = originalDescription;
+} else {
+    desc.innerText = originalDescription;
+}
+
+card.appendChild(desc);
+
 // Add product price
 const price = document.createElement("h4");
 const formattedPrice = parseFloat(product.price).toLocaleString('en-US');
@@ -4002,23 +4021,27 @@ card.appendChild(ratingCount);
 
 
 
-              // Add fast delivery sticker with icon
-  const stickerContainer = document.createElement("div");
-  stickerContainer.classList.add("sticker-container");
-
-  const fastDeliverySticker = document.createElement("div");
-  fastDeliverySticker.classList.add("sticker", "fast-delivery");
-  fastDeliverySticker.innerHTML = '... <i class="fas fa-truck"></i> Fast Delivery';
-
-  stickerContainer.appendChild(fastDeliverySticker);
-  card.appendChild(stickerContainer);
-
 
 
       // Add product description
-      const desc = document.createElement("p");
-      desc.innerText = product.description;
-      card.appendChild(desc);
+const maxDescriptionLength = 70; // Set your desired maximum length
+
+const desc = document.createElement("p");
+const originalDescription = product.description;
+
+if (originalDescription.length > maxDescriptionLength) {
+    // Truncate the description if it's too long
+    const truncatedDescription = originalDescription.substring(0, maxDescriptionLength);
+    desc.innerText = truncatedDescription + '...';
+
+    // Add a tooltip with the full description
+    desc.title = originalDescription;
+} else {
+    desc.innerText = originalDescription;
+}
+
+card.appendChild(desc);
+
 // Add product price
 const price = document.createElement("h4");
 const formattedPrice = parseFloat(product.price).toLocaleString('en-US');
@@ -4474,24 +4497,28 @@ card.appendChild(ratingCount);
 
 
 
-              // Add fast delivery sticker with icon
-  const stickerContainer = document.createElement("div");
-  stickerContainer.classList.add("sticker-container");
-
-  const fastDeliverySticker = document.createElement("div");
-  fastDeliverySticker.classList.add("sticker", "fast-delivery");
-  fastDeliverySticker.innerHTML = '... <i class="fas fa-truck"></i> Fast Delivery';
-
-  stickerContainer.appendChild(fastDeliverySticker);
-  card.appendChild(stickerContainer);
-
 
 
 
       // Add product description
-      const desc = document.createElement("p");
-      desc.innerText = product.description;
-      card.appendChild(desc);
+const maxDescriptionLength = 70; // Set your desired maximum length
+
+const desc = document.createElement("p");
+const originalDescription = product.description;
+
+if (originalDescription.length > maxDescriptionLength) {
+    // Truncate the description if it's too long
+    const truncatedDescription = originalDescription.substring(0, maxDescriptionLength);
+    desc.innerText = truncatedDescription + '...';
+
+    // Add a tooltip with the full description
+    desc.title = originalDescription;
+} else {
+    desc.innerText = originalDescription;
+}
+
+card.appendChild(desc);
+
 // Add product price
 const price = document.createElement("h4");
 const formattedPrice = parseFloat(product.price).toLocaleString('en-US');
@@ -4945,23 +4972,29 @@ ratingCount.innerText = `(${formattedRating}) 5 star ratings`;
 card.appendChild(ratingCount);
 
 
-              // Add fast delivery sticker with icon
-  const stickerContainer = document.createElement("div");
-  stickerContainer.classList.add("sticker-container");
 
-  const fastDeliverySticker = document.createElement("div");
-  fastDeliverySticker.classList.add("sticker", "fast-delivery");
-  fastDeliverySticker.innerHTML = '... <i class="fas fa-truck"></i> Fast Delivery';
-
-  stickerContainer.appendChild(fastDeliverySticker);
-  card.appendChild(stickerContainer);
 
 
 
       // Add product description
-      const desc = document.createElement("p");
-      desc.innerText = product.description;
-      card.appendChild(desc);
+const maxDescriptionLength = 70; // Set your desired maximum length
+
+const desc = document.createElement("p");
+const originalDescription = product.description;
+
+if (originalDescription.length > maxDescriptionLength) {
+    // Truncate the description if it's too long
+    const truncatedDescription = originalDescription.substring(0, maxDescriptionLength);
+    desc.innerText = truncatedDescription + '...';
+
+    // Add a tooltip with the full description
+    desc.title = originalDescription;
+} else {
+    desc.innerText = originalDescription;
+}
+
+card.appendChild(desc);
+
 // Add product price
 const price = document.createElement("h4");
 const formattedPrice = parseFloat(product.price).toLocaleString('en-US');
@@ -5414,23 +5447,29 @@ ratingCount.innerText = `(${formattedRating}) 5 star ratings`;
 card.appendChild(ratingCount);
 
 
-              // Add fast delivery sticker with icon
-  const stickerContainer = document.createElement("div");
-  stickerContainer.classList.add("sticker-container");
 
-  const fastDeliverySticker = document.createElement("div");
-  fastDeliverySticker.classList.add("sticker", "fast-delivery");
-  fastDeliverySticker.innerHTML = '... <i class="fas fa-truck"></i> Fast Delivery';
-
-  stickerContainer.appendChild(fastDeliverySticker);
-  card.appendChild(stickerContainer);
 
 
 
       // Add product description
-      const desc = document.createElement("p");
-      desc.innerText = product.description;
-      card.appendChild(desc);
+const maxDescriptionLength = 70; // Set your desired maximum length
+
+const desc = document.createElement("p");
+const originalDescription = product.description;
+
+if (originalDescription.length > maxDescriptionLength) {
+    // Truncate the description if it's too long
+    const truncatedDescription = originalDescription.substring(0, maxDescriptionLength);
+    desc.innerText = truncatedDescription + '...';
+
+    // Add a tooltip with the full description
+    desc.title = originalDescription;
+} else {
+    desc.innerText = originalDescription;
+}
+
+card.appendChild(desc);
+
 // Add product price
 const price = document.createElement("h4");
 const formattedPrice = parseFloat(product.price).toLocaleString('en-US');
@@ -5885,23 +5924,29 @@ ratingCount.innerText = `(${formattedRating}) 5 star ratings`;
 card.appendChild(ratingCount);
 
 
-              // Add fast delivery sticker with icon
-  const stickerContainer = document.createElement("div");
-  stickerContainer.classList.add("sticker-container");
 
-  const fastDeliverySticker = document.createElement("div");
-  fastDeliverySticker.classList.add("sticker", "fast-delivery");
-  fastDeliverySticker.innerHTML = '... <i class="fas fa-truck"></i> Fast Delivery';
-
-  stickerContainer.appendChild(fastDeliverySticker);
-  card.appendChild(stickerContainer);
 
 
 
       // Add product description
-      const desc = document.createElement("p");
-      desc.innerText = product.description;
-      card.appendChild(desc);
+const maxDescriptionLength = 70; // Set your desired maximum length
+
+const desc = document.createElement("p");
+const originalDescription = product.description;
+
+if (originalDescription.length > maxDescriptionLength) {
+    // Truncate the description if it's too long
+    const truncatedDescription = originalDescription.substring(0, maxDescriptionLength);
+    desc.innerText = truncatedDescription + '...';
+
+    // Add a tooltip with the full description
+    desc.title = originalDescription;
+} else {
+    desc.innerText = originalDescription;
+}
+
+card.appendChild(desc);
+
 // Add product price
 const price = document.createElement("h4");
 const formattedPrice = parseFloat(product.price).toLocaleString('en-US');
@@ -6365,16 +6410,7 @@ ratingCount.innerText = `(${formattedRating}) 5 star ratings`;
 newScreenCard.appendChild(ratingCount);
 
 
-        // Add fast delivery sticker with icon
-        const stickerContainer = document.createElement("div");
-  stickerContainer.classList.add("sticker-container");
 
-  const fastDeliverySticker = document.createElement("div");
-  fastDeliverySticker.classList.add("sticker", "fast-delivery");
-  fastDeliverySticker.innerHTML = '... <i class="fas fa-truck"></i> Fast Delivery';
-
-  stickerContainer.appendChild(fastDeliverySticker);
-  newScreenCard.appendChild(stickerContainer);
 
 
 
@@ -6914,16 +6950,7 @@ gradeBScreenCard.appendChild(ratingCount);
 
 
 
-        // Add fast delivery sticker with icon
-  const stickerContainer = document.createElement("div");
-  stickerContainer.classList.add("sticker-container");
 
-  const fastDeliverySticker = document.createElement("div");
-  fastDeliverySticker.classList.add("sticker", "fast-delivery");
-  fastDeliverySticker.innerHTML = '... <i class="fas fa-truck"></i> Fast Delivery';
-
-  stickerContainer.appendChild(fastDeliverySticker);
-  gradeBScreenCard.appendChild(stickerContainer);
 
 
                 const desc = document.createElement("p");
@@ -7462,16 +7489,7 @@ ratingCount.innerText = `(${formattedRating}) 5 star ratings`;
 portCard.appendChild(ratingCount);
 
 
-        // Add fast delivery sticker with icon
-        const stickerContainer = document.createElement("div");
-  stickerContainer.classList.add("sticker-container");
 
-  const fastDeliverySticker = document.createElement("div");
-  fastDeliverySticker.classList.add("sticker", "fast-delivery");
-  fastDeliverySticker.innerHTML = '... <i class="fas fa-truck"></i> Fast Delivery';
-
-  stickerContainer.appendChild(fastDeliverySticker);
-  portCard.appendChild(stickerContainer);
 
 
 
@@ -8010,21 +8028,27 @@ card.appendChild(ratingCount);
 
 
 
-        // Add fast delivery sticker with icon
-  const stickerContainer = document.createElement("div");
-  stickerContainer.classList.add("sticker-container");
-
-  const fastDeliverySticker = document.createElement("div");
-  fastDeliverySticker.classList.add("sticker", "fast-delivery");
-  fastDeliverySticker.innerHTML = '... <i class="fas fa-truck"></i> Fast Delivery';
-
-  stickerContainer.appendChild(fastDeliverySticker);
-  card.appendChild(stickerContainer);
 
 
-                const desc = document.createElement("p");
-                desc.innerText = product.description;
-                card.appendChild(desc);
+
+const maxDescriptionLength = 70; // Set your desired maximum length
+
+const desc = document.createElement("p");
+const originalDescription = product.description;
+
+if (originalDescription.length > maxDescriptionLength) {
+    // Truncate the description if it's too long
+    const truncatedDescription = originalDescription.substring(0, maxDescriptionLength);
+    desc.innerText = truncatedDescription + '...';
+
+    // Add a tooltip with the full description
+    desc.title = originalDescription;
+} else {
+    desc.innerText = originalDescription;
+}
+
+card.appendChild(desc);
+
       
       
       
@@ -8568,21 +8592,26 @@ ratingCount.innerText = `(${formattedRating}) 5 star ratings`;
 card.appendChild(ratingCount);
 
 
-        // Add fast delivery sticker with icon
-        const stickerContainer = document.createElement("div");
-  stickerContainer.classList.add("sticker-container");
-
-  const fastDeliverySticker = document.createElement("div");
-  fastDeliverySticker.classList.add("sticker", "fast-delivery");
-  fastDeliverySticker.innerHTML = '... <i class="fas fa-truck"></i> Fast Delivery';
-
-  stickerContainer.appendChild(fastDeliverySticker);
-  card.appendChild(stickerContainer);
 
 
-                const desc = document.createElement("p");
-                desc.innerText = product.description;
-                card.appendChild(desc);
+const maxDescriptionLength = 70; // Set your desired maximum length
+
+const desc = document.createElement("p");
+const originalDescription = product.description;
+
+if (originalDescription.length > maxDescriptionLength) {
+    // Truncate the description if it's too long
+    const truncatedDescription = originalDescription.substring(0, maxDescriptionLength);
+    desc.innerText = truncatedDescription + '...';
+
+    // Add a tooltip with the full description
+    desc.title = originalDescription;
+} else {
+    desc.innerText = originalDescription;
+}
+
+card.appendChild(desc);
+
       
      
       
@@ -9092,23 +9121,28 @@ ratingCount.innerText = `(${formattedRating}) 5 star ratings`;
 card.appendChild(ratingCount);
 
 
-        // Add fast delivery sticker with icon
-        const stickerContainer = document.createElement("div");
-  stickerContainer.classList.add("sticker-container");
-
-  const fastDeliverySticker = document.createElement("div");
-  fastDeliverySticker.classList.add("sticker", "fast-delivery");
-  fastDeliverySticker.innerHTML = '... <i class="fas fa-truck"></i> Fast Delivery';
-
-  stickerContainer.appendChild(fastDeliverySticker);
-  card.appendChild(stickerContainer);
 
 
   
 
-                const desc = document.createElement("p");
-                desc.innerText = product.description;
-                card.appendChild(desc);
+const maxDescriptionLength = 70; // Set your desired maximum length
+
+const desc = document.createElement("p");
+const originalDescription = product.description;
+
+if (originalDescription.length > maxDescriptionLength) {
+    // Truncate the description if it's too long
+    const truncatedDescription = originalDescription.substring(0, maxDescriptionLength);
+    desc.innerText = truncatedDescription + '...';
+
+    // Add a tooltip with the full description
+    desc.title = originalDescription;
+} else {
+    desc.innerText = originalDescription;
+}
+
+card.appendChild(desc);
+
       
       
       

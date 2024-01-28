@@ -117,9 +117,10 @@
         <button type="button" id="subscribeButton">Subscribe</button>
         <div id="spinner" style="display: none;"> <!-- Spinner element initially hidden -->
           <i class="fa fa-spinner fa-spin"></i> Subscribing...
-        </div>
+        </div> 
+             <button type="submit" class="close-button" id="closeButton">Close</button>
+
       </form>
-      <button class="close-button" id="closeButton">Close</button>
     </div>
 
     <!-- Success message initially hidden -->
@@ -290,6 +291,8 @@ if($('.cookie-notice').length) {
   <img src="img/Devine Phones.png" alt="Devine Logo" class="logo2">
 </div>
 
+      <!-- Notification element -->
+<div id="notification" class="notification"></div>
 
 
   <!-- Logout Confirmation Popup -->
@@ -309,6 +312,7 @@ if($('.cookie-notice').length) {
             <div class="products">
       <div id="products-list"></div>
       </div>
+
           <div class="modal">
               <span class="close">&times;</span>
               <img class="modal-content" id="modalImg">
