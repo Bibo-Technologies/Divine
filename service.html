@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Sanyu Hospital - Premier Medical Facility in Katooke, Wakiso, Uganda</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Sanyu Hospital is a premier medical facility in Katooke, Wakiso, Uganda, providing comprehensive healthcare services. Our expert doctors and state-of-the-art facilities ensure top-quality medical care for patients of all ages." name="description">
+    <meta content="Sanyu Hospital, Katooke Hospital, Wakiso Healthcare, Uganda Medical Services, Premier Hospital, Advanced Medical Care, Experienced Doctors, State-of-the-Art Facilities, Healthcare Excellence, Emergency Services, Specialized Medical Treatments" name="keywords">
+
+    <!-- Favicon -->
+    <link href="img/sanyu-removebg-preview.png" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"> 
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <link href="lib/twentytwenty/twentytwenty.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-grow text-primary m-1" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-dark m-1" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-secondary m-1" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+
+    <!-- Topbar Start -->
+    <div class="container-fluid bg-light ps-5 pe-0 d-none d-lg-block">
+        <div class="row gx-0">
+            <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
+                <div class="d-inline-flex align-items-center">
+                    <small class="py-2"><i class="far fa-clock text-primary me-2"></i>Opening Hours: Mon - Tues : 6.00 am - 10.00 pm, Sunday Closed </small>
+                </div>
+            </div>
+            <div class="col-md-6 text-center text-lg-end">
+                <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
+                    <div class="me-3 pe-3 border-end py-2">
+                        <p class="m-0"><i class="fa fa-envelope-open me-2"></i>sanyuhospital@gmail.com</p>
+                    </div>
+                    <div class="py-2">
+                        <p class="m-0"><i class="fa fa-phone-alt me-2"></i>+(256) 757 706 210</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
+        <a href="index.html" class="navbar-brand p-0">
+            <h1 class="m-0 text-primary">
+                <img src="img/sanyu-removebg-preview.png" alt="SanyuHospital Logo">
+                Sanyu Hospital
+            </h1>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto py-0">
+                <a href="index.html" class="nav-item nav-link">Home</a>
+                <a href="about.html" class="nav-item nav-link">About</a>
+                <a href="service.html" class="nav-item nav-link active">Service</a>
+                <a href="FAQ.html" class="nav-item nav-link">FAQ</a>
+
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                    <div class="dropdown-menu m-0">
+                        
+                        <a href="appointment.html" class="dropdown-item">Appointment</a>
+                    </div>
+                </div>
+                <a href="contact.html" class="nav-item nav-link">Contact</a>
+            </div>
+            <a href="appointment.html" class="btn btn-primary py-2 px-4 ms-3">Appointment</a>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+
+    <!-- Full Screen Search Start -->
+    <div class="modal fade" id="searchModal" tabindex="-1">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content" style="background: rgba(9, 30, 62, .7);">
+                <div class="modal-header border-0">
+                    <button type="button" class="btn bg-white btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex align-items-center justify-content-center">
+                    <div class="input-group" style="max-width: 600px;">
+                        <input type="text" class="form-control bg-transparent border-primary p-3" placeholder="Type search keyword">
+                        <button class="btn btn-primary px-4"><i class="bi bi-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Full Screen Search End -->
+
+
+    <!-- Hero Start -->
+    <div class="container-fluid bg-primary py-5 hero-header mb-5">
+        <div class="row py-3">
+            <div class="col-12 text-center">
+                <h1 class="display-3 text-white animated zoomIn">Services</h1>
+                <a href="" class="h4 text-white">Home</a>
+                <i class="far fa-circle text-white px-2"></i>
+                <a href="" class="h4 text-white">Services</a>
+            </div>
+        </div>
+    </div>
+    <!-- Hero End -->
+
+
+    <!-- Service Start -->
+    <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container">
+            <div class="row g-5 mb-5">
+                <div class="col-lg-5 wow zoomIn" data-wow-delay="0.3s" style="min-height: 400px;">
+                    <div class="twentytwenty-container position-relative h-100 rounded overflow-hidden">
+                        <img class="position-absolute w-100 h-100" src="img/before.jpg" style="object-fit: cover;">
+                        <img class="position-absolute w-100 h-100" src="img/after.jpg" style="object-fit: cover;">
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="section-title mb-5">
+                        <h5 class="position-relative d-inline-block text-primary text-uppercase">Our Services</h5>
+                        <h1 class="display-5 mb-0">We Offer The Best Quality Services</h1>
+                    </div>
+                    <div class="row g-5">
+                        <div class="col-md-6 service-item wow zoomIn" data-wow-delay="0.6s" onclick="redirectToAnotherPage()">
+                            <div class="rounded-top overflow-hidden">
+                                <img class="img-fluid" src="img/internal medicine.jpg" alt="">
+                            </div>
+                            <div class="position-relative bg-light rounded-bottom text-center p-4">
+                                <h5 class="m-0">Internal Medicine</h5>
+                            </div>
+                        </div>
+                        
+                        <script>
+                            function redirectToAnotherPage() {
+                                // Replace 'your-target-page.html' with the actual URL of the page you want to redirect to
+                                window.location.href = '#';
+                            }
+                        </script>
+                        <div class="col-md-6 service-item wow zoomIn" data-wow-delay="0.9s" onclick="redirectToAnotherPage()">
+                            <div class="rounded-top overflow-hidden">
+                                <img class="img-fluid" src="img/pediatrics.jpg" alt="">
+                            </div>
+                            <div class="position-relative bg-light rounded-bottom text-center p-4">
+                                <h5 class="m-0">Pediatrics</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-5 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="col-lg-7">
+                    <div class="row g-5">
+                        <div class="col-md-6 service-item wow zoomIn" data-wow-delay="0.3s" onclick="redirectToAnotherPage()">
+                            <div class="rounded-top overflow-hidden">
+                                <img class="img-fluid" src="img/gyna.webp" alt="">
+                            </div>
+                            <div class="position-relative bg-light rounded-bottom text-center p-4">
+                                <h5 class="m-0">Pediatrics   </h5>
+                            </div>
+                        </div>
+                        <div class="col-md-6 service-item wow zoomIn" data-wow-delay="0.6s" onclick="redirectToAnotherPage()">
+                            <div class="rounded-top overflow-hidden">
+                                <img class="img-fluid" src="img/radiology.jpg" alt="">
+                            </div>
+                            <div class="position-relative bg-light rounded-bottom text-center p-4">
+                                <h5 class="m-0">Radiology</h5>
+                            </div>
+                        </div>
+                        <div class="col-md-6 service-item wow zoomIn" data-wow-delay="0.6s" onclick="redirectToAnotherPage()">
+                            <div class="rounded-top overflow-hidden">
+                                <img class="img-fluid" src="img/laboratory.jpg" alt="">
+                            </div>
+                            <div class="position-relative bg-light rounded-bottom text-center p-4">
+                                <h5 class="m-0">Laboratory</h5>
+                            </div>
+                        </div>
+                        <div class="col-md-6 service-item wow zoomIn" data-wow-delay="0.6s" onclick="redirectToAnotherPage()">
+                            <div class="rounded-top overflow-hidden">
+                                <img class="img-fluid" src="img/labo.jpg" alt="">
+                            </div>
+                            <div class="position-relative bg-light rounded-bottom text-center p-4">
+                                <h5 class="m-0">LaboMaternal and child health</h5>
+                            </div>
+                        </div>
+                        <div class="col-md-6 service-item wow zoomIn" data-wow-delay="0.6s" onclick="redirectToAnotherPage()">
+                            <div class="rounded-top overflow-hidden">
+                                <img class="img-fluid" src="img/otho.webp" alt="">
+                            </div>
+                            <div class="position-relative bg-light rounded-bottom text-center p-4">
+                                <h5 class="m-0">Orthopedic</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="col-lg-5 service-item wow zoomIn" data-wow-delay="0.9s">
+                    <div class="position-relative bg-primary rounded h-100 d-flex flex-column align-items-center justify-content-center text-center p-4">
+                        <h3 class="text-white mb-3">Make Appointment</h3>
+                        <p class="text-white mb-3">Call us today and Schedule your appointment with us for the best treatment.</p>
+                        <h2 class="text-white mb-0">(+256) 757 706 210</h2>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <!-- Service End -->
+    
+  <div class="container2">
+        <div class="card">
+          <div class="card-header">
+            <img src="img/internal medicine.jpg" alt="rover" />
+          </div>
+          <div class="card-body">
+            <span class="tag tag-teal">Internal Medicine</span>
+            <h4>
+                What Is Internal Medicine?
+            </h4>
+            <p>
+                Internal medicine is a medical specialty that encompasses the diagnosis and treatment of complex illnesses that affect adults and applies preventive principles to maintain health and wellness.
+            </p>
+            <div class="user">
+              <img src="https://yt3.ggpht.com/a/AGF-l7-0J1G0Ue0mcZMw-99kMeVuBmRxiPjyvIYONg=s900-c-k-c0xffffffff-no-rj-mo" alt="user" />
+              <div class="user-info">
+                <h5>Sridhar Nadamuni, Debra Fulghum Bruce, PhD (Editor), Jeni Baker  Medically Reviewed by Sanjai Sinha.
+                </h5>
+                <small>Last Updated: Jan. 3, 2024</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <img src="./img/pediatrics.jpg" alt="ballons" />
+          </div>
+          <div class="card-body">
+            <span class="tag tag-purple">Pediatrics</span>
+            <h4>
+              What is Pediatrics?
+            </h4>
+            <p>
+                Pediatrics is the branch of medicine dealing with the health and medical care of infants, children, and adolescents from birth up to the age of 18. The word “paediatrics” means “healer of children”; they are derived from two Greek words: (pais = child) and (iatros = doctor or healer). Paediatrics is a relatively new medical specialty, developing only in the mid-19th century. Abraham Jacobi (1830–1919) is known as the father of paediatrics.
+            </p>
+            <div class="user">
+              <img src="https://d2jx2rerrg6sh3.cloudfront.net/pics/team2/ananya-mandal.jpg" alt="user" />
+              <div class="user-info">
+                <h5>
+                    Dr. Ananya Mandal, MD
+                    </h5>
+                <small>Reviewed by April Cashin-Garbutt, MA (Editor)</small>
+              </div>
+            </div>
+               <!-- Download PDF button -->
+             <a href="./What-is-Pediatrics.pdf" class="download-btn" download>Download PDF</a>
+
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <img src="img/gyna.webp" alt="city" />
+          </div>
+          <div class="card-body">
+            <span class="tag tag-pink">Obstetrics and gynecology</span>
+            <h4>
+               What is Obstetrics and gynecology ?
+                    </h4>
+            <p>
+                Obstetrics and gynecology, medical/surgical specialty concerned with the care of women from pregnancy until after delivery and with the diagnosis and treatment of disorders of the female reproductive tract.
+
+                The medical care of pregnant women (obstetrics) and of female genital diseases (gynecology) developed along different historical paths. Obstetrics had for a long time been the province of female midwives (see midwifery), but in the 17th century, European physicians began to attend on normal deliveries of royal and aristocratic families; from that beginning, the practice grew and spread to the middle classes. The invention of the forceps used in delivery, the introduction of anesthesia, and Ignaz Semmelweis’s discovery of the cause of puerperal (“childbed”) fever and his introduction of antiseptic methods in the delivery room were all major advances in obstetrical practice. Asepsis in turn made cesarean section, in which the infant is delivered through an incision in the mother’s uterus and abdominal wall, a feasible surgical alternative to natural childbirth. By the early 19th century, obstetrics had become established as a recognized medical discipline in Europe and the United States.
+  
+            </p>
+            <div class="user">
+              <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIADgAOAMBIgACEQEDEQH/xAAbAAACAgMBAAAAAAAAAAAAAAAABQQGAQMHAv/EADIQAAEDAwIFAQcCBwAAAAAAAAECAwQAERIFIRMiMUFRBhQyQmFxgZEjQxUzUmJysdH/xAAaAQADAQEBAQAAAAAAAAAAAAACAwQAAQYF/8QAHxEAAgIDAAMBAQAAAAAAAAAAAQIAEQMSITFR8KEE/9oADAMBAAIRAxEAPwCHRTPQ2Ik6QYEr9NciyY74/bc7Ajuk9PxUGSw7FkOR30FLrailafBFegDDbWfHrlzWkFSglIJUTYAC5Jrb7NIxy4DmO2+J7i/+t6c+niZCDFiR2zKyBWVG+aN0k26ggK7fW1xerEzo+oKYTeewVlOF9iSblwjxkFcv+NzScmfQ0YxMWwuc/UCklKgQR1B7VirF6jU5HHs85hkyD/KKXMsUbDL5kkE7nuTbekcOM9MlNRo6cnXVBKR8/wDlNR9l2MBlo1NNFT9YaixZJhxP1PZyUuvn91few7JHQfc96zRKbFwSKNTOhMxn9RaTJlmKQoKbcxuCoHoTfb61Z/UqESdLcXG01QmrkrafXjzIbbuoAkbDlw38CqXHSyp5AkLWhonmUhORA+QuKu8WbHMGW3Cew0+XGTE47y+Zp4IxSXBbYKFhcXHLU2cEOGj8VFSIelmmYOjJls8z8km7hQeQDqADbIDe9t7E2vaty5SuI4lSm8t+dargDaxV/Ui2IJPMncdaSMHVfTkhcCSyX2FtcYobJIsBfJKu2J3+1WNUSOpLchkqTEdYdkJIWRZuw7FPw3uB3JvU2QU2x7cah5XqLNeYRqGlvSJGaVRALOL3IJ2wVa/NcAnb4hXr03gxoqHJkBftDEhDcd3hnJbbp3CfOxX+agTV6l6hcZgRIhjxEN8YFzYEW99Sv7vvvTEzWWNHgRpb6X4EPJt2Q0s/quFKkhLW3NilR32FwN6IghAn597nARttKvrzcNvUXhCdW4FLUpWQFkEn3QQTe3msVFmJjJkKEJx1bHwl1ISr6G21FXoKUSVvM0U10vVDHLLDi0sxUL4iy2wla1/LfyNvFKqK6yhhRmBINiXGBqzJiznmZP8AD2ivFiM69m0tJ6pLYF0gDunzT9rT0CDCgIjZoXAkJDaHiW1XKDuu1wD5ttXL66jp8dZ0nTWQ2nJWlvWbQTw1Xwtl33v+b1B/RjGOiPuSrC213K7qWr5xWluvtTAw9Yx2XcGkJTbGzahdXcb36Un1bWXpjj6EPFyM8rMIeZQCjrYAjxe16UDpRVaYVWTtkJhRRRTYuFFFFaaSYEsQ3uKYsaQodBISVJH2BAP3vT8+utVLqHfZ4PEQkpSrhK2Btce98h+KKKBsSObYQ1dl8GItRm+3vl9UWMwtRJVwEqSFHzYkj8VEooowABQgk32FFFFacn//2Q==" alt="user" />
+              <div class="user-info">
+                <h5>The Editors of Encyclopaedia Britannica</h5>
+                <small>Last Updated: Jan 15, 2024</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+              <img src="img/radiology.jpg" alt="city" />
+            </div>
+            <div class="card-body">
+              <span class="tag tag-pink">Radiology</span>
+              <h4>
+                 What is Radiology ?
+                      </h4>
+              <p>
+                Radiology represents a branch of medicine that deals with radiant energy in the diagnosis and treatment of diseases. This field can be divided into two broad areas – diagnostic radiology and interventional radiology. A physician who specializes in radiology is called radiologist.
+
+                The outcome of an imaging study does not rely merely on the indication or the quality of its technical execution. Diagnostic radiology specialist represents the last link in the diagnostic chain, as they search for relevant image information to evaluate and finally support a sound diagnosis.
+              </p>
+              <div class="user">
+                <img src="https://d2jx2rerrg6sh3.cloudfront.net/pics/team2/tomislav-mestrovic.jpg" alt="user" />
+                <div class="user-info">
+                  <h5>Dr. Tomislav Meštrović, MD, Ph.D.</h5>
+                  <small>Last Updated: Jan 20, 2024</small>
+                </div>
+              </div>
+                   <!-- Download PDF button -->
+             <a href="./What-is-Radiology.pdf" class="download-btn" download>Download PDF</a>
+
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <img src="img/laboratory.jpg" alt="city" />
+            </div>
+            <div class="card-body">
+              <span class="tag tag-pink">Laboratory</span>
+              <h4>
+                 What is a Laboratory ?
+                      </h4>
+              <p>
+                Clinical laboratories are healthcare facilities providing a wide range of laboratory procedures which aid the physicians in carrying out the diagnosis, treatment, and management of patients. These laboratories are manned by medical technologists (clinical laboratory scientists) who are trained to perform various tests to samples of biological specimens collected from its patients. Most of the clinical laboratories are situated within or near hospital facilities to provide access to both physicians and their patients.Classifications of clinical laboratories indicated below reveal that these facilities can provide quality laboratory tests that are significant for addressing medical and public health needs. The list below should not be used as a fixed guide for classifying clinical laboratories because of new areas continually arising in the field of laboratory medicine.
+              </p>
+              <div class="user">
+                <img src="https://www.ncbi.nlm.nih.gov/corehtml/pmc/pmcgifs/bookshelf/thumbs/th-statpearls-lrg.png" alt="user" />
+                <div class="user-info">
+                  <h5>StatPearls.</h5>
+                  <small>Last Updated: Jan 15, 2024</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <img src="img/labo.jpg" alt="city" />
+            </div>
+            <div class="card-body">
+              <span class="tag tag-pink">LaboMaternal and child Health</span>
+              <h4>
+                 What is Maternal Health ?
+                      </h4>
+              <p>
+                Maternal health refers to the health of women during pregnancy, childbirth and the postnatal period. 
+
+                Each stage should be a positive experience, ensuring women and their babies reach their full potential for health and well-being. 
+                
+                Although important progress has been made in the last two decades, about 287 000 women died during and following pregnancy and childbirth in 2020. This number is unacceptably high.
+                
+                The most common direct causes of maternal injury and death are excessive blood loss, infection, high blood pressure, unsafe abortion, and obstructed labour, as well as indirect causes such as anemia, malaria, and heart disease. 
+                
+                Most maternal deaths are preventable with timely management by a skilled health professional working in a supportive environment. 
+                
+                Ending preventable maternal death must remain at the top of the global agenda. At the same time, simply surviving pregnancy and childbirth can never be the marker of successful maternal health care. It is critical to expand efforts reducing maternal injury and disability to promote health and well-being.
+                
+                Every pregnancy and birth is unique. Addressing inequalities that affect health outcomes, especially sexual and reproductive health and rights and gender, is fundamental to ensuring all women have access to respectful and high-quality maternity care.   
+              </p>
+              <div class="user">
+                <img src="data:image/jpeg;base64,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" alt="user" />
+                <div class="user-info">
+                  <h5>World Health Organisation</h5>
+                  <small>Last Updated: Jan 15, 2024</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <img src="img/otho.webp" alt="city" />
+            </div>
+            <div class="card-body">
+              <span class="tag tag-pink">Orthopedic</span>
+              <h4>
+                 What are Orthopedic services ?
+                      </h4>
+              <p>
+                Your bones, joints, ligaments, tendons, and muscles make up your musculoskeletal system. It is common to have pain in these parts of your body because they play such an important part in everyday movement.
+
+                Orthopedics is the medical field devoted to treating these areas. An orthopedic surgeon or orthopedic doctor (also called an orthopedist) is a doctor who specializes in this field. They can perform surgery, but they're also qualified to diagnose and treat issues using other techniques.
+                
+                Orthopedics is a vast field, so most orthopedic doctors specialize in a particular type of orthopedics. For example, some of the most common specialties within orthopedics are hand, foot, and sports injuries.
+                
+                Orthopedists are specialists. Typically, you see an orthopedist after your primary care doctor refers you. Your primary care doctor can let you know what type of orthopedist you need to see for your issue.
+              </p>
+              <div class="user">
+                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIADgAOAMBIgACEQEDEQH/xAAbAAACAgMBAAAAAAAAAAAAAAAABQQGAQMHAv/EADIQAAEDAwIFAQcCBwAAAAAAAAECAwQAERIFIRMiMUFRBhQyQmFxgZEjQxUzUmJysdH/xAAaAQADAQEBAQAAAAAAAAAAAAACAwQAAQYF/8QAHxEAAgIDAAMBAQAAAAAAAAAAAQIAEQMSITFR8KEE/9oADAMBAAIRAxEAPwCHRTPQ2Ik6QYEr9NciyY74/bc7Ajuk9PxUGSw7FkOR30FLrailafBFegDDbWfHrlzWkFSglIJUTYAC5Jrb7NIxy4DmO2+J7i/+t6c+niZCDFiR2zKyBWVG+aN0k26ggK7fW1xerEzo+oKYTeewVlOF9iSblwjxkFcv+NzScmfQ0YxMWwuc/UCklKgQR1B7VirF6jU5HHs85hkyD/KKXMsUbDL5kkE7nuTbekcOM9MlNRo6cnXVBKR8/wDlNR9l2MBlo1NNFT9YaixZJhxP1PZyUuvn91few7JHQfc96zRKbFwSKNTOhMxn9RaTJlmKQoKbcxuCoHoTfb61Z/UqESdLcXG01QmrkrafXjzIbbuoAkbDlw38CqXHSyp5AkLWhonmUhORA+QuKu8WbHMGW3Cew0+XGTE47y+Zp4IxSXBbYKFhcXHLU2cEOGj8VFSIelmmYOjJls8z8km7hQeQDqADbIDe9t7E2vaty5SuI4lSm8t+dargDaxV/Ui2IJPMncdaSMHVfTkhcCSyX2FtcYobJIsBfJKu2J3+1WNUSOpLchkqTEdYdkJIWRZuw7FPw3uB3JvU2QU2x7cah5XqLNeYRqGlvSJGaVRALOL3IJ2wVa/NcAnb4hXr03gxoqHJkBftDEhDcd3hnJbbp3CfOxX+agTV6l6hcZgRIhjxEN8YFzYEW99Sv7vvvTEzWWNHgRpb6X4EPJt2Q0s/quFKkhLW3NilR32FwN6IghAn597nARttKvrzcNvUXhCdW4FLUpWQFkEn3QQTe3msVFmJjJkKEJx1bHwl1ISr6G21FXoKUSVvM0U10vVDHLLDi0sxUL4iy2wla1/LfyNvFKqK6yhhRmBINiXGBqzJiznmZP8AD2ivFiM69m0tJ6pLYF0gDunzT9rT0CDCgIjZoXAkJDaHiW1XKDuu1wD5ttXL66jp8dZ0nTWQ2nJWlvWbQTw1Xwtl33v+b1B/RjGOiPuSrC213K7qWr5xWluvtTAw9Yx2XcGkJTbGzahdXcb36Un1bWXpjj6EPFyM8rMIeZQCjrYAjxe16UDpRVaYVWTtkJhRRRTYuFFFFaaSYEsQ3uKYsaQodBISVJH2BAP3vT8+utVLqHfZ4PEQkpSrhK2Btce98h+KKKBsSObYQ1dl8GItRm+3vl9UWMwtRJVwEqSFHzYkj8VEooowABQgk32FFFFacn//2Q==" alt="user" />
+                <div class="user-info">
+                  <h5>Medically Reviewed by Gabriela Pichardo, Written by WebMD Editorial Contributor</h5>
+                  <small> MD on September 23, 2023</small>
+                </div>
+              </div>
+            </div>
+          </div>
+  </div>
+    <!-- Newsletter Start -->
+    <div class="container-fluid position-relative pt-5 wow fadeInUp" data-wow-delay="0.1s" style="z-index: 1;">
+        <div class="container">
+            <div class="bg-primary p-5">
+                <form class="mx-auto" style="max-width: 600px;">
+                    <div class="input-group">
+                        <input type="text" class="form-control border-white p-3" placeholder="Your Email">
+                        <button class="btn btn-dark px-4">Sign Up</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Newsletter End -->
+  
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-light py-5 wow fadeInUp" data-wow-delay="0.3s" style="margin-top: -75px;">
+        <div class="container pt-5">
+            <div class="row g-5 pt-4">
+                <div class="col-lg-3 col-md-6">
+                    <h3 class="text-white mb-4">Quick Links</h3>
+                    <div class="d-flex flex-column justify-content-start">
+                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Home</a>
+                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>About Us</a>
+                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Our Services</a>
+                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Latest Blog</a>
+                        <a class="text-light" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Contact Us</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h3 class="text-white mb-4">Popular Links</h3>
+                    <div class="d-flex flex-column justify-content-start">
+                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Home</a>
+                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>About Us</a>
+                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Our Services</a>
+                        <a class="text-light mb-2" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Latest Blog</a>
+                        <a class="text-light" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Contact Us</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h3 class="text-white mb-4">Get In Touch</h3>
+                    <p class="mb-2"><i class="bi bi-geo-alt text-primary me-2"></i>Katooke Wakiso-Uganda</p>
+                    <p class="mb-2"><i class="bi bi-envelope-open text-primary me-2"></i>sanyuhospital@gmail.com</p>
+                    <p class="mb-0"><i class="bi bi-telephone text-primary me-2"></i>+(256) 757 706 210</p>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h3 class="text-white mb-4">Follow Us</h3>
+                    <div class="d-flex">
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-twitter fw-normal"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-facebook-f fw-normal"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" href="#"><i class="fab fa-linkedin-in fw-normal"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded" href="#"><i class="fab fa-instagram fw-normal"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid text-light py-4" style="background: #051225;">
+        <div class="container">
+            <div class="row g-0">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-md-0">&copy; <a class="text-white border-bottom" href="#">Sanyu Hospital</a>. All Rights Reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-0"><a class="text-white border-bottom" href="https://htmlcodex.com"></a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="lib/twentytwenty/jquery.event.move.js"></script>
+    <script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>
