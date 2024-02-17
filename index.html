@@ -206,29 +206,45 @@ if($('.cookie-notice').length) {
 
     <div class="saticifaction">
         <div class="all">
-          <div>
+          <div id="newScreens-link">
             <img href="shop.html" src="img/screen.webp" alt="">
-            <a href="#!" id="newScreens-link">SCREENS & LCDs</a>
+            <a href="" >LCDs</a>
+          </div>
+          <div  id="glasses-link">
+            <img href="shop.html" src="img/replacement_front_glass_for_samsung_galaxy_s8_plus_gold_by_maxbhi_com_26254_1.jpg" alt="">
+            <a href="" >GLASSES</a>
+          </div>
+          <div id="cameraGlass-link">
+            <img src="img/camera glass.jpg" alt="">
+            <a href="">CAMERA GLASSES</a>
           </div>
           <div>
+            <img id="backcovers-link" src="img/bc.webp" alt="">
+            <a href="" id="backcovers-link">BACK-COVERS</a>
+          </div>
+          <div id="chesis-link">
+            <img href="shop.html" src="img/chesis.webp" alt="">
+            <a href="" >CHESIS</a>
+          </div>
+          <div id="ports-link">
             <img src="img/port.webp" alt="">
-            <a href="#!" id="ports-link">PORTS AND FLEX</a>
+            <a href="" >PORTS AND FLEX</a>
           </div>
-          <div>
+          <div id="electronics-link">
             <img src="img/electronics.jpg" alt="">
-            <a href="#!" id="electronics-link">ELECTRONICS</a>
+            <a href="" >ELECTRONICS</a>
           </div>
-          <div>
+          <div id="touches-link">
             <img src="img/touch.webp" alt="">
-            <a href="#!" id="touches-link">TOUCHES</a>
+            <a href="" >TOUCHES</a>
           </div>
-          <div >
+          <div id="accessories-link">
             <img src="img/accessories.png" alt="">
-            <a href="#!" id="accessories-link">ACCESSORIES</a>
+            <a href="" >ACCESSORIES</a>
           </div>
         </div>
      </div>
-    
+
     
  
 <!-- Popup Container -->
@@ -272,7 +288,27 @@ if($('.cookie-notice').length) {
         <a href="#!" id="uk-used-link">GRADE B</a>
       </div>
     </section>
-  
+
+    <div class="news-heading">
+     
+      <h5>Filter by phone type</h5>
+      <div id="filterContainer">
+        <button class="filter-btn" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="Apple">Apple</button>
+        <button class="filter-btn" data-filter="Samsung">Samsung</button>
+        <button class="filter-btn" data-filter="Google">Google</button>
+        <button class="filter-btn" data-filter="itel">itel</button>
+        <button class="filter-btn" data-filter="Oppo">Oppo</button>
+        <button class="filter-btn" data-filter="Huawei">Huawei</button>
+        <button class="filter-btn" data-filter="Infinix">Infinix</button>
+        <button class="filter-btn" data-filter="Aquos">Aquos</button>
+        <button class="filter-btn" data-filter="LG">LG</button>
+        <button class="filter-btn" data-filter="Hisense">Hisense</button>
+        <!-- Add more buttons for other brands as needed -->
+      </div>
+      
+</div>
+
   </section>
   
   
@@ -311,8 +347,13 @@ if($('.cookie-notice').length) {
 -->
             <div class="products">
       <div id="products-list"></div>
+      <div id="no-results-container">
+        <!-- This container will hold the no results message -->
+      </div>
+      
       </div>
 
+      
           <div class="modal">
               <span class="close">&times;</span>
               <img class="modal-content" id="modalImg">
@@ -358,7 +399,7 @@ if($('.cookie-notice').length) {
 <!-- Include Fuse.js library from CDN -->
 <script src="https://cdn.jsdelivr.net/npm/fuse.js"></script>
 
-      <script type="module" src="index.min.js">
+      <script type="module" src="index.js">
 
      </script>
 

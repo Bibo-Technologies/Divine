@@ -2494,6 +2494,12 @@ function generatePermutations(arr) {
 }
 
 
+
+
+
+
+
+
 //button for brand new//
 
 
@@ -2522,7 +2528,7 @@ document.querySelector("#brand-new-link").addEventListener("click", () => {
       card.appendChild(badge);
        // Add guarantee text
 const guaranteeText = document.createElement("div");
-guaranteeText.innerHTML = "<i class='fa fa-shield'></i>1 month Guarantee for Brand New";
+guaranteeText.innerHTML = "<i class='fa fa-shield'></i>Good, Tested and Trusted Quality";
 guaranteeText.classList.add("guarantee-text");
 card.appendChild(guaranteeText);
 // Add product image
@@ -3476,7 +3482,7 @@ document.querySelector("#newScreens-link").addEventListener("click", () => {
       card.appendChild(badge);
        // Add guarantee text
       const guaranteeText = document.createElement("div");
-      guaranteeText.innerHTML = "<i class='fa fa-shield'></i>1 month Guarantee for Brand New Screens";
+      guaranteeText.innerHTML = "<i class='fa fa-shield'></i>Good, Tested and Trusted Quality Screens";
       guaranteeText.classList.add("guarantee-text");
       card.appendChild(guaranteeText);
 // Add product image
@@ -6330,7 +6336,7 @@ function loadNewScreenCards(data) {
   newScreenCard.appendChild(usedBadge);
    // Add guarantee text
 const guaranteeText = document.createElement("div");
-guaranteeText.innerHTML = "<i class='fa fa-shield'></i>1 month Guarantee for Brand New";
+guaranteeText.innerHTML = "<i class='fa fa-shield'></i>Good, Tested and Trusted Quality";
 guaranteeText.classList.add("guarantee-text");
 newScreenCard.appendChild(guaranteeText);
 // Add product image
@@ -9613,3 +9619,70 @@ backToTopBtn.addEventListener('click', () => {
         behavior: 'smooth'
     });
 });
+
+
+
+// Get all filter buttons
+const filterButtons = document.querySelectorAll('.filter-btn');
+
+// Add click event listener to each filter button
+filterButtons.forEach(button => {
+  button.addEventListener('click', function() {
+    // Remove the 'active' class from all filter buttons
+    filterButtons.forEach(btn => {
+      btn.classList.remove('active');
+    });
+
+    // Add the 'active' class to the clicked filter button
+    this.classList.add('active');
+
+    // Get the data filter value
+    const filterValue = this.getAttribute('data-filter');
+
+    // Call the filterProducts function with the filter value
+    filterProducts(filterValue);
+  });
+});
+
+// Function to filter products based on the filter value
+function filterProducts(filterValue) {
+  // Get all product cards within the products-list container
+  const products = document.querySelectorAll('#products-list .card1');
+  let foundProducts = false; // Flag to track if any products were found
+
+  // Iterate through each product card
+  products.forEach(product => {
+    // Get the product name
+    const productName = product.querySelector('h2').innerText.toLowerCase();
+
+    // Check if the product name contains the filter value
+    if (productName.includes(filterValue.toLowerCase()) || filterValue === 'all') {
+      // Show the product card if it matches the filter value or if filter value is 'all'
+      product.style.display = 'block';
+      foundProducts = true; // Set flag to true if any products are found
+    } else {
+      // Hide the product card if it doesn't match the filter value
+      product.style.display = 'none';
+    }
+  });
+
+  // If no products were found, display the no results message
+  if (!foundProducts) {
+    showNoResultsMessage();
+  } else {
+    hideNoResultsMessage();
+  }
+}
+
+// Function to show the no results message
+function showNoResultsMessage() {
+  const noResultsContainer = document.getElementById("no-results-container");
+  noResultsContainer.style.display = "block";
+}
+
+// Function to hide the no results message
+function hideNoResultsMessage() {
+  const noResultsContainer = document.getElementById("no-results-container");
+  noResultsContainer.style.display = "none";
+}
+

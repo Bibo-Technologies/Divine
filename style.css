@@ -370,6 +370,13 @@ body {
     font-weight: 600;
     color: var(--light-black);
 }
+.news-heading h5 {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--light-black);
+}
 
 .l-news {
     padding-top: 45px;
@@ -861,15 +868,21 @@ body {
     margin-top: 5px;
   }
   
+  .card1 {
+    /* Other styles for the card */
+    position: relative; /* Make the card a positioning context for absolute positioning */
+  }
+  
   .card1 button {
-    margin-top: auto; /* Push the button to the bottom */
+    position: relative;
+    bottom: 0; /* Position the button at the bottom */
     width: 100%;
     background-color: orange;
     border: none;
     cursor: pointer;
     color: #ffffff;
-
   }
+  
   
   .stars {
     display: flex;
@@ -3040,7 +3053,6 @@ margin: 5px;
   font-size: 9px;
   color: #666;
   display: flex;
-  float: right;
   left: 100px;
   font-style: italic;
 }
@@ -3183,3 +3195,44 @@ margin-bottom: 5px;
               transform: translateX(0);
           }
       }
+        /* Style for the filter buttons */
+#filterContainer {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center horizontally */
+}
+/* Media query for small screens */
+@media screen and (max-width: 768px) {
+  #filterContainer {
+    flex-wrap: wrap; /* Allow buttons to wrap to the next line */
+  }
+}
+        .filter-btn {
+          padding: 8px 16px;
+          margin: 5px;
+          cursor: pointer;
+          border: 1px solid #ccc;
+          border-radius: 50px;
+          background-color: #f2f2f2;
+          width: fit-content;
+          color: #363636;
+      }
+
+      .filter-btn.active {
+          background-color: #007bff;
+          color: #fff;
+          border-color: #007bff;
+          width: fit-content;
+
+      
+      }
+      .filter-btn:hover {
+        background-color: #007bff;
+        color: #fff;
+        padding: 8px 16px;
+        border-color: #007bff;
+        width: fit-content;
+
+    
+    }
