@@ -232,7 +232,7 @@ async function showPopupWithUserDetails() {
       // Set the message content HTML, including the company logo and login button
       messageContent.innerHTML = `
           <div id="companyLogo" class="company-logo">
-              <img src="img/Devine Phones.png" alt="Company Logo">
+              <img src="bibo-phone-spare-world-logo-zip-file/png/logo-black.png" alt="Company Logo">
           </div>
           <p>You are not signed in. Please sign in to access your account.</p>
           <button id="loginButton" class="login-button">
@@ -853,7 +853,7 @@ function showNotLoggedInMessage() {
     // Set the message content HTML, including the company logo and login button
     messageContent.innerHTML = `
         <div id="companyLogo" class="company-logo">
-            <img src="img/Devine Phones.png" alt="Company Logo">
+            <img src="bibo-phone-spare-world-logo-zip-file/png/logo-color.png" alt="Company Logo">
         </div>
         <p>You are not signed in. Please sign in to access your account and shop with us. Thank you!</p>
         <button id="loginButton" class="login-button">
@@ -9655,13 +9655,18 @@ function filterProducts(filterValue) {
     // Get the product name
     const productName = product.querySelector('h2').innerText.toLowerCase();
 
-    // Check if the product name contains the filter value
-    if (productName.includes(filterValue.toLowerCase()) || filterValue === 'all') {
-      // Show the product card if it matches the filter value or if filter value is 'all'
+    // Split the filterValue into an array of suggestions
+    const suggestions = filterValue.toLowerCase().split(',');
+
+    // Check if the product name contains any of the suggestions
+    const matches = suggestions.some(suggestion => productName.includes(suggestion.trim()));
+
+    if (matches || filterValue === 'all') {
+      // Show the product card if it matches any of the suggestions or if filter value is 'all'
       product.style.display = 'block';
       foundProducts = true; // Set flag to true if any products are found
     } else {
-      // Hide the product card if it doesn't match the filter value
+      // Hide the product card if it doesn't match any of the suggestions
       product.style.display = 'none';
     }
   });
@@ -9674,6 +9679,7 @@ function filterProducts(filterValue) {
   }
 }
 
+
 // Function to show the no results message
 function showNoResultsMessage() {
   const noResultsContainer = document.getElementById("no-results-container");
@@ -9685,4 +9691,5 @@ function hideNoResultsMessage() {
   const noResultsContainer = document.getElementById("no-results-container");
   noResultsContainer.style.display = "none";
 }
+
 
