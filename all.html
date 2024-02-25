@@ -39,7 +39,7 @@
      
       
   </div>
-
+<!--
   <script>
     // Request permission for notifications
 if (Notification.permission !== "granted") {
@@ -51,7 +51,7 @@ if (Notification.permission !== "granted") {
 }
 
   </script>
-      
+    -->  
 </header>
 
 
@@ -211,12 +211,12 @@ if (Notification.permission !== "granted") {
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
-
+/*
     // Request permission for notifications
 if (Notification.permission !== 'granted') {
   Notification.requestPermission();
 }
-
+*/
 // Retrieve the orders from Firebase
 const ordersRef = ref(database, "orders");
 
