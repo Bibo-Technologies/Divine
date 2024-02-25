@@ -384,54 +384,45 @@ onValue(receiptsRef, (snapshot) => {
     orderContainer.appendChild(shareButton);
     orderContainer.appendChild(orderDetails);
 
-    // Send browser notification for new order
-    if (sortedOrders[0] === sortedOrder) {
-      if (Notification.permission === 'granted') {
+// Send browser notification for new order
+if (sortedOrders[0] === sortedOrder) {
+  if (Notification.permission === 'granted') {
+    sendNotification(orderId, order);
+  } else if (Notification.permission !== 'denied') {
+    // Request permission from the user
+    Notification.requestPermission().then(permission => {
+      if (permission === 'granted') {
         sendNotification(orderId, order);
-      } else if (Notification.permission !== 'denied') {
-        // Request permission from the user
-        Notification.requestPermission().then(permission => {
-          if (permission === 'granted') {
-            sendNotification(orderId, order);
-          }
-        });
       }
-    }
+    });
+  }
+}
 
-    // Append each order container at the beginning of the orders container
-    ordersContainer.insertBefore(orderContainer, ordersContainer.firstChild);
+// Append each order container at the beginning of the orders container
+ordersContainer.insertBefore(orderContainer, ordersContainer.firstChild);
   }
 });
 
+
 // Function to send the browser notification
 function sendNotification(orderId, order) {
-  const isMobileDevice = /Mobi|Android/i.test(navigator.userAgent);
   const notificationTitle = 'Divine Phones (New Order Placed)';
   const notificationOptions = {
     body: `Order ID: ${orderId}`,
     icon: 'bibo-phone-spare-world-logo-zip-file/png/logo-color.png' // Replace with the path to your notification icon
   };
 
-  if (isMobileDevice) {
-    // Use the `showNotification` method for mobile devices
-    navigator.serviceWorker.ready.then(registration => {
-      registration.showNotification(notificationTitle, notificationOptions);
+  if (Notification.permission === 'granted') {
+    new Notification(notificationTitle, notificationOptions);
+  } else if (Notification.permission !== 'denied') {
+    // Request permission from the user
+    Notification.requestPermission().then(permission => {
+      if (permission === 'granted') {
+        new Notification(notificationTitle, notificationOptions);
+      }
     });
-  } else {
-    // Use the `Notification` constructor for desktop browsers
-    if (Notification.permission === 'granted') {
-      new Notification(notificationTitle, notificationOptions);
-    } else if (Notification.permission !== 'denied') {
-      // Request permission from the user
-      Notification.requestPermission().then(permission => {
-        if (permission === 'granted') {
-          new Notification(notificationTitle, notificationOptions);
-        }
-      });
-    }
   }
 }
-
 
 </script>
 </body>
