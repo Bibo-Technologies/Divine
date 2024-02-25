@@ -383,7 +383,7 @@ onValue(receiptsRef, (snapshot) => {
     orderContainer.appendChild(paymentButton);
     orderContainer.appendChild(shareButton);
     orderContainer.appendChild(orderDetails);
-
+/*
 // Send browser notification for new order
 if (sortedOrders[0] === sortedOrder) {
   if (Notification.permission === 'granted') {
@@ -397,13 +397,13 @@ if (sortedOrders[0] === sortedOrder) {
     });
   }
 }
-
+*/
 // Append each order container at the beginning of the orders container
 ordersContainer.insertBefore(orderContainer, ordersContainer.firstChild);
   }
 });
 
-
+/*
 // Function to send the browser notification
 function sendNotification(orderId, order) {
   const notificationTitle = 'Divine Phones (New Order Placed)';
@@ -422,7 +422,7 @@ function sendNotification(orderId, order) {
       }
     });
   }
-}
+}*/
 
 </script>
 </body>
