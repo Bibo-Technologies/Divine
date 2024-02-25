@@ -7,7 +7,7 @@
     <title>Bibo Phone Spare World</title>
   
     <!-- Add a meta description for search engines -->
-    <meta name="description" content="Expert phone repair services, genuine spare parts, and a wide range of accessories at Divine Phone Repair Shop.">
+    <meta name="description" content="Expert phone repair services, genuine spare parts, and a wide range of accessories at Bibo Phone Spare World.">
   
     <!-- Add keywords relevant to your phone repair shop -->
     <meta name="keywords" content="phone repair, mobile repair, phone spare parts, phone accessories, phone service center">
@@ -16,18 +16,18 @@
     <meta name="language" content="English">
   
     <!-- Add Open Graph meta tags for social media sharing -->
-    <meta property="og:title" content="Divine Phone Repair Shop">
-    <meta property="og:description" content="Expert phone repair services, genuine spare parts, and a wide range of accessories at Divine Phone Repair Shop.">
+    <meta property="og:title" content="Bibo Phone Spare World">
+    <meta property="og:description" content="Expert phone repair services, genuine spare parts, and a wide range of accessories at Bibo Phone Spare World.">
     <meta property="og:image" content="bibo-phone-spare-world-logo-zip-file/png/logo-color.png">
     <meta property="og:url" content="Your website URL">
     <meta property="og:type" content="website">
   
     <!-- Add Twitter Card meta tags for Twitter sharing -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Divine Phone Repair Shop">
-    <meta name="twitter:description" content="Expert phone repair services, genuine spare parts, and a wide range of accessories at Divine Phone Repair Shop.">
+    <meta name="twitter:title" content="Bibo Phone Spare World">
+    <meta name="twitter:description" content="Expert phone repair services, genuine spare parts, and a wide range of accessories at Bibo Phone Spare World.">
     <meta name="twitter:image" content="bibo-phone-spare-world-logo-zip-file/png/logo-color.png">
-  
+
     <!-- Add canonical URL to avoid duplicate content issues -->
     <link rel="canonical" href="Your canonical URL">
   
@@ -98,12 +98,12 @@
 <div class="welcomePopup" id="welcomePopup">
   <div class="welcomePopup-content" id="popupContent">
     <img src="bibo-phone-spare-world-logo-zip-file/png/logo-color.png" alt="Company Logo" class="welcomePopup-logo">
-    <p class="bold">Welcome to Divine Phone Service Center!</p>
+    <p class="bold">Welcome to Bibo Phone Spare World!</p>
 
     <!-- Content to be replaced -->
     <div id="subscriptionContent">
       <p>Your one-stop for expert mobile support, including troubleshooting, setup, and quality repairs. Choose us for our tech-savvy team, convenient service options, and genuine parts commitment.</p>
-      <p class="bold">Lets Take you through !</p>
+      <p class="bold">Let's take you through!</p>
       <ul>
         <li>✨ <strong>Create an account:</strong> Go to the top menu and create an account.</li>
         <li>🌐 <strong>Place your orders:</strong> Add your items to the cart and place your order.</li>
@@ -116,9 +116,8 @@
         <button type="button" id="subscribeButton">Subscribe</button>
         <div id="spinner" style="display: none;"> <!-- Spinner element initially hidden -->
           <i class="fa fa-spinner fa-spin"></i> Subscribing...
-        </div> 
-             <button type="submit" class="close-button" id="closeButton">Close</button>
-
+        </div>
+        <button type="submit" class="close-button" id="closeButton">Close</button>
       </form>
     </div>
 
@@ -128,6 +127,7 @@
     </div>
   </div>
 </div>
+
     
 
 
@@ -222,6 +222,7 @@ if($('.cookie-notice').length) {
     </div>
 
     <div class="saticifaction">
+
       <div class="all">
         <div id="newScreens-link" class="satisfaction-item" data-target="products">
           <img src="img/screen.webp" alt="LCDs">
@@ -245,7 +246,7 @@ if($('.cookie-notice').length) {
         </div>
         <div id="ports-link" class="satisfaction-item" data-target="products">
           <img src="img/port.webp" alt="Ports and Flex">
-          <a href="shop.html">PORTS AND FLEX</a>
+          <a href="shop.html">PORTS & FLEX</a>
         </div>
         <div id="electronics-link" class="satisfaction-item" data-target="products">
           <img src="img/electronics.jpg" alt="Electronics">
@@ -258,11 +259,55 @@ if($('.cookie-notice').length) {
         <div id="accessories-link" class="satisfaction-item" data-target="products">
           <img src="img/accessories.png" alt="Accessories">
           <a href="shop.html">ACCESSORIES</a>
+          </div>
+          <div id="fingerPrint-link" class="satisfaction-item" data-target="products">
+            <img src="img/finger print.jpg" alt="Finger-Prints">
+            <a href="shop.html">FINGER-PRINTS</a>
+          </div>
+          <div id="buttons-link" class="satisfaction-item" data-target="products">
+            <img src="img/swithc.jpg" alt="Buttons">
+            <a href="shop.html">BUTTONS</a>
+          </div>
+          <div id="fibres-link" class="satisfaction-item" data-target="products">
+            <img src="img/fibre.webp" alt="Fibres">
+            <a href="shop.html">FIBRES</a>
+          </div>
+
+        </div>
+        <div class="scroll-buttons-container">
+          <!-- Scroll buttons -->
+          <button id="scrollLeftBtn">&lt;</button>
+          <button id="scrollRightBtn">&gt;</button>
         </div>
       </div>
+      
     </div>
     
+<script>
+  // Get the container and buttons
+const satisfactionContainer = document.querySelector('.saticifaction .all');
+const scrollLeftBtn = document.getElementById('scrollLeftBtn');
+const scrollRightBtn = document.getElementById('scrollRightBtn');
 
+// Set the scroll amount
+const scrollAmount = 200; // Adjust as needed
+
+// Add event listeners to the buttons
+scrollLeftBtn.addEventListener('click', () => {
+  satisfactionContainer.scrollBy({
+    left: -scrollAmount,
+    behavior: 'smooth'
+  });
+});
+
+scrollRightBtn.addEventListener('click', () => {
+  satisfactionContainer.scrollBy({
+    left: scrollAmount,
+    behavior: 'smooth'
+  });
+});
+
+</script>
     
  
 <!-- Popup Container -->
@@ -340,7 +385,7 @@ if($('.cookie-notice').length) {
 <div id="overlay4"></div>
 <div id="overlay5"></div>
 <div id="overlay6"></div>
-
+<div id="overlay10"></div>
 
 <div id="loader" class="loader-container">
   <img src="bibo-phone-spare-world-logo-zip-file/png/logo-black.png" alt="Devine Logo" class="logo2">

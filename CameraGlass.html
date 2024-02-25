@@ -26,34 +26,37 @@
         <div id="page-content">
     
     <div class="card">
-        <h1 class="card-title">Add Touch</h1>
+        <h1 class="card-title">Add Brand New Screen</h1>
         <form id="form" class="card-body">
           <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" class="form-control" required>
           </div>
-      
+        
           <div class="form-group">
             <label for="description">Description:</label>
             <textarea id="description" name="description" class="form-control" required></textarea>
           </div>
-      
+        
           <div class="form-group">
             <label for="price">Price:</label>
             <input type="number" id="price" name="price" class="form-control" required>
           </div>
-       <!-- Add a new form-group for wholesale price -->
-       <div class="form-group">
-        <label for="wholesalePrice">Wholesale Price:</label>
-        <input type="number" id="wholesalePrice" name="wholesalePrice" class="form-control">
-      </div>
+        
+          <!-- Add a new form-group for wholesale price -->
+          <div class="form-group">
+            <label for="wholesalePrice">Wholesale Price:</label>
+            <input type="number" id="wholesalePrice" name="wholesalePrice" class="form-control">
+          </div>
+        
           <div class="form-group">
             <label for="image">Image:</label>
             <input type="file" id="image" name="image" accept="image/*" class="form-control" required>
           </div>
-      
+        
           <button style="width:30%;" type="submit" id="submit" class="btn btn-primary">Add Product</button>
         </form>
+        
       
        
       
@@ -82,7 +85,6 @@
 
 
 <script type="module">
-
 /*
 const passwordPopup = document.getElementById('password-popup');
    const passwordForm = document.getElementById('password-form');
@@ -115,6 +117,7 @@ const passwordPopup = document.getElementById('password-popup');
    window.addEventListener('load', showPasswordPopup);
 */
 
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
 import { getDatabase, ref, push, set, child, get, remove } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
 import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-storage.js";
@@ -134,9 +137,9 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
-const productsRef = ref(db, 'products/touches');
+const productsRef = ref(db, 'products/Camera-Glasses');
 const storage = getStorage(app);
-const imagesRef = storageRef(storage, 'products/touches');
+const imagesRef = storageRef(storage, 'products/Camera-Glasses');
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('form');
   const loader = document.getElementById('loader');
@@ -179,6 +182,8 @@ document.addEventListener('DOMContentLoaded', () => {
     successMessage.style.display = 'none';
   }, 5000);
 });
+
+
   // Function to convert image to WebP
   async function convertToWebP(file) {
     return new Promise((resolve) => {
