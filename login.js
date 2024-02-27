@@ -96,11 +96,11 @@ signInForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     // Verify reCAPTCHA
-   // const recaptchaResponse = grecaptcha.getResponse();
-   // if (!recaptchaResponse) {
-   //     alert('Please complete the reCAPTCHA verification.');
-   //     return;
-   // }
+   const recaptchaResponse = grecaptcha.getResponse();
+   if (!recaptchaResponse) {
+       alert('Please complete the reCAPTCHA verification.');
+      return;
+   }
 
     const email = document.getElementById('emailInput').value;
     const password = document.getElementById('passwordInput').value;
@@ -112,10 +112,10 @@ signInForm.addEventListener('submit', async (e) => {
         spinner.style.display = 'block';
 
         // Verify reCAPTCHA server-side (optional but recommended)
-      //  const recaptchaVerificationResult = await verifyRecaptchaServerSide(recaptchaResponse);
-      //  if (!recaptchaVerificationResult.success) {
-      //      throw new Error('reCAPTCHA verification failed. Please try again.');
-       // }
+        const recaptchaVerificationResult = await verifyRecaptchaServerSide(recaptchaResponse);
+       if (!recaptchaVerificationResult.success) {
+           throw new Error('reCAPTCHA verification failed. Please try again.');
+        }
 
         // Sign in the user with email and password
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
