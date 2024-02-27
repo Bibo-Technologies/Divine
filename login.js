@@ -112,26 +112,11 @@ signInForm.addEventListener('submit', async (e) => {
         spinner.style.display = 'block';
 
         // Verify reCAPTCHA server-side (optional but recommended)
-        const recaptchaVerificationResult = await verifyRecaptchaServerSide(recaptchaResponse);
-       if (!recaptchaVerificationResult.success) {
-           throw new Error('reCAPTCHA verification failed. Please try again.');
-        }
-        async function verifyRecaptchaServerSide(token) {
-            try {
-                const response = await fetch('/verify-recaptcha', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ token })
-                });
-                const data = await response.json();
-                return data;
-            } catch (error) {
-                console.error('Error verifying reCAPTCHA server-side:', error);
-                return { success: false, error: 'Server error' };
-            }
-        }
+       // const recaptchaVerificationResult = await verifyRecaptchaServerSide(recaptchaResponse);
+      //// if (!recaptchaVerificationResult.success) {
+      //     throw new Error('reCAPTCHA verification failed. Please try again.');
+      //  }
+
         // Sign in the user with email and password
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
