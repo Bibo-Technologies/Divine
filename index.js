@@ -1966,7 +1966,7 @@ firebaseNodes.forEach((nodeRef) => {
       const descriptionSimilarity = calculateSimilarity({innerText: description}, queryLower);
 
       // If the query is empty or there is a match (even for one word), create a card for the product
-      if (!queryLower || nameSimilarity > 0.8 || descriptionSimilarity > 0.8 || name.includes(queryLower) || description.includes(queryLower)) {
+      if (!queryLower || nameSimilarity > 0.6 || descriptionSimilarity > 0.6 || name.includes(queryLower) || description.includes(queryLower)) {
 
       // Create a card for the matching product
 const card = document.createElement("div");
@@ -13846,7 +13846,7 @@ filterButtons.forEach(button => {
 function filterProducts(filterValue) {
   // Get all product cards within the products-list container
   const products = document.querySelectorAll('#products-list .card1');
-  let foundProducts = false; // Flag to track if any products were found
+  let maxHeight = 0; // Variable to store the maximum height of visible product cards
 
   // Iterate through each product card
   products.forEach(product => {
@@ -13862,19 +13862,36 @@ function filterProducts(filterValue) {
     if (matches || filterValue === 'all') {
       // Show the product card if it matches any of the suggestions or if filter value is 'all'
       product.style.display = 'block';
-      foundProducts = true; // Set flag to true if any products are found
+      maxHeight = Math.max(maxHeight, product.offsetHeight); // Update maxHeight
     } else {
       // Hide the product card if it doesn't match any of the suggestions
       product.style.display = 'none';
     }
   });
 
+  // Set the same height for all product cards to prevent layout shift
+  products.forEach(product => {
+    product.style.height = `${maxHeight}px`;
+  });
+
   // If no products were found, display the no results message
-  if (!foundProducts) {
-    showNoResultsMessage();
-  } else {
-    hideNoResultsMessage();
-  }
+  const noResultsContainer = document.getElementById("no-results-container");
+  noResultsContainer.style.display = (maxHeight === 0) ? "block" : "none";
+}
+
+// Function to adjust the height of placeholder to maintain layout
+function adjustPlaceholderHeight(allProducts, visibleProducts) {
+  const placeholder = document.getElementById('placeholder'); // Assuming you have a placeholder element
+  const totalProducts = allProducts.length;
+  const visibleCount = visibleProducts.length;
+  const hiddenCount = totalProducts - visibleCount;
+  const cardHeight = visibleProducts[0].offsetHeight; // Assuming all cards have the same height
+
+  // Calculate the height for the placeholder
+  const placeholderHeight = hiddenCount * cardHeight;
+
+  // Set the height of the placeholder
+  placeholder.style.height = `${placeholderHeight}px`;
 }
 
 

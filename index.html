@@ -30,10 +30,13 @@
 
     <!-- Add canonical URL to avoid duplicate content issues -->
     <link rel="canonical" href="Your canonical URL">
-  
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9219377097183768"
+    crossorigin="anonymous"></script>
     <!-- Link to your style.css file -->
     <link rel="stylesheet" href="./style.css">
-  
+    <!-- Include the string-similarity library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/string-similarity/3.1.0/string-similarity.min.js"></script>
+
     <!-- Link to external libraries (FontAwesome, Boxicons, etc.) -->
     <!-- Note: You only need one FontAwesome link. Choose either version 4 or 5 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
@@ -43,7 +46,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" referrerpolicy="no-referrer"></script>
-  
+
     <!-- Favicon for the website -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"><link rel="stylesheet" href="./style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -358,6 +361,7 @@ scrollRightBtn.addEventListener('click', () => {
       <div id="filterContainer">
         <button class="filter-btn" data-filter="all">All</button>
         <button class="filter-btn" data-filter="iphone, Apple, iOS">iPhone</button>
+        <button class="filter-btn" data-filter="Tecno, Phantom, Android">Tecno</button>
         <button class="filter-btn" data-filter="Samsung, Galaxy, Android">Samsung</button>
         <button class="filter-btn" data-filter="Google, Pixel, Android">Google</button>
         <button class="filter-btn" data-filter="itel, Android">itel</button>
@@ -601,14 +605,14 @@ carouselFrames.forEach(frame => makeCarousel(frame));
 
 <h5 id="products">Product List</h5>
 </div>
-<!-- HTML code for products section -->
-<div class="products" >
-  
+<div class="products">
   <div id="products-list"></div>
   <div id="no-results-container">
     <!-- This container will hold the no results message -->
   </div>
+  <div id="placeholder"></div> <!-- Placeholder element -->
 </div>
+
 
           <div class="modal">
               <span class="close">&times;</span>
@@ -648,10 +652,12 @@ carouselFrames.forEach(frame => makeCarousel(frame));
 <script type="module" src="https://www.gstatic.com/firebasejs/9.0.2/firebase-storage.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/source-map@0.7.3/dist/source-map.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/terser/dist/bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/string-similarity/3.1.0/string-similarity.min.js"></script>
+
 <!-- Include Fuse.js library from CDN -->
 <script src="https://cdn.jsdelivr.net/npm/fuse.js"></script>
 
-      <script type="module" src="index.min.js">
+      <script type="module" src="index.js">
 
      </script>
 
