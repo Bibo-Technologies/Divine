@@ -215,7 +215,7 @@ function storePersonalDetails() {
     ];
 
     // Log the personal details to the console
-    console.log("Personal Details:", personalDetailsArray);
+    //console.log("Personal Details:", personalDetailsArray);
 
     // Hide the personal information form and show the account information form
     document.getElementById("personalInfoDiv").style.display = "none";

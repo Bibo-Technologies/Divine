@@ -887,34 +887,93 @@ orderButton.style.marginTop = "20px";
 
 popupContent.appendChild(orderButton);
 
+
+
+
+
+
 function showNotLoggedInMessage() {
-    const messageContainer = document.getElementById('messageContainer');
-    const messageContent = document.getElementById('messageContent');
-    const overlay = document.getElementById('overlay2'); // Add this line
+  const messageContainer = document.getElementById('messageContainer');
+  const messageContent = document.getElementById('messageContent');
+  const overlay = document.getElementById('overlay2'); // Add this line
 
-    // Set the message content HTML, including the company logo and login button
-    messageContent.innerHTML = `
-        <div id="companyLogo" class="company-logo">
-            <img src="bibo-phone-spare-world-logo-zip-file/png/logo-color.png" alt="Company Logo">
-        </div>
-        <p>You are not signed in. Please sign in to access your account and shop with us. Thank you!</p>
-        <button id="loginButton" class="login-button">
-            <i class="fa fa-sign-in"></i> Login
-        </button>
-    `;
+  // Set the message content HTML, including the company logo and login button
+  messageContent.innerHTML = `
+      <div id="companyLogo" class="company-logo">
+          <img src="bibo-phone-spare-world-logo-zip-file/png/logo-color.png" alt="Company Logo">
+      </div>
+      <p>You are not signed in. Please sign in to access your account and shop with us. Thank you!</p>
+      <button id="loginButton" class="login-button">
+          <i class="fa fa-sign-in"></i> Login
+      </button>
+  `;
 
-    // Add the "fade-in" class to apply the fade-in animation
-    messageContainer.classList.add('fade-in');
-    messageContainer.style.display = 'flex'; // Make the message container visible
-    overlay.style.display = 'block'; // Show the overlay
+  // Add the "fade-in" class to apply the fade-in animation
+  messageContainer.classList.add('fade-in');
+  messageContainer.style.display = 'flex'; // Make the message container visible
+  overlay.style.display = 'block'; // Show the overlay
 
-    // Add a click event listener to the login button
-    const loginButton = document.getElementById('loginButton');
-    loginButton.addEventListener('click', function() {
-        window.location.href = 'login.html'; // Adjust the login page URL
-    });
+  // Add a click event listener to the login button
+  const loginButton = document.getElementById('loginButton');
+  loginButton.addEventListener('click', function() {
+      window.location.href = 'login.html'; // Adjust the login page URL
+  });
+// Define getOrderSummary function to extract order details from the table
+function getOrderSummary() {
+  const orderSummary = [];
+  const rows = orderTable.querySelectorAll("tr");
+  rows.forEach((row, index) => {
+      if (index > 0) { // Skip the header row
+          const columns = row.querySelectorAll("td");
+
+          // Assuming the order of columns is Product, Price, Qty, Total, Wholesale
+          const productName = columns[0].innerText;
+          const price = parseFloat(columns[1].innerText.replace("UGX ", ""));
+          const quantity = parseInt(columns[2].innerText, 10);
+          const total = parseFloat(columns[3].innerText.replace("UGX ", ""));
+          const isWholesale = columns[4].innerText.toLowerCase() === "yes";
+
+          // Push product details to orderSummary array
+          orderSummary.push({
+              productName,
+              price,
+              quantity,
+              total,
+              isWholesale,
+          });
+      }
+  });
+  return orderSummary;
 }
 
+// Your other code
+
+  // Get the cart details
+  const deliveryPlace = deliveryPlaceInput.value;
+  // Get the telephone number from the input field
+const telephoneNumber = telephoneInput.value;
+
+  const meansOfTransport = transportSelect.value;
+  const selectedPaymentOptionElement = document.querySelector('input[name="payment-option"]:checked');
+  const selectedPaymentOption = selectedPaymentOptionElement ? selectedPaymentOptionElement.value : "";
+  const orderSummary = getOrderSummary();
+  const cartTotalElement = document.getElementById("total-price");
+  const cartTotal = cartTotalElement ? parseFloat(cartTotalElement.innerText.replace("TOTAL: UGX ", "")) : 0;
+
+// Save the cart details in local storage
+const cartDetails = {
+  deliveryPlace,
+  telephoneNumber,
+  meansOfTransport,
+  selectedPaymentOption,
+  orderSummary,
+  cartTotal
+};
+localStorage.setItem("cartDetails", JSON.stringify(cartDetails));
+
+// Log the cart details in the console
+console.log("Cart details saved in local storage:", cartDetails);
+}
 
 
 
@@ -1133,6 +1192,8 @@ if (!deliveryPlace || !meansOfTransport || !telephoneNumber) {
 // If you need the value of the selected order type, you can access it using selectedOrderType.value
 //const orderTypeValue = selectedOrderType.value;
 
+
+
 // Function to generate a random alphanumeric string
 function generateRandomOrderId(length) {
     const characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
@@ -1147,7 +1208,7 @@ function generateRandomOrderId(length) {
 }
 
 // Generate a random order ID
-const randomOrderId = generateRandomOrderId(10);
+const randomOrderId = generateRandomOrderId(5);
 
 // Create the order data object with the random order ID
 const orderData = {
@@ -2077,7 +2138,7 @@ function closeRatingPopup() {
 
 */
       // Add product description
-const maxDescriptionLength = 50; // Set your desired maximum length
+const maxDescriptionLength = 70; // Set your desired maximum length
 
 const desc = document.createElement("p");
 const originalDescription = product.description;
@@ -2722,7 +2783,7 @@ card.appendChild(ratingCount);
 
 
       // Add product description
-const maxDescriptionLength = 50; // Set your desired maximum length
+const maxDescriptionLength = 70; // Set your desired maximum length
 
 const desc = document.createElement("p");
 const originalDescription = product.description;
@@ -3237,7 +3298,7 @@ card.appendChild(ratingCount);
 
 
       // Add product description
-const maxDescriptionLength = 50; // Set your desired maximum length
+const maxDescriptionLength = 70; // Set your desired maximum length
 
 const desc = document.createElement("p");
 const originalDescription = product.description;
@@ -3756,7 +3817,7 @@ card.appendChild(ratingCount);
 
 
       // Add product description
-const maxDescriptionLength = 50; // Set your desired maximum length
+const maxDescriptionLength = 70; // Set your desired maximum length
 
 const desc = document.createElement("p");
 const originalDescription = product.description;
@@ -4270,7 +4331,7 @@ card.appendChild(ratingCount);
 
 
       // Add product description
-const maxDescriptionLength = 50; // Set your desired maximum length
+const maxDescriptionLength = 70; // Set your desired maximum length
 
 const desc = document.createElement("p");
 const originalDescription = product.description;
@@ -4777,7 +4838,7 @@ card.appendChild(ratingCount);
 
 
       // Add product description
-const maxDescriptionLength = 50; // Set your desired maximum length
+const maxDescriptionLength = 70; // Set your desired maximum length
 
 const desc = document.createElement("p");
 const originalDescription = product.description;
@@ -5290,7 +5351,7 @@ card.appendChild(ratingCount);
 
 
       // Add product description
-const maxDescriptionLength = 50; // Set your desired maximum length
+const maxDescriptionLength = 70; // Set your desired maximum length
 
 const desc = document.createElement("p");
 const originalDescription = product.description;
@@ -5801,7 +5862,7 @@ card.appendChild(ratingCount);
 
 
       // Add product description
-const maxDescriptionLength = 50; // Set your desired maximum length
+const maxDescriptionLength = 70; // Set your desired maximum length
 
 const desc = document.createElement("p");
 const originalDescription = product.description;
@@ -6310,7 +6371,7 @@ card.appendChild(ratingCount);
 
 
       // Add product description
-const maxDescriptionLength = 50; // Set your desired maximum length
+const maxDescriptionLength = 70; // Set your desired maximum length
 
 const desc = document.createElement("p");
 const originalDescription = product.description;
@@ -6816,7 +6877,7 @@ card.appendChild(ratingCount);
 
 
       // Add product description
-const maxDescriptionLength = 50; // Set your desired maximum length
+const maxDescriptionLength = 70; // Set your desired maximum length
 
 const desc = document.createElement("p");
 const originalDescription = product.description;
@@ -7327,7 +7388,7 @@ card.appendChild(ratingCount);
 
 
       // Add product description
-const maxDescriptionLength = 50; // Set your desired maximum length
+const maxDescriptionLength = 70; // Set your desired maximum length
 
 const desc = document.createElement("p");
 const originalDescription = product.description;
@@ -7834,7 +7895,7 @@ card.appendChild(ratingCount);
 
 
       // Add product description
-const maxDescriptionLength = 50; // Set your desired maximum length
+const maxDescriptionLength = 70; // Set your desired maximum length
 
 const desc = document.createElement("p");
 const originalDescription = product.description;
@@ -8342,7 +8403,7 @@ card.appendChild(ratingCount);
 
 
       // Add product description
-const maxDescriptionLength = 50; // Set your desired maximum length
+const maxDescriptionLength = 70; // Set your desired maximum length
 
 const desc = document.createElement("p");
 const originalDescription = product.description;
@@ -8857,7 +8918,7 @@ card.appendChild(ratingCount);
 
 
       // Add product description
-const maxDescriptionLength = 50; // Set your desired maximum length
+const maxDescriptionLength = 70; // Set your desired maximum length
 
 const desc = document.createElement("p");
 const originalDescription = product.description;
@@ -9368,7 +9429,7 @@ card.appendChild(ratingCount);
 
 
       // Add product description
-const maxDescriptionLength = 50; // Set your desired maximum length
+const maxDescriptionLength = 70; // Set your desired maximum length
 
 const desc = document.createElement("p");
 const originalDescription = product.description;
@@ -9881,7 +9942,7 @@ card.appendChild(ratingCount);
 
 
       // Add product description
-const maxDescriptionLength = 50; // Set your desired maximum length
+const maxDescriptionLength = 70; // Set your desired maximum length
 
 const desc = document.createElement("p");
 const originalDescription = product.description;
@@ -12127,7 +12188,7 @@ card.appendChild(ratingCount);
 
 
 
-const maxDescriptionLength = 50; // Set your desired maximum length
+const maxDescriptionLength = 70; // Set your desired maximum length
 
 const desc = document.createElement("p");
 const originalDescription = product.description;
@@ -12726,7 +12787,7 @@ card.appendChild(ratingCount);
 
 
 
-const maxDescriptionLength = 50; // Set your desired maximum length
+const maxDescriptionLength = 70; // Set your desired maximum length
 
 const desc = document.createElement("p");
 const originalDescription = product.description;
@@ -13293,7 +13354,7 @@ card.appendChild(ratingCount);
 
   
 
-const maxDescriptionLength = 50; // Set your desired maximum length
+const maxDescriptionLength = 70; // Set your desired maximum length
 
 const desc = document.createElement("p");
 const originalDescription = product.description;
@@ -13907,4 +13968,295 @@ function hideNoResultsMessage() {
   noResultsContainer.style.display = "none";
 }
 
+// Function to generate a random alphanumeric string
+function generateRandomOrderId(length) {
+  const characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  let result = '';
 
+  for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      result += characters.charAt(randomIndex);
+  }
+
+  return result;
+}
+
+// Generate a random order ID
+const randomOrderId = generateRandomOrderId(5);
+
+
+window.addEventListener("load", () => {
+  // Check if there are any saved cart details in local storage
+  const savedCartDetails = localStorage.getItem("cartDetails");
+  if (savedCartDetails) {
+      // Parse the saved cart details from JSON
+      const cartDetails = JSON.parse(savedCartDetails);
+
+      // Create a popup container
+      const customPopupContainer = document.createElement("div");
+      customPopupContainer.classList.add("custom-popup-container");
+
+      // Create the overlay
+      const overlay = document.createElement("div");
+      overlay.classList.add("overlay7");
+
+      // Create the popup content
+      const customPopupContent = document.createElement("div");
+      customPopupContent.classList.add("custom-popup-content");
+
+      // Add title to the popup
+      const title = document.createElement("h4");
+      title.innerText = "We Saved your previous Cart Details !";
+      customPopupContent.appendChild(title);
+
+      // Display cart details in the popup
+      const cartSummary = document.createElement("p");
+      cartSummary.innerHTML = `
+          <strong>Delivery Place:</strong> ${cartDetails.deliveryPlace}<br>
+          <strong>Telephone Contact:</strong> ${cartDetails.telephoneNumber}<br>
+          <strong>Means of Transport:</strong> ${cartDetails.meansOfTransport}<br>
+          <strong>Selected Payment Option:</strong> ${cartDetails.selectedPaymentOption}<br>
+          <strong>Order Summary:</strong><br>
+      `;
+      cartSummary.classList.add("cart-summary");
+
+      // Create a table for order summary
+      const orderTable = document.createElement("table");
+      orderTable.classList.add("custom-order-table");
+      const tableHeader = document.createElement("tr");
+      tableHeader.innerHTML = `
+          <th>Pdt</th>
+          <th>Price</th>
+          <th>Qty</th>
+          <th>Total</th>
+          <th>Whole-sale</th>
+      `;
+      orderTable.appendChild(tableHeader);
+
+      // Add order items to the table
+      cartDetails.orderSummary.forEach(item => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+              <td>${item.productName}</td>
+              <td>UGX ${item.price}</td>
+              <td>${item.quantity}</td>
+              <td>UGX ${item.total.toFixed(2)}</td>
+              <td>${item.isWholesale ? "Yes" : "No"}</td>
+          `;
+          orderTable.appendChild(row);
+      });
+
+      cartSummary.appendChild(orderTable);
+      customPopupContent.appendChild(cartSummary);
+
+      // Add close button
+      const closeButton = document.createElement("button");
+      closeButton.innerText = "Close";
+      closeButton.classList.add("close-button");
+      closeButton.addEventListener("click", () => {
+          customPopupContainer.style.display = "none";
+          overlay.style.display = "none";
+      });
+      customPopupContent.appendChild(closeButton);
+
+
+      // Add place order button
+      const placeOrderButton = document.createElement("button");
+      placeOrderButton.innerText = "Place Order";
+      placeOrderButton.classList.add("place-order-button");
+      placeOrderButton.addEventListener("click", async () => {
+          // Display loader while processing the order
+          const loader = document.createElement("div");
+          loader.classList.add("loader");
+          customPopupContainer.appendChild(loader);
+
+          // Check if the user is authenticated
+          const user = auth.currentUser;
+          if (!user) {
+              // User is not authenticated, show the not logged in message
+              showNotLoggedInMessage();
+              return; // Stop further execution
+          }
+
+          // Get the UID of the logged-in user
+          const userId = user.uid;
+          const userEmail = user.email;
+          // Get the delivery place from the input field
+          const deliveryPlace = cartDetails.deliveryPlace;
+
+          // Get the selected means of transport
+          const meansOfTransport = cartDetails.meansOfTransport;
+
+          // Get the selected payment option
+          const selectedPaymentOption = cartDetails.selectedPaymentOption;
+// Get the telephone number from the input field
+const telephoneNumber = cartDetails.telephoneNumber;
+
+          // Get the cart total
+          const cartTotal = cartDetails.cartTotal;
+
+          // Get the order summary
+          const orderSummary = cartDetails.orderSummary;
+
+          // Rest of your code to handle placing the order...
+
+// Initialize orderData object
+const orderData = {
+  orderId: generateRandomOrderId(10),
+  orderDate: new Date().toLocaleDateString(),
+  orderTime: new Date().toLocaleTimeString(),
+  deliveryPlace,
+  meansOfTransport,
+  selectedPaymentOption,
+  orderSummary,
+  cartTotal,
+  userId,
+  userEmail,
+  telephoneNumber
+};
+
+// Push the order details to Firebase database
+const orderRef = ref(database, "orders");
+const newOrderRef = push(orderRef);
+
+// Save the order data
+set(newOrderRef, orderData)
+  .then(() => {
+      // Order placed successfully
+
+      // Create a new reference to the customer's receipt in the "receipts" node
+      const userReceiptRef = ref(database, `users/${userId}/receipts`);
+      const newUserReceiptRef = push(userReceiptRef);
+
+      // Save the receipt data under the user's account
+      const receiptData = {
+          orderId: orderData.orderId,
+          orderDate: orderData.orderDate,
+          orderTime: orderData.orderTime,
+          deliveryPlace: orderData.deliveryPlace,
+          meansOfTransport: orderData.meansOfTransport,
+          selectedPaymentOption: orderData.selectedPaymentOption,
+          orderSummary: orderData.orderSummary,
+          cartTotal: orderData.cartTotal,
+          userId: orderData.userId,
+          userEmail: orderData.userEmail
+      };
+
+      // Save the receipt data
+      set(newUserReceiptRef, receiptData)
+          .then(() => {
+              // Receipt saved successfully
+              showSuccessPopup();
+              clearCart();
+          })
+          .catch((error) => {
+              console.error("Error saving receipt:", error.message);
+             // showErrorPopup();
+          })
+          .finally(() => {
+              // Remove the loader container
+              document.body.removeChild(loaderContainer);
+          });
+  })
+  .catch((error) => {
+      console.error("Error placing order:", error.message);
+     // showErrorPopup();
+      document.body.removeChild(loaderContainer); // Remove the loader container in case of an error
+  });
+
+      });
+      customPopupContent.appendChild(placeOrderButton);
+// Add no longer need order button
+const cancelOrderButton = document.createElement("button");
+cancelOrderButton.innerText = "No Longer Need Order ?";
+cancelOrderButton.classList.add("cancel-order-button");
+cancelOrderButton.addEventListener("click", () => {
+    // Display a confirmation dialog before clearing the cart items
+    const confirmation = confirm("Are you sure you no longer need this order?");
+    if (confirmation) {
+        // Clear local storage cart items
+        localStorage.removeItem("cartDetails");
+        // Close the popup
+        customPopupContainer.style.display = "none";
+        // Hide the overlay
+        overlay.style.display = "none";
+    }
+});
+customPopupContent.appendChild(cancelOrderButton);
+
+// Add the popup content to the container
+customPopupContainer.appendChild(customPopupContent);
+
+// Append the overlay and popup container to the body
+document.body.appendChild(overlay);
+document.body.appendChild(customPopupContainer);
+
+// Get a reference to the View Draft Orders button
+const viewDraftOrdersBtn = document.getElementById("viewDraftOrdersBtn");
+
+// Add event listener to the View Draft Orders button
+viewDraftOrdersBtn.addEventListener("click", () => {
+    // Toggle the display of the customPopupContainer
+    customPopupContainer.style.display = "block";
+    overlay.style.display = "block";
+
+});
+}
+});
+
+// Function to remove the loader container
+function removeLoaderContainer() {
+  const loaderContainer = document.querySelector(".loader-container");
+  if (loaderContainer) {
+      document.body.removeChild(loaderContainer);
+  }
+}
+
+// Function to show the success popup
+function showSuccessPopup() {
+  // Remove the loader container
+  removeLoaderContainer();
+
+  // Create the success popup
+  const successPopup = document.createElement("div");
+  successPopup.classList.add("success-popup");
+
+  // Create the success message
+  const successMessage = document.createElement("h3");
+  const successText = document.createElement("p");
+  successText.innerText = "Thank you for shopping with us... You can always find your receipts in your account and use ORDER IDs as reasons for payment. Thank you.";
+  successMessage.innerText = "Order Successful !";
+
+  // Create the okay button
+  const okayButton = document.createElement("button");
+  okayButton.classList.add("okay-button");
+  okayButton.innerText = "Okay";
+
+  // Add event listener to the okay button
+  //okayButton.addEventListener("click", () => {
+  //    location.reload(); // Refresh the page
+ // });
+
+  // Append the okay button to the success popup
+  successPopup.appendChild(okayButton);
+
+// Add event listener to close the success popup when the okay button is clicked
+okayButton.addEventListener("click", () => {
+  // Clear the local storage saved cart details
+  localStorage.removeItem("cartDetails");
+
+  // Reload the page
+  location.reload();
+
+  // Remove the success popup from the document body
+  document.body.removeChild(successPopup);
+});
+
+  // Append the success message and okay button to the success popup
+  successPopup.appendChild(successMessage);
+  successPopup.appendChild(successText);
+  successPopup.appendChild(okayButton);
+
+  // Add the success popup to the document body
+  document.body.appendChild(successPopup);
+}
