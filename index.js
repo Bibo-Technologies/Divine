@@ -956,10 +956,20 @@ function showNotLoggedInMessage() {
       // Show an alert with the error message
       alert(errorMessage);
   } else {
+    
       // Show the popup only if all fields are filled
       const messageContainer = document.getElementById('messageContainer');
       const messageContent = document.getElementById('messageContent');
       const overlay = document.getElementById('overlay2');
+// Save the cart details in local storage
+const cartDetails = {
+  deliveryPlace,
+  telephoneNumber,
+  meansOfTransport,
+  selectedPaymentOption,
+  orderSummary,
+  cartTotal
+};
 
       // Set the message content HTML, including the company logo and login button
       messageContent.innerHTML = `
@@ -973,6 +983,7 @@ function showNotLoggedInMessage() {
       `;
 
       // Add the "fade-in" class to apply the fade-in animation
+      localStorage.setItem("cartDetails", JSON.stringify(cartDetails));
       messageContainer.classList.add('fade-in');
       messageContainer.style.display = 'flex'; // Make the message container visible
       overlay.style.display = 'block'; // Show the overlay
