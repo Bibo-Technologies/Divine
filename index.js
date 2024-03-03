@@ -893,87 +893,98 @@ popupContent.appendChild(orderButton);
 
 
 function showNotLoggedInMessage() {
-  const messageContainer = document.getElementById('messageContainer');
-  const messageContent = document.getElementById('messageContent');
-  const overlay = document.getElementById('overlay2'); // Add this line
+  // Define getOrderSummary function to extract order details from the table
+  function getOrderSummary() {
+      const orderSummary = [];
+      const rows = orderTable.querySelectorAll("tr");
+      rows.forEach((row, index) => {
+          if (index > 0) { // Skip the header row
+              const columns = row.querySelectorAll("td");
 
-  // Set the message content HTML, including the company logo and login button
-  messageContent.innerHTML = `
-      <div id="companyLogo" class="company-logo">
-          <img src="bibo-phone-spare-world-logo-zip-file/png/logo-color.png" alt="Company Logo">
-      </div>
-      <p>You are not signed in. Please sign in to access your account and shop with us. Thank you!</p>
-      <button id="loginButton" class="login-button">
-          <i class="fa fa-sign-in"></i> Login
-      </button>
-  `;
+              // Assuming the order of columns is Product, Price, Qty, Total, Wholesale
+              const productName = columns[0].innerText;
+              const price = parseFloat(columns[1].innerText.replace("UGX ", ""));
+              const quantity = parseInt(columns[2].innerText, 10);
+              const total = parseFloat(columns[3].innerText.replace("UGX ", ""));
+              const isWholesale = columns[4].innerText.toLowerCase() === "yes";
 
-  // Add the "fade-in" class to apply the fade-in animation
-  messageContainer.classList.add('fade-in');
-  messageContainer.style.display = 'flex'; // Make the message container visible
-  overlay.style.display = 'block'; // Show the overlay
-
-  // Add a click event listener to the login button
-  const loginButton = document.getElementById('loginButton');
-  loginButton.addEventListener('click', function() {
-      window.location.href = 'login.html'; // Adjust the login page URL
-  });
-// Define getOrderSummary function to extract order details from the table
-function getOrderSummary() {
-  const orderSummary = [];
-  const rows = orderTable.querySelectorAll("tr");
-  rows.forEach((row, index) => {
-      if (index > 0) { // Skip the header row
-          const columns = row.querySelectorAll("td");
-
-          // Assuming the order of columns is Product, Price, Qty, Total, Wholesale
-          const productName = columns[0].innerText;
-          const price = parseFloat(columns[1].innerText.replace("UGX ", ""));
-          const quantity = parseInt(columns[2].innerText, 10);
-          const total = parseFloat(columns[3].innerText.replace("UGX ", ""));
-          const isWholesale = columns[4].innerText.toLowerCase() === "yes";
-
-          // Push product details to orderSummary array
-          orderSummary.push({
-              productName,
-              price,
-              quantity,
-              total,
-              isWholesale,
-          });
-      }
-  });
-  return orderSummary;
-}
-
-// Your other code
+              // Push product details to orderSummary array
+              orderSummary.push({
+                  productName,
+                  price,
+                  quantity,
+                  total,
+                  isWholesale,
+              });
+          }
+      });
+      return orderSummary;
+  }
 
   // Get the cart details
-  const deliveryPlace = deliveryPlaceInput.value;
-  // Get the telephone number from the input field
-const telephoneNumber = telephoneInput.value;
-
-  const meansOfTransport = transportSelect.value;
+  const deliveryPlace = deliveryPlaceInput.value.trim();
+  const telephoneNumber = telephoneInput.value.trim();
+  const meansOfTransport = transportSelect.value.trim();
   const selectedPaymentOptionElement = document.querySelector('input[name="payment-option"]:checked');
   const selectedPaymentOption = selectedPaymentOptionElement ? selectedPaymentOptionElement.value : "";
   const orderSummary = getOrderSummary();
   const cartTotalElement = document.getElementById("total-price");
   const cartTotal = cartTotalElement ? parseFloat(cartTotalElement.innerText.replace("TOTAL: UGX ", "")) : 0;
 
-// Save the cart details in local storage
-const cartDetails = {
-  deliveryPlace,
-  telephoneNumber,
-  meansOfTransport,
-  selectedPaymentOption,
-  orderSummary,
-  cartTotal
-};
-localStorage.setItem("cartDetails", JSON.stringify(cartDetails));
+  // Validate input values
+  let errorMessage = "";
+  if (!deliveryPlace) {
+      errorMessage += "Delivery place is required. ";
+  }
+  if (!telephoneNumber) {
+      errorMessage += "Telephone number is required. ";
+  }
+  if (!meansOfTransport) {
+      errorMessage += "Means of transport is required. ";
+  }
+  if (!selectedPaymentOption) {
+      errorMessage += "Payment option is required. ";
+  }
+  if (orderSummary.length === 0) {
+      errorMessage += "Order summary is empty. ";
+  }
+  if (cartTotal <= 0) {
+      errorMessage += "Cart total is invalid. ";
+  }
 
-// Log the cart details in the console
-console.log("Cart details saved in local storage:", cartDetails);
+  if (errorMessage) {
+      // Show an alert with the error message
+      alert(errorMessage);
+  } else {
+      // Show the popup only if all fields are filled
+      const messageContainer = document.getElementById('messageContainer');
+      const messageContent = document.getElementById('messageContent');
+      const overlay = document.getElementById('overlay2');
+
+      // Set the message content HTML, including the company logo and login button
+      messageContent.innerHTML = `
+          <div id="companyLogo" class="company-logo">
+              <img src="bibo-phone-spare-world-logo-zip-file/png/logo-color.png" alt="Company Logo">
+          </div>
+          <p>You are not signed in. Please sign in to access your account and shop with us. Thank you!</p>
+          <button id="loginButton" class="login-button">
+              <i class="fa fa-sign-in"></i> Login
+          </button>
+      `;
+
+      // Add the "fade-in" class to apply the fade-in animation
+      messageContainer.classList.add('fade-in');
+      messageContainer.style.display = 'flex'; // Make the message container visible
+      overlay.style.display = 'block'; // Show the overlay
+
+      // Add a click event listener to the login button
+      const loginButton = document.getElementById('loginButton');
+      loginButton.addEventListener('click', function() {
+          window.location.href = 'login.html'; // Adjust the login page URL
+      });
+  }
 }
+
 
 
 
